@@ -1,0 +1,21 @@
+#searcher {
+	padding: 15px;
+	background: #fff;
+	position: fixed;
+	left: 22%;
+	right: 0;
+	top: 60px;
+	height: 65px;
+	border-bottom: 1px solid #ddd;
+	
+	#q {
+		font-family: Arial, Sans Serif;
+		font-size: 16px;
+		line-height: 21px;
+		border: 1px solid #bbb;
+		background: #fff;
+		outline: none;
+		border-radius: 7px;
+		padding: 5px 7px;
+	}
+}

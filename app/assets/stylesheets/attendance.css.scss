@@ -1,0 +1,193 @@
+#attendance_header {
+	position: fixed;
+	top: 60px;
+	left: 0;
+	right: 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	
+	.date_headers {
+		th {
+			text-align: center;
+			vertical-align: top;
+			background: #555;
+			border-right: 1px solid #888;
+			height: 60px;
+		
+			&.with_date {
+				a {
+					.date, .day {
+						display: block;
+					}
+					
+					.day {
+						font-size: 14px;
+						margin-top: 2px;
+						color: #aaa;
+					}
+		
+					.date {
+						font-size: 18px;
+						line-height: 18px;
+						text-transform: none;
+						color: #eee;
+						margin-top: 3px;
+					}
+				}
+			}
+		
+			.add_date {
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 18px;
+				padding: 20px 0px;
+				color: #aaa;
+			}
+			
+			#q {
+				font-family: Arial, Sans Serif;
+				font-size: 18px;
+				line-height: 21px;
+				border: 1px solid #bbb;
+				background: #fff;
+				outline: none;
+				border-radius: 7px;
+				padding: 5px 7px;
+				width: 100%;
+			}
+			
+			.clear_q {
+				position: absolute;
+				right: 14px;
+				margin-top: 2px;
+				padding: 11px 15px;
+				display: none;
+			}
+		}
+	}
+}
+
+#attendance_footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.rooms_show {
+	margin-bottom: 60px;
+
+	.table {
+		table-layout: fixed;
+		font-size: 19px;
+		
+		tr {
+			&:nth-child(even) {
+				background: #fafafa;
+			}
+			
+			td {
+				border-right: 1px solid #ddd;
+				
+				&.presence_toggle {
+					color: #3f90c6;
+		
+					&.present {
+						.not_here {
+							display: none;
+						}
+		
+						.here {
+							display: block;
+						}
+					}
+		
+					.not_here {
+						display: block;
+					}
+		
+					.here {
+						display: none;
+					}
+				}
+			}
+			
+			td, th {
+				padding: 0px;
+		
+				&.row_head {
+					text-align: left;
+					width: 25%;
+					max-width: 250px;
+					min-width: 150px;
+					padding: 13px;
+					color: #333;
+				}
+	
+				&.row_for_new {
+					width: 50px;
+				}
+			
+				a {
+					display: block;
+					padding: 13px 0px;
+				}
+			}
+		}
+		
+		tfoot {
+			font-size: 21px;
+			font-weight: bold;
+		
+			td {
+				border-color: rgba(255, 255, 255, 0.1);
+				color: #fff !important;
+			
+				a {
+					padding: 20px 0px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.rooms_show {
+		margin-bottom: 0px;
+		
+		.table {
+			font-size: 15px;
+			
+			td, th {
+				&:nth-child(4) {
+					width: 10px;
+				}
+			
+				&.row_head {
+					width: 60% !important;
+				}
+				
+				&.row_for_new {
+					width: 10% !important;
+				}
+			
+				&:nth-child(0), &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+					display: none;
+				}	
+			}
+		}
+		
+		#attendance_header {
+			.date_headers {
+				th {
+					#q {
+						font-size: 15px;
+					}
+				}
+			}
+		}
+		
+		#attendance_footer {
+			position: relative;
+		}
+	}	
+}
