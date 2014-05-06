@@ -1,0 +1,15 @@
+.sidebar {
+	position: fixed;
+	left: 0;
+	top: 60px;
+	bottom: 0;
+	width: 22%;
+	background: #eee;
+	border-right: 1px solid #ddd;
+	padding: 15px;
+	overflow-y: auto;
+}
+
+.has_sidebar {
+	margin-left: 22%;
+}

@@ -1,0 +1,40 @@
+<div class="sidebar">
+	<h2>Filter Contacts</h2>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<div class="main has_sidebar">
+	<div id="searcher">
+		<%= form_tag request.path, method: :get, remote: true do %>
+			<%= text_field_tag :q, nil, placeholder: "Search..." %>
+			<%= select_tag :qt, options_for_select(["All Contacts", "Regulars", "Occasionals", "New Guests", "Archived"]) %>
+		<% end %>
+	</div>
+	
+	<table id="contacts" class="table">
+		<thead>
+			<tr>
+				<th><%= check_box_tag :nice %></th>
+				<th>
+					<div class="loading"></div>
+					Name
+				</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @org.memberships.includes(:user).each do |membership| %>
+				<tr>
+					<td><%= check_box_tag :nice %></td>
+					<td><%= link_to membership.user.name, "" %></td>
+					<td><%= link_to membership.user.email, "" %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
