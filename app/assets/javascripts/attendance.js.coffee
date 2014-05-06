@@ -25,7 +25,7 @@ $(document).on "keyup", "#attendance_header #q", ->
 			Attendance.tallyTotals()
 
 	tallyTotals: ->
-		$("#attendance_footer").find(".total:visible").each ->
+		$("#attendance_footer tr").find(".total:visible").each ->
 			index = $(this).index()
-			total = $("#attendance tr").find(".presence_toggle:eq(#{index}).present").length
+			total = $("#attendance tr").find("td:eq(#{index}).present").length
 			$(this).find("a").text total

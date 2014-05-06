@@ -4,15 +4,23 @@
 	<table class="table center date_headers">
 		<thead>
 			<tr>
+				
+				<% @nils.times do %>
+					<th class="unused"></th>
+				<% end %>
 			
-				<% [1, 2, 3, 4, 5].each do |meeting| %>
-					<th class="with_date"><a href="#">
-						<span class="day">Mon</span>
-						<span class="date">Apr 12</span>
-					</a></th>
+				<% @meetings.each do |meeting| %>
+					<th class="with_date">
+						<a href="<%= edit_room_meeting_path(@org.permalink, @room, meeting) %>">
+							<span class="day"><%= meeting.date.strftime("%a") %></span>
+							<span class="date"><%= meeting.date.strftime("%b %-d") %></span>
+						</a>
+					</th>
 				<% end %>
 
-				<th class="row_for_new"><a href="#" class="add_date">+</a></th>
+				<th class="row_for_new">
+					<%= link_to "+", new_room_meeting_path(@org.permalink, @room), class: "add_date" %>
+				</th>
 				<th class="row_head">
 					<%= form_for request.path, method: :get, remote: true do %>
 						<%= link_to "x", "#", class: "clear_q" %>
@@ -29,26 +37,18 @@
 		<% 50.times do |n| %>
 			<% @org.members.each do |member| %>
 				<tr>
-					<td class="presence_toggle present"><a href="#">
-						<span class="here">&check;</span>
-						<span class="not_here">&nbsp;</span>
-					</a></td>
-					<td class="presence_toggle present"><a href="#">
-						<span class="here">&check;</span>
-						<span class="not_here">&nbsp;</span>
-					</a></td>
-					<td class="presence_toggle"><a href="#">
-						<span class="here">&check;</span>
-						<span class="not_here">&nbsp;</span>
-					</a></td>
-					<td class="presence_toggle present"><a href="#">
-						<span class="here">&check;</span>
-						<span class="not_here">&nbsp;</span>
-					</a></td>
-					<td class="presence_toggle"><a href="#">
-						<span class="here">&check;</span>
-						<span class="not_here">&nbsp;</span>
-					</a></td>
+					
+					<% @nils.times do %>
+						<td class="unused"></td>
+					<% end %>
+					
+					<% @meetings.each do |meeting| %>
+						<td class="presence_toggle"><a href="#">
+							<span class="here">&check;</span>
+							<span class="not_here">&nbsp;</span>
+						</a></td>
+					<% end %>
+
 					<td class="here row_for_new"></td>
 					<td class="row_head"><%= member.last_name %>, <%= member.first_name %> <%= n %></td>
 				</tr>
@@ -61,11 +61,14 @@
 	<table class="table center">
 		<tfoot class="blue_bg">
 			<tr>
-				<td class="total"><a href="#">35</a></td>
-				<td class="total"><a href="#">43</a></td>
-				<td class="total"><a href="#">0</a></td>
-				<td class="total"><a href="#">42</a></td>
-				<td class="total"><a href="#">0</a></td>
+				<% @nils.times do %>
+					<td class="unused"></td>
+				<% end %>
+				
+				<% @meetings.each do |meeting| %>
+					<td class="total"><a href="#">0</a></td>
+				<% end %>
+
 				<td class="row_for_new"></td>
 				<td class="row_head">Total</td>
 			</tr>

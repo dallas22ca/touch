@@ -1,10 +1,12 @@
 class MeetingsController < ApplicationController
+  before_filter :set_organization
+  before_filter :set_room
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
 
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    @meetings = @room.meetings
   end
 
   # GET /meetings/1
@@ -24,11 +26,11 @@ class MeetingsController < ApplicationController
   # POST /meetings
   # POST /meetings.json
   def create
-    @meeting = Meeting.new(meeting_params)
+    @meeting = @room.meetings.new(meeting_params)
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
+        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
+        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,11 +66,15 @@ class MeetingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meeting
-      @meeting = Meeting.find(params[:id])
+      @meeting = @room.meetings.find(params[:id])
+    end
+    
+    def set_room
+      @room = @org.rooms.find(params[:room_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:room_id, :date)
+      params.require(:meeting).permit(:date)
     end
 end
