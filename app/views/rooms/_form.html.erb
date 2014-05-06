@@ -1,21 +1,19 @@
-<%= form_for(@room) do |f| %>
-  <% if @room.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
-      <ul>
-      <% @room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<h1><%= @room.new_record? ? "Create A" : "Edit" %> Room</h1>
+	
+<div class="content">
+	<%= form_for @room, url: @room.new_record? ? rooms_path(@org.permalink) : room_path(@org.permalink, @room) do |f| %>
+	  <div class="field">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit %>
+			
+			<%= link_to "Close", "#", class: "close_lightbox" %>
+			
+			<% if @room.persisted? %>
+				<%= link_to "Delete", room_path(@org.permalink, @room), method: :delete, data: { confirm: "Are you sure you want to delete this meeting?" } %>
+			<% end %>
+	  </div>
+	<% end %>
+</div>

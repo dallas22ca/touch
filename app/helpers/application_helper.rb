@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def title(page_title)
-    content_for(:title) { page_title }
+  def title(&block)
+    content_for(:title) { block.call }
   end
 end

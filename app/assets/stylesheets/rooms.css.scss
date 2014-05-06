@@ -1,3 +1,35 @@
-// Place all the styles related to the rooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#topbar {
+	.sub_menu {
+		display: none;
+		position: absolute;
+		top: 60px;
+		background: #fff;
+		color: #333;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		width: 250px;
+		color: #0E3D62;
+		border-bottom-right-radius: 7px;
+	
+		a {
+			text-shadow: none;
+			border-bottom: 1px solid #eee;
+			display: block;
+		}
+		
+		li:last-child {
+			a {
+				border-bottom: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 720px) {
+	#topbar {
+		.sub_menu {
+			left: 0;
+			right: 0;
+			width: auto;
+		}
+	}
+}

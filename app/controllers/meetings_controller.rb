@@ -32,9 +32,11 @@ class MeetingsController < ApplicationController
       if @meeting.save
         format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -46,9 +48,11 @@ class MeetingsController < ApplicationController
       if @meeting.update(meeting_params)
         format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

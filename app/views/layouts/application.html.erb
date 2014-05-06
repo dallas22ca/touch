@@ -11,11 +11,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= "#{controller_name}_#{action_name}" %>">
-	
 	<% if user_signed_in? %>
 		<div id="topbar" class="blue_bg">
-			<h1><%= yield(:title).blank? ? link_to("RealTXN.com", root_path) : yield(:title) %></h1>
-			
 			<ul class="nav">
 				<% if @org %>
 					<% if @org.modules.include? "Contacts" %>
@@ -28,10 +25,14 @@
 				
 				<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
 			</ul>
+			
+			<%= yield(:title).blank? ? link_to("RealTXN.com", root_path) : yield(:title) %>
 		</div>
 	<% end %>
 
-<%= yield %>
+	<%= yield %>
+	
+	<%= render "lightbox" %>
 
 </body>
 </html>

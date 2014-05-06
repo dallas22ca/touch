@@ -5,13 +5,28 @@
 	right: 0;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	
+	.loading {
+		background: url(/imgs/loading.gif) center no-repeat rgba(255, 255, 255, 0.8);
+		position: fixed;
+		top: 60px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 99;
+	}
+	
 	.date_headers {
 		th {
+			position: relative;
 			text-align: center;
 			vertical-align: top;
 			background: #555;
 			border-right: 1px solid #888;
 			height: 60px;
+			
+			&:first-child .prev, &:nth-child(5) .next {
+				display: block;
+			}
 		
 			&.with_date {
 				a {
@@ -32,6 +47,18 @@
 						color: #eee;
 						margin-top: 3px;
 					}
+				}
+			}
+			
+			.next, .prev {
+				display: none;
+				position: absolute;
+				padding: 10px;
+				margin-top: 15px;
+				top: 0;
+				
+				&.next {
+					right: 0;
 				}
 			}
 		
@@ -73,6 +100,12 @@
 	right: 0;
 }
 
+#attendance {
+	.table {
+		border-bottom: 1px solid #ddd;
+	}
+}
+
 .rooms_show {
 	margin-bottom: 60px;
 
@@ -81,6 +114,14 @@
 		font-size: 19px;
 		
 		tr {
+			&.add_on_the_fly {
+				display: none;
+				
+				.name {
+					font-weight: bold;
+				}
+			}
+			
 			&:nth-child(even) {
 				background: #fafafa;
 			}
@@ -89,6 +130,7 @@
 				border-right: 1px solid #ddd;
 				
 				&.presence_toggle {
+					cursor: pointer;
 					color: #3f90c6;
 		
 					&.present {
@@ -150,14 +192,14 @@
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 720px) {
 	.rooms_show {
 		margin-bottom: 0px;
 		
 		.table {
 			font-size: 15px;
 			
-			td, th {
+			td, th {				
 				&:nth-child(4) {
 					width: 10px;
 				}
