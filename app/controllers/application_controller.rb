@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :authenticate_user!
+  before_filter :set_domain
   before_filter :configure_devise_params, if: :devise_controller?
   
   def configure_devise_params
@@ -17,5 +18,12 @@ class ApplicationController < ActionController::Base
     else
       @org = current_user.organizations.first
     end
+  end
+  
+  def set_domain
+    @domain ||= (
+      params[:domain] ||= "church"
+      CONFIG[params[:domain]]
+    )
   end
 end

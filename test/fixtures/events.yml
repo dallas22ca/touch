@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  data: 
+  json_data: MyText
+  organization_id: 
+  member_id: 
+
+two:
+  description: MyString
+  data: 
+  json_data: MyText
+  organization_id: 
+  member_id: 

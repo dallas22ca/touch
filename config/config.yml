@@ -1,0 +1,14 @@
+development:
+  realestate:
+    words:
+      contact: contact
+
+  church:
+    words:
+      contact: member
+
+test:
+  a: b
+
+production:
+  a: b

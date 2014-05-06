@@ -11,7 +11,12 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
-    @meetings = @room.meetings.limit(5).date_desc.reverse
+    @meetings = Meeting
+    @meetings = @meetings.where(room_id: @room.id)
+    @last_meeting = @meetings.date_desc.limit(1).first
+    @meetings = @meetings.where("date < ?", Time.at(params[:finish].to_i)) if params[:finish]
+    @meetings = @meetings.where("date > ?", Time.at(params[:start].to_i)) if params[:start]
+    @meetings = @meetings.date_desc.limit(5).reverse
     @nils = 5 - @meetings.count
   end
 

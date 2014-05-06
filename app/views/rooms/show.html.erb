@@ -1,6 +1,20 @@
-<% title link_to("#{@room.name} &darr;".html_safe, "#") %>
+<% title do %>
+	<h1><%= link_to "#{@room.name} &nbsp; &darr;".html_safe, "#", class: "show_sub_menu" %></h1>
+	<ul class="sub_menu">
+		<li><%= link_to "Edit This Room", edit_room_path(@org.permalink, @room), remote: true %></li>
+		
+		<% @org.rooms.each do |room| %>
+			<% if room != @room %>
+				<li><%= link_to room.name, room_path(@org.permalink, room) %></li>
+			<% end %>
+		<% end %>
+		
+		<li><%= link_to "Create A New Room", new_room_path(@org.permalink), remote: true %></li>
+	</ul>
+<% end %>
 
-<div id="attendance_header">
+<div id="attendance_header" data-room-id="<%= @room.id %>" data-event-path="<%= track_path(@org.permalink) %>" data-last-meeting-id="<%= @last_meeting ? @last_meeting.id : 0 %>">
+	<div class="loading"></div>
 	<table class="table center date_headers">
 		<thead>
 			<tr>
@@ -9,17 +23,10 @@
 					<th class="unused"></th>
 				<% end %>
 			
-				<% @meetings.each do |meeting| %>
-					<th class="with_date">
-						<a href="<%= edit_room_meeting_path(@org.permalink, @room, meeting) %>">
-							<span class="day"><%= meeting.date.strftime("%a") %></span>
-							<span class="date"><%= meeting.date.strftime("%b %-d") %></span>
-						</a>
-					</th>
-				<% end %>
+				<%= render @meetings %>
 
 				<th class="row_for_new">
-					<%= link_to "+", new_room_meeting_path(@org.permalink, @room), class: "add_date" %>
+					<%= link_to "+", new_room_meeting_path(@org.permalink, @room), remote: true, class: "add_date" %>
 				</th>
 				<th class="row_head">
 					<%= form_for request.path, method: :get, remote: true do %>
@@ -34,8 +41,21 @@
 
 <table id="attendance" class="table center">
 	<tbody>
+		<tr class="add_on_the_fly">
+			<% @nils.times do %>
+				<td class="unused"></td>
+			<% end %>
+			
+			<% @meetings.each do |meeting| %>
+				<%= render "presence_toggle" %>
+			<% end %>
+			
+			<td class="here row_for_new"></td>
+			<td class="row_head">Add <span class="name">Dallas Read</span></td>
+		</tr>
+		
 		<% 50.times do |n| %>
-			<% @org.members.each do |member| %>
+			<% @org.memberships.each do |membership| %>
 				<tr>
 					
 					<% @nils.times do %>
@@ -43,14 +63,11 @@
 					<% end %>
 					
 					<% @meetings.each do |meeting| %>
-						<td class="presence_toggle"><a href="#">
-							<span class="here">&check;</span>
-							<span class="not_here">&nbsp;</span>
-						</a></td>
+						<%= render "presence_toggle" %>
 					<% end %>
 
 					<td class="here row_for_new"></td>
-					<td class="row_head"><%= member.last_name %>, <%= member.first_name %> <%= n %></td>
+					<td class="row_head" data-membership-id="<%= membership.id %>"><%= membership.user.last_name %>, <%= membership.user.first_name %> <%= n %></td>
 				</tr>
 			<% end %>
 		<% end %>
@@ -66,12 +83,23 @@
 				<% end %>
 				
 				<% @meetings.each do |meeting| %>
-					<td class="total"><a href="#">0</a></td>
+					<%= render("presence_total") %>
 				<% end %>
 
 				<td class="row_for_new"></td>
 				<td class="row_head">Total</td>
 			</tr>
 		</tfoot>
+	</table>
+</div>
+
+<div class="templates">
+	<table>
+		<tr class="presence_toggle_template">
+			<%= render "presence_toggle" %>
+		</tr>
+		<tr class="presence_total_template">
+			<%= render "presence_total" %>
+		</tr>
 	</table>
 </div>

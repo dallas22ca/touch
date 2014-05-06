@@ -18,6 +18,26 @@ class ModulesController < ApplicationController
     end
   end
   
+  def presence
+    room = @org.rooms.find(params[:room_id])
+    meeting = room.meetings.find(params[:meeting_id])
+    membership = @org.memberships.find(params[:membership_id])
+    present = params[:present].to_s =~ /true|t|1/ ? true : false
+    verb = present ? "Attended" : "Did not attend"
+    
+    @org.events.create!(
+      description: "#{verb} {{ room.name }} on {{ meeting.date }}",
+      json_data: {
+        present: present,
+        meeting: meeting,
+        room: room,
+        contact: membership.user
+      }
+    )
+    
+    render "modules/attendance/presence"
+  end
+  
   private
   
   def check_if_org

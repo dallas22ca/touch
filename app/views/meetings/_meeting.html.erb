@@ -1,0 +1,10 @@
+<% cache meeting do %>
+	<th id="<%= dom_id meeting %>" data-id="<%= meeting.id %>" class="meeting with_date">
+		<%= link_to "<", room_path(meeting.room.organization.permalink, meeting.room, finish: meeting.date.to_i), class: "prev" %>
+		<a href="<%= edit_room_meeting_path(meeting.room.organization.permalink, meeting.room, meeting) %>" data-remote>
+			<span class="day"><%= meeting.date.strftime("%a") %></span>
+			<span class="date"><%= meeting.date.strftime("%b %-d") %></span>
+		</a>
+		<%= link_to ">", room_path(meeting.room.organization.permalink, meeting.room, start: meeting.date.to_i), class: "next" %>
+	</th>
+<% end %>

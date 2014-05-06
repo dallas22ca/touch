@@ -1,0 +1,6 @@
+Lightbox.close()
+Attendance.removeFirstColumn()
+Attendance.addEmptyColumn()
+$("<%= j render @meeting %>").insertBefore("#attendance_header th.row_for_new")
+$("#attendance_header").data("last-meeting-id", "<%= @meeting.id %>")
+Attendance.hideLatestMeetingArrow()
