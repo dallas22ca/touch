@@ -1,4 +1,4 @@
-<%= form_for(@meeting) do |f| %>
+<%= form_for [@room, @meeting], url: @meeting.new_record? ? room_meetings_path(@org.permalink, @room) : room_meeting_path(@org.permalink, @room, @meeting) do |f| %>
   <% if @meeting.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
@@ -10,14 +10,10 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :room_id %><br>
-    <%= f.text_field :room_id %>
-  </div>
+	
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.date_select :date %>
   </div>
   <div class="actions">
     <%= f.submit %>
