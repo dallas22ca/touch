@@ -14,6 +14,10 @@ class ModulesController < ApplicationController
     render "modules/contacts/index"
   end
   
+  def permissions
+    render "modules/permissions/index"
+  end
+  
   def attendance
     if @org.rooms.any?
       redirect_to room_path(@org.permalink, @org.rooms.first)
@@ -38,11 +42,12 @@ class ModulesController < ApplicationController
             ignore_password: true,
             ignore_email: true
           )
-          @membership = @org.memberships.create! user: @user, security: "member"
+          @membership = @org.memberships.create! user: @user, permissions: ["member"]
         end
       
         @org.events.create!(
           description: "#{verb} {{ room.name }} on {{ meeting.date }}",
+          created_at: @meeting.date,
           json_data: {
             present: present,
             meeting: @meeting.attributes,
@@ -64,5 +69,11 @@ class ModulesController < ApplicationController
   
   def check_if_org
     redirect_to contacts_path(current_user.organizations.first) if !@org
+
+    if %w[contacts permissions attendance].include?(action_name)
+      unless @membership.permits?(action_name)
+        redirect_to root_path
+      end
+    end
   end
 end

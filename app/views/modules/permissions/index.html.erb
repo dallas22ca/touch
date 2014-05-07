@@ -1,0 +1,29 @@
+<table id="attendance" class="table center">
+	<thead>
+		<tr>
+			<th class="row_head">Name</th>
+			
+			<% clearances.each do |clearance| %>
+				<th><%= clearance.capitalize %></th>
+			<% end %>
+			
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>		
+		<% @org.memberships.last_name_asc.each do |membership| %>
+			<tr data-membership-id="<%= membership.id %>">
+				<td class="row_head">
+					<span class="pretty_name"><%= membership.pretty_name %></span>
+					<span class="search" style="display: none; "><%= membership.name %></span>
+				</td>
+				
+				<% clearances.each do |clearance| %>
+					<td><%= membership.permits?(clearance) %></td>
+				<% end %>
+				
+				<td><%= link_to "Invite", "#" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

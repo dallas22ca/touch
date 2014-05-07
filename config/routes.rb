@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   authenticate :user do
     get "/:permalink/contacts" => "modules#contacts", as: :contacts
     get "/:permalink/attendance" => "modules#attendance", as: :attendance
+    get "/:permalink/permissions" => "modules#permissions", as: :permissions
   
     scope "/:permalink" do
       post "/track" => "modules#presence", as: :track

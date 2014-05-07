@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140507131157) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "security"
+    t.text     "permissions",     default: "--- []\n"
     t.string   "key"
     t.hstore   "data",            default: {}
   end

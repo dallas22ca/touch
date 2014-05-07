@@ -13,18 +13,25 @@
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
 		<div id="topbar" class="blue_bg">
-			<ul class="nav">
-				<% if @org %>
-					<% if @org.modules.include? "Contacts" %>
-						<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
+			<% cache [@org, @current_membership] do %>
+				<ul class="nav">
+					<% if @org %>
+						<% if @org.modules.include?("contacts") && @membership.permits?("contacts") %>
+							<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
+						<% end %>
+					
+						<% if @org.modules.include?("attendance") && @membership.permits?("attendance") %>
+							<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
+						<% end %>
+					
+						<% if @membership.permits? "permissions" %>
+							<li><%= link_to "Permissions", permissions_path(@org), class: "#{"selected" if request.path == permissions_path(@org)}" %></li>
+						<% end %>
 					<% end %>
-					<% if @org.modules.include? "Attendance" %>
-						<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
-					<% end %>
-				<% end %>
 				
-				<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
-			</ul>
+					<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
+				</ul>
+			<% end %>
 			
 			<%= yield(:title).blank? ? link_to("RealTXN.com", root_path) : yield(:title) %>
 		</div>

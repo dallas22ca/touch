@@ -3,9 +3,6 @@
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
 <div class="main has_sidebar">
@@ -29,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @org.memberships.includes(:user).each do |membership| %>
+			<% @org.memberships.each do |membership| %>
 				<tr>
 					<td><%= check_box_tag :nice %></td>
 					<td><%= link_to membership.data["first_name"], "" %></td>
