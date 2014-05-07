@@ -73,7 +73,7 @@ class ModulesController < ApplicationController
     redirect_to contacts_path(current_user.organizations.first) if !@org
 
     if %w[contacts permissions attendance].include? action_name
-      unless @membership.permits?(action_name)
+      unless @org.modules.include?(action_name) && @membership.permits?(action_name)
         redirect_to root_path
       end
     end
