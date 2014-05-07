@@ -16,4 +16,5 @@ gem 'mustache'
 group :development do
   gem 'capistrano', '~> 2.15', require: false
   gem 'capistrano-maintenance'
+  gem "net-ssh", "~> 2.7.0"
 end
