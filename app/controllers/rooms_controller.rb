@@ -17,6 +17,12 @@ class RoomsController < ApplicationController
     @meetings = @meetings.where("date < ?", Time.at(params[:finish].to_i)) if params[:finish]
     @meetings = @meetings.where("date > ?", Time.at(params[:start].to_i)) if params[:start]
     @meetings = @meetings.date_desc.limit(5).reverse
+    
+    @meeting_events = {}
+    @meetings.each do |meeting|
+      @meeting_events[meeting.id] = meeting.events true
+    end
+    
     @nils = 5 - @meetings.count
   end
 

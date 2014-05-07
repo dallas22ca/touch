@@ -3,7 +3,11 @@ class ModulesController < ApplicationController
   before_filter :check_if_org
   
   def redirect
-    redirect_to contacts_path(current_user.organizations.first)
+    if @org.modules.include? "Contacts"
+      redirect_to contacts_path(current_user.organizations.first)
+    elsif @org.modules.include? "Attendance"
+      redirect_to attendance_path(current_user.organizations.first)
+    end
   end
 
   def contacts
@@ -19,21 +23,39 @@ class ModulesController < ApplicationController
   end
   
   def presence
-    room = @org.rooms.find(params[:room_id])
-    meeting = room.meetings.find(params[:meeting_id])
-    membership = @org.memberships.find(params[:membership_id])
-    present = params[:present].to_s =~ /true|t|1/ ? true : false
+    @room = @org.rooms.find(params[:room_id])
+    @meeting = @room.meetings.find(params[:meeting_id])
+    @membership = @org.memberships.where(id: params[:membership_id]).first
+    present = params[:membership_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
     verb = present ? "Attended" : "Did not attend"
-    
-    @org.events.create!(
-      description: "#{verb} {{ room.name }} on {{ meeting.date }}",
-      json_data: {
-        present: present,
-        meeting: meeting,
-        room: room,
-        contact: membership.user
-      }
-    )
+    exists = @org.events.where("data @> 'contact.key=>#{@membership.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @membership
+
+    if present
+      if !exists
+        if params[:membership_id] == "new"
+          @user = User.create!(
+            name: params[:name],
+            ignore_password: true,
+            ignore_email: true
+          )
+          @membership = @org.memberships.create! user: @user, security: "member"
+        end
+      
+        @org.events.create!(
+          description: "#{verb} {{ room.name }} on {{ meeting.date }}",
+          json_data: {
+            present: present,
+            meeting: @meeting.attributes,
+            room: @room.attributes,
+            contact: {
+              key: @membership.key
+            }
+          }
+        )
+      end
+    else
+      exists.destroy
+    end
     
     render "modules/attendance/presence"
   end

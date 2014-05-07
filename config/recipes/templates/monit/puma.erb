@@ -1,0 +1,4 @@
+check process <%= application %>_puma with pidfile <%= puma_pid %>
+	start program = "/etc/init.d/puma_<%= application %> start"
+	stop program = "/etc/init.d/puma_<%= application %> stop"
+	if totalmem > <%= mem_threshold %> MB for 1 cycles then restart

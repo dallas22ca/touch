@@ -1,0 +1,8 @@
+<%= rails_env %>:
+  sessions:
+    default:
+      database: <%= mongodb_database %>
+      username: <%= mongodb_user %>
+      password: <%= mongodb_password %>      
+      hosts:
+        - <%= mongodb_host %>

@@ -1,4 +1,5 @@
-<td class="presence_toggle">
+<% present ||= false %>
+<td class="presence_toggle<%= " present" if present %>">
 	<a href="#">
 		<span class="here">&check;</span>
 		<span class="not_here">&nbsp;</span>

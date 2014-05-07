@@ -19,11 +19,12 @@
 	<table id="contacts" class="table">
 		<thead>
 			<tr>
-				<th><%= check_box_tag :nice %></th>
 				<th>
 					<div class="loading"></div>
-					Name
+					<%= check_box_tag :nice %>
 				</th>
+				<th>First Name</th>
+				<th>Last Name</th>
 				<th>Email</th>
 			</tr>
 		</thead>
@@ -31,8 +32,9 @@
 			<% @org.memberships.includes(:user).each do |membership| %>
 				<tr>
 					<td><%= check_box_tag :nice %></td>
-					<td><%= link_to membership.user.name, "" %></td>
-					<td><%= link_to membership.user.email, "" %></td>
+					<td><%= link_to membership.data["first_name"], "" %></td>
+					<td><%= link_to membership.data["last_name"], "" %></td>
+					<td><%= link_to membership.data["email"], "" %></td>
 				</tr>
 			<% end %>
 		</tbody>

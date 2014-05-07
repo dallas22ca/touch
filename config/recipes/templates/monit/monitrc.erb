@@ -1,0 +1,29 @@
+set daemon 30
+
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+
+set eventqueue
+	basedir /var/lib/monit/events
+	slots 100
+
+set mailserver porsche.websitewelcome.com port 465
+	username "monit@instagive.io" password "daersallad"
+	using tlsv1
+	with timeout 30 seconds
+
+set alert dallas@instagive.io
+
+# set httpd port 3313 and
+# use address instagive.io
+# allow admin:"daersallad"
+# SSL ENABLE
+# PEMFILE <%= ssl_cert %>
+
+check system instagive_server
+	if loadavg(5min) > 2 for 2 cycles then restart
+	if memory > 90% for 2 cycles then restart
+	if cpu(user) > 90% for 2 cycles then restart
+
+include /etc/monit/conf.d/*
