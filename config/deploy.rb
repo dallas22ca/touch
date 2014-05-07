@@ -38,7 +38,9 @@ Dir.glob("config/recipes/*.rb").each do |file|
   load file
 end
 
-after "deploy", "puma:restart"
+# after "deploy", "puma:restart"
+before "deploy:migrate", "deploy:web:disable"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:cleanup"
+after "deploy:cleanup", "deploy:web:enable"
 after "deploy:install", "deploy:autoremove"
