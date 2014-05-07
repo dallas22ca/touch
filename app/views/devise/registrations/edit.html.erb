@@ -1,6 +1,13 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+<ul>
+	<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+	<!--<% current_user.memberships.each do |membership| %>
+			<% if membership.permits? "permissions" %>
+				<li><%= link_to "Edit Permissions for \"#{membership.organization.permalink}\"", permissions_path(membership.organization) %></li>
+			<% end %>
+		<% end %>-->
+</ul>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>

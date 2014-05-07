@@ -39,6 +39,7 @@ namespace :postgresql do
   task :symlink, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
+    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
   end
   after "deploy:finalize_update", "postgresql:symlink"
   

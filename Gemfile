@@ -14,6 +14,10 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'mustache'
 
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
 group :development do
   gem 'capistrano', '~> 2.15', require: false
   gem 'capistrano-maintenance'
