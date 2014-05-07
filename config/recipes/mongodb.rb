@@ -14,20 +14,20 @@ namespace :mongodb do
     run "#{sudo} chkconfig mongod on"
     # NEED TO ADD USER
   end
-  after "deploy:install", "mongodb:install"
+  # after "deploy:install", "mongodb:install"
 
   desc "Generate the database.yml configuration file."
   task :setup, roles: :app do
     run "mkdir -p #{shared_path}/config"
     template "mongoid.yml.erb", "#{shared_path}/config/mongoid.yml"
   end
-  after "deploy:setup", "mongodb:setup"
+  # after "deploy:setup", "mongodb:setup"
 
   desc "Symlink the database.yml file into latest release"
   task :symlink, roles: :app do
     run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
   end
-  after "deploy:finalize_update", "mongodb:symlink"
+  # after "deploy:finalize_update", "mongodb:symlink"
   
   %w[start stop restart].each do |command|
     desc "#{command} mongodb"
