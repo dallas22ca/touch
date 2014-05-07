@@ -28,7 +28,7 @@
 					<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
 				</ul>
 			<% end %>
-			
+
 			<% if yield(:title).blank? %>
 				<h1><%= link_to("OneAttendance.com", root_path) %></h1>
 			<% else %>
