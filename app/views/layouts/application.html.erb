@@ -23,10 +23,6 @@
 						<% if @org.modules.include?("attendance") && @membership.permits?("attendance") %>
 							<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
 						<% end %>
-					
-						<% if @membership.permits? "permissions" %>
-							<li><%= link_to "Permissions", permissions_path(@org), class: "#{"selected" if request.path == permissions_path(@org)}" %></li>
-						<% end %>
 					<% end %>
 				
 					<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>

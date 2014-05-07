@@ -3,10 +3,12 @@ class ModulesController < ApplicationController
   before_filter :check_if_org
   
   def redirect
-    if @org.modules.include? "Contacts"
+    if @org.modules.include? "contacts"
       redirect_to contacts_path(current_user.organizations.first)
-    elsif @org.modules.include? "Attendance"
+    elsif @org.modules.include? "attendance"
       redirect_to attendance_path(current_user.organizations.first)
+    else
+      redirect_to edit_user_registration_path
     end
   end
 
@@ -70,7 +72,7 @@ class ModulesController < ApplicationController
   def check_if_org
     redirect_to contacts_path(current_user.organizations.first) if !@org
 
-    if %w[contacts permissions attendance].include?(action_name)
+    if %w[contacts permissions attendance].include? action_name
       unless @membership.permits?(action_name)
         redirect_to root_path
       end
