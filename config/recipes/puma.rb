@@ -16,4 +16,5 @@ namespace :puma do
     run "#{sudo} mv /tmp/puma_init /etc/init.d/puma_#{application}"
     run "#{sudo} update-rc.d -f puma_#{application} defaults"
   end
+  after "deploy:setup", "puma:setup"
 end

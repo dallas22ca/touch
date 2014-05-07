@@ -2,7 +2,7 @@ load 'deploy/assets'
 
 require "bundler/capistrano"
 require 'sidekiq/capistrano'
-require "whenever/capistrano"
+# require "whenever/capistrano"
 require 'puma/capistrano'
 
 default_run_options[:pty] = true
@@ -38,9 +38,7 @@ Dir.glob("config/recipes/*.rb").each do |file|
   load file
 end
 
-after "deploy:setup", "puma:setup"
-
-after 'deploy', 'puma:restart'
+after "deploy", "puma:restart"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:cleanup"
 after "deploy:install", "deploy:autoremove"

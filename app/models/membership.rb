@@ -1,15 +1,20 @@
 class Membership < ActiveRecord::Base
+  serialize :permissions, Array
+  
   belongs_to :user
   belongs_to :organization
-  
-  before_create :set_initial_admin
-  before_create :set_security
 
   validates_uniqueness_of :key, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
+  
+  before_create :set_initial_admin
+  before_create :permissions
+  
   after_create :set_user_data
   after_create :set_key, unless: :key
+  
+  scope :last_name_asc, -> { order("memberships.data->'last_name' desc") }
   
   def set_user_data
     split = user.name.split(" ")
@@ -41,10 +46,14 @@ class Membership < ActiveRecord::Base
   end
   
   def set_initial_admin
-    self.security = "admin" if organization.memberships.empty?
+    self.permissions = ["admin"] if organization.memberships.empty?
   end
   
-  def set_security
-    self.security ||= "member"
+  def set_permissions
+    self.permissions ||= ["member"]
+  end
+  
+  def permits?(clearance)
+    permissions.include?("admin") || permissions.include?(clearance)
   end
 end

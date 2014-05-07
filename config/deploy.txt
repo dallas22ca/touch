@@ -10,10 +10,10 @@
 == ON LOCAL MACHINE
 === DEPLOY
 * Put new ip into deploy.rb file.
-* cap ed deploy:install (May takes more than 10 minutes. if forever, just Ctrl + C and run again.)
-* cap ed deploy:setup
-* cap ed deploy:cold # BUNDLE MAY HANG, IF SO RUN AGAIN
-* cap ed db:seed
+* cap deploy:install (May takes more than 10 minutes. if forever, just Ctrl + C and run again.)
+* cap deploy:setup
+* cap deploy:cold # BUNDLE MAY HANG, IF SO RUN AGAIN
+* cap db:seed
 
 = KEYCHAIN ACCESS
 

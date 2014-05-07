@@ -17,5 +17,11 @@ class ApplicationController < ActionController::Base
     else
       @org = current_user.organizations.first
     end
+    
+    set_membership
+  end
+  
+  def set_membership
+    @membership = @org.memberships.where(user_id: current_user.id).first
   end
 end
