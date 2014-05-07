@@ -1,0 +1,6 @@
+check process mongod with pidfile <%= mongodb_pid %>
+  start program = "/etc/init.d/mongod start"
+  stop program = "/etc/init.d/mongod stop"
+	if totalmem > <%= mem_threshold %> MB for 1 cycles then restart
+  if failed host localhost port 5432 protocol pgsql then restart
+  if 5 restarts within 5 cycles then timeout

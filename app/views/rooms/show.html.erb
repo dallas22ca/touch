@@ -51,25 +51,31 @@
 			<% end %>
 			
 			<td class="here row_for_new"></td>
-			<td class="row_head">Add <span class="name">Dallas Read</span></td>
+			<td class="row_head">
+				<span class="pretty_name">
+					Add <span class="name"></span>
+				</span>
+				<span class="search"></span>
+			</td>
 		</tr>
 		
-		<% 50.times do |n| %>
-			<% @org.memberships.each do |membership| %>
-				<tr>
-					
-					<% @nils.times do %>
-						<td class="unused"></td>
-					<% end %>
-					
-					<% @meetings.each do |meeting| %>
-						<%= render "presence_toggle" %>
-					<% end %>
+		<% @org.memberships.each do |membership| %>
+			<tr>
+				
+				<% @nils.times do %>
+					<td class="unused"></td>
+				<% end %>
+				
+				<% @meeting_events.each do |meeting_id, member_ids| %>
+					<%= render "presence_toggle", present: member_ids.include?(membership.user_id) %>
+				<% end %>
 
-					<td class="here row_for_new"></td>
-					<td class="row_head" data-membership-id="<%= membership.id %>"><%= membership.user.last_name %>, <%= membership.user.first_name %> <%= n %></td>
-				</tr>
-			<% end %>
+				<td class="here row_for_new"></td>
+				<td class="row_head" data-membership-id="<%= membership.id %>">
+					<span class="pretty_name"><%= membership.pretty_name %></span>
+					<span class="search"><%= membership.name %></span>
+				</td>
+			</tr>
 		<% end %>
 	</tbody>
 </table>

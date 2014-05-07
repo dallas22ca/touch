@@ -101,9 +101,7 @@
 }
 
 #attendance {
-	.table {
-		border-bottom: 1px solid #ddd;
-	}
+	border-bottom: 1px solid #ddd;
 }
 
 .rooms_show {
@@ -129,6 +127,10 @@
 			td {
 				border-right: 1px solid #ddd;
 				
+				.search {
+					display: none;
+				}
+				
 				&.presence_toggle {
 					cursor: pointer;
 					color: #3f90c6;
@@ -141,6 +143,10 @@
 						.here {
 							display: block;
 						}
+					}
+					
+					&.load {
+						background: url(/imgs/loading_small.gif) center no-repeat #fafafa;
 					}
 		
 					.not_here {

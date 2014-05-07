@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessor :ignore_password, :ignore_email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,11 +13,19 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   
-  def first_name
-    name.split(" ").first
+  def password_required?
+    if ignore_password
+      false
+    else
+      super
+    end
   end
   
-  def last_name
-    name.split(" ").last
+  def email_required?
+    if ignore_email
+      false
+    else
+      super
+    end
   end
 end

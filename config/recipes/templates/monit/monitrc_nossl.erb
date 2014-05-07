@@ -1,0 +1,20 @@
+set daemon 30
+
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+
+set eventqueue
+	basedir /var/lib/monit/events
+	slots 100
+
+set httpd port 3313 and
+use address 162.243.34.45
+allow admin:"touchbase"
+
+check system eo_server
+	if loadavg(5min) > 2 for 2 cycles then restart
+	if memory > 75% for 2 cycles then restart
+	if cpu(user) > 75% for 2 cycles then restart
+
+include /etc/monit/conf.d/*

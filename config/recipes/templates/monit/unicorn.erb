@@ -1,0 +1,11 @@
+check process <%= application %>_unicorn with pidfile <%= unicorn_pid %>
+	start program = "/etc/init.d/unicorn_<%= application %> start"
+	stop program = "/etc/init.d/unicorn_<%= application %> stop"
+	if totalmem > 800 MB for 1 cycles then restart
+
+<% unicorn_workers.times do |n| %>
+  <% pid = unicorn_pid.sub(".pid", ".#{n}.pid") %>
+check process <%= application %>_unicorn_worker_<%= n %> with pidfile <%= pid %>
+	start program = "/bin/true"
+	stop program = "/usr/bin/test -s <%= pid %> && /bin/kill -QUIT `cat <%= pid %>`"
+<% end %>

@@ -1,0 +1,4 @@
+check process sidekiq with pidfile <%= sidekiq_pid %>
+	start program = "/etc/init.d/sidekiq_<%= application %> start"
+	stop program = "/etc/init.d/sidekiq_<%= application %> stop"
+	if totalmem > <%= mem_threshold %> MB for 1 cycles then restart

@@ -11,3 +11,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'devise'
+gem 'mustache'
+
+group :development do
+  gem 'capistrano', '~> 2.15', require: false
+  gem 'capistrano-maintenance'
+end

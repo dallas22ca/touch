@@ -1,1 +1,10 @@
-alert("<%= params[:present] %>")
+<% if params[:membership_id] == "new" %>
+	Attendance.addRow("<%= j ({ 
+		name: @membership.name, 
+		pretty_name: @membership.pretty_name, 
+		meeting_id: @meeting.id,
+		id: @membership.id
+	}).to_json.html_safe %>")
+<% end %>
+
+Attendance.updateRoomCount(<%= @meeting.id %>, <%= @meeting.events.count %>)
