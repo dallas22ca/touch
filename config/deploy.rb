@@ -5,7 +5,10 @@ require 'sidekiq/capistrano'
 require "whenever/capistrano"
 require 'puma/capistrano'
 
-set :application, "instagive"
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
+
+set :application, "touch"
 set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
@@ -30,9 +33,6 @@ set :ssl_cert, "/etc/ssl/certs/#{domain}/ssl.crt"
 set :ssl_key, "/etc/ssl/certs/#{domain}/domain.key"
 server server_name, :web, :app, :db, primary: true
 set :whenever_command, "bundle exec whenever"
-
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
 
 Dir.glob("config/recipes/*.rb").each do |file|
   load file

@@ -1,0 +1,25 @@
+= For setup on new server:
+
+== ON REMOTE MACHINE
+=== ADD USER
+* ssh into server
+* adduser deployer
+* adduser deployer sudo
+* exit
+
+== ON LOCAL MACHINE
+=== DEPLOY
+* Put new ip into deploy.rb file.
+* cap ed deploy:install (May takes more than 10 minutes. if forever, just Ctrl + C and run again.)
+* cap ed deploy:setup
+* cap ed deploy:cold # BUNDLE MAY HANG, IF SO RUN AGAIN
+* cap ed db:seed
+
+= KEYCHAIN ACCESS
+
+== REMOTE
+* sudo ssh git@github.com
+
+== LOCAL
+* cat ~/.ssh/id_rsa.pub | ssh deployer@69.55.54.246 'cat >> ~/.ssh/authorized_keys'
+* ssh-add -K
