@@ -16,7 +16,7 @@
 			<ul class="nav">
 				<% if @org %>
 					<% if @org.modules.include?("contacts") && @member.permits?("contacts") %>
-						<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
+						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
 					<% end %>
 				
 					<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>

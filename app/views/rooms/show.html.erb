@@ -72,8 +72,10 @@
 
 				<td class="here row_for_new"></td>
 				<td class="row_head" data-member-id="<%= member.id %>">
-					<span class="pretty_name"><%= member.pretty_name %></span>
-					<span class="search"><%= member.name %></span>
+					<a href="<%= edit_member_path(@org.permalink, member) %>" data-remote="true">
+						<span class="pretty_name"><%= member.pretty_name %></span>
+						<span class="search"><%= member.name %></span>
+					</a>
 				</td>
 			</tr>
 		<% end %>

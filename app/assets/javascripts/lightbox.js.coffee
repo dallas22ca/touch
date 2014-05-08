@@ -18,8 +18,9 @@ $(document).on "click", "#lightbox_overlay, .close_lightbox", ->
 	resize: ->
 		if $("#lightbox:visible").length
 			$("#lightbox").css "height", "auto"
+			extra_for_top_and_bottom = if $(window).width() < 720 then 30 else 100
 			height = $("#lightbox").outerHeight()
-			height = $(window).height() - 30 if height > $(window).height() - 30
+			height = $(window).height() - extra_for_top_and_bottom  if height > $(window).height() - extra_for_top_and_bottom
 			$("#lightbox").css
 				"height": "#{height}px"
 				"margin-top": "-#{height / 2}px"

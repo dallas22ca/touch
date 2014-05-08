@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   
   authenticate :user do
-    get "/:permalink/contacts" => "modules#contacts", as: :contacts
-    get "/:permalink/attendance" => "modules#attendance", as: :attendance
-    get "/:permalink/permissions" => "modules#permissions", as: :permissions
-  
     scope "/:permalink" do
+      get "/attendance" => "modules#attendance", as: :attendance
+      get "/permissions" => "modules#permissions", as: :permissions
       post "/track" => "modules#presence", as: :track
-    
+      
+      resources :members, path: :contacts
       resources :rooms, path: :attendance do
         resources :meetings
       end

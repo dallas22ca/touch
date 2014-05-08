@@ -1,4 +1,4 @@
-<%= form_tag contacts_path(@org.permalink, format: :js), id: "filter_form" do %>
+<%= form_tag members_path(@org.permalink, format: :js), id: "filter_form" do %>
 	<ul id="filters">
 		<% %w[first_name last_name email].each do |field| %>
 			<li class="disabled">

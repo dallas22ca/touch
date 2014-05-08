@@ -25,8 +25,8 @@ body {
 }
 
 #lightbox {
-	top: 50%;
 	position: fixed;
+	top: 50%;
 	left: 50%;
 	width: 500px;
 	margin-left: -250px;
@@ -37,6 +37,13 @@ body {
 	overflow-y: auto;
 	font-size: 18px;
 	line-height: 24px;
+	
+	.close_button {
+		float: right;
+		padding: 13px 20px;
+		font-weight: bold;
+		color: #777;
+	}
 	
 	h1 {
 		background: #eeeeee;

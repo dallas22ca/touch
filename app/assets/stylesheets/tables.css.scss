@@ -6,6 +6,16 @@
 			background: #fafafa;
 		}
 		
+		&:hover {
+			background: #D4DEE7;
+		}
+		
+		td {
+			&.add_padding {
+				padding: 13px;
+			}
+		}
+		
 		th {
 			font-weight: bold;
 			text-transform: uppercase;
@@ -17,7 +27,8 @@
 			padding: 13px;
 		}
 	
-		td {
+		a {
+			display: block;
 			padding: 13px;
 		}
 	}

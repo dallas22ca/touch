@@ -1,6 +1,6 @@
 <tr>
-	<td><%= check_box_tag :nice %></td>
-	<td><%= link_to member.data["first_name"], "" %></td>
-	<td><%= link_to member.data["last_name"], "" %></td>
-	<td><%= link_to member.data["email"], "" %></td>
+	<td class="add_padding"><%= check_box_tag :nice %></td>
+	<td><%= link_to member.data["first_name"], edit_member_path(@org.permalink, member), remote: true %></td>
+	<td><%= link_to member.data["last_name"], edit_member_path(@org.permalink, member), remote: true %></td>
+	<td><%= link_to member.data["email"], edit_member_path(@org.permalink, member), remote: true %></td>
 </tr>

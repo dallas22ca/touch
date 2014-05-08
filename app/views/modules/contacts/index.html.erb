@@ -4,7 +4,7 @@
 
 <div class="main has_sidebar">
 	<div id="searcher">
-		<%= form_tag contacts_path(@org.permalink, format: :js), id: "q_form" do %>
+		<%= form_tag members_path(@org.permalink, format: :js), id: "q_form" do %>
 			<%= text_field_tag :q, nil, placeholder: "Search..." %>
 			<%= submit_tag "Search" %>
 			<!--<%= select_tag :qt, options_for_select(["All Contacts", "Regulars", "Occasionals", "New Guests", "Archived"]) %>-->

@@ -4,27 +4,12 @@ class ModulesController < ApplicationController
   
   def redirect
     if @org.modules.include? "contacts"
-      redirect_to contacts_path(current_user.organizations.first)
+      redirect_to members_path(current_user.organizations.first)
     elsif @org.modules.include? "attendance"
       redirect_to attendance_path(current_user.organizations.first)
     else
       redirect_to edit_user_registration_path
     end
-  end
-
-  def contacts
-    params[:filters] ||= []
-    params[:filters] = params[:filters].map { |k, v| v } if params[:filters].kind_of? Hash
-    
-    if params[:q]
-      params[:q].split(" ").each do |word|
-        q = { field: "q", matcher: "like", value: word }
-        params[:filters].push q
-      end
-    end
-    
-    @members = @org.filter_members(params[:filters])
-    render "modules/contacts/index"
   end
   
   def permissions
@@ -82,7 +67,7 @@ class ModulesController < ApplicationController
   private
   
   def check_if_org
-    redirect_to contacts_path(current_user.organizations.first) if !@org
+    redirect_to members_path(current_user.organizations.first) if !@org
 
     if %w[contacts permissions attendance].include? action_name
       unless @org.modules.include?(action_name) && @member.permits?(action_name)
