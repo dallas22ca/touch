@@ -227,6 +227,10 @@
 		#attendance_header {
 			.date_headers {
 				th {
+					&:nth-child(5) .prev {
+						display: block;
+					}
+					
 					#q {
 						font-size: 15px;
 					}

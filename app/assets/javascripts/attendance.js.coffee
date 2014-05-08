@@ -53,7 +53,7 @@ $(document).on "keyup", "#attendance_header #q", ->
 		if $("#attendance_footer").length
 			Attendance.sort()
 			Attendance.tallyTotals()
-			Attendance.hideLatestMeetingArrow()
+			Attendance.hideMeetingArrows()
 			
 	addRow: (data) ->
 		data = $.parseJSON(data)
@@ -81,9 +81,10 @@ $(document).on "keyup", "#attendance_header #q", ->
 		total = $("#attendance tr").find("td:eq(#{index}).present").length
 		$(this).find("a").text total
 	
-	hideLatestMeetingArrow: ->
-		id = $("#attendance_header").data("last-meeting-id")
-		$("#meeting_#{id} .next").hide()
+	hideMeetingArrows: ->
+		last_id = $("#attendance_header").data("last-meeting-id")
+		first_id = $("#attendance_header").data("first-meeting-id")
+		$("#meeting_#{last_id} .next, #meeting_#{first_id} .prev").hide()
 	
 	removeFirstColumn: ->
 		$("#attendance_header tr").find("th:first").remove()

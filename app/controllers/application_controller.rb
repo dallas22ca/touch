@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   
   def set_organization
     if params[:permalink]
-      @org = Organization.where(permalink: params[:permalink]).first
+      @org = current_user.organizations.where(permalink: params[:permalink]).first
     else
       @org = current_user.organizations.first
     end
@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
   end
   
   def set_membership
-    @membership = @org.memberships.where(user_id: current_user.id).first
+    @membership = current_user.memberships.where(organization_id: @org.id).first
   end
 end

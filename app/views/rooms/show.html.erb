@@ -13,7 +13,7 @@
 	</ul>
 <% end %>
 
-<div id="attendance_header" data-room-id="<%= @room.id %>" data-event-path="<%= track_path(@org.permalink) %>" data-last-meeting-id="<%= @last_meeting ? @last_meeting.id : 0 %>">
+<div id="attendance_header" data-room-id="<%= @room.id %>" data-event-path="<%= track_path(@org.permalink) %>" data-last-meeting-id="<%= @last_meeting ? @last_meeting.id : 0 %>" data-first-meeting-id="<%= @first_meeting ? @first_meeting.id : 0 %>">
 	<div class="loading"></div>
 	<table class="table center date_headers">
 		<thead>

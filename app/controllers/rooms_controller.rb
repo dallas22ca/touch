@@ -14,9 +14,10 @@ class RoomsController < ApplicationController
     @memberships = @org.memberships.last_name_asc
     @meetings = Meeting
     @meetings = @meetings.where(room_id: @room.id)
-    @last_meeting = @meetings.date_desc.limit(1).first
+    @last_meeting = @meetings.date_desc.first
+    @first_meeting = @meetings.date_asc.first
     @meetings = @meetings.where("date < ?", Time.at(params[:finish].to_i)) if params[:finish]
-    @meetings = @meetings.where("date > ?", Time.at(params[:start].to_i)) if params[:start]
+    @meetings = @meetings.where("date > ?", Time.at(params[:start].to_i)).date_asc if params[:start]
     @meetings = @meetings.date_desc.limit(5).reverse
     
     @meeting_events = {}
