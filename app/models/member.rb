@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   
-  has_many :events
+  has_many :events, dependent: :destroy
 
   validates_uniqueness_of :key, scope: :organization
   

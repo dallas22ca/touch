@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_filter :set_organization
+  before_action :set_this_member, only: [:show, :edit, :update, :destroy]
   
   def index
     params[:filters] ||= []
@@ -17,6 +18,40 @@ class MembersController < ApplicationController
   end
   
   def edit
+  end
+  
+  def update
+    respond_to do |format|
+      if @member.update(member_params)
+        format.html { redirect_to member_path(@org.permalink, @member), notice: 'Room was successfully updated.' }
+        format.json { render :show, status: :ok, location: @member }
+        format.js
+      else
+        format.html { render :edit }
+        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+  
+  def destroy
+    @member.destroy
+    respond_to do |format|
+      format.html { redirect_to members_path(@org.permalink), notice: 'Room was successfully destroyed.' }
+      format.json { head :no_content }
+      format.js
+    end
+  end
+  
+  private
+  
+  def set_this_member
     @member = @org.members.find(params[:id])
+  end
+  
+  def member_params
+    params.require(:member).permit(:key).tap do |whitelisted|
+      whitelisted[:data] = params[:member][:data]
+    end
   end
 end
