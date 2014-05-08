@@ -13,7 +13,7 @@ class ModulesController < ApplicationController
   end
 
   def contacts
-    @memberships = @org.memberships.filter(params[:filters])
+    @members = @org.members.filter(params[:filters])
     render "modules/contacts/index"
   end
   
@@ -32,20 +32,20 @@ class ModulesController < ApplicationController
   def presence
     @room = @org.rooms.find(params[:room_id])
     @meeting = @room.meetings.find(params[:meeting_id])
-    @membership = @org.memberships.where(id: params[:membership_id]).first
-    present = params[:membership_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
+    @member = @org.members.where(id: params[:member_id]).first
+    present = params[:member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
     verb = present ? "attended" : "did not attend"
-    exists = @org.events.where("data @> 'contact.key=>#{@membership.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @membership
+    exists = @org.events.where("data @> 'contact.key=>#{@member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @member
 
     if present
       if !exists
-        if params[:membership_id] == "new"
+        if params[:member_id] == "new"
           @user = User.create!(
             name: params[:name],
             ignore_password: true,
             ignore_email: true
           )
-          @membership = @org.memberships.create! user: @user, permissions: ["member"]
+          @member = @org.members.create! user: @user, permissions: ["member"]
         end
       
         @org.events.create!(
@@ -57,7 +57,7 @@ class ModulesController < ApplicationController
             meeting: @meeting.attributes,
             room: @room.attributes,
             contact: {
-              key: @membership.key
+              key: @member.key
             }
           }
         )
@@ -75,7 +75,7 @@ class ModulesController < ApplicationController
     redirect_to contacts_path(current_user.organizations.first) if !@org
 
     if %w[contacts permissions attendance].include? action_name
-      unless @org.modules.include?(action_name) && @membership.permits?(action_name)
+      unless @org.modules.include?(action_name) && @member.permits?(action_name)
         redirect_to root_path
       end
     end

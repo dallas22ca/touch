@@ -11,12 +11,12 @@ class Event < ActiveRecord::Base
   
   def parse_json
     if json_data[:contact] && json_data[:contact][:key]
-      membership = organization.memberships.where(key: json_data[:contact][:key]).first
+      member = organization.members.where(key: json_data[:contact][:key]).first
       
-      if membership
-        self.member_id = membership.user_id
+      if member
+        self.member_id = member.user_id
         self.json_data[:contact] = self.json_data[:contact].merge(
-          membership.data.merge(id: membership.id)
+          member.data.merge(id: member.id)
         )
       end
     end

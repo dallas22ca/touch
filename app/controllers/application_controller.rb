@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
       @org = current_user.organizations.first
     end
     
-    set_membership
+    set_member
   end
   
-  def set_membership
-    @membership = current_user.memberships.where(organization_id: @org.id).first
+  def set_member
+    @member = current_user.members.where(organization_id: @org.id).first
   end
 end

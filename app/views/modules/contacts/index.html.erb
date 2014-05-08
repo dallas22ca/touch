@@ -23,12 +23,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @memberships.each do |membership| %>
+			<% @members.each do |member| %>
 				<tr>
 					<td><%= check_box_tag :nice %></td>
-					<td><%= link_to membership.data["first_name"], "" %></td>
-					<td><%= link_to membership.data["last_name"], "" %></td>
-					<td><%= link_to membership.data["email"], "" %></td>
+					<td><%= link_to member.data["first_name"], "" %></td>
+					<td><%= link_to member.data["last_name"], "" %></td>
+					<td><%= link_to member.data["email"], "" %></td>
 				</tr>
 			<% end %>
 		</tbody>

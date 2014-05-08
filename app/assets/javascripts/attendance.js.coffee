@@ -1,13 +1,13 @@
 $(document).on "click", ".presence_toggle", ->
 	name = false
 	index = $(this).index()
-	membership_id = $(this).closest("tr").find(".row_head").data("membership-id")
-	membership_id = "new" if typeof membership_id == "undefined"
+	member_id = $(this).closest("tr").find(".row_head").data("member-id")
+	member_id = "new" if typeof member_id == "undefined"
 	room_id = $("#attendance_header").data("room-id")
 	meeting_id = $("#attendance_header").find("th:eq(#{index})").data("id")
 	url = $("#attendance_header").data("event-path")
 	
-	if membership_id == "new"
+	if member_id == "new"
 		name = $(".add_on_the_fly .name").text()
 		$(this).toggleClass "load"
 	else
@@ -15,7 +15,7 @@ $(document).on "click", ".presence_toggle", ->
 		Attendance.tallyTotals()
 
 	$.post url,
-		membership_id: membership_id
+		member_id: member_id
 		meeting_id: meeting_id
 		room_id: room_id
 		present: $(this).hasClass("present")
@@ -68,7 +68,7 @@ $(document).on "keyup", "#attendance_header #q", ->
 		clone.removeClass "add_on_the_fly"
 		clone.find(".row_head .pretty_name").text data.pretty_name
 		clone.find(".row_head .search").text data.name
-		clone.find(".row_head").data("membership-id", data.id)
+		clone.find(".row_head").data("member-id", data.id)
 		clone.find("td:eq(#{index})").addClass "present"
 		clone.insertAfter "#attendance .add_on_the_fly"
 		clone.show()

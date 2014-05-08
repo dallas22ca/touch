@@ -1,4 +1,4 @@
-class Membership < ActiveRecord::Base
+class Member < ActiveRecord::Base
   serialize :permissions, Array
   
   belongs_to :user
@@ -14,7 +14,7 @@ class Membership < ActiveRecord::Base
   after_create :set_user_data
   after_create :set_key, unless: :key
   
-  scope :last_name_asc, -> { order("memberships.data->'last_name' desc") }
+  scope :last_name_asc, -> { order("members.data->'last_name' desc") }
   
   def set_user_data
     split = user.name.split(" ")
@@ -46,7 +46,7 @@ class Membership < ActiveRecord::Base
   end
   
   def set_initial_admin
-    self.permissions = ["admin"] if organization.memberships.empty?
+    self.permissions = ["admin"] if organization.members.empty?
   end
   
   def set_permissions
@@ -61,7 +61,7 @@ class Membership < ActiveRecord::Base
     include_events = false
     normal_fields = ["created_at", "updated_at", "name", "id"]
     queries = []
-    memberships = all
+    members = all
     
     if filters
       filters.each do |filter|
@@ -71,35 +71,35 @@ class Membership < ActiveRecord::Base
         event = filter[:event].to_s
     
         if field == "q"
-          queries.push "LOWER(CAST(avals(memberships.data) AS text)) ilike '%#{q}%'"
+          queries.push "LOWER(CAST(avals(members.data) AS text)) ilike '%#{q}%'"
         elsif !event.blank?
           include_events = true
           queries.push "EVENT THINGY"
         elsif normal_fields.include? field
           case matcher
           when "is"
-            queries.push "memberships.#{field} = '#{value}'"
+            queries.push "members.#{field} = '#{value}'"
           when "is_not"
-            queries.push "memberships.#{field} != '#{value}'"
+            queries.push "members.#{field} != '#{value}'"
           when "like"
-            queries.push "memberships.#{field} ilike '%#{value}%'"
+            queries.push "members.#{field} ilike '%#{value}%'"
           when "greater_than"
-            queries.push "memberships.#{field} > '#{value}'"
+            queries.push "members.#{field} > '#{value}'"
           when "less_than"
-            queries.push "memberships.#{field} < '#{value}'"
+            queries.push "members.#{field} < '#{value}'"
           end  
         else
           case matcher
           when "is"
-            queries.push "memberships.data @> hstore('#{field}', '#{value}')"
+            queries.push "members.data @> hstore('#{field}', '#{value}')"
           when "is_not"
-            queries.push "memberships.data -> '#{field}' <> '#{value}'"
+            queries.push "members.data -> '#{field}' <> '#{value}'"
           when "like"
-            queries.push "memberships.data -> '#{field}' ilike '%#{value}%'"
+            queries.push "members.data -> '#{field}' ilike '%#{value}%'"
           when "greater_than"
-            queries.push "memberships.data -> '#{field}' > '#{value}'"
+            queries.push "members.data -> '#{field}' > '#{value}'"
           when "less_than"
-            queries.push "memberships.data -> '#{field}' < '#{value}'"
+            queries.push "members.data -> '#{field}' < '#{value}'"
           end
         end
       end
@@ -107,8 +107,8 @@ class Membership < ActiveRecord::Base
     
     p queries
     
-    memberships = memberships.where(queries.join(" and ")) if queries.any?
-    memberships = memberships.includes(:events) if include_events
-    memberships
+    members = members.where(queries.join(" and ")) if queries.any?
+    members = members.includes(:events) if include_events
+    members
   end
 end

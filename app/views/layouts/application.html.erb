@@ -13,14 +13,14 @@
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
 		<div id="topbar" class="blue_bg">
-			<% cache [@org, @current_membership] do %>
+			<% cache [@org, @current_member] do %>
 				<ul class="nav">
 					<% if @org %>
-						<% if @org.modules.include?("contacts") && @membership.permits?("contacts") %>
+						<% if @org.modules.include?("contacts") && @member.permits?("contacts") %>
 							<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
 						<% end %>
 					
-						<% if @org.modules.include?("attendance") && @membership.permits?("attendance") %>
+						<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>
 							<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
 						<% end %>
 					<% end %>

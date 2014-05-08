@@ -11,15 +11,15 @@
 		</tr>
 	</thead>
 	<tbody>		
-		<% @org.memberships.last_name_asc.each do |membership| %>
-			<tr data-membership-id="<%= membership.id %>">
+		<% @org.members.last_name_asc.each do |member| %>
+			<tr data-member-id="<%= member.id %>">
 				<td class="row_head">
-					<span class="pretty_name"><%= membership.pretty_name %></span>
-					<span class="search" style="display: none; "><%= membership.name %></span>
+					<span class="pretty_name"><%= member.pretty_name %></span>
+					<span class="search" style="display: none; "><%= member.name %></span>
 				</td>
 				
 				<% clearances.each do |clearance| %>
-					<td><%= membership.permits?(clearance) %></td>
+					<td><%= member.permits?(clearance) %></td>
 				<% end %>
 				
 				<td><%= link_to "Invite", "#" %></td>

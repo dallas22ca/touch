@@ -59,7 +59,7 @@
 			</td>
 		</tr>
 		
-		<% @memberships.each do |membership| %>
+		<% @members.each do |member| %>
 			<tr>
 				
 				<% @nils.times do %>
@@ -67,13 +67,13 @@
 				<% end %>
 				
 				<% @meeting_events.each do |meeting_id, member_ids| %>
-					<%= render "presence_toggle", present: member_ids.include?(membership.user_id) %>
+					<%= render "presence_toggle", present: member_ids.include?(member.user_id) %>
 				<% end %>
 
 				<td class="here row_for_new"></td>
-				<td class="row_head" data-membership-id="<%= membership.id %>">
-					<span class="pretty_name"><%= membership.pretty_name %></span>
-					<span class="search"><%= membership.name %></span>
+				<td class="row_head" data-member-id="<%= member.id %>">
+					<span class="pretty_name"><%= member.pretty_name %></span>
+					<span class="search"><%= member.name %></span>
 				</td>
 			</tr>
 		<% end %>

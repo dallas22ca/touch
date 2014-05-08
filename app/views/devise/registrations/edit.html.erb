@@ -2,9 +2,9 @@
 
 <ul>
 	<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-	<!--<% current_user.memberships.each do |membership| %>
-			<% if membership.permits? "permissions" %>
-				<li><%= link_to "Edit Permissions for \"#{membership.organization.permalink}\"", permissions_path(membership.organization) %></li>
+	<!--<% current_user.members.each do |member| %>
+			<% if member.permits? "permissions" %>
+				<li><%= link_to "Edit Permissions for \"#{member.organization.permalink}\"", permissions_path(member.organization) %></li>
 			<% end %>
 		<% end %>-->
 </ul>

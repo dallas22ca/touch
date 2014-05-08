@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140508105401) do
 
   add_index "meetings", ["room_id"], name: "index_meetings_on_room_id", using: :btree
 
-  create_table "memberships", force: true do |t|
+  create_table "members", force: true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
     t.datetime "created_at"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20140508105401) do
     t.hstore   "data",            default: {}
   end
 
-  add_index "memberships", ["organization_id"], name: "index_memberships_on_organization_id", using: :btree
-  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+  add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
+  add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "permalink"

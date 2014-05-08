@@ -3,23 +3,23 @@ require "spec_helper"
 describe "Filter" do
   before :each do
     Organization.delete_all
-    Membership.delete_all
+    Member.delete_all
     User.delete_all    
   end
   
   it "default returns all" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.members.push FactoryGirl.create(:user) }
-    assert_equal 5, @org.memberships.filter.count
+    assert_equal 5, @org.members.filter.count
   end
   
   it "searches field with simple ilike" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.members.push FactoryGirl.create(:user) }
-    assert_equal 1, @org.memberships.filter([{
+    assert_equal 1, @org.members.filter([{
       field: "last_name",
       matcher: "like",
-      value: "#{@org.memberships.first.data["last_name"]}"
+      value: "#{@org.members.first.data["last_name"]}"
     }]).count
   end
   
@@ -27,11 +27,11 @@ describe "Filter" do
     @org = FactoryGirl.create(:organization)
     5.times.map { |n| @org.members.push FactoryGirl.create(:user) }
     
-    @org.memberships.each_with_index do |m, n|
+    @org.members.each_with_index do |m, n|
       m.update data: { favourite_number: (n + 1).to_s }
     end
     
-    assert_equal 1, @org.memberships.filter([{
+    assert_equal 1, @org.members.filter([{
       field: "favourite_number",
       matcher: "greater_than",
       value: "4"
@@ -42,7 +42,7 @@ describe "Filter" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.members.push FactoryGirl.create(:user) }
     
-    @org.memberships.each_with_index do |m, n|
+    @org.members.each_with_index do |m, n|
       n.times do
         @org.events.create!(
           description: "{{ contact.name }} attended {{ room.name }}",
@@ -60,7 +60,7 @@ describe "Filter" do
       end
     end
     
-    assert_equal 1, @org.memberships.filter([{
+    assert_equal 1, @org.members.filter([{
       field: "events.occurances",
       event: "attended",
       matcher: "greater_than",
