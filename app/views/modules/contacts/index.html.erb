@@ -4,9 +4,11 @@
 
 <div class="main has_sidebar">
 	<div id="searcher">
-		<%= form_tag request.path, method: :get, remote: true do %>
+		<%= form_tag contacts_path(@org.permalink, format: :js), id: "q_form" do %>
 			<%= text_field_tag :q, nil, placeholder: "Search..." %>
-			<%= select_tag :qt, options_for_select(["All Contacts", "Regulars", "Occasionals", "New Guests", "Archived"]) %>
+			<%= submit_tag "Search" %>
+			<!--<%= select_tag :qt, options_for_select(["All Contacts", "Regulars", "Occasionals", "New Guests", "Archived"]) %>-->
+			<span class="members_count"><%= pluralize @members.count, "Result" %></span>
 		<% end %>
 	</div>
 	
@@ -17,20 +19,13 @@
 					<div class="loading"></div>
 					<%= check_box_tag :nice %>
 				</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
+				<th style="width: 33%">First Name</th>
+				<th style="width: 33%">Last Name</th>
+				<th style="width: 33%">Email</th>
 			</tr>
 		</thead>
 		<tbody>
-			<% @members.each do |member| %>
-				<tr>
-					<td><%= check_box_tag :nice %></td>
-					<td><%= link_to member.data["first_name"], "" %></td>
-					<td><%= link_to member.data["last_name"], "" %></td>
-					<td><%= link_to member.data["email"], "" %></td>
-				</tr>
-			<% end %>
+			<%= render @members %>
 		</tbody>
 	</table>
 </div>

@@ -1,12 +1,14 @@
-<%= form_tag "" do %>
+<%= form_tag contacts_path(@org.permalink, format: :js), id: "filter_form" do %>
 	<ul id="filters">
-		<% %w[first_name last_name].each do |field| %>
-			<li>
+		<% %w[first_name last_name email].each do |field| %>
+			<li class="disabled">
 				<%= check_box_tag "#{field}" %>
 				<%= label_tag "#{field}", field.humanize %>
 				
-				<div class="field">
-					<%= text_field_tag :n %>
+				<div class="indent field">
+					<%= hidden_field_tag "#{field}_field", field, data: { field: true } %>
+					<%= hidden_field_tag "#{field}_matcher", "like", data: { matcher: true } %>
+					<%= text_field_tag "#{field}_value", nil, data: { value: true } %>
 				</div>
 			</li>
 		<% end %>
@@ -18,10 +20,6 @@
 <% end %>
 
 <ul class="templates">
-	<li>
-		<%= check_box_tag :n %>
-		<%= select_tag :n, options_for_select(["Attended"]) %>
-	</li>
 	
 	<li class="string">
 		<div class="field">
@@ -31,31 +29,61 @@
 	
 	<li class="event_filter_template">
 		<ul class="no_indent">
-			<li>
+			<li class="disabled">
+				<%= link_to "x", "#", class: "delete_filter" %>
 				<%= check_box_tag :n %>
-				<%= select_tag :n, options_for_select(["Attended"]) %>
-				<ul>
-					<li>
+				<%= select_tag :n, options_for_select(["ATTENDED"]) %>
+				
+				<ul class="field">
+					<li class="disabled">
 						<%= check_box_tag :n %>
-						<%= select_tag :n, options_for_select(["Occurances"]) %>
+						<%= select_tag :n, options_for_select(["OCCURANCES"]) %>
 						
-						<ul class="no_indent">
+						<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+						<%= hidden_field_tag "dynamic_matcher", "greater_than", id: nil, name: nil, data: { matcher: true } %>
+						<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+						<%= hidden_field_tag "dynamic_value", 0, id: nil, name: nil, data: { value: true } %>
+						
+						<ul class="no_indent field">
 							<li class="integer_options">
 								<ul>
-									<li>
-										<%= check_box_tag :n %>
-										<%= label_tag :n, "Greater Than" %>
-										<div class="field">
-											<%= text_field_tag :n %>
+									<li class="disabled">
+										<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+										<%= hidden_field_tag "dynamic_matcher", "greater_than", id: nil, name: nil, data: { matcher: true } %>
+										<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+										<%= hidden_field_tag "dynamic_value", 0, id: nil, name: nil, data: { value: true } %>
+										
+										<%= check_box_tag "dynamic_checkbox", id: nil, name: nil %>
+										<%= label_tag "dynamic_label", "Greater Than", id: nil, name: nil %>
+										
+										<div class="indent field">
+											<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+											<%= hidden_field_tag "dynamic_matcher", "greater_than", id: nil, name: nil, data: { matcher: true } %>
+											<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+											<%= text_field_tag "dynamic_value", nil, id: nil, name: nil, data: { value: true } %>
 										</div>
 									</li>
-									<li>
-										<%= check_box_tag :n %>
-										<%= label_tag :n, "Less Than" %>
+									<li class="disabled">
+										<%= check_box_tag "dynamic_checkbox", id: nil, name: nil %>
+										<%= label_tag "dynamic_label", "Less Than", id: nil, name: nil %>
+										
+										<div class="indent field">
+											<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+											<%= hidden_field_tag "dynamic_matcher", "less_than", id: nil, name: nil, data: { matcher: true } %>
+											<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+											<%= text_field_tag "dynamic_value", nil, id: nil, name: nil, data: { value: true } %>
+										</div>
 									</li>
-									<li>
-										<%= check_box_tag :n %>
-										<%= label_tag :n, "Equals" %>
+									<li class="disabled">
+										<%= check_box_tag "dynamic_checkbox", id: nil, name: nil %>
+										<%= label_tag "dynamic_label", "Equal", id: nil, name: nil %>
+										
+										<div class="indent field">
+											<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+											<%= hidden_field_tag "dynamic_matcher", "is", id: nil, name: nil, data: { matcher: true } %>
+											<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+											<%= text_field_tag "dynamic_value", nil, id: nil, name: nil, data: { value: true } %>
+										</div>
 									</li>
 								</ul>
 							</li>
@@ -63,7 +91,9 @@
 						
 					</li>
 				</ul>
+				
 			</li>
 		</ul>
 	</li>
+	
 </ul>

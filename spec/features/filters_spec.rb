@@ -10,13 +10,13 @@ describe "Filter" do
   it "default returns all" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.users.push FactoryGirl.create(:user) }
-    assert_equal 5, @org.members.filter.count
+    assert_equal 5, @org.filter_members.count
   end
   
   it "searches field with simple ilike" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.users.push FactoryGirl.create(:user) }
-    assert_equal 1, @org.members.filter([{
+    assert_equal 1, @org.filter_members([{
       field: "last_name",
       matcher: "like",
       value: "#{@org.members.first.data["last_name"]}"
@@ -31,7 +31,7 @@ describe "Filter" do
       m.update data: { favourite_number: (n + 1).to_s }
     end
     
-    assert_equal 1, @org.members.filter([{
+    assert_equal 1, @org.filter_members([{
       field: "favourite_number",
       matcher: "greater_than",
       value: "4"
@@ -43,7 +43,7 @@ describe "Filter" do
     5.times.map { @org.users.push FactoryGirl.create(:user) }
     
     @org.members.each_with_index do |m, n|
-      n.times do
+      (10 - n).times do
         @org.events.create!(
           description: "{{ contact.name }} attended {{ room.name }}",
           verb: "attended",
@@ -60,22 +60,32 @@ describe "Filter" do
       end
     end
     
-    assert_equal 1, @org.members.filter([{
-      field: "events.occurances",
+    assert_equal 5, @org.filter_members([{
+      field: "occurances",
       event: "attended",
       matcher: "greater_than",
-      value: "5"
+      value: "1"
     }]).count
+    
+    assert_equal 5, @org.filter_members([{
+      field: "occurances",
+      event: "attended",
+      matcher: "less_than",
+      value: "11"
+    }]).count
+    
+    assert_equal 1, @org.filter_members([{
+      field: "occurances",
+      event: "attended",
+      matcher: "is",
+      value: "7"
+    }]).count
+    
+    assert_equal @org.members.first, @org.filter_members([{
+      field: "occurances",
+      event: "attended",
+      matcher: "is",
+      value: "10"
+    }]).first
   end
-  
-  # {
-  #       field: "first_name",
-  #       matcher: "like",
-  #       value: "owen"
-  #     }, , {
-  #       event: "attended",
-  #       field: "events.occurances",
-  #       matcher: "less_than",
-  #       value: "15"
-  #     }
 end

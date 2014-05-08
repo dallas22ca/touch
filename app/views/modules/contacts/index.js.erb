@@ -1,0 +1,3 @@
+$("#contacts tbody").html("<%= j render @members %>")
+$("#contacts").find(".loading").hide()
+$(".members_count").text("<%= pluralize @members.count, "Result" %>")

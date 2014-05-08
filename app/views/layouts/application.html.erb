@@ -13,21 +13,19 @@
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
 		<div id="topbar" class="blue_bg">
-			<% cache [@org, @current_member] do %>
-				<ul class="nav">
-					<% if @org %>
-						<% if @org.modules.include?("contacts") && @member.permits?("contacts") %>
-							<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
-						<% end %>
-					
-						<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>
-							<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
-						<% end %>
+			<ul class="nav">
+				<% if @org %>
+					<% if @org.modules.include?("contacts") && @member.permits?("contacts") %>
+						<li><%= link_to "Contacts", contacts_path(@org), class: "#{"selected" if request.path == contacts_path(@org)}" %></li>
 					<% end %>
 				
-					<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
-				</ul>
-			<% end %>
+					<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>
+						<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
+					<% end %>
+				<% end %>
+			
+				<li><%= link_to "Settings", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
+			</ul>
 
 			<% if yield(:title).blank? %>
 				<h1><%= link_to("OneAttendance.com", root_path) %></h1>

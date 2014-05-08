@@ -7,29 +7,44 @@
 		font-size: 12px;
 	}
 	
-	label, a {
-		text-transform: uppercase;
-	}
-	
 	ul {
 		margin-left: 20px;
-
+		margin-top: 10px;
+		
 		&.no_indent {
 			margin-left: 0;
 		}
 	}
 	
-	.field {
-		margin-left: 20px;
+	li {
+		margin-bottom: 10px;
+		
+		&.disabled {
+			.field {
+				display: none;	
+			}
+		}
+
+		label, a {
+			text-transform: uppercase;
+		}
+		
+		input[type="checkbox"] {
+			display: inline-block;
+			width: 20px;
+			margin: 0;
+		}
 		
 		input[type="text"] {
 			width: 100%;
 		}
-	}
-	
-	input[type="checkbox"] {
-		display: inline-block;
-		width: 20px;
-		margin: 0;
+		
+		.delete_filter {
+			float: right;
+		}
+		
+		.indent {
+			margin-left: 20px;
+		}
 	}
 }

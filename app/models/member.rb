@@ -3,8 +3,11 @@ class Member < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :organization
+  
+  has_many :events
 
   validates_uniqueness_of :key, scope: :organization
+  validates_uniqueness_of :email, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
   
@@ -55,60 +58,5 @@ class Member < ActiveRecord::Base
   
   def permits?(clearance)
     permissions.include?("admin") || permissions.include?(clearance)
-  end
-  
-  def self.filter(filters = [])
-    include_events = false
-    normal_fields = ["created_at", "updated_at", "name", "id"]
-    queries = []
-    members = all
-    
-    if filters
-      filters.each do |filter|
-        field = filter[:field].to_s
-        matcher = filter[:matcher].to_s
-        value = filter[:value].to_s
-        event = filter[:event].to_s
-    
-        if field == "q"
-          queries.push "LOWER(CAST(avals(members.data) AS text)) ilike '%#{q}%'"
-        elsif !event.blank?
-          include_events = true
-          queries.push "EVENT THINGY"
-        elsif normal_fields.include? field
-          case matcher
-          when "is"
-            queries.push "members.#{field} = '#{value}'"
-          when "is_not"
-            queries.push "members.#{field} != '#{value}'"
-          when "like"
-            queries.push "members.#{field} ilike '%#{value}%'"
-          when "greater_than"
-            queries.push "members.#{field} > '#{value}'"
-          when "less_than"
-            queries.push "members.#{field} < '#{value}'"
-          end  
-        else
-          case matcher
-          when "is"
-            queries.push "members.data @> hstore('#{field}', '#{value}')"
-          when "is_not"
-            queries.push "members.data -> '#{field}' <> '#{value}'"
-          when "like"
-            queries.push "members.data -> '#{field}' ilike '%#{value}%'"
-          when "greater_than"
-            queries.push "members.data -> '#{field}' > '#{value}'"
-          when "less_than"
-            queries.push "members.data -> '#{field}' < '#{value}'"
-          end
-        end
-      end
-    end
-    
-    p queries
-    
-    members = members.where(queries.join(" and ")) if queries.any?
-    members = members.includes(:events) if include_events
-    members
   end
 end

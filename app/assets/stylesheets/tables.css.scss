@@ -1,18 +1,24 @@
 .table {
 	width: 100%;
 
-	th {
-		font-weight: bold;
-		text-transform: uppercase;
-		font-size: 11px;
-		line-height: 11px;
-		text-align: left;
-		background: #eee;
-		color: #777;
-		padding: 13px;
-	}
+	tr {
+		&:nth-child(even) {
+			background: #fafafa;
+		}
+		
+		th {
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 11px;
+			line-height: 11px;
+			text-align: left;
+			background: #eee;
+			color: #777;
+			padding: 13px;
+		}
 	
-	td {
-		padding: 13px;
+		td {
+			padding: 13px;
+		}
 	}
 }
