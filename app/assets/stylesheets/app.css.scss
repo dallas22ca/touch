@@ -82,6 +82,18 @@ img {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f90c6', endColorstr='#186fb2',GradientType=0 );
 }
 
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+	font-family: Arial, Sans Serif;
+	font-size: 16px;
+	line-height: 21px;
+	border: 1px solid #bbb;
+	background: #fff;
+	color: #333;
+	outline: none;
+	border-radius: 7px;
+	padding: 5px 7px;
+}
+
 .templates {
 	display: none;
 }

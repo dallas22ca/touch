@@ -1,8 +1,5 @@
 <div class="sidebar">
-	<h2>Filter Contacts</h2>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<%= render "filters" %>
 </div>
 
 <div class="main has_sidebar">
@@ -26,7 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @org.memberships.each do |membership| %>
+			<% @memberships.each do |membership| %>
 				<tr>
 					<td><%= check_box_tag :nice %></td>
 					<td><%= link_to membership.data["first_name"], "" %></td>

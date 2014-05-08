@@ -2,6 +2,7 @@ class Organization < ActiveRecord::Base
   serialize :modules, Array
 
   has_many :memberships
+  has_many :members, through: :memberships, source: :user
   has_many :rooms
   has_many :events
   

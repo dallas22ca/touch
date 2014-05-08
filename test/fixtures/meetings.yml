@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  room_id: 
-  date: 2014-05-06 11:32:11
-
-two:
-  room_id: 
-  date: 2014-05-06 11:32:11

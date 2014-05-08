@@ -56,4 +56,59 @@ class Membership < ActiveRecord::Base
   def permits?(clearance)
     permissions.include?("admin") || permissions.include?(clearance)
   end
+  
+  def self.filter(filters = [])
+    include_events = false
+    normal_fields = ["created_at", "updated_at", "name", "id"]
+    queries = []
+    memberships = all
+    
+    if filters
+      filters.each do |filter|
+        field = filter[:field].to_s
+        matcher = filter[:matcher].to_s
+        value = filter[:value].to_s
+        event = filter[:event].to_s
+    
+        if field == "q"
+          queries.push "LOWER(CAST(avals(memberships.data) AS text)) ilike '%#{q}%'"
+        elsif !event.blank?
+          include_events = true
+          queries.push "EVENT THINGY"
+        elsif normal_fields.include? field
+          case matcher
+          when "is"
+            queries.push "memberships.#{field} = '#{value}'"
+          when "is_not"
+            queries.push "memberships.#{field} != '#{value}'"
+          when "like"
+            queries.push "memberships.#{field} ilike '%#{value}%'"
+          when "greater_than"
+            queries.push "memberships.#{field} > '#{value}'"
+          when "less_than"
+            queries.push "memberships.#{field} < '#{value}'"
+          end  
+        else
+          case matcher
+          when "is"
+            queries.push "memberships.data @> hstore('#{field}', '#{value}')"
+          when "is_not"
+            queries.push "memberships.data -> '#{field}' <> '#{value}'"
+          when "like"
+            queries.push "memberships.data -> '#{field}' ilike '%#{value}%'"
+          when "greater_than"
+            queries.push "memberships.data -> '#{field}' > '#{value}'"
+          when "less_than"
+            queries.push "memberships.data -> '#{field}' < '#{value}'"
+          end
+        end
+      end
+    end
+    
+    p queries
+    
+    memberships = memberships.where(queries.join(" and ")) if queries.any?
+    memberships = memberships.includes(:events) if include_events
+    memberships
+  end
 end

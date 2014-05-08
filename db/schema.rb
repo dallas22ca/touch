@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507131157) do
+ActiveRecord::Schema.define(version: 20140508105401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140507131157) do
     t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "verb"
   end
 
   add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140507131157) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "modules",    default: "---\n- Contacts\n"
+    t.text     "modules",    default: "---\n- contacts\n"
   end
 
   create_table "rooms", force: true do |t|

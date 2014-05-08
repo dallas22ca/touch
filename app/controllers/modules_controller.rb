@@ -13,6 +13,7 @@ class ModulesController < ApplicationController
   end
 
   def contacts
+    @memberships = @org.memberships.filter(params[:filters])
     render "modules/contacts/index"
   end
   
@@ -33,7 +34,7 @@ class ModulesController < ApplicationController
     @meeting = @room.meetings.find(params[:meeting_id])
     @membership = @org.memberships.where(id: params[:membership_id]).first
     present = params[:membership_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
-    verb = present ? "Attended" : "Did not attend"
+    verb = present ? "attended" : "did not attend"
     exists = @org.events.where("data @> 'contact.key=>#{@membership.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @membership
 
     if present
@@ -48,7 +49,8 @@ class ModulesController < ApplicationController
         end
       
         @org.events.create!(
-          description: "#{verb} {{ room.name }} on {{ meeting.date }}",
+          description: "{{ contact.name }} #{verb} {{ room.name }}",
+          verb: verb,
           created_at: @meeting.date,
           json_data: {
             present: present,

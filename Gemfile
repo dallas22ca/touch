@@ -23,3 +23,12 @@ group :development do
   gem 'capistrano-maintenance'
   gem "net-ssh", "~> 2.7.0"
 end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
+end

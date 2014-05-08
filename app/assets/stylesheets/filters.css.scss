@@ -1,0 +1,35 @@
+#filters {
+	text-transform: uppercase;
+	color: #333;
+	font-size: 12px;
+	
+	* {
+		font-size: 12px;
+	}
+	
+	label, a {
+		text-transform: uppercase;
+	}
+	
+	ul {
+		margin-left: 20px;
+
+		&.no_indent {
+			margin-left: 0;
+		}
+	}
+	
+	.field {
+		margin-left: 20px;
+		
+		input[type="text"] {
+			width: 100%;
+		}
+	}
+	
+	input[type="checkbox"] {
+		display: inline-block;
+		width: 20px;
+		margin: 0;
+	}
+}

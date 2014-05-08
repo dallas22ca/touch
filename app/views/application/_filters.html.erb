@@ -1,0 +1,69 @@
+<%= form_tag "" do %>
+	<ul id="filters">
+		<% %w[first_name last_name].each do |field| %>
+			<li>
+				<%= check_box_tag "#{field}" %>
+				<%= label_tag "#{field}", field.humanize %>
+				
+				<div class="field">
+					<%= text_field_tag :n %>
+				</div>
+			</li>
+		<% end %>
+		
+		<li class="insert_before">
+			<%= link_to "+ Add Event Filter", "#", class: "add_event_filter" %>
+		</li>		
+	</ul>
+<% end %>
+
+<ul class="templates">
+	<li>
+		<%= check_box_tag :n %>
+		<%= select_tag :n, options_for_select(["Attended"]) %>
+	</li>
+	
+	<li class="string">
+		<div class="field">
+			<%= text_field_tag :n %>
+		</div>
+	</li>
+	
+	<li class="event_filter_template">
+		<ul class="no_indent">
+			<li>
+				<%= check_box_tag :n %>
+				<%= select_tag :n, options_for_select(["Attended"]) %>
+				<ul>
+					<li>
+						<%= check_box_tag :n %>
+						<%= select_tag :n, options_for_select(["Occurances"]) %>
+						
+						<ul class="no_indent">
+							<li class="integer_options">
+								<ul>
+									<li>
+										<%= check_box_tag :n %>
+										<%= label_tag :n, "Greater Than" %>
+										<div class="field">
+											<%= text_field_tag :n %>
+										</div>
+									</li>
+									<li>
+										<%= check_box_tag :n %>
+										<%= label_tag :n, "Less Than" %>
+									</li>
+									<li>
+										<%= check_box_tag :n %>
+										<%= label_tag :n, "Equals" %>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
