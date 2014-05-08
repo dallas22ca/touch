@@ -13,6 +13,7 @@ class Organization < ActiveRecord::Base
   end
   
   def filter_members(filters = [])
+    new_query = true
     time = Time.zone.now
     members = self.members
     include_events = false
@@ -62,7 +63,8 @@ class Organization < ActiveRecord::Base
             
             member_ids_to_add = member_ids_to_add.map { |k, v| k }
             
-            if member_ids.blank?
+            if new_query
+              new_query = false
               member_ids = member_ids_to_add
             else
               member_ids = member_ids & member_ids_to_add

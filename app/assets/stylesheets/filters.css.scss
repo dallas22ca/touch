@@ -37,6 +37,11 @@
 		
 		input[type="text"] {
 			width: 100%;
+			
+			&.narrow {
+				width: 4em;
+				text-align: center;
+			}
 		}
 		
 		.delete_filter {
