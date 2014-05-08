@@ -9,13 +9,13 @@ describe "Filter" do
   
   it "default returns all" do
     @org = FactoryGirl.create(:organization)
-    5.times.map { @org.members.push FactoryGirl.create(:user) }
+    5.times.map { @org.users.push FactoryGirl.create(:user) }
     assert_equal 5, @org.members.filter.count
   end
   
   it "searches field with simple ilike" do
     @org = FactoryGirl.create(:organization)
-    5.times.map { @org.members.push FactoryGirl.create(:user) }
+    5.times.map { @org.users.push FactoryGirl.create(:user) }
     assert_equal 1, @org.members.filter([{
       field: "last_name",
       matcher: "like",
@@ -25,7 +25,7 @@ describe "Filter" do
   
   it "searches events field with simple greater_than" do
     @org = FactoryGirl.create(:organization)
-    5.times.map { |n| @org.members.push FactoryGirl.create(:user) }
+    5.times.map { |n| @org.users.push FactoryGirl.create(:user) }
     
     @org.members.each_with_index do |m, n|
       m.update data: { favourite_number: (n + 1).to_s }
@@ -40,7 +40,7 @@ describe "Filter" do
   
   it "searches events field where occurances is greater_than" do
     @org = FactoryGirl.create(:organization)
-    5.times.map { @org.members.push FactoryGirl.create(:user) }
+    5.times.map { @org.users.push FactoryGirl.create(:user) }
     
     @org.members.each_with_index do |m, n|
       n.times do
