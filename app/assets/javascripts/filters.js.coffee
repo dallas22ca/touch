@@ -11,6 +11,9 @@ $(document).on "click", ".add_event_filter", ->
 $(document).on "keyup", "#q_form input, #filters input", ->
 	$(this).closest("form").trigger "submit"
 
+$(document).on "change", "#filters select", ->
+	$(this).closest("form").trigger "submit"
+
 $(document).on "click", "#filters input[type='checkbox']", ->
 	li = $(this).closest("li")
 

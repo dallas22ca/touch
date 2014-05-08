@@ -13,6 +13,7 @@ class Organization < ActiveRecord::Base
   end
   
   def filter_members(filters = [])
+    time = Time.zone.now
     members = self.members
     include_events = false
     member_ids = []
@@ -38,8 +39,14 @@ class Organization < ActiveRecord::Base
             queries.push "LOWER(CAST(avals(#{table}.data) AS text)) ilike '%#{value}%'"
           elsif field == "occurances"
             member_ids_to_add = {}
-            self.member_ids.map { |id| member_ids_to_add[id] = 0 }
-            member_ids_from_events = events.where(verb: event).group(:member_id).count
+            
+            if matcher == "within"
+              member_ids_from_events = events.where("events.created_at > ? and verb = ?", value.to_i.seconds.ago, event).group(:member_id).count
+            else
+              self.member_ids.map { |id| member_ids_to_add[id] = 0 }
+              member_ids_from_events = events.where(verb: event).group(:member_id).count
+            end
+          
             member_ids_from_events.map { |k, v| member_ids_to_add[k] = v }
             
             case matcher

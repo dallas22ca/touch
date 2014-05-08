@@ -85,6 +85,17 @@
 											<%= text_field_tag "dynamic_value", nil, id: nil, name: nil, data: { value: true } %>
 										</div>
 									</li>
+									<li class="disabled">
+										<%= check_box_tag "dynamic_checkbox", id: nil, name: nil %>
+										<%= label_tag "dynamic_label", "Within Period", id: nil, name: nil %>
+										
+										<div class="indent field">
+											<%= hidden_field_tag "dynamic_field", "occurances", id: nil, name: nil, data: { field: true } %>
+											<%= hidden_field_tag "dynamic_matcher", "within", id: nil, name: nil, data: { matcher: true } %>
+											<%= hidden_field_tag "dynamic_event", "attended", id: nil, name: nil, data: { event: true } %>
+											<%= select_tag "dynamic_value", options_for_select([["1 week", 1.week], ["2 weeks", 2.weeks], ["3 weeks", 3.weeks], ["1 month", 1.month], ["2 months", 2.months], ["3 months", 3.months], ["6 months", 6.months], ["1 year", 1.year]]), id: nil, name: nil, data: { value: true } %>
+										</div>
+									</li>
 								</ul>
 							</li>
 						</ul>
