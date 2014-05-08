@@ -7,7 +7,6 @@ class Member < ActiveRecord::Base
   has_many :events
 
   validates_uniqueness_of :key, scope: :organization
-  validates_uniqueness_of :email, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
   
