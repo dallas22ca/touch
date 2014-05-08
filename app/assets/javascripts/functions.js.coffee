@@ -5,7 +5,7 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo((arg) ->
 
 jQuery.fn.order = (asc, fn, callback = false) ->
   fn = fn or (el) ->
-    $(el).text().replace /^\s+|\s+$/g, ""
+    $(el).toUpperCase().text().replace /^\s+|\s+$/g, ""
 
   T = (if asc isnt false then 1 else -1)
   F = (if asc isnt false then -1 else 1)
