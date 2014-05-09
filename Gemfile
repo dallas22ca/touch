@@ -14,6 +14,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'mustache'
 gem 'newrelic_rpm'
+gem 'exception_notification'
 
 gem 'sidekiq'
 gem 'sinatra', require: false

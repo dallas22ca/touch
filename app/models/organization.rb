@@ -5,6 +5,7 @@ class Organization < ActiveRecord::Base
   has_many :users, through: :members
   has_many :rooms
   has_many :events
+  has_many :segments
   
   validates_uniqueness_of :permalink
   
@@ -34,7 +35,7 @@ class Organization < ActiveRecord::Base
           value = filter[:value].to_s
           event = filter[:event].to_s.downcase
           include_events = true if !event.blank?
-          table = include_events ? "events" : "members"
+          table = !event.blank? ? "events" : "members"
         
           if field == "q"
             queries.push "LOWER(CAST(avals(#{table}.data) AS text)) ilike '%#{value}%'"

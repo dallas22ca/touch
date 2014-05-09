@@ -1,10 +1,56 @@
+#filter_form {
+	#choose_segment {
+		width: 100%;
+	}
+	
+	.button {
+		width: 100%;
+	}
+	
+	.segment_meta {
+		margin-top: 5px;
+		font-size: 13px;
+
+		li {
+			float: right;
+			text-align: center;
+			margin-left: 20px;
+			color: #777;
+		}
+	}
+	
+	.save_this_segment {
+		text-align: center;
+		display: block;
+		color: #555;
+		font-size: 13px;
+		padding: 10px;
+	}
+	
+	.saving {
+		display: none;
+	}
+}
+
 #filters {
-	text-transform: uppercase;
+	margin: 15px -15px;
+	padding: 20px 15px;
+	background: #e3e3e3;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 	color: #333;
 	font-size: 12px;
 	
-	* {
+	label {
 		font-size: 12px;
+		text-transform: uppercase;
+		line-height: 15px;
+	}
+	
+	select {
+		font-size: 12px;
+		line-height: 15px;
 	}
 	
 	ul {
@@ -19,14 +65,14 @@
 	li {
 		margin-bottom: 10px;
 		
+		&:last-child {
+			margin-bottom: 0;
+		}
+		
 		&.disabled {
 			.field {
 				display: none;	
 			}
-		}
-
-		label, a {
-			text-transform: uppercase;
 		}
 		
 		input[type="checkbox"] {

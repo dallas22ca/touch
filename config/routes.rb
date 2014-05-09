@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post "/track" => "modules#presence", as: :track
       
       resources :members, path: :contacts
+      resources :segments
       resources :rooms, path: :attendance do
         resources :meetings
       end

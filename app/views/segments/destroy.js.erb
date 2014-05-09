@@ -1,0 +1,2 @@
+$("#choose_segment option[value='<%= members_path(@org.permalink, segment_id: @segment.id, format: :js) %>']").remove()
+$("#choose_segment").val("<%= members_path(@org.permalink, format: :js) %>").trigger("change")

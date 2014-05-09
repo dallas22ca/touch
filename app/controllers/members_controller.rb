@@ -5,12 +5,17 @@ class MembersController < ApplicationController
   def index
     params[:filters] ||= []
     params[:filters] = params[:filters].map { |k, v| v } if params[:filters].kind_of? Hash
-    
+  
     if params[:q]
       params[:q].split(" ").each do |word|
         q = { field: "q", matcher: "like", value: word }
         params[:filters].push q
       end
+    end
+    
+    if params[:segment_id]
+      @segment = @org.segments.find(params[:segment_id])
+      # @segment.filters.map { |f| params[:filters].push f } if @segment && !@segment.filters.blank?
     end
     
     @members = @org.filter_members(params[:filters])

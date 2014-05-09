@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508105401) do
+ActiveRecord::Schema.define(version: 20140509122140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140508105401) do
     t.text     "permissions",     default: "--- []\n"
     t.string   "key"
     t.hstore   "data",            default: {}
+    t.string   "email"
   end
 
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
@@ -68,6 +69,16 @@ ActiveRecord::Schema.define(version: 20140508105401) do
   end
 
   add_index "rooms", ["organization_id"], name: "index_rooms_on_organization_id", using: :btree
+
+  create_table "segments", force: true do |t|
+    t.string   "name"
+    t.text     "filters"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "segments", ["organization_id"], name: "index_segments_on_organization_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

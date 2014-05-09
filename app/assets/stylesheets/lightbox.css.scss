@@ -1,7 +1,6 @@
 body {
 	&.show_lightbox {
 		overflow: hidden;
-		position: fixed;
 		
 		#lightbox_overlay, #lightbox {
 			display: block;
@@ -66,6 +65,10 @@ body {
 	
 	.content {
 		padding: 15px;
+		
+		.field {
+			margin: 20px 0;
+		}
 	}
 }
 

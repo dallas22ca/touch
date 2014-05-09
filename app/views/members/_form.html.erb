@@ -1,5 +1,5 @@
 <%= link_to "x", "#", class: "close_lightbox close_button" %>
-<h1><%= @member.name %></h1>
+<h1><%= @member.new_record? ? "Create A" : "Edit" %> Meeting</h1>
 
 <div class="content">
 	<%= form_for @member, url: @member.new_record? ? members_path(@org.permalink) : member_path(@org.permalink, @member), remote: @member.persisted? do |f| %>
@@ -10,7 +10,8 @@
 			</div>
 		<% end %>
 		
-		<%= submit_tag "Save Contact" %>
+		<%= submit_tag "Save Contact", class: "big blue_bg button" %>
+		
 		<%= link_to "Cancel", "#", class: "close_lightbox" %>
 
 		<% if @member.persisted? %>

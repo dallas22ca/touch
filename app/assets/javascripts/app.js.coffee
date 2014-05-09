@@ -10,6 +10,8 @@ load = ->
 	$(".loading").hide()
 	Attendance.init()
 	Event.init()
+	Segments.init()
+	Filters.init()
 
 $ ->
 	Lightbox.init()

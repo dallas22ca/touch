@@ -77,6 +77,18 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  
+  config.action_mailer.default_url_options = {
+    host: "oneattendance.com",
+    protocol: "https"
+  }
+  
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      sender_address: %{"Notifier" <no-reply@oneattendance.com>},
+      exception_recipients: %w{dallas@excitecreative.ca},
+      email_prefix: "[OneAttendance.com ERROR]"
+    }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

@@ -1,0 +1,17 @@
+<%= link_to "x", "#", class: "close_lightbox close_button" %>
+<h1><%= @segment.new_record? ? "Create A" : "Edit" %> Segment</h1>
+
+<div class="content">
+	<%= form_for @segment, url: @segment.new_record? ? segments_path(@org.permalink) : segment_path(@org.permalink, @segment) do |f| %>
+		<div class="hidden_filters"></div>
+	
+	  <div class="field">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	  </div>
+		
+	  <div class="actions">
+	    <%= f.submit "Save Segment", class: "big blue_bg button" %>
+	  </div>
+	<% end %>
+</div>
