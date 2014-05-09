@@ -7,6 +7,11 @@ class Meeting < ActiveRecord::Base
   scope :date_asc, -> { order("meetings.date asc") }
   
   before_update :update_events_created_at, if: :date_changed?
+  after_destroy :destroy_events
+  
+  def destroy_events
+    events.destroy_all
+  end
   
   def events(pluck_member_ids = false)
     events = Event
