@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       resources :rooms, path: :attendance do
         resources :meetings
       end
+      
+      delete "/sign_out" => "devise/sessions#destroy", as: :org_signout
+      get "/sign-in" => "devise/sessions#new", as: :org_signin
+      get "/sign-up" => "devise/registrations#new", as: :org_signup
     end
     
     get "/:permalink" => "modules#redirect"
