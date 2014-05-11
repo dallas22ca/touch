@@ -15,6 +15,7 @@ gem 'devise'
 gem 'mustache'
 gem 'newrelic_rpm'
 gem 'exception_notification'
+gem "skylight"
 
 gem 'sidekiq'
 gem 'sinatra', require: false
