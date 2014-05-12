@@ -11,11 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509122140) do
+ActiveRecord::Schema.define(version: 20140512163306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "documents", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
+  add_index "documents", ["folder_id"], name: "index_documents_on_folder_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "description"
@@ -30,6 +44,16 @@ ActiveRecord::Schema.define(version: 20140509122140) do
 
   add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
   add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
+
+  create_table "folders", force: true do |t|
+    t.string   "name"
+    t.boolean  "archived",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "organization_id"
+  end
+
+  add_index "folders", ["organization_id"], name: "index_folders_on_organization_id", using: :btree
 
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
@@ -58,7 +82,12 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "modules",    default: "---\n- contacts\n"
+    t.text     "modules",           default: "---\n- contacts\n"
+    t.string   "name"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "rooms", force: true do |t|
@@ -80,6 +109,19 @@ ActiveRecord::Schema.define(version: 20140509122140) do
 
   add_index "segments", ["organization_id"], name: "index_segments_on_organization_id", using: :btree
 
+  create_table "tasks", force: true do |t|
+    t.text     "content"
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "complete",   default: false
+    t.integer  "ordinal",    default: 9999
+  end
+
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
+  add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -94,6 +136,10 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

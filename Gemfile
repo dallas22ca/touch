@@ -14,7 +14,9 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'mustache'
 gem 'exception_notification'
-gem "skylight"
+gem 'skylight'
+gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'aws-sdk'
 
 gem 'sidekiq'
 gem 'sinatra', require: false

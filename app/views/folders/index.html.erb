@@ -1,0 +1,37 @@
+<% title do %>
+	<h1><%= link_to @website["name"], "#", class: "show_sub_menu" %></h1>
+	<ul class="sub_menu">
+		<% if @folder && @folder.persisted? %>
+			<li><%= link_to "Edit This Room", edit_folder_path(@org.permalink, @folder), remote: true %></li>
+		<% end %>
+		<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+	</ul>
+<% end %>
+
+<h1>Listing <%= @org.name %> folders that I have access to!</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Archive</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @folders.each do |folder| %>
+      <tr>
+        <td><%= folder.name %></td>
+        <td><%= folder.archived %></td>
+        <td><%= link_to 'Show', folder_path(folder.organization.permalink, folder) %></td>
+        <td><%= link_to 'Edit', edit_folder_path(folder.organization.permalink, folder) %></td>
+        <td><%= link_to 'Destroy', folder_path(folder.organization.permalink, folder), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Folder', new_folder_path %>

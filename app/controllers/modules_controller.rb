@@ -7,6 +7,8 @@ class ModulesController < ApplicationController
       redirect_to members_path(current_user.organizations.first)
     elsif @org.modules.include? "attendance"
       redirect_to attendance_path(current_user.organizations.first)
+    elsif @org.modules.include? "folders"
+      redirect_to folders_path(current_user.organizations.first)
     else
       redirect_to edit_user_registration_path
     end

@@ -1,13 +1,15 @@
 .table {
 	width: 100%;
 
+	tbody {
+		tr:hover {
+			background: #D4DEE7;
+		}
+	}
+	
 	tr {
 		&:nth-child(even) {
 			background: #fafafa;
-		}
-		
-		&:hover {
-			background: #D4DEE7;
 		}
 		
 		td {

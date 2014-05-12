@@ -15,3 +15,13 @@
 .has_sidebar {
 	margin-left: 22%;
 }
+
+@media screen and (max-width: 600px) {
+	.sidebar {
+		display: none;
+	}
+	
+	.has_sidebar {
+		margin-left: 0;
+	}
+}

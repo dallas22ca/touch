@@ -1,0 +1,41 @@
+<h2><%= @folder.name %></h2>
+
+<%= link_to 'Edit', edit_folder_path(@folder.organization.permalink, @folder) %>
+
+<div class="panel">
+	<h3>Who's Here?</h3>
+	<ul class="bulleted">
+		<% 5.times do %>
+			<li><%= link_to "Dallas Read", "#" %></li>
+		<% end %>
+	</ul>
+</div>
+
+<div class="panel">
+	<h3>What's Next?</h3>
+	<ul id="tasks" class="folder_<%= @folder.id %>_tasks bulleted" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>">
+		<%= render @folder.tasks.by_ordinal %>
+	</ul>
+	<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+		<%= f.text_field :content %>
+	<% end %>
+</div>
+
+<div class="panel">
+	<h3>Documents</h3>
+	<ul class="folder_<%= @folder.id %>_documents bulleted">
+		<%= render @folder.documents.order("updated_at desc") %>
+	</ul>
+	<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+		<%= f.file_field :file %>
+	<% end %>
+</div>
+
+<div class="panel">
+	<h3>Homes</h3>
+	<ul>
+		<% 5.times do %>
+			<li><%= link_to "61 Westfield Crescent", "#" %></li>
+		<% end %>
+	</ul>
+</div>

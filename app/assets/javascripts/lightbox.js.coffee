@@ -18,7 +18,7 @@ $(document).on "click", "#lightbox_overlay, .close_lightbox", ->
 	resize: ->
 		if $("#lightbox:visible").length
 			$("#lightbox").css "height", "auto"
-			extra_for_top_and_bottom = if $(window).width() < 720 then 30 else 100
+			extra_for_top_and_bottom = if Touch.mobile then 30 else 100
 			height = $("#lightbox").outerHeight()
 			height = $(window).height() - extra_for_top_and_bottom  if height > $(window).height() - extra_for_top_and_bottom
 			$("#lightbox").css

@@ -6,6 +6,12 @@ class Organization < ActiveRecord::Base
   has_many :rooms
   has_many :events
   has_many :segments
+  has_many :folders
+  
+  has_attached_file :logo,
+    default_url: "/imgs/brokerage_no_logo.jpg"
+  
+  validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
   
   validates_uniqueness_of :permalink
   

@@ -1,0 +1,4 @@
+<%= content_tag_for :li, document do %>
+	<%= link_to document.file.url, document.file.url %>
+	<%= link_to "x", folder_document_path(document.folder.organization.permalink, document.folder, document), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this document?" } %>
+<% end %>

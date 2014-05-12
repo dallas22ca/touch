@@ -1,0 +1,3 @@
+<% if @task.errors.any? %>
+	$("#<%= dom_id @task %>").replaceWith("<%= j render @task.reload %>")
+<% end %>

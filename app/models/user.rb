@@ -9,7 +9,12 @@ class User < ActiveRecord::Base
   has_many :members
   has_many :organizations, through: :members
   
-  accepts_nested_attributes_for :organizations
+  has_attached_file :avatar,
+    default_url: "/imgs/user_no_avatar.jpg"
+  
+  validates_attachment_content_type :avatar, content_type: /jpeg|jpg|gif|png/
+  
+  accepts_nested_attributes_for :organizations, reject_if: Proc.new { |o| o["permalink"].blank? }
   
   validates_presence_of :name
   

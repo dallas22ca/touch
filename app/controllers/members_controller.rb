@@ -18,7 +18,12 @@ class MembersController < ApplicationController
       # @segment.filters.map { |f| params[:filters].push f } if @segment && !@segment.filters.blank?
     end
     
-    @members = @org.filter_members(params[:filters])
+    if request.format == :js
+      @members = @org.filter_members(params[:filters])
+    else
+      @members = []
+    end
+
     render "modules/contacts/index"
   end
   

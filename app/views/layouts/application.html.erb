@@ -13,10 +13,16 @@
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
 		<div id="topbar" class="blue_bg">
+			<%= link_to "[#]", "#", class: "show_nav" %>
+
 			<ul class="nav">
 				<% if @org %>
 					<% if @org.modules.include?("contacts") && @member.permits?("contacts") %>
 						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
+					<% end %>
+					
+					<% if @org.modules.include?("folders") && @member.permits?("folders") %>
+						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
 					<% end %>
 				
 					<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>
@@ -28,7 +34,7 @@
 			</ul>
 
 			<% if yield(:title).blank? %>
-				<h1><%= link_to("OneAttendance.com", root_path) %></h1>
+				<h1><%= link_to(@website["name"], root_path) %></h1>
 			<% else %>
 				<%= yield :title %>
 			<% end %>

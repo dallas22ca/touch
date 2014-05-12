@@ -44,6 +44,10 @@ img {
 		float: left;
 	}
 	
+	.show_nav {
+		display: none;
+	}
+	
 	.selected {
 		background: rgba(0, 0, 0, 0.4);			
 	}
@@ -113,8 +117,49 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
 	clear: both;
 }
 
+.bulleted {
+	list-style: disc;
+	margin-left: 25px;
+}
+
 @media screen and (max-width: 600px) {
-	.nav {
-		display: none;
+	#topbar {
+		.show_nav {
+			display: block;
+			float: right;
+		}
+		
+		.nav {
+			display: none;
+			position: absolute;
+			right: 0;
+			top: 60px;
+			left: 0;
+			background: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+			color: #0E3D62;
+			border-bottom-left-radius: 7px;
+	
+			li {
+				float: none;
+		
+				&:last-child {
+					a {
+						border-bottom: 0;
+					}
+				}
+				
+				a {
+					text-shadow: none;
+					border-bottom: 1px solid #eee;
+					display: block;
+					color: #333;
+					
+					&.selected {
+						background: #eee;
+					}
+				}
+			}
+		}
 	}
 }

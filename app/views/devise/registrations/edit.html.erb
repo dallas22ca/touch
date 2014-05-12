@@ -21,6 +21,16 @@
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+	
+	<% resource.organizations.build unless resource.organizations.any? %>
+	<%= f.fields_for :organizations do |o| %>
+		<hr>
+		  <div><%= o.label :name %><br />
+		  <%= o.text_field :name %></div>
+		  <div><%= o.label :permalink %><br />
+		  <%= o.text_field :permalink %></div>
+		<hr>
+	<% end %>
 
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %></div>

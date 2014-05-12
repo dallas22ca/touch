@@ -1,5 +1,5 @@
 <% title do %>
-	<h1><%= link_to "#{@room.name} &nbsp; &darr;".html_safe, "#", class: "show_sub_menu" %></h1>
+	<h1><%= link_to @room.name, "#", class: "show_sub_menu" %></h1>
 	<ul class="sub_menu">
 		<li><%= link_to "Edit This Room", edit_room_path(@org.permalink, @room), remote: true %></li>
 		

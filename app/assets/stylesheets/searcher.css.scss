@@ -14,3 +14,11 @@
 		margin-top: 7px;
 	}
 }
+
+@media screen and (max-width: 600px) {
+	.has_sidebar {
+		#searcher {
+			left: 0;
+		}
+	}
+}

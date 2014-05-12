@@ -10,13 +10,16 @@ Rails.application.routes.draw do
       
       resources :members, path: :contacts
       resources :segments
+
       resources :rooms, path: :attendance do
         resources :meetings
       end
       
-      delete "/sign_out" => "devise/sessions#destroy", as: :org_signout
-      get "/sign-in" => "devise/sessions#new", as: :org_signin
-      get "/sign-up" => "devise/registrations#new", as: :org_signup
+      resources :folders do
+        post "/tasks/sort" => "tasks#sort", as: :sort_tasks
+        resources :tasks
+        resources :documents
+      end
     end
     
     get "/:permalink" => "modules#redirect"
