@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   
+  before_save :format_website
+  
+  def format_website
+    self.website = "http://#{website}" unless website.blank? || website =~ /http/
+  end
+  
   def password_required?
     if ignore_password
       false

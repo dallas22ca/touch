@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_organization
   before_action :set_folder
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :download]
 
   # GET /documents
   # GET /documents.json
@@ -64,11 +64,19 @@ class DocumentsController < ApplicationController
       format.js
     end
   end
+  
+  def download
+    redirect_to @document.file.expiring_url(5)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document
-      @document = @folder.documents.find(params[:id])
+      if params[:document_id]
+        @document = @folder.documents.find(params[:document_id])
+      else
+        @document = @folder.documents.find(params[:id])
+      end
     end
     
     def set_folder

@@ -15,6 +15,12 @@ class Organization < ActiveRecord::Base
   
   validates_uniqueness_of :permalink
   
+  before_save :format_website
+  
+  def format_website
+    self.website = "http://#{website}" unless website.blank? || website =~ /http/
+  end
+  
   def to_param
     permalink
   end

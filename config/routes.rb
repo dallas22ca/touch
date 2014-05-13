@@ -18,7 +18,11 @@ Rails.application.routes.draw do
       resources :folders do
         post "/tasks/sort" => "tasks#sort", as: :sort_tasks
         resources :tasks
-        resources :documents
+        resources :homes
+        
+        resources :documents do
+          get "/download" => "documents#download", as: :download
+        end
       end
     end
     

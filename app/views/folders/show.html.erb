@@ -1,41 +1,90 @@
-<h2><%= @folder.name %></h2>
+<div id="yield">
+	<div class="container">
+		
+		<div class="header">
+			<%= link_to image_tag(@org.logo.url, class: "brokerage_logo"), @org.website.to_s, target: :blank %>
+			<%= link_to image_tag(@folder.creator.avatar.url, class: "user_avatar"), @folder.creator.website.to_s, target: :blank %>
+	
+	    <div class="profile">
+	    	<p class="user_name"><%= @folder.creator.name %></p>
+				<p class="brokerage_name"><%= link_to @org.name, @org.website.to_s, target: :blank %></p>
+				<p class="user_website"><%= link_to @folder.creator.website.to_s, @folder.creator.website.to_s, target: :blank %></p>
+				<p class="user_phone"><%= link_to @folder.creator.phone.to_s, "tel:#{@folder.creator.phone.to_s.gsub(/[^\d]/, "")}", target: :blank %></p>
+	    </div>
+			
+	    <div class="clear"></div>
+		</div>
+		
+		<hr />
+		
+		<div class="folder_meta">
+			<h3>Last updated on <%= @folder.updated_at.strftime("%a, %b %-d") %></h3>
+			<h2>
+				<%= @folder.name %>
+				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true %>
+			</h2>
+		</div>
 
-<%= link_to 'Edit', edit_folder_path(@folder.organization.permalink, @folder) %>
+		<div class="panel right">
+			<%= link_to "Invite", "#", class: "invite_member right button small blue_bg" %>
+			<h3>Who's Here?</h3>
+			<ul class="bulleted">
+				<% 5.times do %>
+					<li><%= link_to "Dallas Read", "#" %></li>
+				<% end %>
+			</ul>
+		</div>
 
-<div class="panel">
-	<h3>Who's Here?</h3>
-	<ul class="bulleted">
-		<% 5.times do %>
-			<li><%= link_to "Dallas Read", "#" %></li>
-		<% end %>
-	</ul>
-</div>
+		<div id="tasks_wrapper" class="panel notepad left">
+			<h3>What's Next?</h3>
+			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>">
+				<%= render @folder.tasks.incomplete.by_ordinal %>
+			</ul>
+			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks">
+				<%= render @folder.tasks.complete.by_completed_at %>
+			</ul>
+			<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+				<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
+			<% end %>
+			<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @folder.tasks.complete.empty?}" %>
+		</div>
 
-<div class="panel">
-	<h3>What's Next?</h3>
-	<ul id="tasks" class="folder_<%= @folder.id %>_tasks bulleted" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>">
-		<%= render @folder.tasks.by_ordinal %>
-	</ul>
-	<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
-		<%= f.text_field :content %>
-	<% end %>
-</div>
+		<div id="documents_wrapper" class="panel top_space no_surround right">
+			<div class="content">
+				<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
+				<h3>Documents</h3>
+				
+				<table style="<%= "display: none; " if @folder.documents.empty? %>">
+					<thead>
+						<tr>
+							<th>File Name</th>
+							<th>Added</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="documents" class="folder_<%= @folder.id %>_documents">
+						<%= render @folder.documents.order("updated_at desc") %>
+					</tbody>
+				</table>
 
-<div class="panel">
-	<h3>Documents</h3>
-	<ul class="folder_<%= @folder.id %>_documents bulleted">
-		<%= render @folder.documents.order("updated_at desc") %>
-	</ul>
-	<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
-		<%= f.file_field :file %>
-	<% end %>
-</div>
+				<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+					<%= f.file_field :file %>
+				<% end %>
+			</div>
+		</div>
 
-<div class="panel">
-	<h3>Homes</h3>
-	<ul>
-		<% 5.times do %>
-			<li><%= link_to "61 Westfield Crescent", "#" %></li>
-		<% end %>
-	</ul>
+		<div class="clear"></div>
+
+		<!--
+		<div class="top_space panel">
+					<h3>Homes</h3>
+					<ul>
+						<li><%= link_to "New Home", new_folder_home_path(@org.permalink, @folder) %></li>
+						<%= render @folder.homes.order("updated_at desc") %>
+					</ul>
+				</div>-->
+		
+		
+		
+	</div>
 </div>

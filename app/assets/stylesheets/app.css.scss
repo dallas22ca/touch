@@ -113,13 +113,42 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
 	display: none;
 }
 
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
 .clear {
 	clear: both;
+}
+
+.container {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+#yield {
+	padding: 3%;
 }
 
 .bulleted {
 	list-style: disc;
 	margin-left: 25px;
+}
+
+hr {
+	height: 1px;
+	background: #ccc;
+	border: 0;
+}
+
+@media screen and (min-width: 601px) {
+	#topbar .nav {
+		display: block !important;
+	}
 }
 
 @media screen and (max-width: 600px) {

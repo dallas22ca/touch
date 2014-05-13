@@ -1,25 +1,36 @@
-<%= form_for(@folder) do |f| %>
-  <% if @folder.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+<%= link_to "x", "#", class: "close_lightbox close_button" %>
+<h1><%= @folder.new_record? ? "Create A" : "Edit" %> Folder</h1>
+	
+<div class="content">
+	<%= form_for @folder, url: @folder.new_record? ? folders_path(@org.permalink) : folder_path(@org.permalink, @folder) do |f| %>
+	  <% if @folder.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
 
-      <ul>
-      <% @folder.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	      <ul>
+	      <% @folder.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :archived %><br>
-    <%= f.check_box :archived %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+	  <div class="field">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :archived %><br>
+	    <%= f.check_box :archived %>
+	  </div>
+	  <div class="actions">
+			<%= f.submit "Save Folder", class: "big blue_bg button" %>
+			
+			<%= link_to "Close", "#", class: "close_lightbox" %>
+			
+			<% if @folder.persisted? %>
+				<%= link_to "Delete", folder_path(@org.permalink, @folder), method: :delete, data: { confirm: "Are you sure you want to delete this folder?" } %>
+			<% end %>
+	  </div>
+	<% end %>
+</div>

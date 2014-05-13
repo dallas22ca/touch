@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:remember_me, :name, :email, :password, :password_confirmation, organizations_attributes: [:id, :permalink, :name]) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:remember_me, :email, :password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password, organizations_attributes: [:id, :permalink, :name]) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password, :phone, :website, :avatar, organizations_attributes: [:id, :permalink, :name, :logo, :website]) }
   end
   
   def set_organization

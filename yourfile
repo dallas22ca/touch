@@ -1,0 +1,2702 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]--><!--[if gt IE 8]><!--><html class=" js no-flexbox canvas canvastext no-webgl touch no-geolocation postmessage websqldatabase no-indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths dk_fouc" lang="en"><!--<![endif]--><head id="elHead">
+ 
+      
+        <!-- META -->
+	    <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" width="&lt;%=ViewPortWidth%&gt;"><meta name="google" value="notranslate"><meta id="MetaKeyWords" name="keywords" content="houses for sale,homes for sale,real estate,canadian real estate,properties for sale,properties for rent,real estate agent,mls.ca,mls,crea,sia,sia.ca,realtor,realtors,Crea, canadian real estate association,Mls,mls listings,mls canada,mls ontario,canadian real estate,houses for sale,homes for sale,houses for rent,homes for rent,condos for sale,condos for rent,real estate,real estate canada, real estate listings,real estate agents,real estate facts,land for sale,vancouver real estate,toronto real estate,montreal real estate,properties for sale,properties for rent,toronto condos,vancouver condos,montreal condos,property listings."><meta id="MetaDescription" name="description" content="Guided by your local REALTOR®, find your next home here. Search for properties for sale and rent across Canada. Accurate and current listings in your neighbourhood">
+
+        <!-- Search Engine blocking -->
+        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE"><meta http-equiv="PRAGMA" content="NO-CACHE"><meta name="GOOGLEBOT" content="NOARCHIVE">
+   
+
+        <!-- FAVICON -->
+        <link id="favicon" rel="shortcut icon" href="Presentation/Images/common/favicon/favicon.ico?v=2" type="image/x-icon">
+
+        <!-- TITLE -->
+        <title>
+	Home
+</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/Presentation/css/jquery/ui-lightness/jquery-ui-1.8.23.custom.css?Version=635346412013965127" media="screen, print"> 
+        <link rel="stylesheet" type="text/css" href="/Presentation/css/Realtor.css?Version=635346412011625037" media="screen, print"> 
+        <link rel="stylesheet" type="text/css" href="/Presentation/css/royalslider/default/default.css?Version=635346412018177289">
+        <link rel="stylesheet" type="text/css" href="/Presentation/css/qTip2/jquery.qtip.min.css?Version=635346412015837199">
+                       
+        <!-- JS - CDN -->
+        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflJlammA.js" async=""></script><script async="" src="http://b.scorecardresearch.com/beacon.js"></script><script src="https://www.youtube.com/iframe_api"></script><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>   <!-- jquery 1.8.1 is producing a conflict with the slider on the Property Details. -->             
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+        
+
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-12908513-7']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<script type="text/javascript" src="/foresee/foresee-trigger.js"></script>
+<script type="text/javascript">FSR.CPPS.set('province', 'nb')</script>
+
+
+        <script type="text/javascript">
+            if (typeof (jQuery) === 'undefined')
+            {
+                document.write(unescape("%3Cscript src='/Presentation/Javascript/frameworks/jquery-1.7.2.min.js?Version=635346411947194559' type='text/javascript'%3E%3C/script%3E"));
+                document.write(unescape("%3Cscript src='/Presentation/Javascript/frameworks/jquery-ui-1.8.23.custom.min.js?Version=635346411954370835' type='text/javascript'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- JS - LOCAL -->
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/modernizr-2.5.3.min.js?Version=635346411969815429"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.cookie.js?Version=635346411954682847"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.placeholder.js?Version=635346411958426991"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.lightbox_me.js?Version=635346411957802967"></script>        
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.mousewheel.min.js?Version=635346411958270985"></script>   
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.lazyload.js?Version=635346411956710925"></script>   
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.qtip.min.js?Version=635346411960299063"></script>   
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.kinetic.min.js?Version=635346411956398913"></script>   
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.pulse.min.js?Version=635346411958739003"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/libraries/Realtor.js?Version=635346411974027591"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/libraries/RealtorCommon.js?Version=635346411975119633"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/libraries/HelperClasses.js?Version=635346411973559573"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/libraries/RealtorUI.js?Version=635346411979799813"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/libraries/RealtorEmail.js?Version=635346411975587651"></script>
+        <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+          <!-- Load Global Variables so that they are accessible througout the site -->
+        
+
+
+ <!-- Global Variables -->
+<script type="text/javascript">
+
+    //Global variables
+    var warningMessage = '';
+    var url = '';
+    var theQuery = '';
+    var nearMe = true;
+    var lastLazyLoadRecord = 0;
+    var newRecordsPerRequest = 9;
+    var totalLastDownloadedRecords = 0;
+    var totalLoadedRecords = null;
+    var nextRecordsPage = 1;
+    var totalFavCookieLength = null;
+    var lastFavCookieIndexShown = null;
+    var totalRecordsFound=0;
+    
+
+
+    var favCookieValueArray = new Array();
+    var favCookieIDsArray = new Array();
+    var dataSetPage = null;            
+    var favCookieStartIndex = null;
+    var favCookieEndIndex = null;
+    var dataSetItemStartIndex = null;
+    var dataSetItemEndIndex = null;
+    var favCookieEnded = false; 
+    var maxRecordsFromServer = 500; 
+
+
+
+    // Global Application Settings 
+    var ApplicationSettings = new Object();
+    ApplicationSettings.ApplicationId = 1; // should be 53, using 47 for now
+    ApplicationSettings.ApiPath =  'http://beta.realtor.ca/api/'; 
+    ApplicationSettings.CultureID = '1';
+    ApplicationSettings.CultureName = 'en-CA';
+    ApplicationSettings.DefaultRadius = 3000;
+    ApplicationSettings.MaximumResults = 9;//screen.height > 900 ? 15 : 12;
+    ApplicationSettings.MaxRecords = 15000;
+    //ApplicationSettings.MaximumResultsDisplay = 25;
+    ApplicationSettings.RecordsPerPage = 9;//screen.height > 900 ? 15 : 12;
+    ApplicationSettings.RecordsPerPagePreviouslyViewed = 4;
+    //ApplicationSettings.ReturnTop = 25;
+    ApplicationSettings.BingMapKey = 'Ak--MJRg09gcn9kOU096oF5sITeHCQ2H_sEugu-c7WSeBGnmS2b-HHHLpizGDzBK'
+    ApplicationSettings.MapPriceRentDisplay = 'Sale & Rent Ranges';
+    ApplicationSettings.MapPriceDisplay = 'Price Range';
+    ApplicationSettings.MapRentDisplay = 'Rent Range';
+    ApplicationSettings.ICXURL = 'http://www.icx.ca/index.aspx?cul=1';
+    ApplicationSettings.IsMobile = false;
+
+    ApplicationSettings.MapSearchWaitTimeLong = 1800;
+    ApplicationSettings.MapSearchWaitTimeShort = 700;
+    ApplicationSettings.MapSearchSpeedInterval = 5000;
+
+
+    // Global Transaction Type
+    var TransactionType = new Object();
+    TransactionType.ForSaleRent = "1"
+    TransactionType.ForSale = "2"
+    TransactionType.ForRent = "3"
+
+    var propertyResultsPanel = new Object();
+    propertyResultsPanel.OpenHouse = 'Open House';
+    propertyResultsPanel.ListingID = 'Listing ID:';
+    propertyResultsPanel.FarmType = 'Farm Type';
+    propertyResultsPanel.NoAddress = '';
+    propertyResultsPanel.BuildingType = 'Building Type';
+    propertyResultsPanel.PropertyType = 'Property Type';    
+    propertyResultsPanel.LandSize = 'Land Size';
+    propertyResultsPanel.LandUse = 'Land Use';
+    propertyResultsPanel.FloorSpace = 'Floor Space';
+    propertyResultsPanel.Title = 'Title';
+    propertyResultsPanel.Storeys = 'Storeys';
+    propertyResultsPanel.More = 'More';
+    propertyResultsPanel.Parking = 'Parking';
+    propertyResultsPanel.ParkingSpaces = 'Total Parking Spaces';    
+    propertyResultsPanel.PropertyNotMapped = 'Property Not Mapped';    
+    
+    var genericTranslatables = new Object();
+    genericTranslatables.All = 'All';
+
+    //Global Messages
+    var Message = new Object();
+    Message.FavouriteRemoved = 'Some listings have been removed from your Favourites because they no longer exist on REALTOR.ca'
+    Message.EndOfList = 'End of list'
+    Message.DisplayMax200 = 'Displaying maximum 200 results'
+    Message.SenderNameNotValid = 'Please enter a sender.'
+    Message.SenderEmailNotValid = 'Please provide your email address.'
+    Message.RecipientEmailNotValid = 'Please provide recipient\'s email address'
+    Message.NoOffices = 'Unfortunately, no offices matched your search. Edit your criteria and try again.'
+    Message.NotSent = 'Your email did not reach its intended recipients.'
+    Message.EmailSent = 'Your email has been sent.'
+    Message.InvalidSalePrice = 'Maximum must be greater than minimum price'
+    Message.InvalidRentPrice = 'Maximum must be greater than minimum rent'
+    Message.From = 'From'
+    Message.Email = 'Email'
+    Message.PhoneNumber = 'Phone Number '
+    Message.Message = 'Message'
+    Message.CheckAtLeastOneOption = 'Please check at least one item.'
+    Message.Bedrooms = 'Bedrooms'
+    Message.Bathrooms = 'Bathrooms'
+    Message.Mls = 'MLS&reg;'
+    Message.LandSize = 'Land Size'
+    Message.Fax = 'Fax'
+    Message.Colon = ':'
+    Message.FarmType = 'Farm Type'
+    Message.DissallowedGeoLocation = 'You have dissallowed geo location for this website'
+    Message.UnableToDetectCurrentPosition = 'We are unable to determine your location. Please enter a Neighbourhood, City, or Listing ID to find properties.'
+    Message.TakingTooLongToDetectPosition = 'Took too long to detect your current position'
+    Message.UnknownErrorDetectingPosition = 'An unknown error prevented the device detecting your current position'
+    Message.PleaseEnterAddressCityToFindProperties = 'Please enter an Address, City or Listing ID to find properties.'
+    Message.NearMe = 'Near Me'
+    Message.NoResultsExpandingSearchArea = 'Your search returned no results.  Try expanding the search area.'
+    Message.TooManyResultsReducingSearchArea = 'The search did not return any results. Reducing the search area.'
+    Message.AddToFavorites = 'Add to my favourites'
+    Message.RemoveFromMyFavourites = 'Remove from my favourites'
+    Message.RequestTimeout = 'The request timed out.'
+    Message.TheRequestWasNotModified = 'The request was not modified but was not retrieved from the cache.'
+    Message.BadXMLJsonFormat = 'XML/Json format is bad.'
+    Message.HttpError = 'HTTP Error'
+    Message.Of = 'of'
+    Message.ErrorInTheRequest = 'There was an error in the request'
+    Message.ErrorInTheRequest = 'There was an error in the request'
+    Message.PropertyNA = 'Property is no longer available'
+    Message.NoFavouriteToView= 'There are currently no favourite listings to display.'
+    Message.MlsNmbr= 'Listing ID'
+    Message.MessageRequired= 'Please enter a message in the comments field.'
+    Message.AddressNotAvailable= 'Address not available'
+    Message.NoResults= 'Your search did not return any results, please refine your search criteria.'
+    Message.TooManyResults = 'Your search returned too many results, please refine your search criteria.'
+    Message.ErrorNoResults = 'Your search did not return any results, please refine your search criteria.'
+    Message.CompareLimit = 'You may only compare 5 properties at a time. Remove a property from your compare list to add this property.'
+    Message.FavoriteLimit = 'You can only save 5 searches. To add a new search to \"My Searches\", please first delete 1 saved search from your list.'
+    Message.AddToCompare = 'Add to compare'
+    Message.WhichLocation = 'We found more than one {searchterm}. Please select the location you were looking for or start your search again:'
+    Message.RemoveFromCompare = 'Remove from compare'
+    Message.SaveSearchNameMustBeUnique = 'You have already saved a search with this name. Please rename your saved search.'
+    Message.NoResultsWithSearchVal = 'Sorry, we couldn\'t find {search term}, Canada.  Please check spelling or try your search using the name of another nearby location (city, town or township).'
+
+    Message.SalePriceRange = 'Maximum must be greater than minimum price'   
+    Message.RentPriceRange = 'Maximum must be greater than minimum rent'
+    Message.InvalidDateRange = 'Start date must be smaller than end date'
+    Message.NoRealtors = 'Unfortunately, no REALTORS® matched your search. Edit your criteria and try again.'
+    Message.SaveSearchSuccess = 'Your search has been saved as '
+
+    Message.Today = 'Today'
+    Message.Delete = 'Delete'
+
+    Message.AndMore = 'and more'
+
+    Message.DaysAgo = '{days} days ago'
+    Message.Yesterday = 'Yesterday'
+
+    Message.SaveSearchNeedsName = 'Please add a save search name'
+
+    Message.EnterListPrice = 'Please enter a List Price'
+    Message.EnterMortgageRate = 'Please enter a Mortgage Rate'
+    Message.MortgageTermGreaterThanAmmort = 'The mortgage term cannot be greater than the amortization period'
+    Message.InvalidMortgageRate = 'Please enter a numeric mortgage rate between 1.00 and 25.00 (ex. 4.25)'
+    Message.InvalidListPrice = 'Please enter a list price number between 10,000 and 10,000,000'
+    Message.EnterAmortization = 'Please enter an Amortization Period'
+
+    Message.CaptchaValidation = 'The verification words are incorrect.'
+    Message.Year = 'Year'
+    Message.TotalPaid = 'Total Paid'
+    Message.PrincipalPaid = 'Principal Paid'
+    Message.InterestPaid = 'Interest Paid'
+    Message.Balance = 'Balance'
+    Message.Totals = 'Totals'
+    Message.AmortPeriodTooLong = 'The amortization period cannot be greater than 25'
+
+    Message.InvalidAnnualIncome = 'Please enter an annual income number between {0} and {1}'
+    Message.InvalidMonthlyDebtPayments = 'Please enter a Monthly Debt Payment number between {0} and {1}'
+    Message.InvalidAnnualPropertyTaxes = 'Please enter a Property Tax number between {0} and {1}'
+    Message.InvalidMonthlyCondoFees = 'Please enter a Monthly Condo Fee number between {0} and {1}'
+    Message.InvalidMonthlyHeatingCost = 'Please enter a Heating Cost number between {0} and {1}'
+    Message.InvalidMortgageInterestRate = 'Please enter a numeric interest rate between {0} and {1} (ex. 4.25)'
+
+    Message.ThisIsAMandatoryField = 'This is a mandatory field and must be filled in to continue'
+
+    Message.PleaseSelectAProvince = 'Please select a province'
+    Message.InvalidEmail = 'Invalid email address'
+    Message.FeedbackThankYou = 'Thank you for your feedback!'
+    Message.EmailSendOK = 'Your email has been sent.'
+    Message.EmailSendFail = 'We\'re sorry, an error has occurred and the email could not be sent.  Please try again later.'
+    Message.NoFavouritesToolTip = 'You currently have no favourites. Click the heart icon to view instructions on adding Favourites.'
+    
+    Message.NoSavedSearchesYet = 'You don\'t have any saved searches yet.'
+
+    Message.TooManyPropertiesInFavourites = 'Fifty is the maximum number of properties that can be included in your favourites list. To add another property to your favourites list, you must first remove one of the properties currently in your favourites list.'
+
+    Message.Draw = 'Draw'
+
+    Message.EndDraw = 'End Draw'
+    Message.Edit = 'Edit'
+    Message.EndEdit = 'End Edit'
+    Message.Hide = 'Hide'
+    Message.Show = 'Show'
+    Message._Delete = 'Delete'
+    Message.Search = 'Search'
+    Message.Exit = 'Exit Tool'
+    Message.RightToCompleteShape = 'Left click to begin drawing the area and right click to complete it.'
+    Message.PolyErrorMsg = 'A shape may not have intersecting lines, please edit the shape you\'ve created so none of the lines intersect with one another. What would you like to do?'
+    Message.RestoreShape = 'Restore Area'
+    Message.DeleteShape = 'Delete Area'
+    Message.ConfirmDeleteSingle = 'Click OK to Confirm Delete'
+    Message.ConfirmDelete = 'OK'
+    Message.MoreThanOneLine = 'You need to draw more than one line (at least three points) to create a valid area.'
+    Message.ExitMsg = 'You have not saved the drawn Shape. What would you like to do?'
+    Message.SaveShape = 'Save and Exit'
+    Message.CancelExit = 'Cancel'
+    Message.SearchAreaText = 'Search Area'
+    Message.ZoomIn = 'Please zoom in to draw an area.'
+    Message.SavePoly = 'Save'
+    Message.PolyHelp = 'Help'
+    Message.InvalidShape = 'Invalid Shape'
+    Message.IncompleteShape = 'Incomplete Shape'
+    Message.EditArea = 'Edit Area'
+    Message.DeleteArea = 'Delete Area'
+    Message.DrawARegion = 'Draw an Area'
+    Message.ZoomIn = 'Please zoom in to draw an area.'
+
+
+</script>
+
+        <script type="text/javascript">
+            if (ApplicationSettings.CultureID == 2) {
+                document.write(unescape("%3Cscript src='/Presentation/Javascript/frameworks/localization/jquery.ui.datepicker-fr-CA.js?Version=635346411971375489' type='text/javascript'%3E%3C/script%3E"));
+
+            } else {
+                document.write(unescape("%3Cscript src='/Presentation/Javascript/frameworks/localization/jquery.ui.datepicker-en-CA.js?Version=635346411971063477' type='text/javascript'%3E%3C/script%3E"));
+
+            }
+        </script><script src="/Presentation/Javascript/frameworks/localization/jquery.ui.datepicker-en-CA.js?Version=635346411971063477" type="text/javascript"></script>
+        <script type="text/javascript" src="/Presentation/Javascript/frameworks/jquery.dropkick-1.0.0.js?Version=635346411954994859"></script>
+        <!-- Allows for insertion of page level js or css -->
+        <script type="text/javascript" src="/foresee/foresee-surveydef.js?build=8"></script><link rel="stylesheet" type="text/css" href="/foresee/foresee-dhtml.css?build=8"></head>
+
+    <body id="MasterPageBodyTag">
+
+        <noscript>
+            &lt;div id="warnJSDisabled_con"&gt;
+            &lt;div style="color: red;"&gt;Warning&lt;/div&gt;
+            
+    &lt;div id="noScriptWarn_txt"&gt;To use this site, we suggest that you enable JavaScript in your browser.  For help enabling JavaScript, &lt;a href="http://enable-javascript.com"&gt;click here&lt;/a&gt;.
+     &lt;/div&gt;
+            &lt;/div&gt;
+        </noscript>
+
+        <!-- MAIN FORM -->
+        <form name="elMasterForm" method="post" action="Index.aspx" id="elMasterForm" autocomplete="off">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTMxNjc3NTM3NWRkcRuyCDbieLnRgjZwPzyFf9mRQVc=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['elMasterForm'];
+if (!theForm) {
+    theForm = document.elMasterForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+
+            <!-- HEADER -->
+            
+<div class="l_hdr">
+    <div class="l_hdr_glb l_grd">
+    
+        <div class="l_hdr_glb_col_lft">
+            <div class="m_hdr_glb_logo">
+                <a href="/Index.aspx" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'REALTOR.ca Logo']);"><img src="presentation/images/en-CA/logos/logo_beta.png" id="hdr_home" title="Home" alt="Home"></a>
+            </div>
+
+            <div class="m_hdr_glb_search noPrint">
+                <div class="m_hdr_glb_search_con">
+                    <input name="ctl00$elHeader$m_hdr_glb_search_input" type="text" maxlength="100" id="m_hdr_glb_search_input" placeholder="Neighbourhood, City or Listing ID">
+                    <img src="/Presentation/Images/common/icons/magnify.png" id="m_hdr_glb_search_magnify" class="m_hdr_glb_search_magnify" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Search box']);" title="Search" alt="Search">
+                </div>
+
+                <!-- DISAMBIGUATION -->
+                <div id="searchDisambiguationBox" class="m_hdr_glb_disamb d_base" style="display:none">
+                    <div class="d_hdr">                        
+                        <div id="d_disamb_close" class="b_base b_low b_fit b_close">
+                            <img src="/Presentation/Images/common/icons/close_dialog.png" alt="Close">
+                        </div>
+                    </div>
+                    <div class="m_hdr_glb_disamb_title"></div>
+                    <div class="m_hdr_glb_disamb_cnt" id="searchDisambiguationLocations"></div>
+                </div>
+
+            </div>
+        
+            <div class="m_hdr_glb_actions noPrint">
+                <a href="/propertyFavourites.aspx" id="m_hdr_glb_actions_favourite" class="m_hdr_glb_actions_sct_sml" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Favorite']);">
+                    <img src="/Presentation/Images/common/icons/favourites_unselected.png" id="hdr_favourites" class="m_hdr_glb_actions_favourite" alt="Favourites" oldtitle="Favourites" title="" data-hasqtip="true">
+                </a>
+                <span id="m_hdr_glb_actions_financial_cont">
+                <a href="#" id="m_hdr_glb_actions_financial" class="m_hdr_glb_actions_sct_sml" onclick="$('#m_hdr_glb_actions_financial_menu').toggle(); _gaq.push(['_trackEvent', 'Top Menu', 'Financial Tools drop-down']); return false;">
+                    <img src="/Presentation/Images/common/icons/financial.png" id="hdr_calculator" class="m_hdr_glb_actions_financial" title="Financials" alt="Financials">
+                </a>
+                <div id="m_hdr_glb_actions_financial_menu" style="display: none; ">
+                    <a class="financial_menu_opt" href="#" onclick="MortgageCalculator('',ApplicationSettings.CultureID, 1); $('#m_hdr_glb_actions_financial_menu').hide(); _gaq.push(['_trackEvent', 'Top Menu', 'Mortgage calculator']); return false;"><span id="lblCalculate">Mortgage Calculator</span></a>
+                    <a class="financial_menu_opt" href="#" onclick="MortgageCalculator('',ApplicationSettings.CultureID, 2); $('#m_hdr_glb_actions_financial_menu').hide(); _gaq.push(['_trackEvent', 'Top Menu', 'Land transfer calculator ']); return false;"><span id="Label1">Land Transfer Tax Calculator</span></a>
+                    <a class="financial_menu_opt" href="#" onclick="MortgageCalculator('',ApplicationSettings.CultureID, 3); $('#m_hdr_glb_actions_financial_menu').hide(); _gaq.push(['_trackEvent', 'Top Menu', 'Affordability calculator']); return false;"><span id="Label2">Affordability Calculator</span></a>
+                </div>
+                </span>
+                <a href="/propertyCompare.aspx" id="m_hdr_glb_actions_compare" class="m_hdr_glb_actions_sct_big" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Compare']);">
+                    <img src="/Presentation/Images/common/icons/compare_unselected.png" id="hdr_compare" class="m_hdr_glb_actions_compare" title="Compare Properties" alt="Compare Properties">
+                    <span style="display: none; "><span style="display: none; ">Compare</span></span> <span style="display: none; ">(</span><span class="m_hdr_glb_actions_compare_number" style="display: none; ">0</span><span style="display: none; ">/</span><span class="m_hdr_glb_actions_compare_number_max" style="display: none; ">5</span><span style="display: none; ">)</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="l_hdr_glb_col_rgt noPrint">
+            <div class="m_hdr_glb_nav">                
+                <a href="/RealtorSearch.aspx"><span id="SearchListings" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Find a REALTOR']);">Find a REALTOR®</span></a>
+                <span id="BuyingAndSellingGuideCon">
+                <a href="#" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Buying &amp; Selling Guide']); return false;" id="BuyingAndSellingGuideLnk"><span id="hdr_buying_selling">Buying &amp; Selling Info </span></a>
+               <div class="m_hdr_glb_nav_drpdwn_pnl" style="display: none; ">
+                        <a href="/BuyerInformation.aspx" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Home Buying Guide']);"><span>Buying Information</span></a>
+                        <a href="/SellerInformation.aspx" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Home Selling Guide']);" id="SellingGuideLnk"><span>Selling Information</span></a>
+                    </div>
+                    </span>
+                <a href="http://www.icx.ca/index.aspx?cul=1" id="lnkCommercial" onclick="_gaq.push(['_trackEvent', 'Top Menu', 'Commercial Listings']);" target="_blank"><span id="hdr_commercial">Commercial Listings</span></a>
+            </div>
+            <div class="m_hdr_glb_lang">
+                <a onclick="_gaq.push(['_trackEvent', 'Top Menu', 'English language toggle']);" id="lnkToggleEnglish" class="m_hdr_glb_lang_item m_hdr_glb_lang_on" href="javascript:__doPostBack('ctl00$elHeader$lnkToggleEnglish','')">EN</a>
+                <a onclick="_gaq.push(['_trackEvent', 'Top Menu', 'French language toggle']);" id="lnkToggleFrench" class="m_hdr_glb_lang_item" href="javascript:__doPostBack('ctl00$elHeader$lnkToggleFrench','')">FR</a>
+                <input type="hidden" name="ctl00$elHeader$PageHash" id="PageHash">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    // CREATE GLOBAL VARIABLE TO HOLD DOCUMENT READY
+    $.headerReady = function () {
+
+       
+
+
+        // BUYING / SELLING GUIDE        
+
+        $('#BuyingAndSellingGuideLnk').click(function (e) {
+            //$('.BuyingAndSellingGuideCon').stop();
+
+            if (!$('.m_hdr_glb_nav_drpdwn_pnl').is(":visible")) {
+                $('.m_hdr_glb_nav_drpdwn_pnl').show();
+                return true;
+            } else {
+                $('.m_hdr_glb_nav_drpdwn_pnl').hide();
+                return true;
+            }
+
+        });
+
+        $(document).click(function (e) {
+            var $target = $(e.target);
+
+         if ($target.is('#BuyingAndSellingGuideCon *')){
+                return true;
+            } else {
+                $('.m_hdr_glb_nav_drpdwn_pnl').hide();
+            }
+        });
+
+       
+        $('#SellingGuideLnk').blur(function (e) {
+            $('.m_hdr_glb_nav_drpdwn_pnl').stop();
+            $('.m_hdr_glb_nav_drpdwn_pnl').slideUp();
+        });
+
+        // SEARCH BAR
+        $('#m_hdr_glb_search_magnify').click(function (e) {
+            e.preventDefault();
+            startSearch();
+        });
+
+        $('#m_hdr_glb_search_input').keypress(function (e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                startSearch();
+            }
+        });
+
+        // PROPERTY COMPARE
+        $('#m_hdr_glb_actions_compare').click(function (e) {
+            document.location.href = '/PropertyCompare.aspx';
+        });
+
+       
+
+        function startSearch(){
+
+            // Invalidate if the user did not input text
+            if( $("#m_hdr_glb_search_input").pVal() === '' )
+            {
+                redirectToDisclaimer('/Map.aspx');
+                return false;
+        
+            }
+
+            if (location.href.toLowerCase().indexOf('map.aspx') > -1) {
+                HashSearch.remove('Area');
+                HashSearch.set('Area', $('#m_hdr_glb_search_input').val());
+                $('#m_hdr_glb_search_input').val('');
+            } else {
+
+                var areaSearch = new SubAreaSearch();
+                areaSearch.input = $('#m_hdr_glb_search_input').val(); // INPUT TEXTBOX
+                areaSearch.searchType = 'BASIC'; // BASIC || FILTERS
+                areaSearch.searchCriteriaCommon += 'CultureId=' + ApplicationSettings.CultureID;
+                areaSearch.searchCriteriaCommon += '&ApplicationId=' + ApplicationSettings.ApplicationId;
+                areaSearch.searchCriteria = '&Area=' + encodeURIComponent($('#m_hdr_glb_search_input').val());
+                areaSearch.Search();
+                $('#m_hdr_glb_search_input').val('');
+            }
+
+            $('#m_hdr_glb_search_input').focus();
+
+            return false;
+
+        }
+
+    };
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="/Presentation/Javascript/Polygon/polygonApp.js"> </script>
+<script type="text/javascript" src="/Presentation/Javascript/Polygon/polygonEngine_7.js"> </script>
+<script type="text/javascript" src="/Presentation/Javascript/Polygon/moveablePane.js"> </script>
+
+
+            <!-- UTIL -->
+            <div class="l_util noPrint">
+                <div id="m_status_msg" class="m_status_msg_warning" style="display:none">
+    <span id="lblWarningMessage" class="m_status_msg_text"></span>
+    <img src="Presentation/Images/common/icons/close_message_white.png" class="m_status_msg_close" alt="Close" title="Close">     
+</div>
+
+                
+<div class="m_load_icon" style="overflow-x: hidden; overflow-y: hidden; height: 4.2718px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; ">    
+    <img src="/Presentation/Images/common/icons/loading.gif" alt="Loading">
+    <span><span>Loading</span>...</span>
+</div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="l_cnt">
+                <!-- CONTENT -->
+                
+
+     
+
+    <!-- ROYAL SLIDER STYLES -->
+    <link href="Presentation/Css/royalslider/royalslider-8.1.css" rel="stylesheet">    
+    <link href="Presentation/Css/royalslider/default/default.css" rel="stylesheet">
+
+    <!-- BETA FEEDBACK -->
+    <div class="m_hme_feedback"> </div>
+    <div id="m_hme_map_hdr_banner_con">
+        <img src="presentation/images/common/icons/map_header_banner.png" onclick="redirectToDisclaimer('map.aspx'); return false;" class="m_hme_map_hdr_banner">
+        <div class="m_hme_map_hdr_banner_txt" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Map Icon']); redirectToDisclaimer('map.aspx'); return false;">Search Map</div>
+    </div>
+
+    <!-- TITLE -->
+    <h2 id="hm_title">Welcome from REALTORS<sup>®</sup> across Canada</h2>
+     
+    <!-- SEARCH INPUT -->
+    <div class="m_hme_srch">
+        <div class="m_hme_srch_ipt">
+            <div class="m_hme_srch_ipt_plchldr">               
+                <a href="#" onclick="return false;" class="m_hme_srch_ipt_plchldr_where">Where are you looking?</a>
+                <span class="m_hme_srch_ipt_plchldr_try">Try a Neighbourhood, City, Listing ID or Postal Code</span>
+            </div>
+            <input name="ctl00$elContent$ctl00$home_search_input" maxlength="255" id="home_search_input" class="m_hme_srch_ipt_txtbox" type="text" style="display:none;">
+        </div>
+        <div class="is_clear_both"></div>
+    </div>
+
+    <!-- SEARCH FILTER -->
+    <div class="m_hme_fltr_con">
+        <div class="m_hme_fltr">
+            <div id="m_hme_fltr_params_row1">
+
+                <!-- PROPERTY TYPE -->
+                <div class="m_hme_fltr_param">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_PropertyTypeID" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_PropertyTypeID" class="dk_label">Residential</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="PropertyTypeID_300" data-dk-dropdown-value="300">Residential</a></li><li class=""><a id="PropertyTypeID_301" data-dk-dropdown-value="301">Recreational</a></li><li class=""><a id="PropertyTypeID_con" data-dk-dropdown-value="con">Condo/Strata</a></li><li class=""><a id="PropertyTypeID_302" data-dk-dropdown-value="302">Agriculture</a></li><li class=""><a id="PropertyTypeID_308" data-dk-dropdown-value="308">Parking</a></li><li class=""><a id="PropertyTypeID_303" data-dk-dropdown-value="303">Vacant Land</a></li></ul></div></div><select id="PropertyTypeID" class="m_dropkick_select_property_type" style="display: none; ">                        
+                        <option value="300">Residential</option>
+                        <option value="301">Recreational</option>
+                        <option value="con">Condo/Strata</option>
+                        <option value="302">Agriculture</option>
+                        <option value="308">Parking</option>
+                        <option value="303">Vacant Land</option>                        
+                        
+                    </select>
+                </div>           
+
+                <!-- TRANSACTION TYPE -->
+                <div class="m_hme_fltr_param">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_TransactionTypeID" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_TransactionTypeID" class="dk_label">For sale</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="TransactionTypeID_2" data-dk-dropdown-value="2">For sale</a></li><li class=""><a id="TransactionTypeID_3" data-dk-dropdown-value="3">For rent</a></li><li class=""><a id="TransactionTypeID_1" data-dk-dropdown-value="1">For sale or rent</a></li></ul></div></div><select name="ctl00$elContent$ctl00$TransactionTypeID$ctl00" class="m_dropkick_select_listing_type" id="TransactionTypeID" style="display: none; ">
+	<option value="2">For sale</option>
+	<option value="3">For rent</option>
+	<option value="1">For sale or rent</option>
+
+</select>
+                </div>
+
+                <!-- SELECT - BEDS -->
+                <div class="m_hme_fltr_param m_hme_fltr_beds" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_BedRange" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_BedRange" class="dk_label">Any</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="BedRange_0-0" data-dk-dropdown-value="0-0">Any</a></li><li class=""><a id="BedRange_1-1" data-dk-dropdown-value="1-1">1</a></li><li class=""><a id="BedRange_1-0" data-dk-dropdown-value="1-0">1+</a></li><li class=""><a id="BedRange_2-2" data-dk-dropdown-value="2-2">2</a></li><li class=""><a id="BedRange_2-0" data-dk-dropdown-value="2-0">2+</a></li><li class=""><a id="BedRange_3-3" data-dk-dropdown-value="3-3">3</a></li><li class=""><a id="BedRange_3-0" data-dk-dropdown-value="3-0">3+</a></li><li class=""><a id="BedRange_4-4" data-dk-dropdown-value="4-4">4</a></li><li class=""><a id="BedRange_4-0" data-dk-dropdown-value="4-0">4+</a></li><li class=""><a id="BedRange_5-5" data-dk-dropdown-value="5-5">5</a></li><li class=""><a id="BedRange_5-0" data-dk-dropdown-value="5-0">5+</a></li></ul></div></div><select name="ctl00$elContent$ctl00$BedRange$ctl00" class="m_dropkick_select_property_filter" id="BedRange" style="display: none; ">
+	<option value="0-0">Any</option>
+	<option value="1-1">1</option>
+	<option value="1-0">1+</option>
+	<option value="2-2">2</option>
+	<option value="2-0">2+</option>
+	<option value="3-3">3</option>
+	<option value="3-0">3+</option>
+	<option value="4-4">4</option>
+	<option value="4-0">4+</option>
+	<option value="5-5">5</option>
+	<option value="5-0">5+</option>
+
+</select>
+                    <img src="presentation/images/common/icons/bed.png" class="m_hme_fltr_icon">
+                </div>
+            
+                <!-- SELECT - BATHS -->
+                <div class="m_hme_fltr_param m_hme_fltr_baths" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_BathRange" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_BathRange" class="dk_label">Any</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="BathRange_0-0" data-dk-dropdown-value="0-0">Any</a></li><li class=""><a id="BathRange_1-1" data-dk-dropdown-value="1-1">1</a></li><li class=""><a id="BathRange_1-0" data-dk-dropdown-value="1-0">1+</a></li><li class=""><a id="BathRange_2-2" data-dk-dropdown-value="2-2">2</a></li><li class=""><a id="BathRange_2-0" data-dk-dropdown-value="2-0">2+</a></li><li class=""><a id="BathRange_3-3" data-dk-dropdown-value="3-3">3</a></li><li class=""><a id="BathRange_3-0" data-dk-dropdown-value="3-0">3+</a></li><li class=""><a id="BathRange_4-4" data-dk-dropdown-value="4-4">4</a></li><li class=""><a id="BathRange_4-0" data-dk-dropdown-value="4-0">4+</a></li><li class=""><a id="BathRange_5-5" data-dk-dropdown-value="5-5">5</a></li><li class=""><a id="BathRange_5-0" data-dk-dropdown-value="5-0">5+</a></li></ul></div></div><select name="ctl00$elContent$ctl00$BathRange$ctl00" class="m_dropkick_select_property_filter" id="BathRange" style="display: none; ">
+	<option value="0-0">Any</option>
+	<option value="1-1">1</option>
+	<option value="1-0">1+</option>
+	<option value="2-2">2</option>
+	<option value="2-0">2+</option>
+	<option value="3-3">3</option>
+	<option value="3-0">3+</option>
+	<option value="4-4">4</option>
+	<option value="4-0">4+</option>
+	<option value="5-5">5</option>
+	<option value="5-0">5+</option>
+
+</select>
+                    <img src="presentation/images/common/icons/bath.png" class="m_hme_fltr_icon">
+                </div>  
+                
+                  <!-- SELECT - ACRES -->
+                <div class="m_hme_fltr_param m_hme_fltr_acres" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_LandSizeRange" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_LandSizeRange" class="dk_label">Any Acreage</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="LandSizeRange_0-0" data-dk-dropdown-value="0-0">Any Acreage</a></li><li class=""><a id="LandSizeRange_0-10" data-dk-dropdown-value="0-10">0-10 acres</a></li><li class=""><a id="LandSizeRange_10-50" data-dk-dropdown-value="10-50">10-50 acres</a></li><li class=""><a id="LandSizeRange_50-100" data-dk-dropdown-value="50-100">50-100 acres</a></li><li class=""><a id="LandSizeRange_100-320" data-dk-dropdown-value="100-320">100-320 acres</a></li><li class=""><a id="LandSizeRange_320-640" data-dk-dropdown-value="320-640">320-640 acres</a></li><li class=""><a id="LandSizeRange_640-1000" data-dk-dropdown-value="640-1000">640-1000 acres</a></li><li class=""><a id="LandSizeRange_1000-0" data-dk-dropdown-value="1000-0">1000 + acres</a></li></ul></div></div><select name="ctl00$elContent$ctl00$LandSizeRange$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_acres" id="LandSizeRange" style="display: none; ">
+	<option value="0-0">Any Acreage</option>
+	<option value="0-10">0-10 acres</option>
+	<option value="10-50">10-50 acres</option>
+	<option value="50-100">50-100 acres</option>
+	<option value="100-320">100-320 acres</option>
+	<option value="320-640">320-640 acres</option>
+	<option value="640-1000">640-1000 acres</option>
+	<option value="1000-0">1000 + acres</option>
+
+</select>
+                </div>         
+
+                <!-- SELECT - FARM TYPE -->
+                <div class="m_hme_fltr_param m_hme_fltr_farm_type" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_FarmTypeID" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_FarmTypeID" class="dk_label">Any Farm Type</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="FarmTypeID_0" data-dk-dropdown-value="0">Any Farm Type</a></li><li class=""><a id="FarmTypeID_1" data-dk-dropdown-value="1">Animal</a></li><li class=""><a id="FarmTypeID_2" data-dk-dropdown-value="2">Boarding</a></li><li class=""><a id="FarmTypeID_3" data-dk-dropdown-value="3">Cash Crop</a></li><li class=""><a id="FarmTypeID_4" data-dk-dropdown-value="4">Feed Lot</a></li><li class=""><a id="FarmTypeID_5" data-dk-dropdown-value="5">Nursery</a></li><li class=""><a id="FarmTypeID_6" data-dk-dropdown-value="6">Market Gardening</a></li><li class=""><a id="FarmTypeID_7" data-dk-dropdown-value="7">Hobby Farm</a></li><li class=""><a id="FarmTypeID_8" data-dk-dropdown-value="8">Vineyard</a></li><li class=""><a id="FarmTypeID_9" data-dk-dropdown-value="9">Orchard</a></li><li class=""><a id="FarmTypeID_10" data-dk-dropdown-value="10">Greenhouse</a></li><li class=""><a id="FarmTypeID_11" data-dk-dropdown-value="11">Unknown</a></li><li class=""><a id="FarmTypeID_12" data-dk-dropdown-value="12">Mixed</a></li><li class=""><a id="FarmTypeID_13" data-dk-dropdown-value="13">Farm</a></li><li class=""><a id="FarmTypeID_14" data-dk-dropdown-value="14">Other</a></li><li class=""><a id="FarmTypeID_15" data-dk-dropdown-value="15">See Remarks</a></li></ul></div></div><select name="ctl00$elContent$ctl00$FarmTypeID$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_farm_type" id="FarmTypeID" style="display: none; ">
+	<option value="0">Any Farm Type</option>
+	<option value="1">Animal</option>
+	<option value="2">Boarding</option>
+	<option value="3">Cash Crop</option>
+	<option value="4">Feed Lot</option>
+	<option value="5">Nursery</option>
+	<option value="6">Market Gardening</option>
+	<option value="7">Hobby Farm</option>
+	<option value="8">Vineyard</option>
+	<option value="9">Orchard</option>
+	<option value="10">Greenhouse</option>
+	<option value="11">Unknown</option>
+	<option value="12">Mixed</option>
+	<option value="13">Farm</option>
+	<option value="14">Other</option>
+	<option value="15">See Remarks</option>
+
+</select>
+                </div> 
+
+                <!-- SELECT - PARKING SPACES -->
+                <div class="m_hme_fltr_param m_hme_fltr_parking_spaces" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_ParkingSpacesRange" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_ParkingSpacesRange" class="dk_label">Any Parking Spaces</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="ParkingSpacesRange_0-0" data-dk-dropdown-value="0-0">Any                                               </a></li><li class=""><a id="ParkingSpacesRange_1-1" data-dk-dropdown-value="1-1">1                                                 </a></li><li class=""><a id="ParkingSpacesRange_1-0" data-dk-dropdown-value="1-0">1+                                                </a></li><li class=""><a id="ParkingSpacesRange_2-2" data-dk-dropdown-value="2-2">2                                                 </a></li><li class=""><a id="ParkingSpacesRange_2-0" data-dk-dropdown-value="2-0">2+                                                </a></li><li class=""><a id="ParkingSpacesRange_3-3" data-dk-dropdown-value="3-3">3                                                 </a></li><li class=""><a id="ParkingSpacesRange_3-0" data-dk-dropdown-value="3-0">3+                                                </a></li><li class=""><a id="ParkingSpacesRange_4-4" data-dk-dropdown-value="4-4">4                                                 </a></li><li class=""><a id="ParkingSpacesRange_4-0" data-dk-dropdown-value="4-0">4+                                                </a></li><li class=""><a id="ParkingSpacesRange_5-5" data-dk-dropdown-value="5-5">5                                                 </a></li><li class=""><a id="ParkingSpacesRange_5-0" data-dk-dropdown-value="5-0">5+                                                </a></li></ul></div></div><select name="ctl00$elContent$ctl00$ParkingSpacesRange$ctl00" class="m_dropkick_select_property_filter" title="Any Parking Spaces" id="ParkingSpacesRange" style="display: none; ">
+	<option value="0-0">Any                                               </option>
+	<option value="1-1">1                                                 </option>
+	<option value="1-0">1+                                                </option>
+	<option value="2-2">2                                                 </option>
+	<option value="2-0">2+                                                </option>
+	<option value="3-3">3                                                 </option>
+	<option value="3-0">3+                                                </option>
+	<option value="4-4">4                                                 </option>
+	<option value="4-0">4+                                                </option>
+	<option value="5-5">5                                                 </option>
+	<option value="5-0">5+                                                </option>
+
+</select>
+                </div>
+
+            </div>
+
+            <div id="m_hme_fltr_params_row2">
+
+                  <!-- MIN PRICE -->
+                <div class="m_hme_fltr_param m_hme_fltr_min_sale" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_PriceMin" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_PriceMin" class="dk_label">Lower Price Limit</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="PriceMin_0" data-dk-dropdown-value="0">0</a></li><li class=""><a id="PriceMin_25000" data-dk-dropdown-value="25000">25,000</a></li><li class=""><a id="PriceMin_50000" data-dk-dropdown-value="50000">50,000</a></li><li class=""><a id="PriceMin_75000" data-dk-dropdown-value="75000">75,000</a></li><li class=""><a id="PriceMin_100000" data-dk-dropdown-value="100000">100,000</a></li><li class=""><a id="PriceMin_125000" data-dk-dropdown-value="125000">125,000</a></li><li class=""><a id="PriceMin_150000" data-dk-dropdown-value="150000">150,000</a></li><li class=""><a id="PriceMin_175000" data-dk-dropdown-value="175000">175,000</a></li><li class=""><a id="PriceMin_200000" data-dk-dropdown-value="200000">200,000</a></li><li class=""><a id="PriceMin_225000" data-dk-dropdown-value="225000">225,000</a></li><li class=""><a id="PriceMin_250000" data-dk-dropdown-value="250000">250,000</a></li><li class=""><a id="PriceMin_275000" data-dk-dropdown-value="275000">275,000</a></li><li class=""><a id="PriceMin_300000" data-dk-dropdown-value="300000">300,000</a></li><li class=""><a id="PriceMin_325000" data-dk-dropdown-value="325000">325,000</a></li><li class=""><a id="PriceMin_350000" data-dk-dropdown-value="350000">350,000</a></li><li class=""><a id="PriceMin_375000" data-dk-dropdown-value="375000">375,000</a></li><li class=""><a id="PriceMin_400000" data-dk-dropdown-value="400000">400,000</a></li><li class=""><a id="PriceMin_425000" data-dk-dropdown-value="425000">425,000</a></li><li class=""><a id="PriceMin_450000" data-dk-dropdown-value="450000">450,000</a></li><li class=""><a id="PriceMin_475000" data-dk-dropdown-value="475000">475,000</a></li><li class=""><a id="PriceMin_500000" data-dk-dropdown-value="500000">500,000</a></li><li class=""><a id="PriceMin_550000" data-dk-dropdown-value="550000">550,000</a></li><li class=""><a id="PriceMin_600000" data-dk-dropdown-value="600000">600,000</a></li><li class=""><a id="PriceMin_650000" data-dk-dropdown-value="650000">650,000</a></li><li class=""><a id="PriceMin_700000" data-dk-dropdown-value="700000">700,000</a></li><li class=""><a id="PriceMin_750000" data-dk-dropdown-value="750000">750,000</a></li><li class=""><a id="PriceMin_800000" data-dk-dropdown-value="800000">800,000</a></li><li class=""><a id="PriceMin_850000" data-dk-dropdown-value="850000">850,000</a></li><li class=""><a id="PriceMin_900000" data-dk-dropdown-value="900000">900,000</a></li><li class=""><a id="PriceMin_950000" data-dk-dropdown-value="950000">950,000</a></li><li class=""><a id="PriceMin_1000000" data-dk-dropdown-value="1000000">1,000,000</a></li><li class=""><a id="PriceMin_1100000" data-dk-dropdown-value="1100000">1,100,000</a></li><li class=""><a id="PriceMin_1200000" data-dk-dropdown-value="1200000">1,200,000</a></li><li class=""><a id="PriceMin_1300000" data-dk-dropdown-value="1300000">1,300,000</a></li><li class=""><a id="PriceMin_1400000" data-dk-dropdown-value="1400000">1,400,000</a></li><li class=""><a id="PriceMin_1500000" data-dk-dropdown-value="1500000">1,500,000</a></li><li class=""><a id="PriceMin_1600000" data-dk-dropdown-value="1600000">1,600,000</a></li><li class=""><a id="PriceMin_1700000" data-dk-dropdown-value="1700000">1,700,000</a></li><li class=""><a id="PriceMin_1800000" data-dk-dropdown-value="1800000">1,800,000</a></li><li class=""><a id="PriceMin_1900000" data-dk-dropdown-value="1900000">1,900,000</a></li><li class=""><a id="PriceMin_2000000" data-dk-dropdown-value="2000000">2,000,000</a></li><li class=""><a id="PriceMin_2500000" data-dk-dropdown-value="2500000">2,500,000</a></li><li class=""><a id="PriceMin_3000000" data-dk-dropdown-value="3000000">3,000,000</a></li><li class=""><a id="PriceMin_4000000" data-dk-dropdown-value="4000000">4,000,000</a></li><li class=""><a id="PriceMin_5000000" data-dk-dropdown-value="5000000">5,000,000</a></li><li class=""><a id="PriceMin_7500000" data-dk-dropdown-value="7500000">7,500,000</a></li><li class=""><a id="PriceMin_10000000" data-dk-dropdown-value="10000000">10,000,000</a></li></ul></div></div><select name="ctl00$elContent$ctl00$PriceMin$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_min_sale" title="Lower Price Limit" id="PriceMin" style="display: none; ">
+	<option value="0">0</option>
+	<option value="25000">25,000</option>
+	<option value="50000">50,000</option>
+	<option value="75000">75,000</option>
+	<option value="100000">100,000</option>
+	<option value="125000">125,000</option>
+	<option value="150000">150,000</option>
+	<option value="175000">175,000</option>
+	<option value="200000">200,000</option>
+	<option value="225000">225,000</option>
+	<option value="250000">250,000</option>
+	<option value="275000">275,000</option>
+	<option value="300000">300,000</option>
+	<option value="325000">325,000</option>
+	<option value="350000">350,000</option>
+	<option value="375000">375,000</option>
+	<option value="400000">400,000</option>
+	<option value="425000">425,000</option>
+	<option value="450000">450,000</option>
+	<option value="475000">475,000</option>
+	<option value="500000">500,000</option>
+	<option value="550000">550,000</option>
+	<option value="600000">600,000</option>
+	<option value="650000">650,000</option>
+	<option value="700000">700,000</option>
+	<option value="750000">750,000</option>
+	<option value="800000">800,000</option>
+	<option value="850000">850,000</option>
+	<option value="900000">900,000</option>
+	<option value="950000">950,000</option>
+	<option value="1000000">1,000,000</option>
+	<option value="1100000">1,100,000</option>
+	<option value="1200000">1,200,000</option>
+	<option value="1300000">1,300,000</option>
+	<option value="1400000">1,400,000</option>
+	<option value="1500000">1,500,000</option>
+	<option value="1600000">1,600,000</option>
+	<option value="1700000">1,700,000</option>
+	<option value="1800000">1,800,000</option>
+	<option value="1900000">1,900,000</option>
+	<option value="2000000">2,000,000</option>
+	<option value="2500000">2,500,000</option>
+	<option value="3000000">3,000,000</option>
+	<option value="4000000">4,000,000</option>
+	<option value="5000000">5,000,000</option>
+	<option value="7500000">7,500,000</option>
+	<option value="10000000">10,000,000</option>
+
+</select>
+                </div>
+
+                <!-- MIN RENT -->
+                <div class="m_hme_fltr_param m_hme_fltr_min_rent" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_RentMin" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_RentMin" class="dk_label">Lower Price Limit</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="RentMin_0" data-dk-dropdown-value="0">0</a></li><li class=""><a id="RentMin_100" data-dk-dropdown-value="100">100</a></li><li class=""><a id="RentMin_200" data-dk-dropdown-value="200">200</a></li><li class=""><a id="RentMin_300" data-dk-dropdown-value="300">300</a></li><li class=""><a id="RentMin_400" data-dk-dropdown-value="400">400</a></li><li class=""><a id="RentMin_500" data-dk-dropdown-value="500">500</a></li><li class=""><a id="RentMin_600" data-dk-dropdown-value="600">600</a></li><li class=""><a id="RentMin_700" data-dk-dropdown-value="700">700</a></li><li class=""><a id="RentMin_800" data-dk-dropdown-value="800">800</a></li><li class=""><a id="RentMin_900" data-dk-dropdown-value="900">900</a></li><li class=""><a id="RentMin_1000" data-dk-dropdown-value="1000">1,000</a></li><li class=""><a id="RentMin_1200" data-dk-dropdown-value="1200">1,200</a></li><li class=""><a id="RentMin_1400" data-dk-dropdown-value="1400">1,400</a></li><li class=""><a id="RentMin_1600" data-dk-dropdown-value="1600">1,600</a></li><li class=""><a id="RentMin_1800" data-dk-dropdown-value="1800">1,800</a></li><li class=""><a id="RentMin_2000" data-dk-dropdown-value="2000">2,000</a></li><li class=""><a id="RentMin_2500" data-dk-dropdown-value="2500">2,500</a></li><li class=""><a id="RentMin_3000" data-dk-dropdown-value="3000">3,000</a></li></ul></div></div><select name="ctl00$elContent$ctl00$RentMin$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_min_sale" title="Lower Price Limit" id="RentMin" style="display: none; ">
+	<option value="0">0</option>
+	<option value="100">100</option>
+	<option value="200">200</option>
+	<option value="300">300</option>
+	<option value="400">400</option>
+	<option value="500">500</option>
+	<option value="600">600</option>
+	<option value="700">700</option>
+	<option value="800">800</option>
+	<option value="900">900</option>
+	<option value="1000">1,000</option>
+	<option value="1200">1,200</option>
+	<option value="1400">1,400</option>
+	<option value="1600">1,600</option>
+	<option value="1800">1,800</option>
+	<option value="2000">2,000</option>
+	<option value="2500">2,500</option>
+	<option value="3000">3,000</option>
+
+</select>
+                </div>
+
+                
+                <!-- MAX PRICE -->
+                <div class="m_hme_fltr_param m_hme_fltr_max_sale" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_PriceMax" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_PriceMax" class="dk_label">Upper Price Limit</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="PriceMax_0" data-dk-dropdown-value="0">Unlimited</a></li><li class=""><a id="PriceMax_25000" data-dk-dropdown-value="25000">25,000</a></li><li class=""><a id="PriceMax_50000" data-dk-dropdown-value="50000">50,000</a></li><li class=""><a id="PriceMax_75000" data-dk-dropdown-value="75000">75,000</a></li><li class=""><a id="PriceMax_100000" data-dk-dropdown-value="100000">100,000</a></li><li class=""><a id="PriceMax_125000" data-dk-dropdown-value="125000">125,000</a></li><li class=""><a id="PriceMax_150000" data-dk-dropdown-value="150000">150,000</a></li><li class=""><a id="PriceMax_175000" data-dk-dropdown-value="175000">175,000</a></li><li class=""><a id="PriceMax_200000" data-dk-dropdown-value="200000">200,000</a></li><li class=""><a id="PriceMax_225000" data-dk-dropdown-value="225000">225,000</a></li><li class=""><a id="PriceMax_250000" data-dk-dropdown-value="250000">250,000</a></li><li class=""><a id="PriceMax_275000" data-dk-dropdown-value="275000">275,000</a></li><li class=""><a id="PriceMax_300000" data-dk-dropdown-value="300000">300,000</a></li><li class=""><a id="PriceMax_325000" data-dk-dropdown-value="325000">325,000</a></li><li class=""><a id="PriceMax_350000" data-dk-dropdown-value="350000">350,000</a></li><li class=""><a id="PriceMax_375000" data-dk-dropdown-value="375000">375,000</a></li><li class=""><a id="PriceMax_400000" data-dk-dropdown-value="400000">400,000</a></li><li class=""><a id="PriceMax_425000" data-dk-dropdown-value="425000">425,000</a></li><li class=""><a id="PriceMax_450000" data-dk-dropdown-value="450000">450,000</a></li><li class=""><a id="PriceMax_475000" data-dk-dropdown-value="475000">475,000</a></li><li class=""><a id="PriceMax_500000" data-dk-dropdown-value="500000">500,000</a></li><li class=""><a id="PriceMax_550000" data-dk-dropdown-value="550000">550,000</a></li><li class=""><a id="PriceMax_600000" data-dk-dropdown-value="600000">600,000</a></li><li class=""><a id="PriceMax_650000" data-dk-dropdown-value="650000">650,000</a></li><li class=""><a id="PriceMax_700000" data-dk-dropdown-value="700000">700,000</a></li><li class=""><a id="PriceMax_750000" data-dk-dropdown-value="750000">750,000</a></li><li class=""><a id="PriceMax_800000" data-dk-dropdown-value="800000">800,000</a></li><li class=""><a id="PriceMax_850000" data-dk-dropdown-value="850000">850,000</a></li><li class=""><a id="PriceMax_900000" data-dk-dropdown-value="900000">900,000</a></li><li class=""><a id="PriceMax_950000" data-dk-dropdown-value="950000">950,000</a></li><li class=""><a id="PriceMax_1000000" data-dk-dropdown-value="1000000">1,000,000</a></li><li class=""><a id="PriceMax_1100000" data-dk-dropdown-value="1100000">1,100,000</a></li><li class=""><a id="PriceMax_1200000" data-dk-dropdown-value="1200000">1,200,000</a></li><li class=""><a id="PriceMax_1300000" data-dk-dropdown-value="1300000">1,300,000</a></li><li class=""><a id="PriceMax_1400000" data-dk-dropdown-value="1400000">1,400,000</a></li><li class=""><a id="PriceMax_1500000" data-dk-dropdown-value="1500000">1,500,000</a></li><li class=""><a id="PriceMax_1600000" data-dk-dropdown-value="1600000">1,600,000</a></li><li class=""><a id="PriceMax_1700000" data-dk-dropdown-value="1700000">1,700,000</a></li><li class=""><a id="PriceMax_1800000" data-dk-dropdown-value="1800000">1,800,000</a></li><li class=""><a id="PriceMax_1900000" data-dk-dropdown-value="1900000">1,900,000</a></li><li class=""><a id="PriceMax_2000000" data-dk-dropdown-value="2000000">2,000,000</a></li><li class=""><a id="PriceMax_2500000" data-dk-dropdown-value="2500000">2,500,000</a></li><li class=""><a id="PriceMax_3000000" data-dk-dropdown-value="3000000">3,000,000</a></li><li class=""><a id="PriceMax_4000000" data-dk-dropdown-value="4000000">4,000,000</a></li><li class=""><a id="PriceMax_5000000" data-dk-dropdown-value="5000000">5,000,000</a></li><li class=""><a id="PriceMax_7500000" data-dk-dropdown-value="7500000">7,500,000</a></li><li class=""><a id="PriceMax_10000000" data-dk-dropdown-value="10000000">10,000,000</a></li></ul></div></div><select name="ctl00$elContent$ctl00$PriceMax$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_max_sale" title="Upper Price Limit" id="PriceMax" style="display: none; ">
+	<option value="0">Unlimited</option>
+	<option value="25000">25,000</option>
+	<option value="50000">50,000</option>
+	<option value="75000">75,000</option>
+	<option value="100000">100,000</option>
+	<option value="125000">125,000</option>
+	<option value="150000">150,000</option>
+	<option value="175000">175,000</option>
+	<option value="200000">200,000</option>
+	<option value="225000">225,000</option>
+	<option value="250000">250,000</option>
+	<option value="275000">275,000</option>
+	<option value="300000">300,000</option>
+	<option value="325000">325,000</option>
+	<option value="350000">350,000</option>
+	<option value="375000">375,000</option>
+	<option value="400000">400,000</option>
+	<option value="425000">425,000</option>
+	<option value="450000">450,000</option>
+	<option value="475000">475,000</option>
+	<option value="500000">500,000</option>
+	<option value="550000">550,000</option>
+	<option value="600000">600,000</option>
+	<option value="650000">650,000</option>
+	<option value="700000">700,000</option>
+	<option value="750000">750,000</option>
+	<option value="800000">800,000</option>
+	<option value="850000">850,000</option>
+	<option value="900000">900,000</option>
+	<option value="950000">950,000</option>
+	<option value="1000000">1,000,000</option>
+	<option value="1100000">1,100,000</option>
+	<option value="1200000">1,200,000</option>
+	<option value="1300000">1,300,000</option>
+	<option value="1400000">1,400,000</option>
+	<option value="1500000">1,500,000</option>
+	<option value="1600000">1,600,000</option>
+	<option value="1700000">1,700,000</option>
+	<option value="1800000">1,800,000</option>
+	<option value="1900000">1,900,000</option>
+	<option value="2000000">2,000,000</option>
+	<option value="2500000">2,500,000</option>
+	<option value="3000000">3,000,000</option>
+	<option value="4000000">4,000,000</option>
+	<option value="5000000">5,000,000</option>
+	<option value="7500000">7,500,000</option>
+	<option value="10000000">10,000,000</option>
+
+</select>
+                </div>
+
+                <!-- MAX RENT -->
+                <div class="m_hme_fltr_param m_hme_fltr_max_rent" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_RentMax" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_RentMax" class="dk_label">Upper Price Limit</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="RentMax_0" data-dk-dropdown-value="0">Unlimited</a></li><li class=""><a id="RentMax_100" data-dk-dropdown-value="100">100</a></li><li class=""><a id="RentMax_200" data-dk-dropdown-value="200">200</a></li><li class=""><a id="RentMax_300" data-dk-dropdown-value="300">300</a></li><li class=""><a id="RentMax_400" data-dk-dropdown-value="400">400</a></li><li class=""><a id="RentMax_500" data-dk-dropdown-value="500">500</a></li><li class=""><a id="RentMax_600" data-dk-dropdown-value="600">600</a></li><li class=""><a id="RentMax_700" data-dk-dropdown-value="700">700</a></li><li class=""><a id="RentMax_800" data-dk-dropdown-value="800">800</a></li><li class=""><a id="RentMax_900" data-dk-dropdown-value="900">900</a></li><li class=""><a id="RentMax_1000" data-dk-dropdown-value="1000">1,000</a></li><li class=""><a id="RentMax_1200" data-dk-dropdown-value="1200">1,200</a></li><li class=""><a id="RentMax_1400" data-dk-dropdown-value="1400">1,400</a></li><li class=""><a id="RentMax_1600" data-dk-dropdown-value="1600">1,600</a></li><li class=""><a id="RentMax_1800" data-dk-dropdown-value="1800">1,800</a></li><li class=""><a id="RentMax_2000" data-dk-dropdown-value="2000">2,000</a></li><li class=""><a id="RentMax_2500" data-dk-dropdown-value="2500">2,500</a></li><li class=""><a id="RentMax_3000" data-dk-dropdown-value="3000">3,000</a></li></ul></div></div><select name="ctl00$elContent$ctl00$RentMax$ctl00" class="m_dropkick_select_property_filter m_dropkick_select_max_sale" title="Upper Price Limit" id="RentMax" style="display: none; ">
+	<option value="0">Unlimited</option>
+	<option value="100">100</option>
+	<option value="200">200</option>
+	<option value="300">300</option>
+	<option value="400">400</option>
+	<option value="500">500</option>
+	<option value="600">600</option>
+	<option value="700">700</option>
+	<option value="800">800</option>
+	<option value="900">900</option>
+	<option value="1000">1,000</option>
+	<option value="1200">1,200</option>
+	<option value="1400">1,400</option>
+	<option value="1600">1,600</option>
+	<option value="1800">1,800</option>
+	<option value="2000">2,000</option>
+	<option value="2500">2,500</option>
+	<option value="3000">3,000</option>
+
+</select>
+                </div>
+
+              
+
+       
+                
+                <!-- SELECT - DATE FROM -->
+                <div class="m_hme_fltr_param m_hme_fltr_date_from" style="display: none; ">
+                    <input type="text" class="searchfield hasDatepicker" id="OpenHouseStartDate"><img class="ui-datepicker-trigger" src="Presentation/Images/common/icons/dropkick_arrow_black_dwn.png" alt="..." title="...">
+                </div>                                
+
+                <!-- SELECT - DATE TO -->
+                <div class="m_hme_fltr_param m_hme_fltr_date_to" style="display: none; ">
+                    <input type="text" class="searchfield hasDatepicker" id="OpenHouseEndDate"><img class="ui-datepicker-trigger" src="Presentation/Images/common/icons/dropkick_arrow_black_dwn.png" alt="..." title="...">
+                </div>       
+                
+                <!-- SELECT - DATES --> 
+                <div class="m_hme_fltr_param m_hme_fltr_listed_since" style="display: inline-block; ">
+                    <input id="NumberofDays" class="searchfield hasDatepicker" type="text" readonly="readonly"><img class="ui-datepicker-trigger" src="Presentation/Images/common/icons/dropkick_arrow_black_dwn.png" alt="..." title="...">       
+                    <img src="presentation/images/common/icons/calendar2.png" class="m_hme_fltr_icon_date">
+                </div>
+
+                <!-- OPEN HOUSE + DATE RANGE -->
+                <div class="searchfield m_hme_fltr_openhouse" id="openHouseBox" style="display: inline-block; ">
+                    <input id="OpenHouse" class="" type="checkbox">
+                    <span class="">Open Houses Only</span> 
+                </div>
+
+                <div class="is_clear_both"></div>
+            </div>
+
+             <div id="m_hme_fltr_params_row3" style="display: none; ">
+
+                <div class="m_hme_fltr_param m_hme_fltr_crop_type" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_CropTypeId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_CropTypeId" class="dk_label">Crops</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="CropTypeId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="CropTypeId_1" data-dk-dropdown-value="1">Barley</a></li><li class=""><a id="CropTypeId_2" data-dk-dropdown-value="2">Beans</a></li><li class=""><a id="CropTypeId_3" data-dk-dropdown-value="3">Corn</a></li><li class=""><a id="CropTypeId_4" data-dk-dropdown-value="4">Sweet Corn</a></li><li class=""><a id="CropTypeId_5" data-dk-dropdown-value="5">Hay</a></li><li class=""><a id="CropTypeId_6" data-dk-dropdown-value="6">Hops</a></li><li class=""><a id="CropTypeId_7" data-dk-dropdown-value="7">Kale/Cole</a></li><li class=""><a id="CropTypeId_8" data-dk-dropdown-value="8">Oats</a></li><li class=""><a id="CropTypeId_9" data-dk-dropdown-value="9">Soybeans</a></li><li class=""><a id="CropTypeId_10" data-dk-dropdown-value="10">Wheat</a></li><li class=""><a id="CropTypeId_11" data-dk-dropdown-value="11">Rice</a></li><li class=""><a id="CropTypeId_12" data-dk-dropdown-value="12">Grains</a></li><li class=""><a id="CropTypeId_13" data-dk-dropdown-value="13">Tobacco</a></li><li class=""><a id="CropTypeId_14" data-dk-dropdown-value="14">Sod</a></li><li class=""><a id="CropTypeId_15" data-dk-dropdown-value="15">Fruits</a></li><li class=""><a id="CropTypeId_16" data-dk-dropdown-value="16">Mixed Vegetables</a></li><li class=""><a id="CropTypeId_17" data-dk-dropdown-value="17">Plants/Flowers</a></li><li class=""><a id="CropTypeId_18" data-dk-dropdown-value="18">Herbs</a></li><li class=""><a id="CropTypeId_19" data-dk-dropdown-value="19">Carrots</a></li><li class=""><a id="CropTypeId_20" data-dk-dropdown-value="20">Cucumbers</a></li><li class=""><a id="CropTypeId_21" data-dk-dropdown-value="21">Onions</a></li><li class=""><a id="CropTypeId_22" data-dk-dropdown-value="22">Pea Crops</a></li><li class=""><a id="CropTypeId_23" data-dk-dropdown-value="23">Potatoes</a></li><li class=""><a id="CropTypeId_25" data-dk-dropdown-value="25">Sugar Beets</a></li><li class=""><a id="CropTypeId_26" data-dk-dropdown-value="26">Tomatoes</a></li><li class=""><a id="CropTypeId_27" data-dk-dropdown-value="27">Grapes</a></li><li class=""><a id="CropTypeId_28" data-dk-dropdown-value="28">Mushrooms</a></li><li class=""><a id="CropTypeId_29" data-dk-dropdown-value="29">Berries</a></li><li class=""><a id="CropTypeId_30" data-dk-dropdown-value="30">Strawberries</a></li><li class=""><a id="CropTypeId_31" data-dk-dropdown-value="31">Raspberries</a></li><li class=""><a id="CropTypeId_32" data-dk-dropdown-value="32">Blueberries</a></li><li class=""><a id="CropTypeId_33" data-dk-dropdown-value="33">Melons</a></li><li class=""><a id="CropTypeId_34" data-dk-dropdown-value="34">Pumpkins</a></li><li class=""><a id="CropTypeId_35" data-dk-dropdown-value="35">Peppers</a></li><li class=""><a id="CropTypeId_36" data-dk-dropdown-value="36">Apples</a></li><li class=""><a id="CropTypeId_37" data-dk-dropdown-value="37">Pears</a></li><li class=""><a id="CropTypeId_38" data-dk-dropdown-value="38">Plums</a></li><li class=""><a id="CropTypeId_39" data-dk-dropdown-value="39">Cherries</a></li><li class=""><a id="CropTypeId_40" data-dk-dropdown-value="40">Cranberries</a></li><li class=""><a id="CropTypeId_41" data-dk-dropdown-value="41">Tree</a></li><li class=""><a id="CropTypeId_42" data-dk-dropdown-value="42">Unknown</a></li></ul></div></div><select name="ctl00$elContent$ctl00$CropTypeId$ctl00" title="Crops" id="CropTypeId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">Barley</option>
+	<option value="2">Beans</option>
+	<option value="3">Corn</option>
+	<option value="4">Sweet Corn</option>
+	<option value="5">Hay</option>
+	<option value="6">Hops</option>
+	<option value="7">Kale/Cole</option>
+	<option value="8">Oats</option>
+	<option value="9">Soybeans</option>
+	<option value="10">Wheat</option>
+	<option value="11">Rice</option>
+	<option value="12">Grains</option>
+	<option value="13">Tobacco</option>
+	<option value="14">Sod</option>
+	<option value="15">Fruits</option>
+	<option value="16">Mixed Vegetables</option>
+	<option value="17">Plants/Flowers</option>
+	<option value="18">Herbs</option>
+	<option value="19">Carrots</option>
+	<option value="20">Cucumbers</option>
+	<option value="21">Onions</option>
+	<option value="22">Pea Crops</option>
+	<option value="23">Potatoes</option>
+	<option value="25">Sugar Beets</option>
+	<option value="26">Tomatoes</option>
+	<option value="27">Grapes</option>
+	<option value="28">Mushrooms</option>
+	<option value="29">Berries</option>
+	<option value="30">Strawberries</option>
+	<option value="31">Raspberries</option>
+	<option value="32">Blueberries</option>
+	<option value="33">Melons</option>
+	<option value="34">Pumpkins</option>
+	<option value="35">Peppers</option>
+	<option value="36">Apples</option>
+	<option value="37">Pears</option>
+	<option value="38">Plums</option>
+	<option value="39">Cherries</option>
+	<option value="40">Cranberries</option>
+	<option value="41">Tree</option>
+	<option value="42">Unknown</option>
+
+</select>
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_livestock_type" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_LiveStockTypeId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_LiveStockTypeId" class="dk_label">Livestock</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="LiveStockTypeId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="LiveStockTypeId_1" data-dk-dropdown-value="1">Beef</a></li><li class=""><a id="LiveStockTypeId_2" data-dk-dropdown-value="2">Calf</a></li><li class=""><a id="LiveStockTypeId_3" data-dk-dropdown-value="3">Cow</a></li><li class=""><a id="LiveStockTypeId_4" data-dk-dropdown-value="4">Goat</a></li><li class=""><a id="LiveStockTypeId_5" data-dk-dropdown-value="5">Hog</a></li><li class=""><a id="LiveStockTypeId_6" data-dk-dropdown-value="6">Horse</a></li><li class=""><a id="LiveStockTypeId_7" data-dk-dropdown-value="7">Rabbit</a></li><li class=""><a id="LiveStockTypeId_8" data-dk-dropdown-value="8">Sheep</a></li><li class=""><a id="LiveStockTypeId_9" data-dk-dropdown-value="9">Worm</a></li><li class=""><a id="LiveStockTypeId_10" data-dk-dropdown-value="10">Alpaca</a></li><li class=""><a id="LiveStockTypeId_11" data-dk-dropdown-value="11">Deer</a></li><li class=""><a id="LiveStockTypeId_12" data-dk-dropdown-value="12">Elk</a></li><li class=""><a id="LiveStockTypeId_13" data-dk-dropdown-value="13">Buffalo</a></li><li class=""><a id="LiveStockTypeId_14" data-dk-dropdown-value="14">Chicken</a></li><li class=""><a id="LiveStockTypeId_15" data-dk-dropdown-value="15">Turkey</a></li><li class=""><a id="LiveStockTypeId_16" data-dk-dropdown-value="16">Duck</a></li><li class=""><a id="LiveStockTypeId_17" data-dk-dropdown-value="17">Goose</a></li><li class=""><a id="LiveStockTypeId_18" data-dk-dropdown-value="18">Pheasant</a></li><li class=""><a id="LiveStockTypeId_19" data-dk-dropdown-value="19">Quail</a></li><li class=""><a id="LiveStockTypeId_20" data-dk-dropdown-value="20">Pidgeon</a></li><li class=""><a id="LiveStockTypeId_21" data-dk-dropdown-value="21">Bee </a></li><li class=""><a id="LiveStockTypeId_22" data-dk-dropdown-value="22">Dog</a></li><li class=""><a id="LiveStockTypeId_23" data-dk-dropdown-value="23">Cat</a></li><li class=""><a id="LiveStockTypeId_24" data-dk-dropdown-value="24">Salmon</a></li><li class=""><a id="LiveStockTypeId_25" data-dk-dropdown-value="25">Game Fish</a></li><li class=""><a id="LiveStockTypeId_26" data-dk-dropdown-value="26">Shellfish</a></li><li class=""><a id="LiveStockTypeId_27" data-dk-dropdown-value="27">Mussells</a></li><li class=""><a id="LiveStockTypeId_28" data-dk-dropdown-value="28">Clams</a></li><li class=""><a id="LiveStockTypeId_29" data-dk-dropdown-value="29">Scallops</a></li><li class=""><a id="LiveStockTypeId_30" data-dk-dropdown-value="30">Snails</a></li><li class=""><a id="LiveStockTypeId_31" data-dk-dropdown-value="31">Chinchilla</a></li><li class=""><a id="LiveStockTypeId_32" data-dk-dropdown-value="32">Mink</a></li><li class=""><a id="LiveStockTypeId_33" data-dk-dropdown-value="33">Fox</a></li><li class=""><a id="LiveStockTypeId_34" data-dk-dropdown-value="34">Fish</a></li><li class=""><a id="LiveStockTypeId_35" data-dk-dropdown-value="35">Poultry</a></li><li class=""><a id="LiveStockTypeId_36" data-dk-dropdown-value="36">Dairy</a></li><li class=""><a id="LiveStockTypeId_37" data-dk-dropdown-value="37">Exotic Animals</a></li><li class=""><a id="LiveStockTypeId_38" data-dk-dropdown-value="38">Stock included</a></li><li class=""><a id="LiveStockTypeId_39" data-dk-dropdown-value="39">Unknown</a></li><li class=""><a id="LiveStockTypeId_40" data-dk-dropdown-value="40">Stock Not Included</a></li></ul></div></div><select name="ctl00$elContent$ctl00$LiveStockTypeId$ctl00" title="Livestock" id="LiveStockTypeId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">Beef</option>
+	<option value="2">Calf</option>
+	<option value="3">Cow</option>
+	<option value="4">Goat</option>
+	<option value="5">Hog</option>
+	<option value="6">Horse</option>
+	<option value="7">Rabbit</option>
+	<option value="8">Sheep</option>
+	<option value="9">Worm</option>
+	<option value="10">Alpaca</option>
+	<option value="11">Deer</option>
+	<option value="12">Elk</option>
+	<option value="13">Buffalo</option>
+	<option value="14">Chicken</option>
+	<option value="15">Turkey</option>
+	<option value="16">Duck</option>
+	<option value="17">Goose</option>
+	<option value="18">Pheasant</option>
+	<option value="19">Quail</option>
+	<option value="20">Pidgeon</option>
+	<option value="21">Bee </option>
+	<option value="22">Dog</option>
+	<option value="23">Cat</option>
+	<option value="24">Salmon</option>
+	<option value="25">Game Fish</option>
+	<option value="26">Shellfish</option>
+	<option value="27">Mussells</option>
+	<option value="28">Clams</option>
+	<option value="29">Scallops</option>
+	<option value="30">Snails</option>
+	<option value="31">Chinchilla</option>
+	<option value="32">Mink</option>
+	<option value="33">Fox</option>
+	<option value="34">Fish</option>
+	<option value="35">Poultry</option>
+	<option value="36">Dairy</option>
+	<option value="37">Exotic Animals</option>
+	<option value="38">Stock included</option>
+	<option value="39">Unknown</option>
+	<option value="40">Stock Not Included</option>
+
+</select>
+                </div>              
+
+                <div class="m_hme_fltr_param m_hme_fltr_building_type" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_BuildingTypeId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_BuildingTypeId" class="dk_label">Building Type</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="BuildingTypeId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="BuildingTypeId_1" data-dk-dropdown-value="1">House</a></li><li class=""><a id="BuildingTypeId_16" data-dk-dropdown-value="16">Row / Townhouse</a></li><li class=""><a id="BuildingTypeId_17" data-dk-dropdown-value="17">Apartment</a></li><li class=""><a id="BuildingTypeId_2" data-dk-dropdown-value="2">Duplex</a></li><li class=""><a id="BuildingTypeId_3" data-dk-dropdown-value="3">Triplex</a></li><li class=""><a id="BuildingTypeId_19" data-dk-dropdown-value="19">Fourplex</a></li><li class=""><a id="BuildingTypeId_20" data-dk-dropdown-value="20">Garden Home</a></li><li class=""><a id="BuildingTypeId_6" data-dk-dropdown-value="6">Mobile Home</a></li><li class=""><a id="BuildingTypeId_27" data-dk-dropdown-value="27">Manufactured Home/Mobile</a></li><li class=""><a id="BuildingTypeId_12" data-dk-dropdown-value="12">Special Purpose</a></li><li class=""><a id="BuildingTypeId_5" data-dk-dropdown-value="5">Residential Commercial Mix</a></li><li class=""><a id="BuildingTypeId_14" data-dk-dropdown-value="14">Other</a></li></ul></div></div><select name="ctl00$elContent$ctl00$BuildingTypeId$ctl00" title="Building Type" id="BuildingTypeId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">House</option>
+	<option value="16">Row / Townhouse</option>
+	<option value="17">Apartment</option>
+	<option value="2">Duplex</option>
+	<option value="3">Triplex</option>
+	<option value="19">Fourplex</option>
+	<option value="20">Garden Home</option>
+	<option value="6">Mobile Home</option>
+	<option value="27">Manufactured Home/Mobile</option>
+	<option value="12">Special Purpose</option>
+	<option value="5">Residential Commercial Mix</option>
+	<option value="14">Other</option>
+
+</select>  
+                </div>    
+
+                <div class="m_hme_fltr_param m_hme_fltr_ownership_type" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_OwnershipTypeGroupId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_OwnershipTypeGroupId" class="dk_label">Ownership/Title</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="OwnershipTypeGroupId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="OwnershipTypeGroupId_1" data-dk-dropdown-value="1">Freehold</a></li><li class=""><a id="OwnershipTypeGroupId_2" data-dk-dropdown-value="2">Condo/Strata</a></li><li class=""><a id="OwnershipTypeGroupId_3" data-dk-dropdown-value="3">Timeshare/Fractional</a></li><li class=""><a id="OwnershipTypeGroupId_4" data-dk-dropdown-value="4">Leasehold</a></li></ul></div></div><select name="ctl00$elContent$ctl00$OwnershipTypeGroupId$ctl00" title="Ownership/Title" id="OwnershipTypeGroupId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">Freehold</option>
+	<option value="2">Condo/Strata</option>
+	<option value="3">Timeshare/Fractional</option>
+	<option value="4">Leasehold</option>
+
+</select>
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_story_range" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_StoreyRange" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_StoreyRange" class="dk_label">Storeys</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="StoreyRange_0-0" data-dk-dropdown-value="0-0">Any</a></li><li class=""><a id="StoreyRange_1-1" data-dk-dropdown-value="1-1">1</a></li><li class=""><a id="StoreyRange_1-0" data-dk-dropdown-value="1-0">1 or more</a></li><li class=""><a id="StoreyRange_2-2" data-dk-dropdown-value="2-2">2</a></li><li class=""><a id="StoreyRange_2-0" data-dk-dropdown-value="2-0">2 or more</a></li><li class=""><a id="StoreyRange_3-3" data-dk-dropdown-value="3-3">3</a></li><li class=""><a id="StoreyRange_3-0" data-dk-dropdown-value="3-0">3 or more</a></li><li class=""><a id="StoreyRange_4-4" data-dk-dropdown-value="4-4">4</a></li><li class=""><a id="StoreyRange_4-0" data-dk-dropdown-value="4-0">4 or more</a></li><li class=""><a id="StoreyRange_5-5" data-dk-dropdown-value="5-5">5</a></li><li class=""><a id="StoreyRange_5-0" data-dk-dropdown-value="5-0">5 or more</a></li><li class=""><a id="StoreyRange_6-6" data-dk-dropdown-value="6-6">6</a></li><li class=""><a id="StoreyRange_6-0" data-dk-dropdown-value="6-0">6 or more</a></li></ul></div></div><select name="ctl00$elContent$ctl00$StoreyRange" id="StoreyRange" title="Storeys" style="display: none; ">
+	<option value="0-0">Any</option>
+	<option value="1-1">1</option>
+	<option value="1-0">1 or more</option>
+	<option value="2-2">2</option>
+	<option value="2-0">2 or more</option>
+	<option value="3-3">3</option>
+	<option value="3-0">3 or more</option>
+	<option value="4-4">4</option>
+	<option value="4-0">4 or more</option>
+	<option value="5-5">5</option>
+	<option value="5-0">5 or more</option>
+	<option value="6-6">6</option>
+	<option value="6-0">6 or more</option>
+
+</select>
+                </div>     
+
+                <div class="m_hme_fltr_param m_hme_fltr_bedrange" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_BedRangeOption" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_BedRangeOption" class="dk_label">Any</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="BedRangeOption_0-0" data-dk-dropdown-value="0-0">Any</a></li><li class=""><a id="BedRangeOption_1-1" data-dk-dropdown-value="1-1">1</a></li><li class=""><a id="BedRangeOption_1-0" data-dk-dropdown-value="1-0">1+</a></li><li class=""><a id="BedRangeOption_2-2" data-dk-dropdown-value="2-2">2</a></li><li class=""><a id="BedRangeOption_2-0" data-dk-dropdown-value="2-0">2+</a></li><li class=""><a id="BedRangeOption_3-3" data-dk-dropdown-value="3-3">3</a></li><li class=""><a id="BedRangeOption_3-0" data-dk-dropdown-value="3-0">3+</a></li><li class=""><a id="BedRangeOption_4-4" data-dk-dropdown-value="4-4">4</a></li><li class=""><a id="BedRangeOption_4-0" data-dk-dropdown-value="4-0">4+</a></li><li class=""><a id="BedRangeOption_5-5" data-dk-dropdown-value="5-5">5</a></li><li class=""><a id="BedRangeOption_5-0" data-dk-dropdown-value="5-0">5+</a></li></ul></div></div><select name="ctl00$elContent$ctl00$BedRangeOption$ctl00" id="BedRangeOption" style="display: none; ">
+	<option value="0-0">Any</option>
+	<option value="1-1">1</option>
+	<option value="1-0">1+</option>
+	<option value="2-2">2</option>
+	<option value="2-0">2+</option>
+	<option value="3-3">3</option>
+	<option value="3-0">3+</option>
+	<option value="4-4">4</option>
+	<option value="4-0">4+</option>
+	<option value="5-5">5</option>
+	<option value="5-0">5+</option>
+
+</select>
+                    <img src="presentation/images/common/icons/bed.png" class="m_hme_fltr_icon">
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_bathrange" style="display: none; "> 
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_BathRangeOption" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_BathRangeOption" class="dk_label">Any</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="BathRangeOption_0-0" data-dk-dropdown-value="0-0">Any</a></li><li class=""><a id="BathRangeOption_1-1" data-dk-dropdown-value="1-1">1</a></li><li class=""><a id="BathRangeOption_1-0" data-dk-dropdown-value="1-0">1+</a></li><li class=""><a id="BathRangeOption_2-2" data-dk-dropdown-value="2-2">2</a></li><li class=""><a id="BathRangeOption_2-0" data-dk-dropdown-value="2-0">2+</a></li><li class=""><a id="BathRangeOption_3-3" data-dk-dropdown-value="3-3">3</a></li><li class=""><a id="BathRangeOption_3-0" data-dk-dropdown-value="3-0">3+</a></li><li class=""><a id="BathRangeOption_4-4" data-dk-dropdown-value="4-4">4</a></li><li class=""><a id="BathRangeOption_4-0" data-dk-dropdown-value="4-0">4+</a></li><li class=""><a id="BathRangeOption_5-5" data-dk-dropdown-value="5-5">5</a></li><li class=""><a id="BathRangeOption_5-0" data-dk-dropdown-value="5-0">5+</a></li></ul></div></div><select name="ctl00$elContent$ctl00$BathRangeOption$ctl00" id="BathRangeOption" style="display: none; ">
+	<option value="0-0">Any</option>
+	<option value="1-1">1</option>
+	<option value="1-0">1+</option>
+	<option value="2-2">2</option>
+	<option value="2-0">2+</option>
+	<option value="3-3">3</option>
+	<option value="3-0">3+</option>
+	<option value="4-4">4</option>
+	<option value="4-0">4+</option>
+	<option value="5-5">5</option>
+	<option value="5-0">5+</option>
+
+</select>
+                    <img src="presentation/images/common/icons/bath.png" class="m_hme_fltr_icon">
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_landuse" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_LandUseTypeId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_LandUseTypeId" class="dk_label">Any Land Use</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="LandUseTypeId_0" data-dk-dropdown-value="0">Any Land Use</a></li><li class=""><a id="LandUseTypeId_1" data-dk-dropdown-value="1">Agriculture - active</a></li><li class=""><a id="LandUseTypeId_2" data-dk-dropdown-value="2">Agriculture - inactive</a></li><li class=""><a id="LandUseTypeId_3" data-dk-dropdown-value="3">Country residential</a></li><li class=""><a id="LandUseTypeId_4" data-dk-dropdown-value="4">Development commercial</a></li><li class=""><a id="LandUseTypeId_5" data-dk-dropdown-value="5">Development office</a></li><li class=""><a id="LandUseTypeId_6" data-dk-dropdown-value="6">Development residential</a></li><li class=""><a id="LandUseTypeId_7" data-dk-dropdown-value="7">Development retail</a></li><li class=""><a id="LandUseTypeId_8" data-dk-dropdown-value="8">Development industrial</a></li><li class=""><a id="LandUseTypeId_9" data-dk-dropdown-value="9">Development other</a></li><li class=""><a id="LandUseTypeId_10" data-dk-dropdown-value="10">Equestrian</a></li><li class=""><a id="LandUseTypeId_11" data-dk-dropdown-value="11">Gravel Yard</a></li><li class=""><a id="LandUseTypeId_12" data-dk-dropdown-value="12">Hobby Farm</a></li><li class=""><a id="LandUseTypeId_13" data-dk-dropdown-value="13">Industrial</a></li><li class=""><a id="LandUseTypeId_14" data-dk-dropdown-value="14">Mixed use</a></li><li class=""><a id="LandUseTypeId_15" data-dk-dropdown-value="15">Mobile home</a></li><li class=""><a id="LandUseTypeId_16" data-dk-dropdown-value="16">Other</a></li><li class=""><a id="LandUseTypeId_17" data-dk-dropdown-value="17">Orchard</a></li><li class=""><a id="LandUseTypeId_18" data-dk-dropdown-value="18">Open pit</a></li><li class=""><a id="LandUseTypeId_19" data-dk-dropdown-value="19">Pasture</a></li><li class=""><a id="LandUseTypeId_20" data-dk-dropdown-value="20">Quarry</a></li><li class=""><a id="LandUseTypeId_21" data-dk-dropdown-value="21">Ranch</a></li><li class=""><a id="LandUseTypeId_22" data-dk-dropdown-value="22">Range</a></li><li class=""><a id="LandUseTypeId_23" data-dk-dropdown-value="23">Recreational</a></li><li class=""><a id="LandUseTypeId_24" data-dk-dropdown-value="24">Vineyard</a></li><li class=""><a id="LandUseTypeId_25" data-dk-dropdown-value="25">No special use</a></li><li class=""><a id="LandUseTypeId_26" data-dk-dropdown-value="26">No land</a></li><li class=""><a id="LandUseTypeId_27" data-dk-dropdown-value="27">Unknown</a></li></ul></div></div><select name="ctl00$elContent$ctl00$LandUseTypeId$ctl00" id="LandUseTypeId" style="display: none; ">
+	<option value="0">Any Land Use</option>
+	<option value="1">Agriculture - active</option>
+	<option value="2">Agriculture - inactive</option>
+	<option value="3">Country residential</option>
+	<option value="4">Development commercial</option>
+	<option value="5">Development office</option>
+	<option value="6">Development residential</option>
+	<option value="7">Development retail</option>
+	<option value="8">Development industrial</option>
+	<option value="9">Development other</option>
+	<option value="10">Equestrian</option>
+	<option value="11">Gravel Yard</option>
+	<option value="12">Hobby Farm</option>
+	<option value="13">Industrial</option>
+	<option value="14">Mixed use</option>
+	<option value="15">Mobile home</option>
+	<option value="16">Other</option>
+	<option value="17">Orchard</option>
+	<option value="18">Open pit</option>
+	<option value="19">Pasture</option>
+	<option value="20">Quarry</option>
+	<option value="21">Ranch</option>
+	<option value="22">Range</option>
+	<option value="23">Recreational</option>
+	<option value="24">Vineyard</option>
+	<option value="25">No special use</option>
+	<option value="26">No land</option>
+	<option value="27">Unknown</option>
+
+</select>
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_view_type" style="display: inline-block; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_ViewTypeGroupId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_ViewTypeGroupId" class="dk_label">View</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="ViewTypeGroupId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="ViewTypeGroupId_1" data-dk-dropdown-value="1">City</a></li><li class=""><a id="ViewTypeGroupId_2" data-dk-dropdown-value="2">Mountain</a></li><li class=""><a id="ViewTypeGroupId_8" data-dk-dropdown-value="8">All Water Views</a></li><li class=""><a id="ViewTypeGroupId_3" data-dk-dropdown-value="3">Ocean</a></li><li class=""><a id="ViewTypeGroupId_4" data-dk-dropdown-value="4">Lake</a></li><li class=""><a id="ViewTypeGroupId_5" data-dk-dropdown-value="5">River</a></li><li class=""><a id="ViewTypeGroupId_6" data-dk-dropdown-value="6">Ravine</a></li><li class=""><a id="ViewTypeGroupId_7" data-dk-dropdown-value="7">Other</a></li></ul></div></div><select name="ctl00$elContent$ctl00$ViewTypeGroupId$ctl00" title="View" id="ViewTypeGroupId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">City</option>
+	<option value="2">Mountain</option>
+	<option value="8">All Water Views</option>
+	<option value="3">Ocean</option>
+	<option value="4">Lake</option>
+	<option value="5">River</option>
+	<option value="6">Ravine</option>
+	<option value="7">Other</option>
+
+</select>
+                </div>
+
+                <div class="m_hme_fltr_param m_hme_fltr_parking_type" style="display: none; ">
+                    <div class="dk_container dk_theme_crea_hme_filter" id="dk_container_ParkingTypeId" tabindex="" style="display: block; "><a class="dk_toggle" href="#" style="width: 211px; "><span id="dk_label_ParkingTypeId" class="dk_label">Parking Type</span><span class="dk_img"></span></a><div class="dk_options"><ul class="dk_options_inner"><li class="dk_option_current"><a id="ParkingTypeId_0" data-dk-dropdown-value="0">Any</a></li><li class=""><a id="ParkingTypeId_1" data-dk-dropdown-value="1">Attached garage</a></li><li class=""><a id="ParkingTypeId_2" data-dk-dropdown-value="2">Integrated garage</a></li><li class=""><a id="ParkingTypeId_3" data-dk-dropdown-value="3">Detached garage</a></li><li class=""><a id="ParkingTypeId_4" data-dk-dropdown-value="4">Garage</a></li><li class=""><a id="ParkingTypeId_5" data-dk-dropdown-value="5">Carport</a></li><li class=""><a id="ParkingTypeId_6" data-dk-dropdown-value="6">Underground</a></li><li class=""><a id="ParkingTypeId_7" data-dk-dropdown-value="7">Indoor</a></li><li class=""><a id="ParkingTypeId_8" data-dk-dropdown-value="8">Open</a></li><li class=""><a id="ParkingTypeId_9" data-dk-dropdown-value="9">Covered</a></li><li class=""><a id="ParkingTypeId_10" data-dk-dropdown-value="10">Parking pad</a></li><li class=""><a id="ParkingTypeId_11" data-dk-dropdown-value="11">Paved Yard</a></li></ul></div></div><select name="ctl00$elContent$ctl00$ParkingTypeId$ctl00" title="Parking Type" id="ParkingTypeId" style="display: none; ">
+	<option value="0">Any</option>
+	<option value="1">Attached garage</option>
+	<option value="2">Integrated garage</option>
+	<option value="3">Detached garage</option>
+	<option value="4">Garage</option>
+	<option value="5">Carport</option>
+	<option value="6">Underground</option>
+	<option value="7">Indoor</option>
+	<option value="8">Open</option>
+	<option value="9">Covered</option>
+	<option value="10">Parking pad</option>
+	<option value="11">Paved Yard</option>
+
+</select>
+                </div>
+
+                 <div id="FeatureGroup">
+                    <span class="m_hme_fltr_airconditioning" style="display: inline; "><input type="checkbox" id="AirCondition" value="1"><label for="AirCondition">A/C</label></span>
+                    <span class="m_hme_fltr_pool" style="display: inline; "><input type="checkbox" id="Pool" value="1"><label for="Pool">Pool</label></span>
+                    <span class="m_hme_fltr_fireplace" style="display: inline; "><input type="checkbox" id="Fireplace" value="1"><label for="Fireplace">Fireplace</label></span>
+                    <span class="m_hme_fltr_garage" style="display: inline; "><input type="checkbox" id="Garage" value="1"><label for="Garage">Garage</label></span>
+                    <span class="m_hme_fltr_waterfront" style="display: inline; "><input type="checkbox" id="Waterfront" value="1"><label for="Waterfront">Waterfront</label></span>
+                    <span class="m_hme_fltr_acreage" style="display: inline; "><input type="checkbox" id="Acreage" value="1"><label for="Acreage">Acreage</label></span>
+                 </div>
+             </div>
+        </div>
+        <div class="m_hme_srch_opt_toggle">
+            <a class="b_base b_mid b_fit" id="btnMoreOptions" href="#"><span>More Options</span></a>
+        </div>
+          <div class="m_hme_srch_btn">
+            <a href="#" id="button_realtor_go" class="b_base b_high b_align_center b_go_hme" onclick="_gaq.push(['_trackEvent', 'Searches', 'Homepage Search button']);" autofocus=""><span id="Label1">GO</span></a>
+        </div>
+ 
+    </div>
+ 
+   
+
+
+
+    <!-- FIRST VIEW -->
+    <div id="welcome" class="m_hme_first" style="display:none;">
+        <div id="m_hme_first_con">
+        <div class="m_hme_first_hdr">
+            <p class="m_hme_first_hdr_title1">We've done some renovating</p>
+            <p class="m_hme_first_hdr_title2">and wanted to show you some of the changes.</p>
+        </div>
+        <div class="m_hme_first_bdy">
+             <div class="m_hme_ryl_sld">
+                <div id="royalslider-def" class="royalSlider default">
+                    <ul class="royalSlidesContainer">
+                        <li class="royalSlide"><img src="presentation/images/en-CA/content/hme_slide_latest.jpg" id="Image1" class="royalImage" title=""></li>
+                        <li class="royalSlide"><img src="presentation/images/en-CA/content/hme_slide_favourites.jpg" class="royalImage" title=""></li>
+                        <li class="royalSlide"><img src="presentation/images/en-CA/content/hme_slide_recently_viewed.jpg" class="royalImage" title=""></li>
+                        <li class="royalSlide"><img src="presentation/images/en-CA/content/hme_slide_saved_search.jpg" class="royalImage" title=""></li>
+                    </ul>  
+                </div>
+            </div>
+        </div>
+            </div>
+    </div>
+
+    <!-- RECENTLY VEIWED -->
+    <div id="recentlyViewed" class="m_hme_recent" style="display: none; ">
+
+         <!-- SEARCH NAVIGATION -->
+        <div class="m_hme_right_col" style="width: 280px; float:right;">
+            <div id="savedSearches" class="right">
+                <div id="hm_saved_searches_title" class="m_hme_recent_title">My Saved Searches</div>
+                <div id="mySavedSaerchesList">
+                    <div id="m_hme_oocurrentsavedsearches">
+                        <span style="vertical-align: middle;">You don't have any saved searches yet.</span>
+                    </div>
+                </div>
+                <a class="d_my_searches_trigger sublink" id="hm_saved_searches_all" href="#" style="display: none; ">See all my saved searches</a>
+            </div>
+            <div id="searchByMap" class="right">
+                 <div class="m_hme_recent_title">Listings in My Area</div> 
+            
+            
+                <a href="#" onclick="redirectToDisclaimer('map.aspx#CultureID=1&amp;Latitude=46.0832977294922&amp;Longitude=-64.7667007446289&amp;ZoomLevel=13'); return false;"><img src="http://dev.virtualearth.net/REST/v1/Imagery/Map/Road/46.0832977294922,-64.7667007446289/9?mapSize=280,150&amp;key=Ak--MJRg09gcn9kOU096oF5sITeHCQ2H_sEugu-c7WSeBGnmS2b-HHHLpizGDzBK" style="border: 1px solid #C9C9C4; cursor: pointer; width:100%; height:150px;  margin-left: -2px; position: relative; " id="m_hme_map_nearme"></a>
+                <a href="#" class="sublink" style="display: none;" id="hm_explore" onclick="redirectToDisclaimer('map.aspx#CultureID=1&amp;Latitude=46.0832977294922&amp;Longitude=-64.7667007446289&amp;ZoomLevel=13'); return false;">Explore listings in your area</a>
+            </div>
+        
+        </div>
+        
+        <div id="recentlyViewedListingsTitle" class="m_hme_recent_title">My Recently Viewed Listings</div>
+
+        <div id="recentlyViewedListings"><img style="display: block; margin-left:auto; margin-right: auto; padding:10px;" src="Presentation/Images/common/icons/loading_map.gif"></div>
+
+
+       
+        <!-- FOOTER -->
+    <div class="m_rslt_ftr" style="display: none;">
+        <div class="m_rslt_pager">
+            <button id="bottomPrevious" class="b_pager">&lt;</button>
+            <div id="numberOfPagedRecordsBottom" class="m_rslt_pager_current_page"></div>
+            <button id="bottomNext" class="b_pager">&gt;</button>
+        </div> 
+    </div>
+    </div>
+
+ <!-- MOBILE ADVERT -->
+    <div id="homeAdverts" class="m_hme_adverts" style="">        
+        <div id="m_howrealtorshelp_home_cnt_con" class="m_howrealtorshelp_home_con noPrint">
+
+    
+    <h2><span class="howrealtorshelp_home_title">Find out how a REALTOR<sup>®</sup> can protect you when buying or selling your home.</span></h2>
+        <div id="howrealtorshelp_home_con">
+            <div id="howrealtorshelp_home_tab_con">
+                <span id="howrealtorshelp_home_buyers_tab" class="howrealtorshelp_home_tab m_hme_advert_tab m_hme_advert_tab_sel" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Tabbed Category - Buying a Property']);  stopVideos(); showBuyersTab(); ">Buying a Property</span>
+                <span id="howrealtorshelp_home_sellers_tab" class="howrealtorshelp_home_tab m_hme_advert_tab" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Tabbed Category - Selling a Property']);  stopVideos(); showSellersTab();  ">Selling a Property</span>
+            </div>
+
+            <div id="howrealtorshelp_home_buyers_tab_con">                
+                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="LIuWU1L_oh4"><img src="Presentation/Images/common/placeholders/LIuWU1L_oh4.png"></span></div>
+                <div class="m_howrealtorshelp_home_sub_con">
+                    <div class="m_howrealtorshelp_home_hdr">Make sure you're ready to buy</div>
+                    <span class="m_howrealtorshelp_home_txt">This professional mother was ready to move so she could spend more time with her family and make an investment in her son's future.</span>
+                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Make sure you\'re ready to buy']); return true;" href="BuyerInformation.aspx#step=1_1&amp;noplay=1">See more of Erika's story</a></span>
+                </div>
+            </div>
+
+            <div id="howrealtorshelp_home_sellers_tab_con" style="position: absolute; top: -1000px;">             
+                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="hJIyHUT4TBo"><img src="Presentation/Images/common/placeholders/hJIyHUT4TBo.png"></span></div>
+                <div class="m_howrealtorshelp_home_sub_con">
+                    <div class="m_howrealtorshelp_home_hdr">Determine your home's asking price</div>
+                    <span class="m_howrealtorshelp_home_txt">Lots of people out there want to buy your home. The right asking price will attract attention and get you maximum return.</span>
+                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Determine your home\'s asking price']); return true;" href="SellerInformation.aspx#step=4_2&amp;noplay=1">See more of Chris and Philana's story</a></span>
+                </div>
+            </div>
+      </div>
+   
+  </div>
+
+<script type="text/javascript">
+
+    function showSellersTab() {
+        $('#howrealtorshelp_home_sellers_tab_con').css('position', 'static').css('top', '');
+        $('#howrealtorshelp_home_buyers_tab_con').css('position', 'absolute').css('top', '-1000px');
+        $('#howrealtorshelp_home_buyers_tab').removeClass('m_hme_advert_tab_sel');
+        $('#howrealtorshelp_home_sellers_tab').addClass('m_hme_advert_tab_sel');
+        
+    }
+
+    function showBuyersTab()
+    {
+        $('#howrealtorshelp_home_buyers_tab_con').css('position', 'static').css('top', '');
+        $('#howrealtorshelp_home_sellers_tab_con').css('position', 'absolute').css('top', '-1000px');
+        $('#howrealtorshelp_home_buyers_tab').addClass('m_hme_advert_tab_sel');
+        $('#howrealtorshelp_home_sellers_tab').removeClass('m_hme_advert_tab_sel');
+    }
+</script>
+        
+    </div>
+
+    <!-- MOBILE ADVERT -->
+    <div class="m_hme_mobile">
+
+        <div class="left">
+            <img id="hm_mobile" src="Presentation/Images/common/content/mobile.png" alt="m.Realtor.ca">
+        </div>
+        <div class="right">
+            <a href="#" id="check_out_mobile_apps" class="b_base b_mid b_fit b_align_center" onclick="window.location='mobile.aspx'"><span>Check out our mobile apps &gt;</span></a>
+        </div>
+    </div>
+
+    <!-- MY SEARCHES -->
+    <div id="d_my_searches" class="d_base" style="display:none;">
+        <div class="d_hdr">
+            <h2 id="hm_saved_searches_all_title">Saved Searches</h2>
+            <div id="d_my_searches_close" class="b_base b_low b_fit b_close">
+                <img src="Presentation/Images/common/icons/close_dialog.png" id="hm_saved_searches_all_close" alt="Close">
+            </div>
+        </div>
+        <div class="m_my_searches_toolbar">
+            <div class="m_my_searches_delete_all">Delete All</div>
+        </div>
+        <div class="m_my_searches_con"></div>
+        <div class="m_my_searches_confirm_delete_all" style="display:none;">
+            <p>Are you sure you want to delete all your saved searches?</p>
+            <div class="m_my_searches_delete_all_buttons">
+                <div id="m_my_searches_delete_all_ok" class="b_base b_high b_align_right_last">Delete All Searches</div>
+                <div id="m_my_searches_delete_all_cancel" class="b_base b_low_dark b_align_right">Keep All Searches</div>
+            </div>
+        </div>
+        <div class="m_my_searches_no_searches" style="display:none;">
+            <p>You haven't saved any searches</p>
+        </div>
+    </div>
+
+
+
+    <!-- ROYAL SLIDER -->
+    <script src="Presentation/Javascript/frameworks/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="Presentation/Javascript/frameworks/royal-slider-8.1.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    
+
+  
+    // CREATE GLOBAL VARIABLE TO HOLD DOCUMENT READY
+    $.indexReady = function () {
+
+        
+
+        //LoadVisibleUnloadedVideos();
+
+        //IE retains values on back, but the drop kicks aren't updated - force to first element
+        resetSearchFilters();
+        if (CookieHandler.getCookieValueAsString(GlobalData.REALTOR_HOME_SHOW_ADVANCED) != "1") {
+            $('#m_hme_fltr_params_row3').hide();
+        } else {
+            $("#btnMoreOptions").html("<span>Fewer Options</span>");
+        }
+
+    
+        $("#NumberofDays").datepicker(
+          {
+              showOn: "button",
+              showButtonPanel: true,
+              numberOfMonths: 2,
+              maxDate: 0,
+              buttonImage: "Presentation/Images/common/icons/dropkick_arrow_black_dwn.png",
+              buttonImageOnly: true,
+              dateFormat: "m/d/yy",
+              minDate: -363,
+              beforeShow: function (input, inst) {
+            
+                      $(this).parent().children('input').css('background', '#ffffff');
+                      $(this).parent().children('input').css('border-top', '1px solid #C9C9C4');
+                      $(this).parent().children('input').css('border-right', '1px solid #C9C9C4');
+                      $(this).parent().children('input').css('border-bottom', 'none');
+                      $(this).parent().children('input').css('border-left', '1px solid #C9C9C4');
+                      $(this).parent().children('.ui-datepicker-trigger').attr('src', 'Presentation/Images/common/icons/calendar_close.png');
+                      setTimeout(function () {
+                          var buttonPane = $(input).datepicker("widget").find(".ui-datepicker-buttonpane");
+                          $("<button>",
+                              {
+                                  text: "Clear Date", click: function () {
+                                      $.datepicker._clearDate(input);
+                                  }
+                              }).appendTo(buttonPane);
+                      }, 1);
+                  
+              },
+              onClose: function (dateText, inst) {
+                  //if (!isMapDrawing) {
+                  $(this).parent().children('input').css('background', '#f1f1eb');
+                  $(this).parent().children('input').css('border', '1px solid #C9C9C4');
+                  $(this).parent().children('.ui-datepicker-trigger').attr('src', 'Presentation/Images/common/icons/dropkick_arrow_black_dwn.png');
+                  //}
+              },
+              onSelect: function () {
+
+                  if ($(this).parent().children('input').val() == "") {
+                      $(this).parent().children('input').val("Listed Since")
+                  }   
+              }
+          }
+      );
+
+        $('#NumberofDays').focus(function () {
+            if (!$("#NumberofDays").datepicker("widget").is(":visible")) {
+                $('#NumberofDays').datepicker('show');
+            } 
+        });
+        $('.m_hme_fltr_listed_since img').click(function () {
+
+            if (!$("#NumberofDays").datepicker("widget").is(":visible")) {
+
+                $('#NumberofDays').datepicker('show');
+            }
+        });
+        $("#NumberofDays").val("Listed Since");
+
+        $('.m_hme_return').click(function () {
+            window.location = '';
+        });
+
+
+        if (CookieHandler.getCookieValueAsArray(GlobalData.PRE_VIEWED_MLS_COOKIE) != '') {  
+            makeAjaxCall();
+            if (ApplicationSettings.CultureID === '1' && 'true' == 'true') {
+                $('#homeAdverts').show();
+            }
+            $(window).on('hashchange', function (e) {
+                LoadPreviouslyViewed();
+            });
+        } else {
+            $('#recentlyViewed').hide();
+
+            if (ApplicationSettings.CultureID === '1' && 'true' == 'true') {
+                $('#homeAdverts').show();
+            } else {
+                $('#welcome').show();
+            }
+
+
+          
+        }
+      
+        function ResetAdvancedSearchFields()
+        {
+            $('#m_hme_fltr_params_row3 select').each(function () {
+                                                              
+                $(this).prop('selectedIndex', 0).dropkick('setValue', $("#" + $(this).attr('id') + " option:selected").val());
+
+                if ($(this).attr('title')) {
+                    $('#dk_label_' + $(this).attr('id')).html($(this).attr('title'));
+                }
+            });
+
+            $('#m_hme_fltr_params_row3 :checkbox').each(function () {
+                $(this).attr("checked", false);
+            });  
+        }
+
+        $("#btnMoreOptions").click(function (event) {
+            if ($('#m_hme_fltr_params_row3').is(":visible")) {
+                CookieHandler.deleteCookie(GlobalData.REALTOR_HOME_SHOW_ADVANCED);
+
+                $('#m_hme_fltr_params_row3').hide();
+                $("#btnMoreOptions").html("<span>More Options</span>");                
+
+                ResetAdvancedSearchFields();
+                _gaq.push(['_trackEvent', 'Home Page', 'Fewer Options Button']);
+
+            } else {
+                CookieHandler.createCookie(GlobalData.REALTOR_HOME_SHOW_ADVANCED, "1");
+                $('#m_hme_fltr_params_row3').show();
+                $("#btnMoreOptions").html("<span>Fewer Options</span>");
+                _gaq.push(['_trackEvent', 'Home Page', 'More Options Button']);
+            }
+
+        
+        });
+
+        $(".youtubeVideo").click(function (event) {
+      
+
+            if (VideoNeedsToBeLoaded(this.id)) {
+                player = new YT.Player(this.id, {
+                    width: '850',
+                    height: '515',
+                    videoId: this.id,   
+                    playerVars: {
+                        modestbranding: '1',
+                        theme: 'light',
+                        showinfo: '0',
+                        rel: '0',                        
+                        enablejsapi: '1'
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+
+                playerIds.push(this.id);
+             
+            }
+        });
+
+        $("#bottomPrevious").click(function (event) {
+            event.preventDefault ? event.preventDefault() : event.returnValue = false;
+            
+            if (HashSearch.keyExists("Page")) {
+                var page = Number(HashSearch.get('Page'));
+                HashSearch.set('Page', page - 1);
+            }
+        });
+
+      
+
+        $("#bottomNext").click(function (event) {
+            event.preventDefault ? event.preventDefault() : event.returnValue = false;            
+            
+            if (HashSearch.keyExists("Page")) {
+                var page = Number(HashSearch.get('Page'));
+                HashSearch.set('Page', page + 1);
+            } else {
+                HashSearch.set('Page', '2');
+            }
+        });
+
+    
+        // If user clicks on the enter button when typing in a search parameter we will start the search
+        $(".m_hme_srch_ipt_txtbox").keyup(function (e) {
+            if(e.keyCode == 13){
+                e.preventDefault();
+                StartSearch();
+            }
+        });        
+
+        $('#button_realtor_go').click(function (e) {
+            e.preventDefault();
+            StartSearch();
+        });
+
+        $('#home_search_input').keypress(function (e) {
+            
+            if (e.which == 13 || e.keyCode == 13) {
+                
+                $('#button_realtor_go').trigger('click');
+                return false;
+            }
+        });
+
+       
+
+        if ($('#royalslider-def').is(":visible")) {
+            $('#royalslider-def').royalSlider({
+                controlNavThumbs: false,
+                imageAlignCenter: false,
+                directionNavEnabled: true,
+                welcomeScreenEnabled: false,
+                hideArrowOnLastSlide: true
+            });
+        }
+      
+    };
+
+    function GetPreiouslyViewedIds() {
+
+        var previouslyViewed = CookieHandler.getCookieValueAsArray(GlobalData.PRE_VIEWED_MLS_COOKIE);
+        var ids = '';
+        for (var index = previouslyViewed.length; index >= 0; index--) {
+            if (previouslyViewed[index] && previouslyViewed[index] != '')
+                ids += previouslyViewed[index] + ",";
+        }
+
+        if (ids.length > 0) {
+            ids = ids.substring(0, ids.length - 1);
+        }
+        
+        return ids;
+    }
+        
+
+    function makeAjaxCall() {
+
+        var theQuery = "ApplicationId=" + ApplicationSettings.ApplicationId + "&cultureid=" + ApplicationSettings.CultureID + "&RecordsPerPage=" + GlobalData.MAX_PRE_MLS + "&Listingids=" + GetPreiouslyViewedIds();
+
+        if (theQuery) {
+            AjaxEngine.getResults(ApplicationSettings.ApiPath + "Listing.svc/PropertySearch_Post", theQuery, loadResults, 1, 'POST');
+        }
+    }
+
+    function loadResults(results) {
+
+        allServerRsults = results;
+
+        LoadPreviouslyViewed();
+    }
+
+    function LoadPreviouslyViewed() {
+
+        pageStr = '';
+        if (!allServerRsults)
+            return;
+
+        var page = Number(HashSearch.get('Page', 1));
+
+        favCookieEndIndex = (GlobalData.MAX_PRE_MLS_PER_PAGE * page);
+        favCookieStartIndex = favCookieEndIndex - (GlobalData.MAX_PRE_MLS_PER_PAGE);
+
+        RenderResults(allServerRsults);
+                
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+        return true;      
+    }
+
+    function RenderResults(results) {
+        
+        var resultMatched = false;
+        var totalFavListLength = null;
+        var resultsHTML = '';
+        var IDArray = GetPreiouslyViewedIds().split(",");
+
+        activatePager(results.Results.length);
+        
+        var count = 0;
+        var actualResults = [];
+        for (var index = 0; index < IDArray.length; index++) {
+
+            var id = IDArray[index].split('_')[0];
+            var result = null;
+
+            for (var rindex = 0; rindex < results.Results.length; rindex++) {
+
+                if (results.Results[rindex].Id == id) {
+                    actualResults.push(results.Results[rindex]);                  
+                    break;
+                }
+            }          
+        }
+
+        for (var index = favCookieStartIndex; index < favCookieEndIndex; index++) {
+
+            if (actualResults[index]) {
+                resultsHTML += RenderListing(actualResults[index], index % 2);
+            }
+        }
+
+   
+
+        $('#recentlyViewedListings').html('');
+        $('#recentlyViewedListings').html(resultsHTML);
+
+        if (actualResults.length > 4) {
+            $('.m_rslt_ftr').show();
+        } else {
+            $('.m_rslt_ftr').hide();
+        }
+
+        // Hide loading
+        $('.m_load_icon').slideUp();
+        searchInAction = false;
+    }
+
+    function RenderListing(result, property_cell_count) {
+        var propertyImage = '';
+        var propertyBedsBaths = [];
+        var propertyDetails = [];
+        var propertyPrice = [];
+        var organizationDesignation = '';
+        var listings = '';
+
+        (result.Property.Photo != null) ? propertyImage = result.Property.Photo[0].MedResPath : propertyImage = 'Presentation/Images/common/placeholders/no-image.png';
+
+        switch (result.Property.TypeId) {
+            case '308':
+                var parking = '';
+                $.each(result.Property.Parking, function (i, val) {
+                    parking += val.Name + ' ';
+                });
+                propertyDetails.push('<span>' + parking + '</span><br />');
+                break;
+            case '302':
+                if (typeof (result.Property.FarmType) != 'undefined') { propertyDetails.push('<span>' + result.Property.FarmType + '</span><br />') };
+                if (typeof (result.Land.SizeTotal) != 'undefined') { propertyDetails.push('<span>' + result.Land.SizeTotal + '</span><br />') };
+                if (typeof (result.Building.Bedrooms) != 'undefined') { propertyBedsBaths.push('<span>' + result.Building.Bedrooms + '</span><img src="Presentation/Images/common/icons/bed.png" alt="' + Message.Bedrooms + '" title=" ' + Message.Bedrooms + '"/>') };
+                if (typeof (result.Building.BathroomTotal) != 'undefined') { propertyBedsBaths.push('<span>' + result.Building.BathroomTotal + '</span><img src="Presentation/Images/common/icons/bath.png" alt="' + Message.Bathrooms + '" title="' + Message.Bathrooms + '"/>') };
+                break;
+            case '303':
+                if (typeof (result.Land.CurrentUse) != 'undefined') { propertyDetails.push('<span>' + result.Land.CurrentUse + '</span><br />') };
+                if (typeof (result.Land.SizeTotal) != 'undefined') { propertyDetails.push('<span>' + result.Land.SizeTotal + '</span><br />') };
+                break;
+            default:
+                if (typeof (result.Property.Type) != 'undefined') { propertyDetails.push('<span id="hm_lst_proptype' + (property_cell_count + 1) + '">' + result.Property.Type + '</span>') };
+                if (typeof (result.Building.Type) != 'undefined') { propertyDetails.push('<span>' + result.Building.Type + '</span>') };
+                if (typeof (result.Building.Bedrooms) != 'undefined') { propertyBedsBaths.push('<span id="hm_lst_bed_num' + (property_cell_count + 1) + '">' + result.Building.Bedrooms + '</span><img  id="hm_lst_bed_img' + (property_cell_count + 1) + '" src="Presentation/Images/common/icons/bed.png" alt="' + Message.Bedrooms + '" title=" ' + Message.Bedrooms + '"/>') };
+                if (typeof (result.Building.BathroomTotal) != 'undefined') { propertyBedsBaths.push('<span id="hm_lst_bath_num' + (property_cell_count + 1) + '">' + result.Building.BathroomTotal + '</span><img  id="hm_lst_bath_img' + (property_cell_count + 1) + '" src="Presentation/Images/common/icons/bath.png" alt="' + Message.Bathrooms + '" title="' + Message.Bathrooms + '"/>') };
+                break;
+        }
+
+        // Organization Designation
+        if (typeof (result.Individual[0].Organization.Designation) != 'undefined') { organizationDesignation = result.Individual[0].Organization.Designation };
+
+        (result.Property.Price) ? propertyPrice.push(result.Property.Price) : null;
+        (result.Property.LeaseRent) ? propertyPrice.push(result.Property.LeaseRent) : null;
+
+        var favState = $.inArray(result.Id + '_' + result.Property.Address.Latitude + '_' + result.Property.Address.Longitude, CookieHandler.getCookieValueAsArray(GlobalData.REALTOR_FAVORITES_COOKIE)) > -1 ? '_selected' : '_unselected';
+        var comState = $.inArray(result.Id, CookieHandler.getCookieValueAsArray(GlobalData.REALTOR_COMPARE_COOKIE)) > -1 ? '_selected' : '_unselected';
+
+        if (property_cell_count == 0) {
+            listings += '<div class="m_gallery_lst_row">';
+        }
+
+        listings += '<div class="m_gallery_lst_hme_cell">';
+
+        //listings += '   <div class="m_gallery_lst_cell_sec m_gallery_lst_hme_cell_first">';
+
+        if (result.AlternateURL && result.AlternateURL.DetailsLink) {
+            listings += '   <a href="' + result.AlternateURL.DetailsLink + '" onclick="TrackAltFeatureSheet(\'' + result.Id + '\'); return true;" target="_blank">';
+        } else {
+            listings += '   <a href="propertyDetails.aspx?PropertyId=' + result.Id + '">';
+        }
+
+        
+        
+        listings += '       <div class="m_gallery_lst_cell_hdr">';
+        listings += (result.OpenHouse ? '<span class="m_gallery_lst_cell_hdr_opnhouse">' + propertyResultsPanel.OpenHouse + '</span>' : '');
+        listings += '       </div>';
+        listings += '       <div class="m_gallery_lst_cell_sec">';
+        listings += '           <div class="m_gallery_lst_cell_img">';
+        listings += '               <img id="hm_lst_image' + (property_cell_count + 1) + '" src="' + propertyImage + '" alt="' + result.Property.Address.AddressText + '" />';
+        listings += '           </div>';
+        listings += '           <div id="hm_lst_address' + (property_cell_count + 1) + '"  class="m_gallery_lst_cell_address clickable">';
+        listings += result.Property.Address.AddressText.replace('|', '<br />');
+        listings += '           </div>';
+        listings += '           </div>';
+        listings += '       </a>';
+       // listings += '   </div>';
+        listings += '   <div class="m_gallery_lst_cell_sec m_gallery_lst_cell_sec_info">';
+        listings += '       <div class="m_gallery_lst_cell_row">';
+        listings += '           <div class="m_gallery_lst_cell_lft">';
+        listings += '               <div id="hm_lst_price' + (property_cell_count + 1) + '"  class="m_gallery_lst_cell_price">' + (result.Property.Price || result.Property.LeaseRent) + '</div>';
+        listings += '           </div>';
+        listings += '           <div class="m_gallery_lst_cell_rgt">';
+        listings += '               <div class="m_gallery_lst_cell_bed_bath">' + propertyBedsBaths.join('') + '</div>';
+        listings += '           </div>';
+        listings += '       </div>';
+        listings += '       <div class="m_gallery_lst_cell_row">';
+        listings += '           <div class="m_gallery_lst_cell_lft">';
+        listings += '               <div class="m_gallery_lst_cell_type">' + propertyDetails.join(' ') + '</div>';
+        listings += '           </div>';
+        listings += '       </div>';
+        listings += '       <div class="m_gallery_lst_cell_row">';
+        listings += '           <div class="m_gallery_lst_cell_lft">';
+        listings += '               <div id="hm_lst_MLSID' + (property_cell_count + 1) + '"  class="m_gallery_lst_cell_listing">' + propertyResultsPanel.ListingID + ' ' + result.MlsNumber + '</div>';
+        listings += '           </div>';
+        listings += '           <div class="m_gallery_lst_cell_rgt">';
+        listings += '               <div class="m_gallery_lst_cell_tools">';
+        listings += '                   <a href="#" id="hm_lst_comp' + (property_cell_count + 1) + '" onclick="AddToCompare(' + result.Id + ', this); return false;">' + getCompareImage(result.Id, comState) + '</a>';
+        listings += '                   <a href="#" id="hm_lst_fav' + (property_cell_count + 1) + '" onclick="AddToFavorites(' + result.Id + ',' + result.Property.Address.Latitude + ',' + result.Property.Address.Longitude + ', this); return false;"> ' + getFavouriteImage(result.Id, favState) + '</a>';
+        listings += '               </div>';
+        listings += '           </div>';
+        listings += '       </div>';
+        listings += '   </div>';
+        listings += '   <div class="m_gallery_lst_cell_ftr">';
+        listings += '       <span><a href=\'OfficeDetails.aspx?OrganizationId=' + result.Individual[0].Organization.OrganizationID + '\'>' + result.Individual[0].Organization.Name + '</a><br/>' + organizationDesignation + '</span>';
+        listings += '   </div>';
+
+        listings += '</div>';
+
+        
+
+        if (property_cell_count == 1) {
+            listings += '</div>';            
+        }
+
+        return listings;
+    }
+
+
+
+
+
+    function IsSearchCriteriaBlank() {
+
+        return $('#PriceMin').val() == "0" &&
+        $('#PriceMax').val() == "0" &&
+        $('#NumberofDays').val() == "0" &&
+        $('#BathRange').val() == "0-0" &&
+        $('#BedRange').val() == "0-0" &&
+        $('#home_search_input').val() == '';
+        
+    }
+
+    //Front end validation of basic search elements
+    function ValidateSearch() {
+
+        var errorMessage = '';       
+        
+        //Sale price range
+        if ($('#TransactionTypeID').val() == 2) {
+            if (parseInt($('#PriceMax').val()) < parseInt($('#PriceMin').val()) && parseInt($('#PriceMax').val()) != 0) {
+                errorMessage = Message.SalePriceRange;
+            }
+        }
+
+        //Rent price range
+        if ($('#TransactionTypeID').val() == 3) { 
+            if (parseInt($('#RentMax').val()) < parseInt($('#RentMin').val()) && parseInt($('#RentMax').val()) != 0) {
+                errorMessage = Message.RentPriceRange;
+            }
+        }
+
+        //Open house range 
+        if ($('#PropertyTypeID').val() === 'ohs' &&  $('#OpenHouseEndDate').val() != '') {
+            if ($('#OpenHouseStartDate').val() == '' && $('#OpenHouseEndDate').val() != '') {
+                //errorMessage = Message.InvalidDateRange;
+            }
+            else if ($('#OpenHouseStartDate').datepicker('getDate').getTime() > $('#OpenHouseEndDate').datepicker('getDate').getTime()) {
+                errorMessage = Message.InvalidDateRange;
+            }
+        }
+        
+        
+     
+        if (errorMessage != '') {        
+            showMessage(errorMessage);
+            return false;
+        }
+
+        return true;
+    }
+
+
+    function resetSearchFilters() {
+        $('#PropertyTypeID').prop('selectedIndex', 0).dropkick('setValue', $('#PropertyTypeID').val());
+        $('#TransactionTypeID').prop('selectedIndex', 0).dropkick('setValue', $('#TransactionTypeID').val());
+        $('#BedRange').prop('selectedIndex', 0).dropkick('setValue', $('#BedRange').val());
+        $('#BathRange').prop('selectedIndex', 0).dropkick('setValue', $('#BathRange').val());
+        $('#LandSizeRange').prop('selectedIndex', 0).dropkick('setValue', $('#LandSizeRange').val());
+        $('#FarmTypeID').prop('selectedIndex', 0).dropkick('setValue', $('#FarmTypeID').val());
+        $('#ParkingSpacesRange').prop('selectedIndex', 0).dropkick('setValue', $('#ParkingSpacesRange').val());
+        $('#PriceMin').prop('selectedIndex', 0).dropkick('setValue', $('#PriceMin').val());
+        $('#RentMin').prop('selectedIndex', 0).dropkick('setValue', $('#RentMin').val());
+        $('#PriceMax').prop('selectedIndex', 0).dropkick('setValue', $('#PriceMax').val());
+        $('#RentMax').prop('selectedIndex', 0).dropkick('setValue', $('#RentMax').val());
+        $('#CropTypeId').prop('selectedIndex', 0).dropkick('setValue', $('#CropTypeId').val());
+        $('#LiveStockTypeId').prop('selectedIndex', 0).dropkick('setValue', $('#LiveStockTypeId').val());
+        $('#BuildingTypeId').prop('selectedIndex', 0).dropkick('setValue', $('#BuildingTypeId').val());
+        $('#OwnershipTypeGroupId').prop('selectedIndex', 0).dropkick('setValue', $('#OwnershipTypeGroupId').val());
+        $('#StoreyRange').prop('selectedIndex', 0).dropkick('setValue', $('#StoreyRange').val());
+        $('#BedRangeOption').prop('selectedIndex', 0).dropkick('setValue', $('#BedRangeOption').val());
+        $('#BathRangeOption').prop('selectedIndex', 0).dropkick('setValue', $('#BathRangeOption').val());
+        $('#LandUseTypeId').prop('selectedIndex', 0).dropkick('setValue', $('#LandUseTypeId').val());
+        $('#ViewTypeGroupId').prop('selectedIndex', 0).dropkick('setValue', $('#ViewTypeGroupId').val());
+        $('#ParkingTypeId').prop('selectedIndex', 0).dropkick('setValue', $('#ParkingTypeId').val());
+        $('#home_search_input').val('');
+
+        $('#AirCondition, #Pool, #Fireplace, #Garage, #Waterfront, #Acreage, #OpenHouse').attr('checked', false);
+    }
+
+    function activatePager(totalRecords) {
+
+
+        var currentPage = Number(HashSearch.get('Page', 1));
+
+        // Pagination, cell and html variables        
+        totalPages = numPages(totalRecords, GlobalData.MAX_PRE_MLS_PER_PAGE);
+
+        if (currentPage <= totalPages) {
+
+            $("#numberOfPagedRecordsBottom").show();
+            // create the html for the pager
+            $("#numberOfPagedRecordsBottom").html(currentPage + ' of ' + totalPages);
+
+            // set buttons active or deactive for the apger
+            ControlSimplePagerState(totalPages, { Next: '#bottomNext', Previous: '#bottomPrevious' }, currentPage);
+
+            // show pager
+            $(".m_rslt_hdr, .m_rslt, .m_rslt_ftr, .m_pager").fadeIn();
+        } else {
+            $("#numberOfPagedRecordsBottom").hide();
+        }
+    }
+
+
+    function AddControlValToQuery(paramName, controlId) {
+        var returnVal = '';
+
+        if ($('#' + controlId).is(":visible") || $('#dk_label_' + controlId).is(":visible")) {
+            switch ($('#' + controlId).prop('type')) {
+
+                case "select-one":
+                    if ($('#' + controlId).val() != "0") {
+                        returnVal = "&" + paramName + "=" + $('#' + controlId).val();
+                    }
+                    break;
+                case "checkbox":
+                    if ($('#' + controlId).prop('checked')) {
+                        returnVal = "&" + paramName + "=" + $('#' + controlId).val();
+                    }
+                    break;
+
+                case "text":
+                    if ($('#' + controlId).hasClass('hasDatepicker') && !/[a-zA-Z]+/.test($('#' + controlId).val())) {
+                        try {
+                            var d = new Date();
+                            returnVal = "&" + paramName + "=" + Math.ceil((d.getTime() - $('#' + controlId).datepicker('getDate').getTime()) / ((1000 * 60 * 60 * 24)));
+                        } catch (ex) { }
+                    }
+                    break;
+
+            }
+        }
+
+        return returnVal;
+    }
+
+    function StartSearch() {      
+       
+
+        if (IsSearchCriteriaBlank()) {
+            redirectToDisclaimer('Map.aspx');
+        }
+
+        if (!ValidateSearch()) {      
+            return;
+        }
+
+        var areaSearch = new SubAreaSearch();
+        areaSearch.input = $('#home_search_input').val(); // INPUT TEXTBOX
+        areaSearch.searchType = 'FILTERS'; // BASIC || FILTERS
+
+        areaSearch.searchCriteriaCommon += 'CultureId=' + ApplicationSettings.CultureID;
+        areaSearch.searchCriteriaCommon += '&ApplicationId=' + ApplicationSettings.ApplicationId;
+
+        areaSearch.searchFilters += AddControlValToQuery('BedRange', 'BedRangeOption');
+        areaSearch.searchFilters += AddControlValToQuery('BathRange', 'BathRangeOption');
+        areaSearch.searchFilters += AddControlValToQuery('BuildingTypeId', 'BuildingTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('ViewTypeGroupId', 'ViewTypeGroupId');
+        areaSearch.searchFilters += AddControlValToQuery('OwnershipTypeGroupId', 'OwnershipTypeGroupId');
+        areaSearch.searchFilters += AddControlValToQuery('LiveStockTypeId', 'LiveStockTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('CropTypeId', 'CropTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('StoreyRange', 'StoreyRange');
+        areaSearch.searchFilters += AddControlValToQuery('FarmTypeId', 'FarmTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('LandUseTypeId', 'LandUseTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('ParkingTypeId', 'ParkingTypeId');
+        areaSearch.searchFilters += AddControlValToQuery('AirCondition', 'AirCondition');
+        areaSearch.searchFilters += AddControlValToQuery('Pool', 'Pool');
+        areaSearch.searchFilters += AddControlValToQuery('Fireplace', 'Fireplace');
+        areaSearch.searchFilters += AddControlValToQuery('Garage', 'Garage');
+        areaSearch.searchFilters += AddControlValToQuery('Waterfront', 'Waterfront');
+        areaSearch.searchFilters += AddControlValToQuery('Acreage', 'Acreage');
+        areaSearch.searchFilters += AddControlValToQuery('NumberofDays', 'NumberofDays'); 
+        
+        if ($('#OpenHouse').is(":checked") && $('#OpenHouse').is(":visible")) {
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if (dd < 10) { dd = '0' + dd }
+            if (mm < 10) { mm = '0' + mm }
+            today = mm + '/' + dd + '/' + yyyy;
+
+            areaSearch.searchFilters += "&OpenHouse=1";
+            areaSearch.searchFilters += "&OpenHouseStartDate=" + today;
+            //areaSearch.searchFilters += "&OpenHouseEndDate=" + today;
+        }
+
+
+
+        switch ($('#PropertyTypeID').val()) {
+            case '300': case '301': case 'con': case 'ohs': //RESIDENTIAL, RECREATIONAL
+                if ($('#PropertyTypeID').val() === '300' || $('#PropertyTypeID').val() === '301') { areaSearch.searchFilters += '&PropertyTypeId=' + $('#PropertyTypeID').val(); }
+                if ($('#PropertyTypeID').val() === 'con') { areaSearch.searchFilters += '&OwnershipTypeGroupId=2' }                
+                areaSearch.searchFilters += '&TransactionTypeId=' + $('#TransactionTypeID').val();
+
+                switch ($('#TransactionTypeID').val()) {
+                    case '1': //FOR SALE & RENT
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                    case '2': //FOR SALE
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        break;
+                    case '3': //FOR RENT
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                }
+
+                if ($('#PropertyTypeID').val() === '300' || $('#PropertyTypeID').val() === '301' || $('#PropertyTypeID').val() === 'con') {
+                    areaSearch.searchFilters += '&BedRange=' + $('#BedRange').val();
+                    areaSearch.searchFilters += '&BathRange=' + $('#BathRange').val();
+                }                
+
+                break;
+            case '302': case '303': //AGRICULTURE, VACANT LAND
+                areaSearch.searchFilters += '&PropertyTypeId=' + $('#PropertyTypeID').val();
+                areaSearch.searchFilters += '&TransactionTypeId=' + $('#TransactionTypeID').val();
+
+                switch ($('#TransactionTypeID').val()) {
+                    case '1': //FOR SALE & RENT
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                    case '2': //FOR SALE
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        break;
+                    case '3': //FOR RENT
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                }
+
+                areaSearch.searchFilters += '&LandSizeRange=' + $('#LandSizeRange').val();
+
+                if ($('#PropertyTypeID').val() === '302') { areaSearch.searchFilters += '&FarmTypeId=' + $('#FarmTypeID').val(); }
+                
+
+                break;
+            case '308': //PARKING
+                areaSearch.searchFilters += '&PropertyTypeId=' + $('#PropertyTypeID').val();
+                areaSearch.searchFilters += '&TransactionTypeId=' + $('#TransactionTypeID').val();
+
+                switch ($('#TransactionTypeID').val()) {
+                    case '1': //FOR SALE & RENT
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                    case '2': //FOR SALE
+                        areaSearch.searchFilters += '&PriceMin=' + $('#PriceMin').val();
+                        areaSearch.searchFilters += '&PriceMax=' + $('#PriceMax').val();
+                        break;
+                    case '3': //FOR RENT
+                        areaSearch.searchFilters += '&RentMin=' + $('#RentMin').val();
+                        areaSearch.searchFilters += '&RentMax=' + $('#RentMax').val();
+                        break;
+                }
+
+                areaSearch.searchFilters += '&ParkingSpacesRange=' + $('#ParkingSpacesRange').val();
+                areaSearch.searchFilters += AddControlValToQuery('ParkingTypeId', 'ParkingTypeId');
+
+                break;
+        }
+
+
+        if (areaSearch.input != '') {
+            areaSearch.searchCriteria += '&Area=' + encodeURIComponent(areaSearch.input);
+            areaSearch.Search();
+
+            $('#home_search_input').focus();
+        } else {
+            if (areaSearch.searchFilters.substring(0, 1) == '&')
+                areaSearch.searchFilters = areaSearch.searchFilters.substring(1);
+            redirectToDisclaimer("Map.aspx#" + areaSearch.searchFilters);
+        }
+
+
+
+     
+    }
+
+
+    (function showRecentlyViewed() {
+
+        var cookieValueArray = new Array();
+        var recentlyViewedArray = new Array();
+        var counter = 0;
+        var cookieValue = null;
+
+        // populate the array for recently viewed properties (recentlyViewedArray), with the correct number of properties viewed
+        getMaxPre_MLS_Listing();
+
+        // if there was at least one previously viewed property, then show it on the page
+        if (recentlyViewedArray[0]) {
+            CreateRecentlyViewedListings(recentlyViewedArray);
+        }
+
+        // this function gets the values for each listing_id from the serverf and creates the recently viewed property list
+        function CreateRecentlyViewedListings(mlsArray) {
+            for (var i = 0; i < mlsArray.length; i++) {
+                // alert(mlsArray[i]);
+            }
+            // alert('All recently viewed properies created 4');
+        }
+
+        // gets the max number of MLS allowed from the recently viewed cookie
+        function getMaxPre_MLS_Listing() {
+            cookieValue = CookieHandler.getCookieValueAsArray("recentlyViewedMls")
+
+            // there is no mls number in the cookie, then exit
+            if (!cookieValue) {
+                return;
+            }
+
+            // populate the recentlyview cookie with at least maximum previously viewed cookies
+            for (var i = cookieValue.length - 2; i >= 0; i--) {
+                if (counter >= GlobalData.MAX_PRE_MLS) {
+                    break;
+                }
+                recentlyViewedArray.push(cookieValue[i]);
+                counter++;
+            }
+        }
+
+    } ());
+
+    $("#OpenHouseStartDate, #OpenHouseEndDate").datepicker(
+        {
+            showOn: "button",
+            showButtonPanel: true,
+            numberOfMonths: 2,
+            minDate: 0,
+            buttonImage: "Presentation/Images/common/icons/dropkick_arrow_black_dwn.png",
+            buttonImageOnly: true,
+            dateFormat: "mm/dd/yy",
+            beforeShow: function (input, inst) {
+                $(this).parent().children('input').css('background', '#ffffff');
+                $(this).parent().children('input').css('border-top', '1px solid #908d99');
+                $(this).parent().children('input').css('border-right', '1px solid #908d99');
+                $(this).parent().children('input').css('border-bottom', 'none');
+                $(this).parent().children('input').css('border-left', '1px solid #908d99');
+                $(this).parent().children('.ui-datepicker-trigger').attr('src', 'Presentation/Images/common/icons/calendar_close.png');
+                setTimeout(function() 
+                {
+                    var buttonPane = $( input ).datepicker( "widget" ).find( ".ui-datepicker-buttonpane" );
+                    $( "<button>", 
+                        { text: 'Clear Date', click: function() {
+                            $.datepicker._clearDate( input );
+                        }
+                    }).appendTo( buttonPane );
+                }, 1 );
+            },
+            onClose: function (dateText, inst) {
+                $(this).parent().children('input').css('background', '#f1f1eb');
+                $(this).parent().children('input').css('border', '1px solid #dfdfd9');
+                $(this).parent().children('.ui-datepicker-trigger').attr('src', 'Presentation/Images/common/icons/dropkick_arrow_black_dwn.png');
+            }
+        },
+        $.datepicker.regional["en-CA"]
+    );
+
+    // Init custom selects
+    $('.m_dropkick_select_property_type').dropkick({ 
+        theme: 'crea_hme_filter',
+        change: function (value, label) {            
+            build_filter_section(value);
+        }         
+    });
+
+    $('#PriceMin').dropkick({
+        theme: 'crea_hme_filter',
+        change: function (value, label) {
+            MinPriceFilterChange();
+        }
+    });
+
+    $('#PriceMax').dropkick({
+        theme: 'crea_hme_filter',
+        change: function (value, label) {
+            MaxPriceFilterChange();
+        }
+    });
+
+    $('#RentMin').dropkick({
+        theme: 'crea_hme_filter',
+        change: function (value, label) {
+            MinRentFilterChange();
+        }
+    });
+
+    $('#RentMax').dropkick({
+        theme: 'crea_hme_filter',
+        change: function (value, label) {
+            MaxRentFilterChange();
+        }
+    });
+
+    $('.m_dropkick_select_property_filter').dropkick({ 
+        theme: 'crea_hme_filter'       
+    });
+    
+
+    $('#StoreyRange, #OwnershipTypeGroupId, #ViewTypeGroupId, #BuildingTypeId, #CropTypeId, #LiveStockTypeId, #BathRangeOption, #BedRangeOption, #LandUseTypeId, #ViewTypeGroupId, #ParkingTypeId').dropkick({
+        theme: 'crea_hme_filter'
+    });
+   
+
+
+    var MaxPriceFilterChange = function () {
+
+        var maxVal = $("#PriceMax option:selected").val();
+
+        $('#dk_container_PriceMin ul.dk_options_inner li a').each(function (index, item) {
+            var entry = $(item);
+            if (Number(entry.attr('data-dk-dropdown-value')) > maxVal && maxVal != 0) {
+                entry.parent().hide();
+            } else {
+                entry.parent().show();
+            }           
+        });
+    }
+
+    var MinPriceFilterChange = function () {
+        
+        var minVal = $("#PriceMin option:selected").val();
+
+        $('#dk_container_PriceMax ul.dk_options_inner li a').each(function (index, item) {
+            var entry = $(item);
+            if (Number(entry.attr('data-dk-dropdown-value')) < minVal && Number(entry.attr('data-dk-dropdown-value')) != 0){
+                entry.parent().hide();
+            } else {
+                entry.parent().show();
+            }           
+        });
+    }
+
+    var MaxRentFilterChange = function () {
+
+        var maxVal = $("#RentMax option:selected").val();
+
+        $('#dk_container_RentMin ul.dk_options_inner li a').each(function (index, item) {
+            var entry = $(item);
+            if (Number(entry.attr('data-dk-dropdown-value')) > maxVal && maxVal != 0) {
+                entry.parent().hide();
+            } else {
+                entry.parent().show();
+            }
+        });
+    }
+
+    var MinRentFilterChange = function () {
+
+        var minVal = $("#RentMin option:selected").val();
+
+        $('#dk_container_RentMax ul.dk_options_inner li a').each(function (index, item) {
+            var entry = $(item);
+            if (Number(entry.attr('data-dk-dropdown-value')) < minVal && Number(entry.attr('data-dk-dropdown-value')) != 0) {
+                entry.parent().hide();
+            } else {
+                entry.parent().show();
+            }
+        });
+    }
+
+    // Listing Type Select Change
+    $('.m_dropkick_select_listing_type').dropkick({ 
+        theme: 'crea_hme_filter',
+        change: function (value, label) {
+           build_filter_section( $("#PropertyTypeID").val() );
+        }         
+    });
+
+    // Init filter section
+    build_filter_section($("#PropertyTypeID").val());
+
+    buildMyLastSearches();
+    
+
+    //Yourube videos
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var players = [];
+    var playerIds = [];
+    var youtubeAPIReady = false;
+    var player;
+
+    function VideoNeedsToBeLoaded(id) {
+
+        //if ($('#' + id).is(':visible')) {
+            for (var index = 0; index < players.length; index++) {
+                if (players[index].getVideoData().video_id == id) {
+                    return false;
+                }
+            }
+            return true;
+        //}
+        //return false;
+    }
+
+
+    function onYouTubeIframeAPIReady() {
+        youtubeAPIReady = true;     
+    }
+
+    //The YouTube IFrame API will call this function when a video player is ready.
+    function onPlayerReady(video) {
+
+        players.push(video.target);
+
+        if (!ApplicationSettings.IsMobile) {
+            //video.target.playVideo();
+        }
+                
+          
+    }
+
+    function onPlayerStateChange(event) {
+
+        if (event.data == YT.PlayerState.PLAYING && event.target.gatracked != true) {
+            event.target.gatracked = true;
+            if (event.target.a.id == 'LIuWU1L_oh4') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Make sure you\'re ready to buy Video']);
+            } else if (event.target.a.id == '1YjXVxv4A6w') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Decide what you want to buy Video']);
+            } else if (event.target.a.id == 'MrgpiV1cvPw') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Figure out how much you can afford Video']);
+            } else if (event.target.a.id == 'hJIyHUT4TBo') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Determine your home\'s asking price Video']);
+            } else if (event.target.a.id == 'vjdwzi_Xdkg') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Find a REALTOR® who is right for you Video']);
+            } else if (event.target.a.id == 'O-3kgC5jYEM') {
+                _gaq.push(['_trackEvent', 'Home Page', 'Decide when to sell Video']);
+            }
+        }
+    }
+
+    function stopVideos() {
+
+        if (ApplicationSettings.IsMobile) {
+            return;
+        }
+        if (players) {
+            for (var index = 0; index < players.length; index++) {
+                players[index].stopVideo();
+            }
+        }
+    }
+
+    function PlayVideo(step) {
+        if (!ApplicationSettings.IsMobile) {
+            var sectionNum = step.split('_')[0];
+            var videoId = $('#m_buysellguide_header_' + sectionNum).next('iframe').attr('id');
+
+            for (var index = 0; index < players.length; index++) {
+                if (videoId == players[index].getVideoData().video_id) {
+                    players[index].seekTo(0, true);
+                    players[index].playVideo();
+
+                } else {
+                    players[index].stopVideo();
+                }
+            }
+        }
+    }
+
+
+
+
+
+    //var map = new Microsoft.Maps.Map(document.getElementById('m_hme_map_nearme'), { credentials: ApplicationSettings.BingMapKey, zoom: parseInt(zoom), center: center, showScalebar: false, mapTypeId: Microsoft.Maps.MapTypeId.road, showMapTypeSelector: false, showDashboard: false, enableClickableLogo: false, showCopyright: false, enableSearchLogo: false });
+    //map.blur();
+
+    function build_filter_section( property )
+    {
+        // Hide all element filters
+        $(".m_hme_fltr_between").hide();
+        $(".m_hme_fltr_listed_since").hide();
+        $(".m_hme_fltr_listed_since").hide();
+        $(".m_hme_fltr_openhouse").hide();        
+        $(".m_hme_fltr_with1").hide();
+        $(".m_hme_fltr_min_sale").hide();
+        $(".m_hme_fltr_min_rent").hide();
+        $(".m_hme_fltr_amp1").hide();
+        $(".m_hme_fltr_max_sale").hide();
+        $(".m_hme_fltr_max_rent").hide();
+        $(".m_hme_fltr_with2").hide();
+        $(".m_hme_fltr_in_the_range_of").hide();
+        $(".m_hme_fltr_acres").hide();
+        $(".m_hme_fltr_from1").hide();
+        $(".m_hme_fltr_beds").hide();
+        $(".m_hme_fltr_beds_amp").hide();
+        $(".m_hme_fltr_baths").hide();
+        $(".m_hme_fltr_baths_from").hide();
+        $(".m_hme_fltr_acres_for").hide();
+        $(".m_hme_fltr_farm_type").hide();
+        $(".m_hme_fltr_parking_spaces").hide();
+        $(".m_hme_fltr_parking_spaces_from").hide();
+        $(".m_hme_fltr_acres_from").hide();
+        $(".m_hme_fltr_date_from").hide();
+        $(".m_hme_fltr_to1").hide();
+        $(".m_hme_fltr_date_to").hide();
+        $(".m_hme_fltr_listed_since").hide();
+        $(".m_hme_fltr_listed_since2").hide();
+        $(".m_hme_fltr_dates").hide();
+        $(".m_hme_fltr_airconditioning").hide();
+        $(".m_hme_fltr_pool").hide();
+        $(".m_hme_fltr_fireplace").hide();
+        $(".m_hme_fltr_garage").hide();
+        $(".m_hme_fltr_waterfront").hide();
+        $(".m_hme_fltr_acreage").hide();
+
+        $(".m_hme_fltr_crop_type").hide();
+        $(".m_hme_fltr_livestock_type").hide();
+        $(".m_hme_fltr_ownership_type").hide();
+        $(".m_hme_fltr_story_range").hide();
+        $(".m_hme_fltr_building_type").hide();
+        $(".m_hme_fltr_bathrange").hide();
+        $(".m_hme_fltr_bedrange").hide();
+        $(".m_hme_fltr_landuse").hide();
+        $(".m_hme_fltr_view_type").hide();
+        $(".m_hme_fltr_parking_type").hide();
+
+
+        if( property === "300" )
+        {            
+            $(".m_hme_fltr_openhouse").show();
+            $(".m_hme_fltr_with2").show();
+            $(".m_hme_fltr_beds").show();
+            $(".m_hme_fltr_beds_amp").show();
+            $(".m_hme_fltr_baths").show();
+            $(".m_hme_fltr_baths_from").show();
+            $(".m_hme_fltr_listed_since").show();
+            $(".m_hme_fltr_dates").show();
+
+            $(".m_hme_fltr_building_type").show();
+            $(".m_hme_fltr_ownership_type").show();
+            $(".m_hme_fltr_view_type").show();
+            $(".m_hme_fltr_story_range").show();
+            $(".m_hme_fltr_airconditioning").show();
+            $(".m_hme_fltr_pool").show();
+            $(".m_hme_fltr_fireplace").show();
+            $(".m_hme_fltr_garage").show();
+            $(".m_hme_fltr_waterfront").show();
+            $(".m_hme_fltr_acreage").show();
+        }
+
+        if( property === "301" )
+        {
+            $(".m_hme_fltr_openhouse").show();
+            $(".m_hme_fltr_with2").show();
+            $(".m_hme_fltr_beds").show();
+            $(".m_hme_fltr_beds_amp").show();
+            $(".m_hme_fltr_baths").show();
+            $(".m_hme_fltr_baths_from").show();
+            $(".m_hme_fltr_listed_since").show();
+            $(".m_hme_fltr_dates").show();
+
+            $(".m_hme_fltr_building_type").show();
+            $(".m_hme_fltr_ownership_type").show();
+            $(".m_hme_fltr_view_type").show();
+            $(".m_hme_fltr_story_range").show();
+            $(".m_hme_fltr_airconditioning").show();
+            $(".m_hme_fltr_pool").show();
+            $(".m_hme_fltr_fireplace").show();
+            $(".m_hme_fltr_garage").show();
+            $(".m_hme_fltr_waterfront").show();
+            $(".m_hme_fltr_acreage").show();
+        }
+
+        if( property === "con" )
+        {
+            $(".m_hme_fltr_openhouse").show();
+            $(".m_hme_fltr_with2").show();
+            $(".m_hme_fltr_beds").show();
+            $(".m_hme_fltr_beds_amp").show();
+            $(".m_hme_fltr_baths").show();
+            $(".m_hme_fltr_baths_from").show();
+            $(".m_hme_fltr_listed_since").show();
+            $(".m_hme_fltr_dates").show();
+
+            $(".m_hme_fltr_building_type").show();
+            //$(".m_hme_fltr_ownership_type").show();
+            $(".m_hme_fltr_view_type").show();
+            $(".m_hme_fltr_story_range").show();
+            $(".m_hme_fltr_airconditioning").show();
+            $(".m_hme_fltr_pool").show();
+            $(".m_hme_fltr_fireplace").show();
+            $(".m_hme_fltr_garage").show();
+            $(".m_hme_fltr_waterfront").show();
+            $(".m_hme_fltr_acreage").show();
+
+        }
+
+        if( property === "302" )
+        {
+            $(".m_hme_fltr_in_the_range_of").show();
+            $(".m_hme_fltr_acres").show();
+            $(".m_hme_fltr_acres_for").show();
+            $(".m_hme_fltr_farm_type").show();
+            $(".m_hme_fltr_listed_since").show();
+
+            $(".m_hme_fltr_crop_type").show();
+            $(".m_hme_fltr_livestock_type").show();
+            $(".m_hme_fltr_building_type").show();
+            $(".m_hme_fltr_bathrange").show();
+            $(".m_hme_fltr_bedrange").show();
+            $(".m_hme_fltr_view_type").show();
+            $(".m_hme_fltr_airconditioning").show();
+            $(".m_hme_fltr_pool").show();
+            $(".m_hme_fltr_fireplace").show();
+            $(".m_hme_fltr_garage").show();
+            $(".m_hme_fltr_waterfront").show();
+            //$(".m_hme_fltr_acreage").show();
+        }
+        
+
+        if( property === "308" )
+        {
+            $(".m_hme_fltr_with2").show();
+            $(".m_hme_fltr_parking_spaces").show();
+            $(".m_hme_fltr_parking_spaces_from").show();
+            $(".m_hme_fltr_listed_since").show();
+            $(".m_hme_fltr_dates").show();
+            $(".m_hme_fltr_parking_type").show();
+        }
+
+        if( property === "303" )
+        {
+            $(".m_hme_fltr_in_the_range_of").show();
+            $(".m_hme_fltr_acres").show();
+            $(".m_hme_fltr_acres_from").show();
+            $(".m_hme_fltr_listed_since").show();
+            $(".m_hme_fltr_dates").show();
+            $(".m_hme_fltr_landuse").show();
+            $(".m_hme_fltr_view_type").show();
+            $(".m_hme_fltr_waterfront").show();
+        }
+
+        if( property === "ohs" )
+        {
+            $(".m_hme_fltr_from1").show();
+            $(".m_hme_fltr_date_from").show();
+            $(".m_hme_fltr_to1").show();
+            $(".m_hme_fltr_date_to").show();
+            $(".m_hme_fltr_listed_since2").show();
+            $(".m_hme_fltr_dates").show();
+        }
+
+        var listing_type = $("#TransactionTypeID").val();
+        // FOR SALE OR RENT
+        if (listing_type === "1") {
+            $(".m_hme_fltr_between").hide();
+            $(".m_hme_fltr_amp1").hide();
+            $('.m_hme_fltr_min_sale').hide();
+            $('.m_hme_fltr_max_sale').hide();
+            $('.m_hme_fltr_min_rent').hide();
+            $('.m_hme_fltr_max_rent').hide();
+        }
+
+        // FOR SALE
+        if (listing_type === "2") {
+            $('.m_hme_fltr_min_sale').show();
+            $('.m_hme_fltr_max_sale').show();
+            $(".m_hme_fltr_between").show();
+            $(".m_hme_fltr_amp1").show();
+        }
+
+        // FOR RENT
+        if (listing_type === "3") {
+            $(".m_hme_fltr_between").show();
+            $(".m_hme_fltr_amp1").show();
+            $('.m_hme_fltr_min_rent').show();
+            $('.m_hme_fltr_max_rent').show();
+        }
+    }
+
+</script>
+
+
+
+            </div>
+
+            <!-- FOOTER -->    
+            
+
+<div class="l_ftr">
+
+    <div id="pnlFooterLinks" class="noPrint">
+	
+    <div class="l_ftr_home noPrint">
+        <a id="m_ftr_home" href="/Index.aspx"><img src="/Presentation/Images/common/icons/home.png" alt="Home" title="Home"></a>
+    </div>
+
+    <div class="l_ftr_site noPrint">
+
+        <ul class="m_ftr_site">
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Old REALTOR.ca']);"><a id="OldRealtor" href="http://www.realtor.ca/splash.aspx?opt=1" target="_blank">Old REALTOR.ca</a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Mobile']);"><a href="/Mobile.aspx" id="ftr_mobile"><span>Mobile</span></a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Contact Us']);"><a href="/ContactUs.aspx" id="ftr_contact"><span id="Label2">Contact Us</span></a></li>
+
+        </ul>
+    
+        <ul class="m_ftr_site">
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'International Properties']);"><a id="ftr_international" href="http://www.WorldProperties.com" target="_blank">International Properties</a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Commercial Properties']);"><a id="ftr_commercial" href="http://www.icx.ca/index.aspx?cul=1" target="blank">Commercial Properties</a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Sellers info']);"><a href="/SellerInformation.aspx" id="ftr_sellers"><span id="Label1">Sellers Information</span></a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Buyers info']);"><a href="/BuyerInformation.aspx" id="ftr_buyers"><span id="Label5">Buyers Information</span></a></li>        
+        </ul>
+        
+        <ul class="m_ftr_site">
+            <!-- <li onClick="_gaq.push(['_trackEvent', 'Bottom Menu', 'How REALTORS Help']);"><a id="Hyperlink2" href="http://www.howrealtorshelp.ca" target="_blank">How REALTORS® Help</a></li>-->
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'REALTORS Care']);"><a id="ftr_realtor_care" href="http://www.realtorscare.ca" target="_blank">REALTORS® Care </a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'REALTORS Code of Ethics']);"><a href="/RealtorCodeOfEthics.aspx" id="ftr_realtor_code"><span id="Label4">REALTOR® Code of Ethics</span></a></li>
+        </ul>
+        
+        <ul class="m_ftr_site">
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'News']);"><a id="ftr_news" href="http://crea.ca/news" target="_blank">News</a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Legal']);"><a href="/Legal.aspx" id="ftr_legal"><span>Legal</span></a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Privacy Policy']);"><a href="/PrivacyPolicy.aspx" id="ftr_privacy"><span>Privacy Policy</span></a></li>
+        </ul> 
+   
+    </div>
+    
+</div>
+    
+    <div class="l_ftr_legal noPrint">
+    
+        <div class="m_ftr_legal_logo" id="ftr_home">
+            <img src="presentation/images/en-CA/logos/realtor.png" title="REALTOR®" alt="REALTOR®">
+        </div>
+        <div class="m_ftr_legal_text">
+            <p>
+                 <span id="lblFooter">©1998-2014 The Canadian Real Estate Association. All rights reserved. MLS®, Multiple Listing Service®, and all related graphics are trademarks of The Canadian Real Estate Association. REALTOR®, REALTORS®, and all related graphics&nbsp;are trademarks&nbsp;of REALTOR® Canada Inc. a corporation owned by&nbsp;The Canadian Real Estate Association and the National Association of REALTORS®. Site hosted by <a href="http://primus.ca/business" target="_new" id="PrimusLink">Primus Business Services</a></span>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- EMAIL REALTOR FORM-->
+<div id="email_realtor_form" class="d_base" style="display:none;">
+    <div class="d_loading" style="display:none;">
+        <img src="Presentation/Images/common/icons/loading.gif" alt="Loading"><span id="Label1">Loading</span>
+    </div>
+</div>
+
+
+<!-- EMAIL COMPARE FORM-->
+<div id="email_compare_form" class="d_base" style="display:none;">
+    <div class="d_loading" style="display:none;">
+        <img src="Presentation/Images/common/icons/loading.gif" id="Image1" alt="Loading"><span id="Label1">Loading</span>
+    </div>
+</div>
+
+<!-- EMAIL Friend FORM-->
+<div id="email_friend_form" class="d_base" style="display:none;">
+    <div class="d_loading" style="display:none;">
+        <img src="Presentation/Images/common/icons/loading.gif" id="Image1" alt="Loading"><span id="Label1">Loading</span>
+    </div>
+</div>
+
+<!-- EMAIL Friend FORM-->
+<div id="email_friend_listings_form" class="d_base" style="display:none;">
+    <div class="d_loading" style="display:none;">
+        <img src="Presentation/Images/common/icons/loading.gif" id="Image1" alt="Loading"><span id="Label1">Loading</span>
+    </div>
+</div>
+
+<!-- EMAIL COMPARE FORM-->
+<div id="email_contactus_form" class="d_base" style="display:none;">
+    <div class="d_loading" style="display:none;">
+        <img src="Presentation/Images/common/icons/loading.gif" id="Image1" alt="Loading"><span id="Label1">Loading</span>
+    </div>
+</div>
+   
+            <!-- FEEDBACK -->  
+            <div style="display: none;" onclick="_gaq.push(['_trackEvent', 'Feedback', 'Send Feedback clicked']);" id="ftr_feedback" class="b_base b_low b_fit b_feedback noPrint"><a href="#" onclick="return false;">Send Feedback</a></div>            
+
+            <!-- ANALYTICS -->
+            
+
+<!-- Comscrore Tracking script-->
+
+<!-- Begin comScore Tag -->
+<script>
+    var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "6035098" });
+    (function () {
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+    })();
+</script>
+<noscript>
+  &lt;img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=6035098&amp;cv=2.0&amp;cj=1" /&gt;
+</noscript>
+<!-- End comScore Tag -->
+            <script type="text/javascript">
+jQuery.support.cors = true;
+$.ajaxSetup({ cache: false });
+function logAnalytics(listingId,eventType) {
+if (listingId!=''){
+var url = 'http://analytics.crea.ca/LogEvents.svc/LogEvents?&DestinationID=384&UUID=d592a243-0e96-453a-badd-27886382cd48&IP=142.167.151.203';
+url += '&Listingid=' + listingId;
+url += '&EventType=' + eventType;
+ var req = $.ajax({url:url,crossDomain:true,dataType:'jsonp',type:'get',timeout:5000});
+ req.error(function() {var xhr=req;if(xhr && xhr.readystate != 4){xhr.abort();}});
+}}
+</script>
+
+
+            <!-- Welcome Screen -->
+                    
+            
+
+            
+        </form><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+        
+
+    
+
+
+
+</body></html>

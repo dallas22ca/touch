@@ -1,3 +1,54 @@
-// Place all the styles related to the documents controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#documents_wrapper {
+	#new_document {
+		display: none;
+	}
+	
+	table {
+		width: 100%;
+		margin-top: 20px;
+		border: 1px solid #333;
+		
+		th {
+			font-size: 11px;
+			line-height: 11px;
+			text-transform: uppercase;
+			background: #333;
+			color: #aaa;
+			text-align: left;
+			padding: 7px;
+		}
+
+		.document {
+			background: #fff;
+			font-size: 14px;
+			line-height: 14px;
+			
+			&:nth-child(even) {
+				background: #fafafa;
+			}
+			
+			&:hover {
+				background: #eee;
+			}
+			
+			.name {
+				width: 75%;
+			}
+		
+			.created_at {
+				width: 25%;
+				border-left: 1px solid #eee;
+			}
+			
+			a {
+				display: block;
+				padding: 7px;
+			}
+		
+			.delete {
+				visibility: hidden;
+				color: maroon;
+			}
+		}
+	}
+}

@@ -1,4 +1,9 @@
-<%= content_tag_for :li, document do %>
-	<%= link_to document.file.url, document.file.url %>
-	<%= link_to "x", folder_document_path(document.folder.organization.permalink, document.folder, document), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this document?" } %>
+<%= content_tag_for :tr, document do %>
+	<td class="name">
+		<%= link_to document.file_file_name, folder_document_download_path(document.folder.organization.permalink, document.folder, document), target: :blank %>
+	</td>
+	<td class="created_at"><%= link_to document.created_at.strftime("%b %-d"), folder_document_download_path(document.folder.organization.permalink, document.folder, document), target: :blank %></td>
+	<td>
+		<%= link_to "x", folder_document_path(document.folder.organization.permalink, document.folder, document), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this document?" }, class: "delete" %>
+	</td>
 <% end %>

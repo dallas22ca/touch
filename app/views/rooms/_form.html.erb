@@ -13,7 +13,7 @@
 			<%= link_to "Close", "#", class: "close_lightbox" %>
 			
 			<% if @room.persisted? %>
-				<%= link_to "Delete", room_path(@org.permalink, @room), method: :delete, data: { confirm: "Are you sure you want to delete this meeting?" } %>
+				<%= link_to "Delete", room_path(@org.permalink, @room), method: :delete, data: { confirm: "Are you sure you want to delete this room?" } %>
 			<% end %>
 	  </div>
 	<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512163306) do
+ActiveRecord::Schema.define(version: 20140513170842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,28 @@ ActiveRecord::Schema.define(version: 20140512163306) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
+    t.integer  "creator_id"
   end
 
+  add_index "folders", ["creator_id"], name: "index_folders_on_creator_id", using: :btree
   add_index "folders", ["organization_id"], name: "index_folders_on_organization_id", using: :btree
+
+  create_table "homes", force: true do |t|
+    t.string   "address"
+    t.string   "city"
+    t.string   "province"
+    t.string   "postal_code"
+    t.string   "beds"
+    t.string   "baths"
+    t.text     "data",        default: "{}"
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
+  add_index "homes", ["folder_id"], name: "index_homes_on_folder_id", using: :btree
 
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
@@ -88,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140512163306) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "website"
   end
 
   create_table "rooms", force: true do |t|
@@ -140,6 +160,8 @@ ActiveRecord::Schema.define(version: 20140512163306) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "phone"
+    t.string   "website"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

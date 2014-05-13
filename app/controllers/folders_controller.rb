@@ -26,6 +26,7 @@ class FoldersController < ApplicationController
   # POST /folders.json
   def create
     @folder = @org.folders.new(folder_params)
+    @folder.creator = current_user
 
     respond_to do |format|
       if @folder.save
@@ -70,6 +71,6 @@ class FoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      params.require(:folder).permit(:name, :archive)
+      params.require(:folder).permit(:name, :archived)
     end
 end

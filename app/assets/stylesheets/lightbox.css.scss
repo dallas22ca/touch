@@ -39,6 +39,7 @@ body {
 	
 	.close_button {
 		float: right;
+		margin-left: -50px;
 		padding: 13px 20px;
 		font-weight: bold;
 		color: #777;
@@ -68,6 +69,14 @@ body {
 		
 		.field {
 			margin: 20px 0;
+		}
+		
+		.actions {
+			a {
+				color: #777;
+				font-size: 13px;
+				margin-left: 20px;
+			}
 		}
 	}
 }

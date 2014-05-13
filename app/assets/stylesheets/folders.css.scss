@@ -1,3 +1,117 @@
-// Place all the styles related to the folders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.panel {
+	background: #eee;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 20px;
+	font-size: 16px;
+	line-height: 24px;
+	
+	&.notepad {
+		background-image: url(/imgs/note.jpg);
+	}
+	
+	&.right {
+		width: 34%;
+	}
+	
+	&.left {
+		width: 63%;
+	}
+	
+	&.top_space {
+		margin-top: 3%;
+	}
+	
+	&.notttttt_surround {
+		padding: 0px;
+		border: 0;
+		background: none;
+	}
+	
+	h3 {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 10px;
+	}
+}
+
+.folders_show {
+	#yield .header {
+		margin-bottom: 20px;
+
+		.brokerage_logo {
+			float: right;
+			max-width: 180px;
+			max-height: 125px;
+		}
+		
+		.user_avatar {
+			float: left;
+			width: 120px;
+		}
+		
+		.profile {
+			float: left;
+			margin-left: 20px;
+			margin-top: 10px;
+			
+			.user_name {
+				font-weight: bold;
+				font-size: 21px;
+				line-height: 32px;
+			}
+		}
+	}
+	
+	.folder_meta {
+		margin: 20px 0;
+		
+		h2 {
+			font-weight: bold;
+			font-size: 34px;
+			line-height: 40px;
+			
+			a {
+				font-weight: normal;
+				font-size: 12px;
+				color: #aaa;
+			}
+		}
+		
+		h3 {
+			float: right;
+			font-size: 12px;
+			line-height: 18px;
+			color: #aaa;
+			font-style: oblique;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.brokerage_logo {
+		display: none;
+	}
+	
+	.folder_meta h3 {
+		display: none;
+	}
+	
+	.panel {
+		margin-bottom: 20px;
+		width: 100% !important;
+		
+		&.left {
+			float: none;
+		}
+		
+		&.right {
+			float: none;
+		}
+		
+		&.top_space {
+			margin-top: 0;
+		}
+	}
+}

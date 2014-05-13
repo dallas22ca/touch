@@ -1,3 +1,8 @@
+$(document).on "click", ".show_completed_tasks", ->
+	$(this).text if $(this).text() == "Show Completed Tasks" then "Hide Completed Tasks" else "Show Completed Tasks"
+	$("#completed_tasks").slideToggle 150
+	false
+
 $(document).on "paste", ".task p[contenteditable]", (e) ->
 	content = (e.originalEvent || e).clipboardData.getData("text/plain") || prompt("Paste something...")
 	pasteHtmlAtCaret content
@@ -31,23 +36,32 @@ $(document).on "click", ".task input[type='checkbox']", ->
 		task:
 			complete: $(this).is(":checked")
 
+$(document).on
+	mouseenter: ->
+		$(this).find(".meta_links").show() unless Touch.mobile
+	mouseleave: ->
+		$(this).find(".meta_links").hide()
+, "#tasks .task"
+
 @Tasks =
 	init: ->
-		$("#tasks").sortable
-			items: ".task"
-			handle: ".handle"
-			placeholder: "ui-state-highlight"
-			forcePlaceholderSize: true
-			forceHelperSize: true
+		if $("#tasks").length
+			$("#tasks").sortable
+				axis: "y"
+				items: ".task"
+				handle: ".handle"
+				placeholder: "ui-state-highlight"
+				forcePlaceholderSize: true
+				forceHelperSize: true
 
-			helper: (e, ui) ->
-				ui.children().each () ->
-					$(this).width $(this).width()
-				ui
+				helper: (e, ui) ->
+					ui.children().each () ->
+						$(this).width $(this).width()
+					ui
+
+				start: (e, ui) ->
+					ui.placeholder.html ""
 			
-			update: ->
+			$("#tasks").bind "sortupdate", ->
 				url = $("#tasks").data("url")
 				$.post url, $(this).sortable("serialize")
-
-			start: (e, ui) ->
-				ui.placeholder.html ""
