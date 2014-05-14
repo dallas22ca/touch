@@ -5,6 +5,8 @@ class Member < ActiveRecord::Base
   belongs_to :organization
   
   has_many :events, dependent: :destroy
+  has_many :folderships
+  has_many :folders, through: :folderships
 
   validates_uniqueness_of :key, scope: :organization
   

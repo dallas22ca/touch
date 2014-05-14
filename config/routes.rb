@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :folderships
+
   devise_for :users
   
   authenticate :user do

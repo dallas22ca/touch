@@ -6,6 +6,6 @@
 	<div class="meta">
 		<%= check_box_tag "#{dom_id task}_complete", false, task.complete %>
 	</div>
-	<p class="content" <%= "contenteditable" unless task.complete %>><%= task.content %></p>
+	<p class="content"><%= task.content %></p>
 	<div class="clear"></div>
 <% end %>

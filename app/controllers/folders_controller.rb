@@ -1,6 +1,7 @@
 class FoldersController < ApplicationController
   before_filter :set_organization
-  before_action :set_folder, only: [:show, :edit, :update, :destroy]
+  before_action :set_folder_with_permissions, only: [:show, :edit, :update, :destroy]
+  before_filter :send_to_folder, unless: Proc.new { @foldership.permits? :folders, :write }, only: [:edit, :update, :destroy]
 
   # GET /folders
   # GET /folders.json
@@ -71,6 +72,6 @@ class FoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      params.require(:folder).permit(:name, :archived)
+      params.require(:folder).permit(:name, :archived, :seed)
     end
 end

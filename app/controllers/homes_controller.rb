@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   before_action :set_organization
-  before_action :set_folder
+  before_action :set_folder_with_permissions
   before_action :set_home, only: [:show, :edit, :update, :destroy]
 
   # GET /homes
@@ -68,10 +68,6 @@ class HomesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_home
       @home = @folder.homes.find(params[:id])
-    end
-    
-    def set_folder
-      @folder = @org.folders.find(params[:folder_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

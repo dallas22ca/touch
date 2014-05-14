@@ -1,12 +1,12 @@
 class DocumentsController < ApplicationController
   before_action :set_organization
-  before_action :set_folder
+  before_action :set_folder_with_permissions
   before_action :set_document, only: [:show, :edit, :update, :destroy, :download]
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = @folder.documents
+    @documents = @folder.documents if @foldership.permits?(:documents, :read)
   end
 
   # GET /documents/1
@@ -30,7 +30,7 @@ class DocumentsController < ApplicationController
     @document.creator = current_user
 
     respond_to do |format|
-      if @document.save!
+      if @foldership.permits?(:documents, :write) && @document.save!
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
@@ -44,7 +44,7 @@ class DocumentsController < ApplicationController
   # PATCH/PUT /documents/1.json
   def update
     respond_to do |format|
-      if @document.update(document_params)
+      if @foldership.permits?(:documents, :write) && @document.update(document_params)
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
       else
@@ -57,7 +57,7 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
-    @document.destroy
+    @document.destroy if @foldership.permits? :documents, :delete
     respond_to do |format|
       format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
@@ -77,10 +77,6 @@ class DocumentsController < ApplicationController
       else
         @document = @folder.documents.find(params[:id])
       end
-    end
-    
-    def set_folder
-      @folder = @org.folders.find(params[:folder_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

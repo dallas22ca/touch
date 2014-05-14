@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_organization
-  before_action :set_folder
+  before_action :set_folder_with_permissions
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = @folder.tasks
+    @tasks = @folder.tasks if @foldership.permits?(:tasks, :read)
   end
 
   # GET /tasks/1
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     @task.creator = current_user
 
     respond_to do |format|
-      if @task.save
+      if @foldership.permits?(:tasks, :write) && @task.save
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
         format.js
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
+      if @foldership.permits?(:tasks, :write) && @task.update(task_params)
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
         format.js
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
+    @task.destroy if @foldership.permits? :tasks, :delete
     respond_to do |format|
       format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
@@ -80,10 +80,6 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = @folder.tasks.find(params[:id])
-    end
-    
-    def set_folder
-      @folder = @org.folders.find(params[:folder_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

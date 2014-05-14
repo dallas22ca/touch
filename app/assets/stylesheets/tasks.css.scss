@@ -3,13 +3,12 @@
 	
 	.ui-state-highlight {
 		background: rgba(0, 0, 0, 0.2);
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 		border-radius: 4px;
 	}
 	
 	#completed_tasks {
 		display: none;
-		margin-bottom: 10px;
 
 		.task {
 			&.complete {
@@ -22,11 +21,45 @@
 			}
 		}
 	}
+	
+	#tasks {
+		&[data-delete][data-write] {
+			.delete {
+				padding-right: 5px;
+			}
+			
+			.handle {
+				padding-left: 5px;
+			}
+			
+			.task .meta_links {
+				margin-left: -50px;
+			}
+		}
+		
+		&[data-delete] {
+			.delete {
+				display: inline-block;
+			}
+			
+			.task .meta_links {
+				margin-left: -25px;
+			}
+		}
+	
+		&[data-write] {
+			.handle {
+				display: inline-block;
+			}
+			
+			.task .meta_links {
+				margin-left: -25px;
+			}
+		}
+	}
 
 	.task {
-		margin-bottom: 10px;
-		margin-left: -150px;
-		padding-left: 150px;
+		margin-bottom: 5px;
 		
 		.content {
 			display: inline-block;
@@ -55,12 +88,8 @@
 			a {
 				padding: 5px 10px;
 			
-				&.delete {
-					padding-right: 5px;
-				}
-			
-				&.handle {
-					padding-left: 5px;
+				&.delete, &.handle {
+					display: none;
 				}
 			}
 		}

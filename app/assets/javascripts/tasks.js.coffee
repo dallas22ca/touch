@@ -28,13 +28,16 @@ $(document).on "blur", ".task p[contenteditable]", ->
 				content: content
 
 $(document).on "click", ".task input[type='checkbox']", ->
-	task = $(this).closest(".task")
-	url = task.data("url")
+	if $(this).closest("[data-write]").length
+		task = $(this).closest(".task")
+		url = task.data("url")
 
-	$.post "#{url}.js",
-		_method: "patch"
-		task:
-			complete: $(this).is(":checked")
+		$.post "#{url}.js",
+			_method: "patch"
+			task:
+				complete: $(this).is(":checked")
+	else
+		false
 
 $(document).on
 	mouseenter: ->
@@ -46,6 +49,8 @@ $(document).on
 @Tasks =
 	init: ->
 		if $("#tasks").length
+			$("#tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
+			
 			$("#tasks").sortable
 				axis: "y"
 				items: ".task"

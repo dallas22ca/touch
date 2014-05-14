@@ -21,57 +21,75 @@
 			<h3>Last updated on <%= @folder.updated_at.strftime("%a, %b %-d") %></h3>
 			<h2>
 				<%= @folder.name %>
-				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true %>
+				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true if @foldership.permits? :folders, :write %>
 			</h2>
 		</div>
 
-		<div class="panel right">
-			<%= link_to "Invite", "#", class: "invite_member right button small blue_bg" %>
-			<h3>Who's Here?</h3>
-			<ul class="bulleted">
-				<% 5.times do %>
-					<li><%= link_to "Dallas Read", "#" %></li>
+		<% if @foldership.permits? :folderships, :read %>
+			<div class="panel right">
+				<% if @foldership.permits? :folderships, :write %>
+					<%= link_to "Invite", "#", class: "invite_member right button small blue_bg" %>
 				<% end %>
-			</ul>
-		</div>
-
-		<div id="tasks_wrapper" class="panel notepad left">
-			<h3>What's Next?</h3>
-			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>">
-				<%= render @folder.tasks.incomplete.by_ordinal %>
-			</ul>
-			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks">
-				<%= render @folder.tasks.complete.by_completed_at %>
-			</ul>
-			<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
-				<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
-			<% end %>
-			<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @folder.tasks.complete.empty?}" %>
-		</div>
-
-		<div id="documents_wrapper" class="panel top_space no_surround right">
-			<div class="content">
-				<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
-				<h3>Documents</h3>
 				
-				<table style="<%= "display: none; " if @folder.documents.empty? %>">
-					<thead>
-						<tr>
-							<th>File Name</th>
-							<th>Added</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody id="documents" class="folder_<%= @folder.id %>_documents">
-						<%= render @folder.documents.order("updated_at desc") %>
-					</tbody>
-				</table>
-
-				<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
-					<%= f.file_field :file %>
-				<% end %>
+				<h3>Who's Here?</h3>
+				<ul class="bulleted">
+					<% 5.times do %>
+						<li><%= link_to "Dallas Read", "#" %></li>
+					<% end %>
+				</ul>
 			</div>
-		</div>
+		<% end %>
+		
+		<% if @foldership.permits? :tasks, :read %>
+			<div id="tasks_wrapper" class="panel notepad left">
+				<h3>What's Next?</h3>
+				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
+					<%= render @folder.tasks.incomplete.by_ordinal %>
+				</ul>
+				<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
+					<%= render @folder.tasks.complete.by_completed_at %>
+				</ul>
+				
+				<% if @foldership.permits? :tasks, :write %>
+					<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+						<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
+					<% end %>
+				<% end %>
+				
+				<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @folder.tasks.complete.empty?}" %>
+			</div>
+		<% end %>
+
+		<% if @foldership.permits? :documents, :read %>
+			<div id="documents_wrapper" class="panel top_space no_surround right">
+				<div class="content">
+					<% if @foldership.permits? :documents, :write %>
+						<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
+					<% end %>
+					
+					<h3>Documents</h3>
+				
+					<table id="documents" style="<%= "display: none; " if @folder.documents.empty? %>" <%= "data-delete" if @foldership.permits? :documents, :delete %>>
+						<thead>
+							<tr>
+								<th>File Name</th>
+								<th>Added</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="documents" class="folder_<%= @folder.id %>_documents">
+							<%= render @folder.documents.order("updated_at desc") %>
+						</tbody>
+					</table>
+					
+					<% if @foldership.permits? :documents, :write %>
+						<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+							<%= f.file_field :file %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
 
 		<div class="clear"></div>
 

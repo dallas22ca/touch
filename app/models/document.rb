@@ -6,6 +6,6 @@ class Document < ActiveRecord::Base
     default_url: "/imgs/path.jpg",
     s3_permissions: :private
   
-  validates_attachment_content_type :file, content_type: /jpeg|jpg|gif|png|doc|docx|xls|pdf|rdoc|txt|readme|html/
+  validates_attachment_content_type :file, content_type: /jpeg|jpg|gif|png|doc|docx|xls|pdf|rdoc|txt|readme|html|text/
   validates_presence_of :file, :creator_id, :folder_id
 end

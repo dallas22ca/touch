@@ -3,10 +3,18 @@
 		display: none;
 	}
 	
-	table {
+	#documents {
 		width: 100%;
 		margin-top: 20px;
 		border: 1px solid #333;
+		
+		&[data-delete] {
+			.document {
+				.delete {
+					display: block;
+				}
+			}
+		}
 		
 		th {
 			font-size: 11px;
@@ -48,6 +56,7 @@
 			.delete {
 				visibility: hidden;
 				color: maroon;
+				display: none;
 			}
 		}
 	}

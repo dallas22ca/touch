@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513170842) do
+ActiveRecord::Schema.define(version: 20140514110650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20140513170842) do
 
   add_index "folders", ["creator_id"], name: "index_folders_on_creator_id", using: :btree
   add_index "folders", ["organization_id"], name: "index_folders_on_organization_id", using: :btree
+
+  create_table "folderships", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "member_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "folderships", ["folder_id"], name: "index_folderships_on_folder_id", using: :btree
+  add_index "folderships", ["member_id"], name: "index_folderships_on_member_id", using: :btree
 
   create_table "homes", force: true do |t|
     t.string   "address"

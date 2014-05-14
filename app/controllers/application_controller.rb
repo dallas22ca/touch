@@ -30,4 +30,14 @@ class ApplicationController < ActionController::Base
     domain = Rails.env.development? ? "realtxn.com" : request.domain
     @website = CONFIG["sites"][domain]
   end
+  
+  def send_to_folder
+    redirect_to folder_path(@folder.organization.permalink, @folder)
+  end
+  
+  def set_folder_with_permissions
+    id = params[:folder_id] ? params[:folder_id] : params[:id]
+    @foldership = @member.folderships.where(folder_id: id).first
+    @folder = @foldership.folder if @foldership
+  end
 end
