@@ -11,19 +11,19 @@ Rails.application.routes.draw do
       
         resources :members, path: :contacts
         resources :segments
-        resources :folderships, only: :index
+        resources :channelships, only: :index
 
         resources :rooms, path: :attendance do
           resources :meetings
         end
       
-        resources :folders do
+        resources :channels do
           post "/tasks/sort" => "tasks#sort", as: :sort_tasks
           resources :tasks
           resources :homes
 
-          resources :folderships, except: :index do
-            post "/accept" => "folderships#accept", as: :accept
+          resources :channelships, except: :index do
+            post "/accept" => "channelships#accept", as: :accept
           end
         
           resources :documents do
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
   
     scope "/:permalink" do
-      get "/accept/:token" => "folderships#accept", as: :foldership_invitation
+      get "/accept/:token" => "channelships#accept", as: :channelship_invitation
     end
   end
   

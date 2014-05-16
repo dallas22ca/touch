@@ -1,12 +1,12 @@
-class FolderMailer < ActionMailer::Base
+class ChannelMailer < ActionMailer::Base
   default from: "no-reply@realtxn.com"
   
-  def invitation(foldership_id)
-    @foldership = Foldership.find(foldership_id)
-    @folder = @foldership.folder
-    @member = @foldership.member
-    @inviter = @foldership.creator
+  def invitation(channelship_id)
+    @channelship = Channelship.find(channelship_id)
+    @channel = @channelship.channel
+    @member = @channelship.member
+    @inviter = @channelship.creator
 
-    mail to: @member.name_and_email, subject: "You've been invited to a folder"
+    mail to: @member.name_and_email, subject: "You've been invited to a channel"
   end
 end

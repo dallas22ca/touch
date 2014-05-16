@@ -1,5 +1,5 @@
-<% if @folder.errors.any? %>
-	alert("<%= @folder.errors.full_messages.join(", ") %>")
+<% if @channel.errors.any? %>
+	alert("<%= @channel.errors.full_messages.join(", ") %>")
 <% else %>
-	window.location = "<%= folder_path @org.permalink, @folder %>"
+	window.location = "<%= channel_path @org.permalink, @channel %>"
 <% end %>

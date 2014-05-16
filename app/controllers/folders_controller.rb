@@ -1,82 +1,82 @@
-class FoldersController < ApplicationController
+class ChannelsController < ApplicationController
   before_filter :set_organization
-  before_action :set_folder_with_permissions, only: [:show, :edit, :update, :destroy]
-  before_filter :send_to_folder, unless: Proc.new { @foldership.permits? :folders, :write }, only: [:edit, :update, :destroy]
+  before_action :set_channel_with_permissions, only: [:show, :edit, :update, :destroy]
+  before_filter :send_to_channel, unless: Proc.new { @channelship.permits? :channels, :write }, only: [:edit, :update, :destroy]
 
-  # GET /folders
-  # GET /folders.json
+  # GET /channels
+  # GET /channels.json
   def index
-    @folders = @member.folders
+    @channels = @member.channels
   end
 
-  # GET /folders/1
-  # GET /folders/1.json
+  # GET /channels/1
+  # GET /channels/1.json
   def show
   end
 
-  # GET /folders/new
+  # GET /channels/new
   def new
-    @folder = Folder.new
+    @channel = Channel.new
   end
 
-  # GET /folders/1/edit
+  # GET /channels/1/edit
   def edit
   end
 
-  # POST /folders
-  # POST /folders.json
+  # POST /channels
+  # POST /channels.json
   def create
-    @folder = @member.folders.new(folder_params)
-    @folder.creator = @member
-    @folder.organization = @org
+    @channel = @member.channels.new(channel_params)
+    @channel.creator = @member
+    @channel.organization = @org
 
     respond_to do |format|
-      if @folder.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully created.' }
-        format.json { render :show, status: :created, location: @folder }
+      if @channel.save
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Channel was successfully created.' }
+        format.json { render :show, status: :created, location: @channel }
         format.js
       else
         format.html { render :new }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.json { render json: @channel.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
 
-  # PATCH/PUT /folders/1
-  # PATCH/PUT /folders/1.json
+  # PATCH/PUT /channels/1
+  # PATCH/PUT /channels/1.json
   def update
     respond_to do |format|
-      if @folder.update(folder_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully updated.' }
-        format.json { render :show, status: :ok, location: @folder }
+      if @channel.update(channel_params)
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Channel was successfully updated.' }
+        format.json { render :show, status: :ok, location: @channel }
         format.js
       else
         format.html { render :edit }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.json { render json: @channel.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
 
-  # DELETE /folders/1
-  # DELETE /folders/1.json
+  # DELETE /channels/1
+  # DELETE /channels/1.json
   def destroy
-    @folder.destroy
+    @channel.destroy
     respond_to do |format|
-      format.html { redirect_to folders_url(@org.permalink), notice: 'Folder was successfully destroyed.' }
+      format.html { redirect_to channels_url(@org.permalink), notice: 'Channel was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = @member.folders.find(params[:id])
+    def set_channel
+      @channel = @member.channels.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def folder_params
-      params.require(:folder).permit(:name, :archived, :seed)
+    def channel_params
+      params.require(:channel).permit(:name, :archived, :seed)
     end
 end

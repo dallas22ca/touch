@@ -1,4 +1,4 @@
-json.array!(@folders) do |folder|
-  json.extract! folder, :id, :name, :archived
-  json.url folder_url(folder, format: :json)
+json.array!(@channels) do |channel|
+  json.extract! channel, :id, :name, :archived
+  json.url channel_url(channel, format: :json)
 end

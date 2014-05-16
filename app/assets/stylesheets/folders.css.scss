@@ -1,8 +1,8 @@
-#folders {
+#channels {
 	width: 100%;
 	padding-top: 20px;
 	
-	.folder {
+	.channel {
 		width: 31.333333%;
 		float: left;
 		margin: 1%;
@@ -96,7 +96,7 @@
 	}
 }
 
-.folders_show {
+.channels_show {
 	#yield .header {
 		margin-bottom: 20px;
 
@@ -124,7 +124,7 @@
 		}
 	}
 	
-	.folder_meta {
+	.channel_meta {
 		margin: 20px 0;
 		
 		h2 {
@@ -155,7 +155,7 @@
 		display: none;
 	}
 	
-	.folder_meta h3 {
+	.channel_meta h3 {
 		display: none;
 	}
 	

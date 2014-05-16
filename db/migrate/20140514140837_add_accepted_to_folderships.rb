@@ -1,6 +1,6 @@
-class AddAcceptedToFolderships < ActiveRecord::Migration
+class AddAcceptedToChannelships < ActiveRecord::Migration
   def change
-    add_column :folderships, :accepted, :boolean, default: false
-    add_column :folderships, :token, :string
+    add_column :channelships, :accepted, :boolean, default: false
+    add_column :channelships, :token, :string
   end
 end

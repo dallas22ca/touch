@@ -2,10 +2,10 @@
 <h1><%= @fship.new_record? ? "Send An Invitation" : @fship.member.name %></h1>
 	
 <div class="content">
-	<% if @folder.creator_id == @fship.member_id %>
-		You cannot change the permissions of a folder's owner.
+	<% if @channel.creator_id == @fship.member_id %>
+		You cannot change the permissions of a channel's owner.
 	<% else %>
-		<%= form_for @fship, url: @fship.new_record? ? folder_folderships_path(@org.permalink, @folder) : folder_foldership_path(@org.permalink, @folder, @fship), remote: true do |f| %>
+		<%= form_for @fship, url: @fship.new_record? ? channel_channelships_path(@org.permalink, @channel) : channel_channelship_path(@org.permalink, @channel, @fship), remote: true do |f| %>
 		
 			<% if @fship.new_record? %>
 			  <div class="field">
@@ -28,7 +28,7 @@
 				<%= link_to "Close", "#", class: "close_lightbox" %>
 			
 				<% if @fship.persisted? %>
-					<%= link_to "Revoke Access", folder_foldership_path(@org.permalink, @folder, @fship), method: :delete, remote: true, data: { confirm: "Are you sure you want to revoke #{@fship.member.name}'s access?" } %>
+					<%= link_to "Revoke Access", channel_channelship_path(@org.permalink, @channel, @fship), method: :delete, remote: true, data: { confirm: "Are you sure you want to revoke #{@fship.member.name}'s access?" } %>
 				<% end %>
 		  </div>
 		<% end %>

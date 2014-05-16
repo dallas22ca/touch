@@ -1,10 +1,10 @@
 Hi <%= @member.name %>,
 
-<%= @inviter.name %> has invited you to work on a project together called "<%= @folder.name %>".
+<%= @inviter.name %> has invited you to work on a project together called "<%= @channel.name %>".
 
 To accept this invitation, click on the following link:
 
-<%= foldership_invitation_url(@folder.organization.permalink, @foldership.token) %>
+<%= channelship_invitation_url(@channel.organization.permalink, @channelship.token) %>
 
 Thanks,
 

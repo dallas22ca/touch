@@ -1,4 +1,4 @@
-<%= content_tag_for :li, foldership do %>
-	<%= link_to "#{foldership.name} - #{foldership.role_explained}", edit_folder_foldership_path(foldership.folder.organization.permalink, foldership.folder, foldership), remote: true %>
-	<%= link_to "Re-send", folder_foldership_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { resend: true }), method: :patch, remote: true, class: "resend" unless foldership.accepted? %>
+<%= content_tag_for :li, channelship do %>
+	<%= link_to "#{channelship.name} - #{channelship.role_explained}", edit_channel_channelship_path(channelship.channel.organization.permalink, channelship.channel, channelship), remote: true %>
+	<%= link_to "Re-send", channel_channelship_path(channelship.channel.organization.permalink, channelship.channel, channelship, channelship: { resend: true }), method: :patch, remote: true, class: "resend" unless channelship.accepted? %>
 <% end %>

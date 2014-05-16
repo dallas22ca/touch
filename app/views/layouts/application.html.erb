@@ -21,8 +21,8 @@
 						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
 					<% end %>
 					
-					<% if @org.modules.include?("folders") && @member.permits?("folders") %>
-						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
+					<% if @org.modules.include?("channels") && @member.permits?("channels") %>
+						<li><%= link_to "Channels", channels_path(@org), class: "#{"selected" if request.path.include? "channels"}" %></li>
 					<% end %>
 				
 					<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>

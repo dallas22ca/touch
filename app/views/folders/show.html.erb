@@ -3,13 +3,13 @@
 		
 		<div class="header">
 			<%= link_to image_tag(@org.logo.url, class: "brokerage_logo"), @org.website.to_s, target: :blank %>
-			<%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %>
+			<%= link_to image_tag(@channel.creator.user.avatar.url, class: "user_avatar"), @channel.creator.user.website.to_s, target: :blank %>
 	
 	    <div class="profile" data-no-turbolink>
-	    	<p class="user_name"><%= @folder.creator.name %></p>
+	    	<p class="user_name"><%= @channel.creator.name %></p>
 				<p class="brokerage_name"><%= link_to @org.name, @org.website.to_s, target: :blank %></p>
-				<p class="user_website"><%= link_to @folder.creator.user.website.to_s, @folder.creator.user.website.to_s, target: :blank %></p>
-				<p class="user_phone"><%= link_to @folder.creator.user.phone.to_s, "tel:#{@folder.creator.user.phone.to_s.gsub(/[^\d]/, "")}", target: :blank %></p>
+				<p class="user_website"><%= link_to @channel.creator.user.website.to_s, @channel.creator.user.website.to_s, target: :blank %></p>
+				<p class="user_phone"><%= link_to @channel.creator.user.phone.to_s, "tel:#{@channel.creator.user.phone.to_s.gsub(/[^\d]/, "")}", target: :blank %></p>
 	    </div>
 			
 	    <div class="clear"></div>
@@ -17,60 +17,60 @@
 		
 		<hr />
 		
-		<div class="folder_meta">
+		<div class="channel_meta">
 			<h3>
-				Last updated on <%= @folder.updated_at.strftime("%a, %b %-d") %>.<br>
-				Signed in as a <%= @foldership.role_explained %>.
+				Last updated on <%= @channel.updated_at.strftime("%a, %b %-d") %>.<br>
+				Signed in as a <%= @channelship.role_explained %>.
 			</h3>
 			<h2>
-				<%= @folder.name %>
-				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true if @foldership.permits? :folders, :write %>
+				<%= @channel.name %>
+				<%= link_to "Rename", edit_channel_path(@channel.organization.permalink, @channel), remote: true if @channelship.permits? :channels, :write %>
 			</h2>
 		</div>
 
-		<% if @foldership.permits? :folderships, :read %>
+		<% if @channelship.permits? :channelships, :read %>
 			<div class="panel right">
-				<% if @foldership.permits? :folderships, :write %>
-					<%= link_to "Invite", new_folder_foldership_path(@folder.organization.permalink, @folder), class: "invite_member right button small blue_bg", remote: true %>
+				<% if @channelship.permits? :channelships, :write %>
+					<%= link_to "Invite", new_channel_channelship_path(@channel.organization.permalink, @channel), class: "invite_member right button small blue_bg", remote: true %>
 				<% end %>
 				
 				<h3>Who's Here?</h3>
-				<ul id="folderships" class="bulleted folder_<%= @folder.id %>_folderships" <%= "data-write" if @foldership.permits? :folderships, :write %>>
-					<%= render @folder.folderships.order("created_at asc") %>
+				<ul id="channelships" class="bulleted channel_<%= @channel.id %>_channelships" <%= "data-write" if @channelship.permits? :channelships, :write %>>
+					<%= render @channel.channelships.order("created_at asc") %>
 				</ul>
 			</div>
 		<% end %>
 		
-		<% if @foldership.permits? :tasks, :read %>
+		<% if @channelship.permits? :tasks, :read %>
 			<div id="tasks_wrapper" class="panel notepad left">
 				<h3>What's Next?</h3>
-				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
-					<%= render @folder.tasks.incomplete.by_ordinal %>
+				<ul id="tasks" class="channel_<%= @channel.id %>_tasks" data-url="<%= channel_sort_tasks_path(@org.permalink, @channel) %>" <%= "data-write" if @channelship.permits? :tasks, :write %> <%= "data-delete" if @channelship.permits? :tasks, :delete %>>
+					<%= render @channel.tasks.incomplete.by_ordinal %>
 				</ul>
-				<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
-					<%= render @folder.tasks.complete.by_completed_at %>
+				<ul id="completed_tasks" class="channel_<%= @channel.id %>_completed_tasks" <%= "data-write" if @channelship.permits? :tasks, :write %>>
+					<%= render @channel.tasks.complete.by_completed_at %>
 				</ul>
 				
-				<% if @foldership.permits? :tasks, :write %>
-					<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+				<% if @channelship.permits? :tasks, :write %>
+					<%= form_for [@channel, Task.new], url: channel_tasks_path(@org.permalink, @channel), remote: true do |f| %>
 						<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
 					<% end %>
 				<% end %>
 				
-				<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @folder.tasks.complete.empty?}" %>
+				<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @channel.tasks.complete.empty?}" %>
 			</div>
 		<% end %>
 
-		<% if @foldership.permits? :documents, :read %>
+		<% if @channelship.permits? :documents, :read %>
 			<div id="documents_wrapper" class="panel top_space no_surround right">
 				<div class="content">
-					<% if @foldership.permits? :documents, :write %>
+					<% if @channelship.permits? :documents, :write %>
 						<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
 					<% end %>
 					
 					<h3>Documents</h3>
 				
-					<table id="documents" style="<%= "display: none; " if @folder.documents.empty? %>" <%= "data-delete" if @foldership.permits? :documents, :delete %>>
+					<table id="documents" style="<%= "display: none; " if @channel.documents.empty? %>" <%= "data-delete" if @channelship.permits? :documents, :delete %>>
 						<thead>
 							<tr>
 								<th>File Name</th>
@@ -78,13 +78,13 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody id="documents" class="folder_<%= @folder.id %>_documents">
-							<%= render @folder.documents.order("updated_at desc") %>
+						<tbody id="documents" class="channel_<%= @channel.id %>_documents">
+							<%= render @channel.documents.order("updated_at desc") %>
 						</tbody>
 					</table>
 					
-					<% if @foldership.permits? :documents, :write %>
-						<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+					<% if @channelship.permits? :documents, :write %>
+						<%= form_for [@channel, Document.new], url: channel_documents_path(@org.permalink, @channel) do |f| %>
 							<%= f.file_field :file %>
 						<% end %>
 					<% end %>
@@ -98,8 +98,8 @@
 		<div class="top_space panel">
 					<h3>Homes</h3>
 					<ul>
-						<li><%= link_to "New Home", new_folder_home_path(@org.permalink, @folder) %></li>
-						<%= render @folder.homes.order("updated_at desc") %>
+						<li><%= link_to "New Home", new_channel_home_path(@org.permalink, @channel) %></li>
+						<%= render @channel.homes.order("updated_at desc") %>
 					</ul>
 				</div>-->
 		

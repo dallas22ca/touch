@@ -1,5 +1,5 @@
-class AddOrganizationToFolders < ActiveRecord::Migration
+class AddOrganizationToChannels < ActiveRecord::Migration
   def change
-    add_reference :folders, :organization, index: true
+    add_reference :channels, :organization, index: true
   end
 end

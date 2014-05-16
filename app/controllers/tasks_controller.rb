@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_organization
-  before_action :set_folder_with_permissions
+  before_action :set_channel_with_permissions
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = @folder.tasks if @foldership.permits?(:tasks, :read)
+    @tasks = @channel.tasks if @channelship.permits?(:tasks, :read)
   end
 
   # GET /tasks/1
@@ -26,12 +26,12 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = @folder.tasks.new(task_params)
+    @task = @channel.tasks.new(task_params)
     @task.creator = @member
 
     respond_to do |format|
-      if @foldership.permits?(:tasks, :write) && @task.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully created.' }
+      if @channelship.permits?(:tasks, :write) && @task.save
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
         format.js
       else
@@ -46,8 +46,8 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @foldership.permits?(:tasks, :write) && @task.update(task_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully updated.' }
+      if @channelship.permits?(:tasks, :write) && @task.update(task_params)
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
         format.js
       else
@@ -61,9 +61,9 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy if @foldership.permits? :tasks, :delete
+    @task.destroy if @channelship.permits? :tasks, :delete
     respond_to do |format|
-      format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end
@@ -71,7 +71,7 @@ class TasksController < ApplicationController
   
   def sort
     params[:task].each_with_index do |id, index|
-      @folder.tasks.find(id).update ordinal: index + 1
+      @channel.tasks.find(id).update ordinal: index + 1
     end
     render nothing: true
   end
@@ -79,7 +79,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = @folder.tasks.find(params[:id])
+      @task = @channel.tasks.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

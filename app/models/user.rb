@@ -19,12 +19,12 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   
   before_save :format_website
-  after_save :add_to_folder, if: :invitation_token
+  after_save :add_to_channel, if: :invitation_token
   
-  def add_to_folder
-    foldership = Foldership.where(token: invitation_token).first
-    member = foldership.member.update! user: self
-    foldership.accept
+  def add_to_channel
+    channelship = Channelship.where(token: invitation_token).first
+    member = channelship.member.update! user: self
+    channelship.accept
   end
   
   def format_website

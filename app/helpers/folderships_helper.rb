@@ -1,2 +1,2 @@
-module FoldershipsHelper
+module ChannelshipsHelper
 end

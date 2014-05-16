@@ -1,23 +1,23 @@
-class Folder < ActiveRecord::Base
+class Channel < ActiveRecord::Base
   attr_accessor :seed
 
   belongs_to :organization
   has_many :tasks, dependent: :destroy
   has_many :documents, dependent: :destroy
   has_many :homes, dependent: :destroy
-  has_many :folderships, dependent: :destroy
-  has_many :members, through: :folderships
+  has_many :channelships, dependent: :destroy
+  has_many :members, through: :channelships
   has_many :users, through: :members
   
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   
   validates_presence_of :name
 
-  after_create :create_foldership, if: Proc.new { folderships.empty? }
+  after_create :create_channelship, if: Proc.new { channelships.empty? }
   after_create :seed_tasks, unless: Proc.new { seed.blank? }
   
-  def create_foldership
-    folderships.create!(
+  def create_channelship
+    channelships.create!(
       member: creator, 
       role: "admin",
       accepted: true
@@ -26,20 +26,20 @@ class Folder < ActiveRecord::Base
   
   def seed_tasks
     if seed == "buyer" || seed == "seller"
-      seed_folder = Folder.sample_seller
+      seed_channel = Channel.sample_seller
     else
-      seed_folder = organization.folders.find seed
+      seed_channel = organization.channels.find seed
     end
     
-    if seed_folder
-      seed_folder.tasks.each do |task|
+    if seed_channel
+      seed_channel.tasks.each do |task|
         t = task.dup
         t.creator = self.creator
         t.complete = false
         self.tasks.push t
       end
     
-      seed_folder.documents.each do |document|
+      seed_channel.documents.each do |document|
         d = self.documents.new
         d.creator = self.creator
         d.file = document.file
@@ -47,11 +47,11 @@ class Folder < ActiveRecord::Base
       end
     end
     
-    # delete users of folder
+    # delete users of channel
   end
   
   def self.sample_seller
-    f = Folder.new
+    f = Channel.new
     [
       "Complete all paperwork", 
       "Install lockbox", 

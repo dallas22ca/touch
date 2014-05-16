@@ -1,2 +1,2 @@
-module FoldersHelper
+module ChannelsHelper
 end

@@ -31,17 +31,17 @@ class ApplicationController < ActionController::Base
     @website = CONFIG["sites"][domain]
   end
   
-  def send_to_folder
-    redirect_to folder_path(@folder.organization.permalink, @folder)
+  def send_to_channel
+    redirect_to channel_path(@channel.organization.permalink, @channel)
   end
   
   def redirect_to_root
     redirect_to root_path
   end
   
-  def set_folder_with_permissions
-    id = params[:folder_id] ? params[:folder_id] : params[:id]
-    @foldership = @member.folderships.accepted.where(folder_id: id).first
-    @folder = @foldership.folder if @foldership
+  def set_channel_with_permissions
+    id = params[:channel_id] ? params[:channel_id] : params[:id]
+    @channelship = @member.channelships.accepted.where(channel_id: id).first
+    @channel = @channelship.channel if @channelship
   end
 end

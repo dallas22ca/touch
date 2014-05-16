@@ -2,10 +2,10 @@
 
 one:
   content: MyText
-  folder_id: 
+  channel_id: 
   user_id: 
 
 two:
   content: MyText
-  folder_id: 
+  channel_id: 
   user_id: 

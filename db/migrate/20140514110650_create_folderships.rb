@@ -1,7 +1,7 @@
-class CreateFolderships < ActiveRecord::Migration
+class CreateChannelships < ActiveRecord::Migration
   def change
-    create_table :folderships do |t|
-      t.belongs_to :folder, index: true
+    create_table :channelships do |t|
+      t.belongs_to :channel, index: true
       t.belongs_to :member, index: true
       t.string :role
 

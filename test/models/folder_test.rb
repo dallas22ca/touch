@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FolderTest < ActiveSupport::TestCase
+class ChannelTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

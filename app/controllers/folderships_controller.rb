@@ -1,25 +1,25 @@
-class FoldershipsController < ApplicationController
+class ChannelshipsController < ApplicationController
   layout :choose_layout
   before_action :set_organization, except: [:accept]
-  before_action :set_folder_with_permissions, except: [:index, :accept]
+  before_action :set_channel_with_permissions, except: [:index, :accept]
   before_action :set_fship, only: [:show, :edit, :update, :destroy]
   
   def index
-    @folderships = @member.folderships.unaccepted
+    @channelships = @member.channelships.unaccepted
   end
   
   def new
-    @fship = Foldership.new
-    render nothing: true unless @foldership.permits?(:folderships, :write)
+    @fship = Channelship.new
+    render nothing: true unless @channelship.permits?(:channelships, :write)
   end
   
   def create
-    @fship = @folder.folderships.new(foldership_params)
+    @fship = @channel.channelships.new(channelship_params)
     @fship.creator = @member
 
     respond_to do |format|
-      if @foldership.permits?(:folderships, :write) && @fship.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully created.' }
+      if @channelship.permits?(:channelships, :write) && @fship.save
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @fship }
         format.js
       else
@@ -31,13 +31,13 @@ class FoldershipsController < ApplicationController
   end
   
   def edit
-    render nothing: true unless @foldership.permits?(:folderships, :write)
+    render nothing: true unless @channelship.permits?(:channelships, :write)
   end
   
   def update
     respond_to do |format|
-      if @foldership.permits?(:folderships, :write) && @folder.creator != @fship.member && @fship.update!(foldership_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully updated.' }
+      if @channelship.permits?(:channelships, :write) && @channel.creator != @fship.member && @fship.update!(channelship_params)
+        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @fship }
         format.js
       else
@@ -49,9 +49,9 @@ class FoldershipsController < ApplicationController
   end
   
   def destroy
-    @fship.destroy if @foldership.permits? :folderships, :delete
+    @fship.destroy if @channelship.permits? :channelships, :delete
     respond_to do |format|
-      format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end
@@ -59,24 +59,24 @@ class FoldershipsController < ApplicationController
   
   def accept
     @org = Organization.where(permalink: params[:permalink]).first
-    @fship = @org.folderships.where(token: params[:token]).first
-    @folder = @fship.folder
+    @fship = @org.channelships.where(token: params[:token]).first
+    @channel = @fship.channel
     
     if user_signed_in?
       @member = @org.members.where(user_id: current_user.id).first
 
       if @member
-        if @folder.members.include? @member
-          redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+        if @channel.members.include? @member
+          redirect_to channel_path(@fship.channel.organization.permalink, @fship.channel)
         else
           @fship.accept
-          redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+          redirect_to channel_path(@fship.channel.organization.permalink, @fship.channel)
         end
       else
         @member = @org.members.create! user: current_user
         @fship.update member: @member
         @fship.accept
-        redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+        redirect_to channel_path(@fship.channel.organization.permalink, @fship.channel)
       end
     else
       redirect_to new_user_registration_path(token: params[:token])
@@ -86,11 +86,11 @@ class FoldershipsController < ApplicationController
   private
   
     def set_fship
-      @fship = @folder.folderships.find(params[:id])
+      @fship = @channel.channelships.find(params[:id])
     end
   
-    def foldership_params
-      params.require(:foldership).permit(:name, :email, :role, :resend)
+    def channelship_params
+      params.require(:channelship).permit(:name, :email, :role, :resend)
     end
     
     def choose_layout

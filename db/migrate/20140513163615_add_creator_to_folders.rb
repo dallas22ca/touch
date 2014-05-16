@@ -1,5 +1,5 @@
-class AddCreatorToFolders < ActiveRecord::Migration
+class AddCreatorToChannels < ActiveRecord::Migration
   def change
-    add_reference :folders, :creator, index: true
+    add_reference :channels, :creator, index: true
   end
 end

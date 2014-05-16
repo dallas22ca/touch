@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  folder_id: 
+  channel_id: 
 
 two:
-  folder_id: 
+  channel_id: 

@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class FoldersHelperTest < ActionView::TestCase
+class ChannelsHelperTest < ActionView::TestCase
 end

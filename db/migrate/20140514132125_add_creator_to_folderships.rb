@@ -1,5 +1,5 @@
-class AddCreatorToFolderships < ActiveRecord::Migration
+class AddCreatorToChannelships < ActiveRecord::Migration
   def change
-    add_reference :folderships, :creator, index: true
+    add_reference :channelships, :creator, index: true
   end
 end

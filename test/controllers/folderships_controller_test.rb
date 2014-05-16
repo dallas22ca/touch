@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FoldershipsControllerTest < ActionController::TestCase
+class ChannelshipsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

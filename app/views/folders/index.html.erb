@@ -1,33 +1,33 @@
 <% title do %>
 	<h1><%= link_to @website["name"], "#", class: "show_sub_menu" %></h1>
 	<ul class="sub_menu">
-		<% if @folder && @folder.persisted? %>
-			<li><%= link_to "Edit This Room", edit_folder_path(@org.permalink, @folder), remote: true %></li>
+		<% if @channel && @channel.persisted? %>
+			<li><%= link_to "Edit This Room", edit_channel_path(@org.permalink, @channel), remote: true %></li>
 		<% end %>
-		<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+		<li><%= link_to "Create A Channel", new_channel_path(@org.permalink), remote: true %></li>
 	</ul>
 <% end %>
 
-<% if @member.folderships.unaccepted.any? %>
+<% if @member.channelships.unaccepted.any? %>
 	<h3>Invitations</h3>
 	<ul>
-		<% @member.folderships.unaccepted.each do |foldership| %>
+		<% @member.channelships.unaccepted.each do |channelship| %>
 			<li>
-				<%= foldership.folder.name %> by
-				<%= foldership.folder.creator.name %>
-				<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+				<%= channelship.channel.name %> by
+				<%= channelship.channel.creator.name %>
+				<%= link_to "Accept", channel_channelship_accept_path(channelship.channel.organization.permalink, channelship.channel, channelship, channelship: { accepted: true }), method: :post %>
 			</li>
 		<% end %>
 	</ul>
 <% end %>
 
 <div class="container">
-	<ul id="folders">
-		<li class="folder panel center">
-			<a href="<%= new_folder_path %>" data-remote="true">
+	<ul id="channels">
+		<li class="channel panel center">
+			<a href="<%= new_channel_path %>" data-remote="true">
 				<%= image_tag "/imgs/plus.png", class: "plus" %>
 			</a>
 		</li>
-	  <%= render @folders %>
+	  <%= render @channels %>
 	</ul>
 </div>

@@ -1,14 +1,14 @@
-class Foldership < ActiveRecord::Base
+class Channelship < ActiveRecord::Base
   attr_accessor :resend
 
-  belongs_to :folder
+  belongs_to :channel
   belongs_to :member
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   
-  validates_presence_of :folder_id, :member_id, :role
+  validates_presence_of :channel_id, :member_id, :role
   validates_presence_of :email, if: Proc.new { !member && new_record? }
   validates_presence_of :name, if: Proc.new { !member && new_record? }
-  validates_uniqueness_of :member_id, scope: [:folder_id], message: "is already present", if: :member
+  validates_uniqueness_of :member_id, scope: [:channel_id], message: "is already present", if: :member
   
   before_validation :link_to_member
   before_save :generate_token, if: Proc.new { token.blank? }
@@ -19,7 +19,7 @@ class Foldership < ActiveRecord::Base
   scope :accepted, -> { where accepted: true }
   
   def send_email
-    FolderMailer.invitation(id).deliver unless member == folder.creator
+    ChannelMailer.invitation(id).deliver unless member == channel.creator
   end
   
   def accept
@@ -28,7 +28,7 @@ class Foldership < ActiveRecord::Base
   
   def link_to_member
     unless self.member
-      org = folder.organization
+      org = channel.organization
       self.member = org.members.where("data -> 'email' = ?", email).first
       
       unless self.member
@@ -56,7 +56,7 @@ class Foldership < ActiveRecord::Base
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64.gsub(/-|_/, "")
-      break random_token unless Foldership.exists?(token: random_token)
+      break random_token unless Channelship.exists?(token: random_token)
     end
   end
   
@@ -64,14 +64,14 @@ class Foldership < ActiveRecord::Base
     return true if resource.is_a?(Object) && resource.try(:creator_id) == member_id
     resource = resource.class.name.downcase.pluralize unless resource.is_a? Symbol
     action = action.to_sym unless action.is_a? Symbol
-    r = Foldership.permissions[role.to_sym]
+    r = Channelship.permissions[role.to_sym]
     r.has_key?(resource) && r[resource][action] == true
   end
   
   def self.permissions
     {
       admin: {
-        folders: {
+        channels: {
           read: true,
           write: true,
           delete: true
@@ -86,32 +86,32 @@ class Foldership < ActiveRecord::Base
           write: true,
           delete: true
         },
-        folderships: {
+        channelships: {
           read: true,
           write: true,
           delete: true
         }
       },
       read_only: {
-        folders: {},
+        channels: {},
         documents: {
           read: true
         },
         tasks: {
           read: true
         },
-        folderships: {
+        channelships: {
           read: true
         }
       },
       documents_only: {
-        folders: {},
+        channels: {},
         documents: {
           read: true,
           write: true
         },
         tasks: {},
-        folderships: {
+        channelships: {
           read: true
         }
       }

@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class FoldersControllerTest < ActionController::TestCase
+class ChannelsControllerTest < ActionController::TestCase
   setup do
-    @folder = folders(:one)
+    @channel = channels(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:folders)
+    assert_not_nil assigns(:channels)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class FoldersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create folder" do
-    assert_difference('Folder.count') do
-      post :create, folder: { archive: @folder.archive, name: @folder.name }
+  test "should create channel" do
+    assert_difference('Channel.count') do
+      post :create, channel: { archive: @channel.archive, name: @channel.name }
     end
 
-    assert_redirected_to folder_path(assigns(:folder))
+    assert_redirected_to channel_path(assigns(:channel))
   end
 
-  test "should show folder" do
-    get :show, id: @folder
+  test "should show channel" do
+    get :show, id: @channel
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @folder
+    get :edit, id: @channel
     assert_response :success
   end
 
-  test "should update folder" do
-    patch :update, id: @folder, folder: { archive: @folder.archive, name: @folder.name }
-    assert_redirected_to folder_path(assigns(:folder))
+  test "should update channel" do
+    patch :update, id: @channel, channel: { archive: @channel.archive, name: @channel.name }
+    assert_redirected_to channel_path(assigns(:channel))
   end
 
-  test "should destroy folder" do
-    assert_difference('Folder.count', -1) do
-      delete :destroy, id: @folder
+  test "should destroy channel" do
+    assert_difference('Channel.count', -1) do
+      delete :destroy, id: @channel
     end
 
-    assert_redirected_to folders_path
+    assert_redirected_to channels_path
   end
 end

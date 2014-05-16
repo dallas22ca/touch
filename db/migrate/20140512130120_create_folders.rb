@@ -1,6 +1,6 @@
-class CreateFolders < ActiveRecord::Migration
+class CreateChannels < ActiveRecord::Migration
   def change
-    create_table :folders do |t|
+    create_table :channels do |t|
       t.string :name
       t.boolean :archived, default: false
 

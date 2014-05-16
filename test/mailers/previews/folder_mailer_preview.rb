@@ -1,9 +1,9 @@
-# Preview all emails at http://localhost:3000/rails/mailers/folder_mailer
-class FolderMailerPreview < ActionMailer::Preview
+# Preview all emails at http://localhost:3000/rails/mailers/channel_mailer
+class ChannelMailerPreview < ActionMailer::Preview
 
-  # Preview this email at http://localhost:3000/rails/mailers/folder_mailer/invitation
+  # Preview this email at http://localhost:3000/rails/mailers/channel_mailer/invitation
   def invitation
-    FolderMailer.invitation
+    ChannelMailer.invitation
   end
 
 end

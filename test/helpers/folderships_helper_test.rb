@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class FoldershipsHelperTest < ActionView::TestCase
+class ChannelshipsHelperTest < ActionView::TestCase
 end
