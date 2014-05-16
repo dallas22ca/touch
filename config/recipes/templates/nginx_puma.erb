@@ -7,42 +7,47 @@ upstream puma {
   server <%= puma_sock %> fail_timeout=0;
 }
 
-server {
-	listen 80;
-	# listen 443 ssl spdy;
+<% domains.each do |domain| %>
+	server {
+		listen 80;
+		listen 443 ssl spdy;
 
-  server_name oneattendance.com;
-	root <%= current_path %>/public;
+		server_name <%= domain %>;
+		root <%= current_path %>/public;
 	
-	# ssl_certificate <%= ssl_cert %>;
-	# ssl_certificate_key <%= ssl_key %>;
+		# ssl on;
+		ssl_certificate /etc/ssl/certs/<%= domain %>/ssl.crt;
+		ssl_certificate_key /etc/ssl/certs/<%= domain %>/domain.key;
+		# ssl_protocols SSLv3 TLSv1;
+		# ssl_ciphers ALL:!aNULL:!ADH:!eNULL:!LOW:!EXP:RC4+RSA:+HIGH:+MEDIUM;
 	
-	try_files $uri/index.html $uri @puma;
-  location @puma {
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header X-Accel-Mapping /var/www/=/files/;
-    proxy_set_header Host $http_host;
-    proxy_redirect off;
-    proxy_pass http://puma;
-  }
+		try_files $uri/index.html $uri @puma;
+	  location @puma {
+	    proxy_set_header X-Forwarded-Proto $scheme;
+	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header X-Accel-Mapping /var/www/=/files/;
+	    proxy_set_header Host $http_host;
+	    proxy_redirect off;
+	    proxy_pass http://puma;
+	  }
 	
-	location ~ ^/assets/ {
-    gzip_static on;
-    expires max;
-    add_header Cache-Control public;
-  }
+		location ~ ^/assets/ {
+	    gzip_static on;
+	    expires max;
+	    add_header Cache-Control public;
+	  }
 
-	if (-f $document_root/system/maintenance.html) {
-		return 503;
+		if (-f $document_root/system/maintenance.html) {
+			return 503;
+		}
+		error_page 503 @maintenance;
+		location @maintenance {
+			rewrite  ^(.*)$  /system/maintenance.html last;
+			break;
+		}
+
+	  error_page 500 502 503 504 /500.html;
+	  client_max_body_size 4G;
+	  keepalive_timeout 10;
 	}
-	error_page 503 @maintenance;
-	location @maintenance {
-		rewrite  ^(.*)$  /system/maintenance.html last;
-		break;
-	}
-
-  error_page 500 502 503 504 /500.html;
-  client_max_body_size 4G;
-  keepalive_timeout 10;
-}
+<% end %>

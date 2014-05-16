@@ -25,12 +25,10 @@ set :whenever_command, "bundle exec whenever"
 set :server_name, "188.226.234.90"
 set :rails_env, "production"
 set :branch, "master"
-set :domain, "oneattendance.com"
-set :root_url, "https://#{domain}"
+set :domains, ["app.oneattendance.com", "app.realtxn.com"]
+set :root_url, "https://#{domains[0]}"
 set :mem_total, 2000
 set :mem_threshold, (mem_total * 0.75).round
-set :ssl_cert, "/etc/ssl/certs/#{domain}/ssl.crt"
-set :ssl_key, "/etc/ssl/certs/#{domain}/domain.key"
 server server_name, :web, :app, :db, primary: true
 set :whenever_command, "bundle exec whenever"
 
