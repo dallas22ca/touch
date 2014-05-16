@@ -7,6 +7,7 @@ class Organization < ActiveRecord::Base
   has_many :events
   has_many :segments
   has_many :folders
+  has_many :folderships, through: :folders
   
   has_attached_file :logo,
     default_url: "/imgs/brokerage_no_logo.jpg"

@@ -1,3 +1,23 @@
-// Place all the styles related to the folderships controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#folderships {
+	&[data-write] {
+		a {
+			cursor: pointer;
+			
+			&.resend {
+				display: inline-block;
+			}
+		}
+	}
+	
+	a {
+		cursor: text;
+		display: inline-block;
+		
+		&.resend {
+			color: #aaa;
+			font-size: 10px;
+			margin-left: 3px;
+			display: none;
+		}
+	}
+}

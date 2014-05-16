@@ -6,7 +6,7 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    @folders = @org.folders
+    @folders = @member.folders
   end
 
   # GET /folders/1
@@ -26,16 +26,19 @@ class FoldersController < ApplicationController
   # POST /folders
   # POST /folders.json
   def create
-    @folder = @org.folders.new(folder_params)
-    @folder.creator = current_user
+    @folder = @member.folders.new(folder_params)
+    @folder.creator = @member
+    @folder.organization = @org
 
     respond_to do |format|
       if @folder.save
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully created.' }
         format.json { render :show, status: :created, location: @folder }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -47,9 +50,11 @@ class FoldersController < ApplicationController
       if @folder.update(folder_params)
         format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully updated.' }
         format.json { render :show, status: :ok, location: @folder }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -67,7 +72,7 @@ class FoldersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_folder
-      @folder = @org.folders.find(params[:id])
+      @folder = @member.folders.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

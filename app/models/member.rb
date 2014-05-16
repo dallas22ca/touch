@@ -5,7 +5,7 @@ class Member < ActiveRecord::Base
   belongs_to :organization
   
   has_many :events, dependent: :destroy
-  has_many :folderships
+  has_many :folderships, dependent: :destroy
   has_many :folders, through: :folderships
 
   validates_uniqueness_of :key, scope: :organization
@@ -15,7 +15,8 @@ class Member < ActiveRecord::Base
   before_create :set_initial_admin
   before_create :permissions
   
-  after_create :set_user_data
+  after_create :set_user_data, if: :user
+  after_save :set_user_data, if: :user_id_changed?
   after_create :set_key, unless: :key
   
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
@@ -33,6 +34,7 @@ class Member < ActiveRecord::Base
   def name
     name = data["first_name"]
     name += " " + data["last_name"] unless data["last_name"].blank? 
+    name
   end
   
   def pretty_name
@@ -59,5 +61,9 @@ class Member < ActiveRecord::Base
   
   def permits?(clearance)
     permissions.include?("admin") || permissions.include?(clearance)
+  end
+  
+  def name_and_email
+    "#{name} <#{data["email"]}>"
   end
 end

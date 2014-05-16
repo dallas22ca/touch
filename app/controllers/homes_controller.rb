@@ -27,7 +27,7 @@ class HomesController < ApplicationController
   # POST /homes.json
   def create
     @home = @folder.homes.new(home_params)
-    @home.creator = current_user
+    @home.creator = @member
 
     respond_to do |format|
       if @home.save

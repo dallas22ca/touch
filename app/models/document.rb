@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
   belongs_to :folder, touch: true
-  belongs_to :creator, foreign_key: :creator_id, class_name: "User"
+  belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   
   has_attached_file :file,
     default_url: "/imgs/path.jpg",

@@ -49,7 +49,7 @@ $(document).on
 @Tasks =
 	init: ->
 		if $("#tasks").length
-			$("#tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
+			Tasks.makeEditable()
 			
 			$("#tasks").sortable
 				axis: "y"
@@ -70,3 +70,8 @@ $(document).on
 			$("#tasks").bind "sortupdate", ->
 				url = $("#tasks").data("url")
 				$.post url, $(this).sortable("serialize")
+	
+	makeEditable: ->
+		$("#tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
+		$("#tasks").css "min-height", "auto"
+		$("#tasks").css "min-height", $("#tasks").height()

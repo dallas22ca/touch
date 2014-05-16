@@ -3,13 +3,13 @@
 		
 		<div class="header">
 			<%= link_to image_tag(@org.logo.url, class: "brokerage_logo"), @org.website.to_s, target: :blank %>
-			<%= link_to image_tag(@folder.creator.avatar.url, class: "user_avatar"), @folder.creator.website.to_s, target: :blank %>
+			<%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %>
 	
 	    <div class="profile">
 	    	<p class="user_name"><%= @folder.creator.name %></p>
 				<p class="brokerage_name"><%= link_to @org.name, @org.website.to_s, target: :blank %></p>
-				<p class="user_website"><%= link_to @folder.creator.website.to_s, @folder.creator.website.to_s, target: :blank %></p>
-				<p class="user_phone"><%= link_to @folder.creator.phone.to_s, "tel:#{@folder.creator.phone.to_s.gsub(/[^\d]/, "")}", target: :blank %></p>
+				<p class="user_website"><%= link_to @folder.creator.user.website.to_s, @folder.creator.user.website.to_s, target: :blank %></p>
+				<p class="user_phone"><%= link_to @folder.creator.user.phone.to_s, "tel:#{@folder.creator.user.phone.to_s.gsub(/[^\d]/, "")}", target: :blank %></p>
 	    </div>
 			
 	    <div class="clear"></div>
@@ -18,7 +18,10 @@
 		<hr />
 		
 		<div class="folder_meta">
-			<h3>Last updated on <%= @folder.updated_at.strftime("%a, %b %-d") %></h3>
+			<h3>
+				Last updated on <%= @folder.updated_at.strftime("%a, %b %-d") %>.<br>
+				Signed in as a <%= @foldership.role_explained %>.
+			</h3>
 			<h2>
 				<%= @folder.name %>
 				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true if @foldership.permits? :folders, :write %>
@@ -28,14 +31,12 @@
 		<% if @foldership.permits? :folderships, :read %>
 			<div class="panel right">
 				<% if @foldership.permits? :folderships, :write %>
-					<%= link_to "Invite", "#", class: "invite_member right button small blue_bg" %>
+					<%= link_to "Invite", new_folder_foldership_path(@folder.organization.permalink, @folder), class: "invite_member right button small blue_bg", remote: true %>
 				<% end %>
 				
 				<h3>Who's Here?</h3>
-				<ul class="bulleted">
-					<% 5.times do %>
-						<li><%= link_to "Dallas Read", "#" %></li>
-					<% end %>
+				<ul id="folderships" class="bulleted folder_<%= @folder.id %>_folderships" <%= "data-write" if @foldership.permits? :folderships, :write %>>
+					<%= render @folder.folderships.order("created_at asc") %>
 				</ul>
 			</div>
 		<% end %>

@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = @folder.tasks.new(task_params)
-    @task.creator = current_user
+    @task.creator = @member
 
     respond_to do |format|
       if @foldership.permits?(:tasks, :write) && @task.save

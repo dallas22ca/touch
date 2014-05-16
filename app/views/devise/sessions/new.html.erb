@@ -1,6 +1,8 @@
 <h2>Sign in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
+
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :ignore_password, :ignore_email
+  attr_accessor :ignore_password, :ignore_email, :invitation_token
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   
   before_save :format_website
+  after_save :add_to_folder, if: :invitation_token
+  
+  def add_to_folder
+    foldership = Foldership.where(token: invitation_token).first
+    member = foldership.member.update! user: self
+    foldership.accept
+  end
   
   def format_website
     self.website = "http://#{website}" unless website.blank? || website =~ /http/

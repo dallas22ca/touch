@@ -1,2 +1,3 @@
 $("<%= j render @task %>").appendTo(".folder_<%= @folder.id %>_tasks")
 $("#new_task")[0].reset()
+Tasks.makeEditable()

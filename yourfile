@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="/Presentation/css/qTip2/jquery.qtip.min.css?Version=635346412015837199">
                        
         <!-- JS - CDN -->
-        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflJlammA.js" async=""></script><script async="" src="http://b.scorecardresearch.com/beacon.js"></script><script src="https://www.youtube.com/iframe_api"></script><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>   <!-- jquery 1.8.1 is producing a conflict with the slider on the Property Details. -->             
+        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflktr3k_.js" async=""></script><script async="" src="http://b.scorecardresearch.com/beacon.js"></script><script src="https://www.youtube.com/iframe_api"></script><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>   <!-- jquery 1.8.1 is producing a conflict with the slider on the Property Details. -->             
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
         
 
@@ -535,7 +535,7 @@ function __doPostBack(eventTarget, eventArgument) {
 </div>
 
                 
-<div class="m_load_icon" style="overflow-x: hidden; overflow-y: hidden; height: 4.2718px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; ">    
+<div class="m_load_icon" style="overflow-x: hidden; overflow-y: hidden; height: 3.9678px; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; ">    
     <img src="/Presentation/Images/common/icons/loading.gif" alt="Loading">
     <span><span>Loading</span>...</span>
 </div>
@@ -1228,7 +1228,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <div id="m_howrealtorshelp_home_cnt_con" class="m_howrealtorshelp_home_con noPrint">
 
     
-    <h2><span class="howrealtorshelp_home_title">Find out how a REALTOR<sup>®</sup> can protect you when buying or selling your home.</span></h2>
+    <h2><span class="howrealtorshelp_home_title">Wondering if a REALTOR<sup>®</sup> is right for you? <br> Stop wondering. Find out why.</span></h2>
         <div id="howrealtorshelp_home_con">
             <div id="howrealtorshelp_home_tab_con">
                 <span id="howrealtorshelp_home_buyers_tab" class="howrealtorshelp_home_tab m_hme_advert_tab m_hme_advert_tab_sel" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Tabbed Category - Buying a Property']);  stopVideos(); showBuyersTab(); ">Buying a Property</span>
@@ -1236,20 +1236,20 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>
 
             <div id="howrealtorshelp_home_buyers_tab_con">                
-                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="LIuWU1L_oh4"><img src="Presentation/Images/common/placeholders/LIuWU1L_oh4.png"></span></div>
+                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="1YjXVxv4A6w"><img src="Presentation/Images/common/placeholders/1YjXVxv4A6w.png"></span></div>
                 <div class="m_howrealtorshelp_home_sub_con">
-                    <div class="m_howrealtorshelp_home_hdr">Make sure you're ready to buy</div>
-                    <span class="m_howrealtorshelp_home_txt">This professional mother was ready to move so she could spend more time with her family and make an investment in her son's future.</span>
-                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Make sure you\'re ready to buy']); return true;" href="BuyerInformation.aspx#step=1_1&amp;noplay=1">See more of Erika's story</a></span>
+                    <div class="m_howrealtorshelp_home_hdr">Decide what you want to buy</div>
+                    <span class="m_howrealtorshelp_home_txt">If you're thinking of buying a home, you've come to the right place.</span>
+                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Decide what you want to buy']); return true;" href="BuyerInformation.aspx#step=2_1&amp;noplay=1">Watch Karen &amp; Angela's story</a></span>
                 </div>
             </div>
 
             <div id="howrealtorshelp_home_sellers_tab_con" style="position: absolute; top: -1000px;">             
-                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="hJIyHUT4TBo"><img src="Presentation/Images/common/placeholders/hJIyHUT4TBo.png"></span></div>
+                <div class="m_howrealtorshelp_home_vid_con"><span class="youtubeVideo" id="O-3kgC5jYEM"><img src="Presentation/Images/common/placeholders/O-3kgC5jYEM.png"></span></div>
                 <div class="m_howrealtorshelp_home_sub_con">
-                    <div class="m_howrealtorshelp_home_hdr">Determine your home's asking price</div>
-                    <span class="m_howrealtorshelp_home_txt">Lots of people out there want to buy your home. The right asking price will attract attention and get you maximum return.</span>
-                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Determine your home\'s asking price']); return true;" href="SellerInformation.aspx#step=4_2&amp;noplay=1">See more of Chris and Philana's story</a></span>
+                    <div class="m_howrealtorshelp_home_hdr">Decide when to sell</div>
+                    <span class="m_howrealtorshelp_home_txt">In real estate, timing influences your home's selling price. Working with a REALTOR® can help make timing work for you.</span>
+                    <span class="m_howrealtorshelp_home_stry"><a target="_blank" onclick="_gaq.push(['_trackEvent', 'Home Page', 'Decide when to sell']); return true;" href="SellerInformation.aspx#step=1_1&amp;noplay=1">See more of Erika's story</a></span>
                 </div>
             </div>
       </div>
@@ -2678,7 +2678,7 @@ jQuery.support.cors = true;
 $.ajaxSetup({ cache: false });
 function logAnalytics(listingId,eventType) {
 if (listingId!=''){
-var url = 'http://analytics.crea.ca/LogEvents.svc/LogEvents?&DestinationID=384&UUID=d592a243-0e96-453a-badd-27886382cd48&IP=142.167.151.203';
+var url = 'http://analytics.crea.ca/LogEvents.svc/LogEvents?&DestinationID=384&UUID=af0ad467-1ae1-4b69-9f01-82a41af9af1b&IP=142.167.151.203';
 url += '&Listingid=' + listingId;
 url += '&EventType=' + eventType;
  var req = $.ajax({url:url,crossDomain:true,dataType:'jsonp',type:'get',timeout:5000});

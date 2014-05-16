@@ -42,7 +42,7 @@ class ModulesController < ApplicationController
             ignore_password: true,
             ignore_email: true
           )
-          @member = @org.members.create! user: @user, permissions: ["member"]
+          @member = @org.members.create! user: @user
         end
       
         @org.events.create!(

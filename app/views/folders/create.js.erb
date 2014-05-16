@@ -1,0 +1,5 @@
+<% if @folder.errors.any? %>
+	alert("<%= @folder.errors.full_messages.join(", ") %>")
+<% else %>
+	window.location = "<%= folder_path @org.permalink, @folder %>"
+<% end %>

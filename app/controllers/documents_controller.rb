@@ -27,7 +27,7 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = @folder.documents.new(document_params)
-    @document.creator = current_user
+    @document.creator = @member
 
     respond_to do |format|
       if @foldership.permits?(:documents, :write) && @document.save!

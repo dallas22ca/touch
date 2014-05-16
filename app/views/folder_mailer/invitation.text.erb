@@ -1,0 +1,11 @@
+Hi <%= @member.name %>,
+
+<%= @inviter.name %> has invited you to work on a project together called "<%= @folder.name %>".
+
+To accept this invitation, click on the following link:
+
+<%= foldership_invitation_url(@folder.organization.permalink, @foldership.token) %>
+
+Thanks,
+
+Dallas Read & the RealTXN.com team

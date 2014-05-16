@@ -12,6 +12,7 @@
 	
 	&.right {
 		width: 34%;
+		clear: right;
 	}
 	
 	&.left {
@@ -85,6 +86,7 @@
 			line-height: 18px;
 			color: #aaa;
 			font-style: oblique;
+			text-align: right;
 		}
 	}
 }

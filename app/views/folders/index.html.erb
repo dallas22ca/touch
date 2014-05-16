@@ -8,6 +8,19 @@
 	</ul>
 <% end %>
 
+<h3>Invitations</h3>
+<ul>
+	<% @member.folderships.unaccepted.each do |foldership| %>
+		<li>
+			<%= foldership.folder.name %> by
+			<%= foldership.folder.creator.name %>
+			<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+		</li>
+	<% end %>
+</ul>
+
+<hr />
+
 <h1>Listing <%= @org.name %> folders that I have access to!</h1>
 
 <table>
