@@ -8,43 +8,26 @@
 	</ul>
 <% end %>
 
-<h3>Invitations</h3>
-<ul>
-	<% @member.folderships.unaccepted.each do |foldership| %>
-		<li>
-			<%= foldership.folder.name %> by
-			<%= foldership.folder.creator.name %>
-			<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+<% if @member.folderships.unaccepted.any? %>
+	<h3>Invitations</h3>
+	<ul>
+		<% @member.folderships.unaccepted.each do |foldership| %>
+			<li>
+				<%= foldership.folder.name %> by
+				<%= foldership.folder.creator.name %>
+				<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<div class="container">
+	<ul id="folders">
+		<li class="folder panel center">
+			<a href="<%= new_folder_path %>" data-remote="true">
+				<%= image_tag "/imgs/plus.png", class: "plus" %>
+			</a>
 		</li>
-	<% end %>
-</ul>
-
-<hr />
-
-<h1>Listing <%= @org.name %> folders that I have access to!</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Archive</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @folders.each do |folder| %>
-      <tr>
-        <td><%= folder.name %></td>
-        <td><%= folder.archived %></td>
-        <td><%= link_to 'Show', folder_path(folder.organization.permalink, folder) %></td>
-        <td><%= link_to 'Edit', edit_folder_path(folder.organization.permalink, folder) %></td>
-        <td><%= link_to 'Destroy', folder_path(folder.organization.permalink, folder), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Folder', new_folder_path, remote: true %>
+	  <%= render @folders %>
+	</ul>
+</div>

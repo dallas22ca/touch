@@ -5,7 +5,7 @@
 			<%= link_to image_tag(@org.logo.url, class: "brokerage_logo"), @org.website.to_s, target: :blank %>
 			<%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %>
 	
-	    <div class="profile">
+	    <div class="profile" data-no-turbolink>
 	    	<p class="user_name"><%= @folder.creator.name %></p>
 				<p class="brokerage_name"><%= link_to @org.name, @org.website.to_s, target: :blank %></p>
 				<p class="user_website"><%= link_to @folder.creator.user.website.to_s, @folder.creator.user.website.to_s, target: :blank %></p>

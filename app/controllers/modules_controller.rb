@@ -3,11 +3,11 @@ class ModulesController < ApplicationController
   before_filter :check_if_org
   
   def redirect
-    if @org.modules.include? "contacts"
+    if @org.modules.include?("contacts") && @member.permits?("contacts")
       redirect_to members_path(current_user.organizations.first)
-    elsif @org.modules.include? "attendance"
+    elsif @org.modules.include?("attendance") && @member.permits?("attendance")
       redirect_to attendance_path(current_user.organizations.first)
-    elsif @org.modules.include? "folders"
+    elsif @org.modules.include?("folders") && @member.permits?("folders")
       redirect_to folders_path(current_user.organizations.first)
     else
       redirect_to edit_user_registration_path

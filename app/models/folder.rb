@@ -7,6 +7,7 @@ class Folder < ActiveRecord::Base
   has_many :homes, dependent: :destroy
   has_many :folderships, dependent: :destroy
   has_many :members, through: :folderships
+  has_many :users, through: :members
   
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   

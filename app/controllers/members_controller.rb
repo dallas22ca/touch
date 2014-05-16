@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_filter :set_organization
-  before_filter :redirect_to_root, unless: Proc.new { @org.modules.include? "contacts" }
   before_action :set_this_member, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_root, unless: Proc.new { @org.modules.include?("contacts") && @member.permits?("contacts") }
   
   def index
     params[:filters] ||= []
