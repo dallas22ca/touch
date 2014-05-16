@@ -2,10 +2,10 @@ body {
 	font-family: Arial, Sans Serif;
 	font-size: 16px;
 	line-height: 21px;
-	margin-top: 60px;
+	margin-top: 75px;
 	
 	&.members_index {
-		margin-top: 125px;
+		margin-top: 140px;
 	}
 	
 	&.rooms_show {
@@ -29,12 +29,13 @@ img {
 }
 
 #topbar {
-	height: 60px;
+	height: 76px;
 	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
-	color: #fff;
+	color: #777;
+	background: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	z-index: 9999;
 	
@@ -42,6 +43,18 @@ img {
 		font-weight: bold;
 		font-size: 21px;
 		float: left;
+		
+		&.avatar {
+			margin-left: -10px;
+		}
+		
+		a {
+			padding: 10px;
+			
+			img {
+				height: 56px;
+			}
+		}
 	}
 	
 	.show_nav {
@@ -49,13 +62,16 @@ img {
 	}
 	
 	.selected {
-		background: rgba(0, 0, 0, 0.4);			
+		background: #eee;
+		color: #111;
+		border-color: #ddd;
 	}
 	
 	a {
 		display: inline-block;
-		padding: 20px 20px 19px;
-		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+		padding: 28px 25px 27px;
+		border-left: 1px solid transparent;
+		border-right: 1px solid transparent;
 	}
 	
 	.nav {
@@ -163,7 +179,7 @@ hr {
 			display: none;
 			position: absolute;
 			right: 0;
-			top: 60px;
+			top: 75px;
 			left: 0;
 			background: #fff;
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);

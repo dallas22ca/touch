@@ -1,5 +1,5 @@
 <% title do %>
-	<h1><%= link_to @website["name"], "#", class: "show_sub_menu" %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 	<ul class="sub_menu">
 		<% if @channel && @channel.persisted? %>
 			<li><%= link_to "Edit This Room", edit_channel_path(@org.permalink, @channel), remote: true %></li>

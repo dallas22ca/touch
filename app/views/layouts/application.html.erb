@@ -12,7 +12,7 @@
 </head>
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
-		<div id="topbar" class="blue_bg">
+		<div id="topbar">
 			<%= link_to "[#]", "#", class: "show_nav" %>
 
 			<ul class="nav">
@@ -34,7 +34,11 @@
 			</ul>
 
 			<% if yield(:title).blank? %>
-				<h1><%= link_to(@website["name"], root_path) %></h1>
+				<% if @org %>
+					<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+				<% else %>
+					<h1><%= link_to(@website["name"], root_path) %></h1>
+				<% end %>
 			<% else %>
 				<%= yield :title %>
 			<% end %>

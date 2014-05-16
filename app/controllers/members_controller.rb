@@ -33,20 +33,20 @@ class MembersController < ApplicationController
   
   def update
     respond_to do |format|
-      if @member.update(member_params)
-        format.html { redirect_to member_path(@org.permalink, @member), notice: 'Room was successfully updated.' }
-        format.json { render :show, status: :ok, location: @member }
+      if @this_member.update(member_params)
+        format.html { redirect_to member_path(@org.permalink, @this_member), notice: 'Room was successfully updated.' }
+        format.json { render :show, status: :ok, location: @this_member }
         format.js
       else
         format.html { render :edit }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.json { render json: @this_member.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
   
   def destroy
-    @member.destroy
+    @this_member.destroy
     respond_to do |format|
       format.html { redirect_to members_path(@org.permalink), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
@@ -57,7 +57,7 @@ class MembersController < ApplicationController
   private
   
   def set_this_member
-    @member = @org.members.find(params[:id])
+    @this_member = @org.members.find(params[:id])
   end
   
   def member_params
