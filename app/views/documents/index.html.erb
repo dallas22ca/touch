@@ -1,25 +1,30 @@
-<h1>Listing documents</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Channel</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @documents.each do |document| %>
-      <tr>
-        <td><%= document.channel %></td>
-        <td><%= link_to 'Show', document %></td>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Document', new_document_path %>
+		<% if @channelship.permits? :documents, :read %>
+			<div id="documents_wrapper" class="panel top_space no_surround right">
+				<div class="content">
+					<% if @channelship.permits? :documents, :write %>
+						<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
+					<% end %>
+					
+					<h3>Documents</h3>
+				
+					<table id="documents" style="<%= "display: none; " if @channel.documents.empty? %>" <%= "data-delete" if @channelship.permits? :documents, :delete %>>
+						<thead>
+							<tr>
+								<th>File Name</th>
+								<th>Added</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="documents" class="channel_<%= @channel.id %>_documents">
+							<%= render @channel.documents.order("updated_at desc") %>
+						</tbody>
+					</table>
+					
+					<% if @channelship.permits? :documents, :write %>
+						<%= form_for [@channel, Document.new], url: channel_documents_path(@org.permalink, @channel) do |f| %>
+							<%= f.file_field :file %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>

@@ -1,178 +1,31 @@
-#channels {
-	width: 100%;
-	padding-top: 20px;
-	
-	.channel {
-		width: 31.333333%;
-		float: left;
-		margin: 1%;
-		padding: 0px;
-		
-		&:nth-child(1n) {
-			margin-left: 0;
-		}
-		
-		&:nth-child(3n) {
-			margin-right: 0;
-		}
-		
-		a {
-			display: block;
-			padding: 20px;
+.channel_header {
+	position: fixed;
+	background: #fff;
+	left: 0;
+	top: 50px;
+	right: 0;
+	z-index: 9999;
 
-			h2 {
-				font-weight: bold;
-				font-size: 24px;
-				line-height: 36px;
-			}
-			
-			.plus {
-				height: 93px;
-			}
-			
-			.members {
-				margin-top: 10px;
-
-				li {
-					float: left;
-					margin: 0 3.5% 1%;
-					width: 17%;
-					
-					&:nth-child(1n) {
-						margin-left: 0;
-					}
-		
-					&:nth-child(5n) {
-						margin-right: 0;
-					}
-
-					img {
-						width: 100%;
-						border-radius: 35px;
-						border: 1px solid #ccc;
-					}
-				}
-			}
-		}
-	}
-}
-
-.panel {
-	background: #eee;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 20px;
-	font-size: 16px;
-	line-height: 24px;
-	
-	&.notepad {
-		background-image: url(/imgs/note.jpg);
-	}
-	
-	&.right {
-		width: 34%;
-		clear: right;
-	}
-	
-	&.left {
-		width: 63%;
-	}
-	
-	&.top_space {
-		margin-top: 3%;
-	}
-	
-	&.notttttt_surround {
-		padding: 0px;
-		border: 0;
-		background: none;
-	}
-	
-	h3 {
-		font-weight: bold;
-		font-size: 18px;
-		line-height: 24px;
-		margin-bottom: 10px;
-	}
-}
-
-.channels_show {
-	#yield .header {
-		margin-bottom: 20px;
-
-		.brokerage_logo {
-			float: right;
-			max-width: 180px;
-			max-height: 125px;
-		}
-		
-		.user_avatar {
-			float: left;
-			width: 120px;
-		}
-		
-		.profile {
-			float: left;
-			margin-left: 20px;
-			margin-top: 10px;
-			
-			.user_name {
-				font-weight: bold;
-				font-size: 21px;
-				line-height: 32px;
-			}
-		}
-	}
-	
-	.channel_meta {
-		margin: 20px 0;
-		
-		h2 {
-			font-weight: bold;
-			font-size: 34px;
-			line-height: 40px;
-			
-			a {
-				font-weight: normal;
-				font-size: 12px;
-				color: #aaa;
-			}
-		}
-		
-		h3 {
-			float: right;
-			font-size: 12px;
-			line-height: 18px;
-			color: #aaa;
-			font-style: oblique;
-			text-align: right;
-		}
-	}
-}
-
-@media screen and (max-width: 600px) {
 	.brokerage_logo {
-		display: none;
+		float: right;
+		max-width: 180px;
+		max-height: 125px;
 	}
 	
-	.channel_meta h3 {
-		display: none;
+	.user_avatar {
+		float: left;
+		width: 120px;
 	}
 	
-	.panel {
-		margin-bottom: 20px;
-		width: 100% !important;
+	.profile {
+		float: left;
+		margin-left: 20px;
+		margin-top: 10px;
 		
-		&.left {
-			float: none;
-		}
-		
-		&.right {
-			float: none;
-		}
-		
-		&.top_space {
-			margin-top: 0;
+		.user_name {
+			font-weight: bold;
+			font-size: 21px;
+			line-height: 32px;
 		}
 	}
 }

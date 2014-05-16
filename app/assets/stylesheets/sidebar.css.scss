@@ -3,17 +3,22 @@
 	left: 0;
 	top: 60px;
 	bottom: 0;
-	width: 22%;
+	width: 20%;
 	background: #eee;
 	border-right: 1px solid #ddd;
 	//box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	padding: 15px;
 	overflow-y: auto;
 	z-index: 99;
+	
+	&.right_sidebar {
+		right: 0;
+		left: auto;
+	}
 }
 
 .has_sidebar {
-	margin-left: 22%;
+	margin-left: 20%;
 }
 
 @media screen and (max-width: 600px) {
