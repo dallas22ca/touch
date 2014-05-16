@@ -17,34 +17,6 @@ ActiveRecord::Schema.define(version: 20140514144903) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "documents", force: true do |t|
-    t.integer  "channel_id"
-    t.integer  "creator_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
-  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
-  add_index "documents", ["channel_id"], name: "index_documents_on_channel_id", using: :btree
-
-  create_table "events", force: true do |t|
-    t.string   "description"
-    t.hstore   "data"
-    t.text     "json_data"
-    t.integer  "organization_id"
-    t.integer  "member_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "verb"
-  end
-
-  add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
-  add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
-
   create_table "channels", force: true do |t|
     t.string   "name"
     t.boolean  "archived",        default: false
@@ -70,9 +42,37 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.string   "email"
   end
 
-  add_index "channelships", ["creator_id"], name: "index_channelships_on_creator_id", using: :btree
   add_index "channelships", ["channel_id"], name: "index_channelships_on_channel_id", using: :btree
+  add_index "channelships", ["creator_id"], name: "index_channelships_on_creator_id", using: :btree
   add_index "channelships", ["member_id"], name: "index_channelships_on_member_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.integer  "channel_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "documents", ["channel_id"], name: "index_documents_on_channel_id", using: :btree
+  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "description"
+    t.hstore   "data"
+    t.text     "json_data"
+    t.integer  "organization_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "verb"
+  end
+
+  add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
+  add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
 
   create_table "homes", force: true do |t|
     t.string   "address"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.datetime "updated_at"
   end
 
-  add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
   add_index "homes", ["channel_id"], name: "index_homes_on_channel_id", using: :btree
+  add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
 
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
@@ -155,8 +155,8 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.integer  "ordinal",    default: 9999
   end
 
-  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
   add_index "tasks", ["channel_id"], name: "index_tasks_on_channel_id", using: :btree
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
