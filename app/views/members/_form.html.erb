@@ -1,12 +1,12 @@
 <%= link_to "x", "#", class: "close_lightbox close_button" %>
-<h1><%= @member.new_record? ? "Create A" : "Edit" %> Meeting</h1>
+<h1><%= @this_member.new_record? ? "Create A" : "Edit" %> Meeting</h1>
 
 <div class="content">
-	<%= form_for @member, url: @member.new_record? ? members_path(@org.permalink) : member_path(@org.permalink, @member), remote: @member.persisted? do |f| %>
+	<%= form_for @this_member, url: @this_member.new_record? ? members_path(@org.permalink) : member_path(@org.permalink, @this_member), remote: @this_member.persisted? do |f| %>
 		<% %w[first_name last_name email].each do |field| %>
 			<div class="field">
 				<%= label_tag "member[data][#{field}]", field.split("_").map{ |w| w.capitalize }.join(" ") %><br>
-				<%= text_field_tag "member[data][#{field}]", @member.data[field] %>
+				<%= text_field_tag "member[data][#{field}]", @this_member.data[field] %>
 			</div>
 		<% end %>
 		
@@ -14,8 +14,8 @@
 		
 		<%= link_to "Cancel", "#", class: "close_lightbox" %>
 
-		<% if @member.persisted? %>
-			<%= link_to "Delete", member_path(@org.permalink, @member), class: "close_lightbox", remote: true, method: :delete, data: { confirm: "This will delete all data associated with this contact. Are you sure you want to delete this contact?" } %>
+		<% if @this_member.persisted? %>
+			<%= link_to "Delete", member_path(@org.permalink, @this_member), class: "close_lightbox", remote: true, method: :delete, data: { confirm: "This will delete all data associated with this contact. Are you sure you want to delete this contact?" } %>
 		<% end %>
 	<% end %>
 </div>

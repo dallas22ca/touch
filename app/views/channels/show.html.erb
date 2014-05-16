@@ -1,5 +1,12 @@
-<div class="has_header">
-	<div class="sidebar">
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+	<h1 class="avatar"><%= link_to image_tag(@channel.creator.user.avatar.url, class: "user_avatar"), @channel.creator.user.website.to_s, target: :blank %></h1>
+<% end %>
+
+
+<div id="yield">
+	<div class="container">
+		
 		<% if @member.channelships.unaccepted.any? %>
 			<h3>Invitations</h3>
 			<ul>
@@ -9,6 +16,25 @@
 						<%= channelship.channel.creator.name %>
 						<%= link_to "Accept", channel_channelship_accept_path(channelship.channel.organization.permalink, channelship.channel, channelship, channelship: { accepted: true }), method: :post %>
 					</li>
+				<% end %>
+			</ul>
+		<% end %>
+		
+		<div class="channel_meta">
+			<h3>
+				Last updated on <%= @channel.updated_at.strftime("%a, %b %-d") %>.<br>
+				Signed in as a <%= @channelship.role_explained %>.
+			</h3>
+			<h2>
+				<%= @channel.name %>
+				<%= link_to "Rename", edit_channel_path(@channel.organization.permalink, @channel), remote: true if @channelship.permits? :channels, :write %>
+			</h2>
+		</div>
+
+		<% if @channelship.permits? :channelships, :read %>
+			<div class="panel right">
+				<% if @channelship.permits? :channelships, :write %>
+					<%= link_to "Invite", new_channel_channelship_path(@channel.organization.permalink, @channel), class: "invite_member right button small blue_bg", remote: true %>
 				<% end %>
 			</ul>
 		<% end %>
