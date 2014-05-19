@@ -11,11 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514144903) do
+ActiveRecord::Schema.define(version: 20140519154047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "comments", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["creator_id"], name: "index_comments_on_creator_id", using: :btree
+  add_index "comments", ["folder_id"], name: "index_comments_on_folder_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
+  add_index "documents", ["folder_id"], name: "index_documents_on_folder_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "description"
+    t.hstore   "data"
+    t.text     "json_data"
+    t.integer  "organization_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "verb"
+  end
+
+  add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
+  add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
 
   create_table "folders", force: true do |t|
     t.string   "name"
@@ -42,37 +81,9 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.string   "email"
   end
 
-  add_index "folderships", ["folder_id"], name: "index_folderships_on_folder_id", using: :btree
   add_index "folderships", ["creator_id"], name: "index_folderships_on_creator_id", using: :btree
+  add_index "folderships", ["folder_id"], name: "index_folderships_on_folder_id", using: :btree
   add_index "folderships", ["member_id"], name: "index_folderships_on_member_id", using: :btree
-
-  create_table "documents", force: true do |t|
-    t.integer  "folder_id"
-    t.integer  "creator_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
-  add_index "documents", ["folder_id"], name: "index_documents_on_folder_id", using: :btree
-  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
-
-  create_table "events", force: true do |t|
-    t.string   "description"
-    t.hstore   "data"
-    t.text     "json_data"
-    t.integer  "organization_id"
-    t.integer  "member_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "verb"
-  end
-
-  add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
-  add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
 
   create_table "homes", force: true do |t|
     t.string   "address"
@@ -88,8 +99,8 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.datetime "updated_at"
   end
 
-  add_index "homes", ["folder_id"], name: "index_homes_on_folder_id", using: :btree
   add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
+  add_index "homes", ["folder_id"], name: "index_homes_on_folder_id", using: :btree
 
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
@@ -112,6 +123,17 @@ ActiveRecord::Schema.define(version: 20140514144903) do
 
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
   add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
+
+  create_table "notes", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["creator_id"], name: "index_notes_on_creator_id", using: :btree
+  add_index "notes", ["folder_id"], name: "index_notes_on_folder_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "permalink"
@@ -155,8 +177,8 @@ ActiveRecord::Schema.define(version: 20140514144903) do
     t.integer  "ordinal",    default: 9999
   end
 
-  add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
   add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
+  add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

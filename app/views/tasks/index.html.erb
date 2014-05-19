@@ -1,6 +1,6 @@
 <% title do %>
-	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 <% end %>
 
 <div class="has_header">
@@ -9,30 +9,22 @@
 	<div class="main has_sidebar">
 		<div class="loading"></div>
 		
-		<h1><%= @folder.name %> Tasks</h1>
+		<div id="tasks_wrapper">
+			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
+				<%= render @folder.tasks.incomplete.by_ordinal %>
+			</ul>
+			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
+				<%= render @folder.tasks.complete.by_completed_at %>
+			</ul>
+			
+			<% if @foldership.permits? :tasks, :write %>
+				<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+					<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
+				<% end %>
+			<% end %>
+			
+			<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @folder.tasks.complete.empty?}" %>
+		</div>
 
-		<table>
-		  <thead>
-		    <tr>
-		      <th>Content</th>
-		      <th>Folder</th>
-		      <th>User</th>
-		      <th colspan="3"></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @tasks.each do |task| %>
-		      <tr>
-		        <td><%= task.content %></td>
-		        <td><%= task.folder %></td>
-		        <td><%= task.creator %></td>
-		        <td><%= link_to 'Show', folder_task_path(task.folder.organization.permalink, task.folder, task) %></td>
-		        <td><%= link_to 'Edit', edit_folder_task_path(task.folder.organization.permalink, task.folder, task) %></td>
-		        <td><%= link_to 'Destroy', folder_task_path(task.folder.organization.permalink, task.folder, task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
 	</div>
 </div>

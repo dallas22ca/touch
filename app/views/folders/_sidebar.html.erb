@@ -13,8 +13,8 @@
 	<% end %>
 	
 	<ul>
-		<li><%= link_to @folder.name, folder_path(@org.permalink, @folder), class: "choose_folder" %></li>
-		<li><%= link_to "Newsfeed", folder_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to @folder.name, folder_comments_path(@org.permalink, @folder), class: "choose_folder" %></li>
+		<li><%= link_to "Newsfeed", folder_comments_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_comments_path(@org.permalink, @folder)}" %></li>
 		<li><%= link_to "Tasks", folder_tasks_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_tasks_path(@org.permalink, @folder)}" %></li>
 		<li><%= link_to "Homes", folder_homes_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_homes_path(@org.permalink, @folder)}" %></li>
 		<li><%= link_to "Documents", folder_documents_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_documents_path(@org.permalink, @folder)}" %></li>

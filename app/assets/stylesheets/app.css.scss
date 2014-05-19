@@ -11,6 +11,10 @@ body {
 	&.rooms_show {
 		margin-top: 124px;
 	}
+	
+	&.tasks_index {
+		background: #FCF5E7;
+	}
 }
 
 a {
@@ -45,7 +49,7 @@ img {
 		float: left;
 		
 		&.avatar {
-			margin-left: -10px;
+			margin-right: -10px;
 		}
 		
 		a {

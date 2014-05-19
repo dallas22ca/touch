@@ -5,6 +5,7 @@ class Folder < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :documents, dependent: :destroy
   has_many :homes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :folderships, dependent: :destroy
   has_many :members, through: :folderships
   has_many :users, through: :members

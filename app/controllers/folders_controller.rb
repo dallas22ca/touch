@@ -12,6 +12,7 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
+    redirect_to folder_comments_path(@org.permalink, @folder)
   end
 
   # GET /folders/new

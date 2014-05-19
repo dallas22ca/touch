@@ -29,12 +29,14 @@ $(document).on "click", ".show_nav", ->
 
 load = ->
 	$(".loading").hide()
+	Touch.mobileCheck()
+	
 	Attendance.init()
 	Event.init()
 	Segments.init()
 	Filters.init()
 	Tasks.init()
-	Touch.mobileCheck()
+	Comments.init()
 
 $ ->
 	Lightbox.init()

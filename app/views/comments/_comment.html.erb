@@ -1,0 +1,13 @@
+<%= content_tag_for :li, comment do %>
+	<div class="left_meta">
+		<%= image_tag comment.creator.user.avatar.url, class: "avatar" %>
+	</div>
+	
+	<div class="right_meta">
+		<p class="created_at"><%= comment.created_at.strftime("%b %d") %></p>
+		<p class="creator_name"><%= comment.creator.user.name %></p>
+		<p class="body"><%= comment.body %></p>
+	</div>
+	
+	<div class="clear"></div>
+<% end %>

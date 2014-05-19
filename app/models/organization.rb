@@ -10,7 +10,7 @@ class Organization < ActiveRecord::Base
   has_many :folderships, through: :folders
   
   has_attached_file :logo,
-    default_url: "/imgs/brokerage_no_logo.jpg"
+    default_url: "/imgs/no_org_logo.jpg"
   
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
   

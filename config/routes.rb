@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           post "/tasks/sort" => "tasks#sort", as: :sort_tasks
           resources :tasks
           resources :homes
+          resources :comments
 
           resources :folderships, path: :members do
             post "/accept" => "folderships#accept", as: :accept

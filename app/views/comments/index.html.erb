@@ -1,0 +1,26 @@
+<% title do %>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+<% end %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<% if 1 == 0 %>
+			<div class="center">
+				<%= link_to "Load more", "#", class: "big blue_bg button" %>
+			</div>
+		<% end %>
+
+		<ul class="folder_<%= @folder.id %>_comments comments">
+			<%= render @comments %>
+		</ul>
+		
+		<%= form_for [@folder, Comment.new], url: folder_comments_path(@org.permalink, @folder), remote: true do |f| %>
+			<%= f.text_field :body, value: nil, placeholder: "What's on your mind?", autocomplete: "off" %>
+		<% end %>
+	</div>
+</div>

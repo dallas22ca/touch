@@ -1,5 +1,8 @@
 #tasks_wrapper {
-	min-height: 250px;
+	width: 100%;
+	max-width: 500px;
+	margin: 50px auto 70px auto;
+	padding: 8px;
 	
 	.ui-state-highlight {
 		background: rgba(0, 0, 0, 0.2);
@@ -59,7 +62,9 @@
 	}
 
 	.task {
-		margin-bottom: 5px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		border-bottom: 1px solid #EADEC4;
 		
 		.content {
 			display: inline-block;
@@ -96,23 +101,37 @@
 		}
 	}
 	
-	#new_task {
-		width: 100%;
-		margin-top: 10px;
-
-		input[type="text"] {
-			background: transparent;
-			border: 0 none;
-			margin-left: 7%;
-			width: 93%;
-			padding: 0;
-		}
-	}
-	
 	.show_completed_tasks {
 		float: right;
 		color: #555;
 		font-size: 11px;
 		font-style: oblique;
+	}
+}
+
+#new_task {
+	position: fixed;
+	bottom: 0;
+	left: 222px;
+	right: 0;
+	background: #FCF5E7;
+	text-align: center;
+	padding: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	
+	#task_content {
+		height: 32px;
+		width: 100%;
+		max-width: 500px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#new_task {
+		left: 0;
+	}
+	
+	#tasks_wrapper {
+		margin-top: -20px;
 	}
 }
