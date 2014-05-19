@@ -1,3 +1,7 @@
+$(document).on "click", "#topbar .nav a", ->
+	$("#topbar .nav a").removeClass "selected"
+	$(this).addClass "selected"
+	
 $(document).on "click", ".show_sub_menu", ->
 	$(".sub_menu").toggle()
 	$(this).toggleClass  "selected"

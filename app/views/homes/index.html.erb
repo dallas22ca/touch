@@ -1,37 +1,47 @@
-<h1>Listing homes</h1>
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Address</th>
-      <th>City</th>
-      <th>Province</th>
-      <th>Postal code</th>
-      <th>Beds</th>
-      <th>Baths</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="has_header">
+	<%= render "folders/sidebar" %>
 
-  <tbody>
-    <% @homes.each do |home| %>
-      <tr>
-        <td><%= home.address %></td>
-        <td><%= home.city %></td>
-        <td><%= home.province %></td>
-        <td><%= home.postal_code %></td>
-        <td><%= home.beds %></td>
-        <td><%= home.baths %></td>
-        <td><%= home.data %></td>
-        <td><%= link_to 'Show', home %></td>
-        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<h1><%= @folder.name %> Homes</h1>
+	
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Address</th>
+		      <th>City</th>
+		      <th>Province</th>
+		      <th>Postal code</th>
+		      <th>Beds</th>
+		      <th>Baths</th>
+		      <th>Data</th>
+		      <th colspan="3"></th>
+		    </tr>
+		  </thead>
 
-<br>
-
-<%= link_to 'New Home', new_home_path %>
+		  <tbody>
+		    <% @homes.each do |home| %>
+		      <tr>
+		        <td><%= home.address %></td>
+		        <td><%= home.city %></td>
+		        <td><%= home.province %></td>
+		        <td><%= home.postal_code %></td>
+		        <td><%= home.beds %></td>
+		        <td><%= home.baths %></td>
+		        <td><%= home.data %></td>
+		        <td><%= link_to 'Show', home %></td>
+		        <td><%= link_to 'Edit', edit_home_path(home) %></td>
+		        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+		
+	</div>
+</div>

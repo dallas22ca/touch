@@ -1,0 +1,4 @@
+<%= content_tag_for :li, foldership do %>
+	<%= link_to "#{foldership.name} - #{foldership.role_explained}", edit_folder_foldership_path(foldership.folder.organization.permalink, foldership.folder, foldership), remote: true %>
+	<%= link_to "Re-send", folder_foldership_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { resend: true }), method: :patch, remote: true, class: "resend" unless foldership.accepted? %>
+<% end %>

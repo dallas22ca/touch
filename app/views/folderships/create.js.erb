@@ -1,0 +1,7 @@
+<% if @fship.errors.any? %>
+	alert("<%= @fship.errors.full_messages.join(", ").html_safe %>")
+<% else %>
+	$("<%= j render @fship %>").appendTo(".folder_<%= @folder.id %>_folderships")
+	$("#new_foldership")[0].reset()
+	Lightbox.close()
+<% end %>

@@ -1,0 +1,23 @@
+<div id="folder_sidebar" class="sidebar without_padding">
+	<% if @member.folderships.unaccepted.any? %>
+		<h3>Invitations</h3>
+		<ul>
+			<% @member.folderships.unaccepted.each do |foldership| %>
+				<li>
+					<%= foldership.folder.name %> by
+					<%= foldership.folder.creator.name %>
+					<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+	
+	<ul>
+		<li><%= link_to @folder.name, folder_path(@org.permalink, @folder), class: "choose_folder" %></li>
+		<li><%= link_to "Newsfeed", folder_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "Tasks", folder_tasks_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_tasks_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "Homes", folder_homes_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_homes_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "Documents", folder_documents_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_documents_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "Who's Here?", folder_folderships_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_folderships_path(@org.permalink, @folder)}" %></li>
+	</ul>
+</div>

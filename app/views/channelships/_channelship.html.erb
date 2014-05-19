@@ -1,4 +1,0 @@
-<%= content_tag_for :li, channelship do %>
-	<%= link_to "#{channelship.name} - #{channelship.role_explained}", edit_channel_channelship_path(channelship.channel.organization.permalink, channelship.channel, channelship), remote: true %>
-	<%= link_to "Re-send", channel_channelship_path(channelship.channel.organization.permalink, channelship.channel, channelship, channelship: { resend: true }), method: :patch, remote: true, class: "resend" unless channelship.accepted? %>
-<% end %>

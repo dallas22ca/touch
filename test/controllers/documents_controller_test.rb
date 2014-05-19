@@ -18,7 +18,7 @@ class DocumentsControllerTest < ActionController::TestCase
 
   test "should create document" do
     assert_difference('Document.count') do
-      post :create, document: { channel_id: @document.channel_id }
+      post :create, document: { folder_id: @document.folder_id }
     end
 
     assert_redirected_to document_path(assigns(:document))
@@ -35,7 +35,7 @@ class DocumentsControllerTest < ActionController::TestCase
   end
 
   test "should update document" do
-    patch :update, id: @document, document: { channel_id: @document.channel_id }
+    patch :update, id: @document, document: { folder_id: @document.folder_id }
     assert_redirected_to document_path(assigns(:document))
   end
 

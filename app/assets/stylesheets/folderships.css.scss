@@ -1,0 +1,46 @@
+#folder_sidebar {
+	a {
+		font-size: 18px;
+		line-height: 18px;
+		display: block;
+		padding: 16px 16px 16px 35px;
+		color: #666;
+		
+		&.selected {
+			background: #ddd;
+		}
+		
+		&.choose_folder {
+			background: #808080;
+			color: #fff;
+			font-weight: bold;
+			padding: 20px 16px;
+			font-size: 19px;
+			line-height: 19px;
+		}
+	}
+}
+
+#folderships {
+	&[data-write] {
+		a {
+			cursor: pointer;
+			
+			&.resend {
+				display: inline-block;
+			}
+		}
+	}
+	
+	a {
+		cursor: text;
+		display: inline-block;
+		
+		&.resend {
+			color: #aaa;
+			font-size: 10px;
+			margin-left: 3px;
+			display: none;
+		}
+	}
+}

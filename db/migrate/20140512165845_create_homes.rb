@@ -8,7 +8,7 @@ class CreateHomes < ActiveRecord::Migration
       t.string :beds
       t.string :baths
       t.text :data, default: "{}"
-      t.belongs_to :channel, index: true
+      t.belongs_to :folder, index: true
       t.belongs_to :creator, index: true
 
       t.timestamps

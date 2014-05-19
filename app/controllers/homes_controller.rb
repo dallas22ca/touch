@@ -1,12 +1,12 @@
 class HomesController < ApplicationController
   before_action :set_organization
-  before_action :set_channel_with_permissions
+  before_action :set_folder_with_permissions
   before_action :set_home, only: [:show, :edit, :update, :destroy]
 
   # GET /homes
   # GET /homes.json
   def index
-    @homes = @channel.homes
+    @homes = @folder.homes
   end
 
   # GET /homes/1
@@ -26,12 +26,12 @@ class HomesController < ApplicationController
   # POST /homes
   # POST /homes.json
   def create
-    @home = @channel.homes.new(home_params)
+    @home = @folder.homes.new(home_params)
     @home.creator = @member
 
     respond_to do |format|
       if @home.save
-        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Home was successfully created.' }
+        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Home was successfully created.' }
         format.json { render :show, status: :created, location: @home }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class HomesController < ApplicationController
   def update
     respond_to do |format|
       if @home.update(home_params)
-        format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Home was successfully updated.' }
+        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Home was successfully updated.' }
         format.json { render :show, status: :ok, location: @home }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class HomesController < ApplicationController
   def destroy
     @home.destroy
     respond_to do |format|
-      format.html { redirect_to channel_path(@org.permalink, @channel), notice: 'Home was successfully destroyed.' }
+      format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Home was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +67,7 @@ class HomesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_home
-      @home = @channel.homes.find(params[:id])
+      @home = @folder.homes.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

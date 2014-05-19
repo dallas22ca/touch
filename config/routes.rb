@@ -8,22 +8,23 @@ Rails.application.routes.draw do
         get "/attendance" => "modules#attendance", as: :attendance
         get "/permissions" => "modules#permissions", as: :permissions
         post "/track" => "modules#presence", as: :track
+        get "/my-account" => "devise/registrations#edit"
       
         resources :members, path: :contacts
         resources :segments
-        resources :channelships, only: :index
+        resources :folderships, only: :index
 
         resources :rooms, path: :attendance do
           resources :meetings
         end
       
-        resources :channels do
+        resources :folders do
           post "/tasks/sort" => "tasks#sort", as: :sort_tasks
           resources :tasks
           resources :homes
 
-          resources :channelships, except: :index do
-            post "/accept" => "channelships#accept", as: :accept
+          resources :folderships, path: :members do
+            post "/accept" => "folderships#accept", as: :accept
           end
         
           resources :documents do
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
     end
   
     scope "/:permalink" do
-      get "/accept/:token" => "channelships#accept", as: :channelship_invitation
+      get "/accept/:token" => "folderships#accept", as: :foldership_invitation
     end
   end
   

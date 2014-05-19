@@ -1,1 +1,1 @@
-json.extract! @task, :id, :content, :channel_id, :user_id, :created_at, :updated_at
+json.extract! @task, :id, :content, :folder_id, :user_id, :created_at, :updated_at

@@ -1,6 +1,0 @@
-<h3>Invitations</h3>
-
-<p>Would you like to accept the invitation to <%= @invitation.channel.name %> from <%= @invitation.creator.name %>?</p>
-
-<%= link_to "Accept", channel_channelship_accept_path(@invitation.channel.organization.permalink, @invitation.channel, @invitation, channelship: { accepted: true }), method: :post %>
-<%= link_to "Decline", channel_channelship_accept_path(@invitation.channel.organization.permalink, @invitation.channel, @invitation, channelship: { accepted: true }), method: :post %>

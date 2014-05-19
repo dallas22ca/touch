@@ -1,5 +1,0 @@
-<% if @channel.errors.any? %>
-	alert("<%= @channel.errors.full_messages.join(", ") %>")
-<% else %>
-	window.location = "<%= channel_path @channel.organization.permalink, @channel %>"
-<% end %>

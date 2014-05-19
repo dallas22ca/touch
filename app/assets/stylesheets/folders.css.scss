@@ -1,0 +1,31 @@
+.folder_header {
+	position: fixed;
+	background: #fff;
+	left: 0;
+	top: 50px;
+	right: 0;
+	z-index: 9999;
+
+	.brokerage_logo {
+		float: right;
+		max-width: 180px;
+		max-height: 125px;
+	}
+	
+	.user_avatar {
+		float: left;
+		width: 120px;
+	}
+	
+	.profile {
+		float: left;
+		margin-left: 20px;
+		margin-top: 10px;
+		
+		.user_name {
+			font-weight: bold;
+			font-size: 21px;
+			line-height: 32px;
+		}
+	}
+}

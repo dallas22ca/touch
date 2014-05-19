@@ -1,0 +1,13 @@
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+<% end %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+	
+	<div class="main has_sidebar">
+		<%= @folder.name %>
+		<div class="loading"></div>
+	</div>
+</div>

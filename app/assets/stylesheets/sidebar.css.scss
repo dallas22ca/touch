@@ -3,13 +3,17 @@
 	left: 0;
 	top: 75px;
 	bottom: 0;
-	width: 20%;
+	width: 222px;
 	background: #eee;
 	border-right: 1px solid #ddd;
 	//box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	padding: 15px;
 	overflow-y: auto;
 	z-index: 99;
+	
+	&.without_padding {
+		padding: 0px
+	}
 	
 	&.right_sidebar {
 		right: 0;
@@ -18,7 +22,7 @@
 }
 
 .has_sidebar {
-	margin-left: 20%;
+	margin-left: 222px;
 }
 
 @media screen and (max-width: 600px) {

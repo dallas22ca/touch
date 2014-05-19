@@ -2,20 +2,20 @@
 	$("#<%= dom_id @task %>").replaceWith("<%= j render @task.reload %>")
 <% end %>
 
-<% if @channelship.permits? :tasks, :write %>
+<% if @foldership.permits? :tasks, :write %>
 	<% if params[:task] && params[:task][:complete] %>
 		<% if @task.complete %>
 			$("#<%= dom_id @task %>").remove()
-			$("<%= j render @task %>").prependTo(".channel_<%= @channel.id %>_completed_tasks")
+			$("<%= j render @task %>").prependTo(".folder_<%= @folder.id %>_completed_tasks")
 		<% else %>
 			$("#<%= dom_id @task %>").remove()
-			$("<%= j render @task %>").appendTo(".channel_<%= @channel.id %>_tasks")
+			$("<%= j render @task %>").appendTo(".folder_<%= @folder.id %>_tasks")
 			$("#tasks").trigger("sortupdate")
 		<% end %>
 	<% end %>
 <% end %>
 
-<% if @channel.tasks.complete.any? %>
+<% if @folder.tasks.complete.any? %>
 	$(".show_completed_tasks").show()
 <% else %>
 	$(".show_completed_tasks").hide()

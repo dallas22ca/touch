@@ -1,30 +1,39 @@
-		<% if @channelship.permits? :documents, :read %>
-			<div id="documents_wrapper" class="panel top_space no_surround right">
-				<div class="content">
-					<% if @channelship.permits? :documents, :write %>
-						<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
-					<% end %>
-					
-					<h3>Documents</h3>
-				
-					<table id="documents" style="<%= "display: none; " if @channel.documents.empty? %>" <%= "data-delete" if @channelship.permits? :documents, :delete %>>
-						<thead>
-							<tr>
-								<th>File Name</th>
-								<th>Added</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody id="documents" class="channel_<%= @channel.id %>_documents">
-							<%= render @channel.documents.order("updated_at desc") %>
-						</tbody>
-					</table>
-					
-					<% if @channelship.permits? :documents, :write %>
-						<%= form_for [@channel, Document.new], url: channel_documents_path(@org.permalink, @channel) do |f| %>
-							<%= f.file_field :file %>
-						<% end %>
-					<% end %>
-				</div>
-			</div>
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+<% end %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<% if @foldership.permits? :documents, :read %>
+			<% if @foldership.permits? :documents, :write %>
+				<%= link_to "Upload", "#", class: "upload_document right button small blue_bg" %>
+			<% end %>
+			
+			<h1><%= @folder.name %> Documents</h1>
+		
+			<table id="documents" style="<%= "display: none; " if @folder.documents.empty? %>" <%= "data-delete" if @foldership.permits? :documents, :delete %>>
+				<thead>
+					<tr>
+						<th>File Name</th>
+						<th>Added</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="documents" class="folder_<%= @folder.id %>_documents">
+					<%= render @folder.documents.order("updated_at desc") %>
+				</tbody>
+			</table>
+			
+			<% if @foldership.permits? :documents, :write %>
+				<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+					<%= f.file_field :file %>
+				<% end %>
+			<% end %>
 		<% end %>
+	</div>
+</div>

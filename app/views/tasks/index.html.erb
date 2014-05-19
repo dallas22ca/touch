@@ -1,29 +1,38 @@
-<h1>Listing tasks</h1>
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Channel</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="has_header">
+	<%= render "folders/sidebar" %>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.content %></td>
-        <td><%= task.channel %></td>
-        <td><%= task.user %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<h1><%= @folder.name %> Tasks</h1>
 
-<br>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Content</th>
+		      <th>Folder</th>
+		      <th>User</th>
+		      <th colspan="3"></th>
+		    </tr>
+		  </thead>
 
-<%= link_to 'New Task', new_task_path %>
+		  <tbody>
+		    <% @tasks.each do |task| %>
+		      <tr>
+		        <td><%= task.content %></td>
+		        <td><%= task.folder %></td>
+		        <td><%= task.creator %></td>
+		        <td><%= link_to 'Show', folder_task_path(task.folder.organization.permalink, task.folder, task) %></td>
+		        <td><%= link_to 'Edit', edit_folder_task_path(task.folder.organization.permalink, task.folder, task) %></td>
+		        <td><%= link_to 'Destroy', folder_task_path(task.folder.organization.permalink, task.folder, task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+</div>
