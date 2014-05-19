@@ -9,6 +9,29 @@
 	<div class="main has_sidebar">
 		<div class="loading"></div>
 		
-		<h1><%= @folder.name %> Members</h1>
+		<div id="folderships_wrapper">
+			<% if @foldership.permits? :folderships, :read %>
+				
+				<% if @foldership.permits? :folderships, :write %>
+					<%= link_to "Invite", new_folder_foldership_path(@folder.organization.permalink, @folder), class: "invite_member right button big blue_bg", remote: true %>
+				<% end %>
+			
+				<div class="clear"></div>
+			
+				<table id="folderships" class="folder_<%= @folder.id %>_folderships" <%= "data-write" if @foldership.permits? :folderships, :write %>>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Permission</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render @folder.folderships.order("created_at asc") %>
+					</tbody>
+				</table>
+			<% end %>
+		</div>
+		
 	</div>
 </div>

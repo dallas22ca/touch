@@ -1,12 +1,14 @@
 #tasks_wrapper {
 	width: 100%;
 	max-width: 500px;
-	margin: 50px auto 70px auto;
+	margin: 0 auto 70px auto;
 	padding: 8px;
+	padding-top: 50px;
 	
 	.ui-state-highlight {
 		background: rgba(0, 0, 0, 0.2);
-		margin-bottom: 5px;
+		padding-top: 4px;
+		padding-bottom: 3px;
 		border-radius: 4px;
 	}
 	
@@ -132,6 +134,6 @@
 	}
 	
 	#tasks_wrapper {
-		margin-top: -20px;
+		padding-top: 10px;
 	}
 }

@@ -1,18 +1,41 @@
 .comments {
 	width: 100%;
 	max-width: 500px;
-	margin: -25px auto 75px auto;
+	margin: 0 auto 75px auto;
 	padding: 8px;
-
+	
 	li {
 		margin-top: 30px;
 		font-size: 14px;
 		line-height: 21px;
 		
+		&.no_comments {
+			margin-top: 100px;
+			text-align: center;
+			
+			h3 {
+				font-size: 21px;
+				line-height: 32px;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+			
+			p {
+				font-size: 16px;
+				line-height: 21px;
+				padding: 0px 50px;
+			}
+		}
+		
 		.left_meta {
 			float: left;
 			width: 40px;
 			margin-top: 3px;
+			
+			img {
+				width: 40px;
+				height: 40px;
+			}
 		}
 		
 		.right_meta {
@@ -60,6 +83,7 @@
 	}
 	
 	.comments {
+		margin-top: -10px;
 		margin-bottom: 60px;
 		
 		li {

@@ -124,17 +124,6 @@ ActiveRecord::Schema.define(version: 20140519154047) do
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
   add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
 
-  create_table "notes", force: true do |t|
-    t.integer  "folder_id"
-    t.integer  "creator_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notes", ["creator_id"], name: "index_notes_on_creator_id", using: :btree
-  add_index "notes", ["folder_id"], name: "index_notes_on_folder_id", using: :btree
-
   create_table "organizations", force: true do |t|
     t.string   "permalink"
     t.datetime "created_at"

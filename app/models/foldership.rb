@@ -60,6 +60,10 @@ class Foldership < ActiveRecord::Base
     end
   end
   
+  def name_or_member_name
+    member ? member.name : name
+  end
+  
   def permits?(resource, action)
     return true if resource.is_a?(Object) && resource.try(:creator_id) == member_id
     resource = resource.class.name.downcase.pluralize unless resource.is_a? Symbol

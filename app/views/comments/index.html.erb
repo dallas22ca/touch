@@ -16,6 +16,13 @@
 		<% end %>
 
 		<ul class="folder_<%= @folder.id %>_comments comments">
+			<% if @folder.comments.empty? %>
+				<li class="no_comments">
+					<h3>This folder has no comments!</h3>
+					<p>Be the first to comment by by typing a message in the box below, then press &lt;ENTER&gt;!</p>
+				</li>
+			<% end %>
+			
 			<%= render @comments %>
 		</ul>
 		

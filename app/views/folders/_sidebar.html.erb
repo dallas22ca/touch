@@ -1,3 +1,4 @@
+<div id="folder_sidebar_mobile_placeholder"></div>
 <div id="folder_sidebar" class="sidebar without_padding">
 	<% if @member.folderships.unaccepted.any? %>
 		<h3>Invitations</h3>
@@ -13,11 +14,27 @@
 	<% end %>
 	
 	<ul>
-		<li><%= link_to @folder.name, folder_comments_path(@org.permalink, @folder), class: "choose_folder" %></li>
-		<li><%= link_to "Newsfeed", folder_comments_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_comments_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "Tasks", folder_tasks_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_tasks_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "Homes", folder_homes_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_homes_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "Documents", folder_documents_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_documents_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "Who's Here?", folder_folderships_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_folderships_path(@org.permalink, @folder)}" %></li>
+		<li>
+			<%= link_to "<i class=\"fa fa-bars\"></i> <span class=\"word\">#{@folder.name}</span>".html_safe, folder_comments_path(@org.permalink, @folder), class: "choose_folder" %>
+			
+			<ul class="folders_list">
+				<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+				<% @member.folders.each do |folder| %>
+					<li><%= link_to folder.name, folder_comments_path(@org.permalink, folder) %></li>
+				<% end %>
+			</ul>
+		</li>
+		<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_comments_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_tasks_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_homes_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_documents_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_folderships_path(@org.permalink, @folder)}" %></li>
 	</ul>
 </div>
+	
+	<ul class="mobile_folders_list">
+		<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+		<% @member.folders.each do |folder| %>
+			<li><%= link_to folder.name, folder_comments_path(@org.permalink, folder) %></li>
+		<% end %>
+	</ul>

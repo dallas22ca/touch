@@ -22,7 +22,8 @@
 					<% end %>
 					
 					<% if @org.modules.include?("folders") && @member.permits?("folders") %>
-						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
+						<% path = @member.folders.any? ? folder_path(@org.permalink, @member.folders.order("updated_at desc").first) : new_folder_path(@org) %>
+						<li><%= link_to "Folders", path, class: "#{"selected" if request.path.include? "folders"}" %></li>
 					<% end %>
 				
 					<% if @org.modules.include?("attendance") && @member.permits?("attendance") %>
