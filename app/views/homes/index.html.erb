@@ -28,14 +28,7 @@
 			  </thead>
 
 			  <tbody>
-			    <% @homes.each do |home| %>
-			      <tr>
-			        <td><%= link_to home.address, folder_home_path(home.folder.organization, home.folder, home) %></td>
-			        <td><%= link_to home.beds, folder_home_path(home.folder.organization, home.folder, home) %></td>
-			        <td><%= link_to home.baths, folder_home_path(home.folder.organization, home.folder, home) %></td>
-			        <td><%= link_to 'Destroy', folder_home_path(home.folder.organization, home.folder, home), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			      </tr>
-			    <% end %>
+			    <%= render @homes %>
 			  </tbody>
 			</table>
 		</div>

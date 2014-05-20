@@ -13,7 +13,7 @@
 <body class="<%= "#{controller_name}_#{action_name}" %>">
 	<% if user_signed_in? %>
 		<div id="topbar">
-			<%= link_to "[#]", "#", class: "show_nav" %>
+			<%= link_to "<i class=\"fa fa-bars\"></i>".html_safe, "#", class: "show_nav" %>
 
 			<ul class="nav">
 				<% if @org %>

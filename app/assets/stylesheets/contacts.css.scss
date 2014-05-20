@@ -1,2 +1,5 @@
-#contacts {
+@media screen and (max-width: 600px) {
+	.members_count {
+		display: none;
+	}
 }

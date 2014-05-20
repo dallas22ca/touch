@@ -64,7 +64,7 @@
 		.content {
 			display: inline-block;
 			outline: none;
-			width: 93%;
+			width: 91%;
 			float: right;
 			margin-top: 2px;
 		}
@@ -124,5 +124,11 @@
 @media screen and (max-width: 600px) {
 	#new_task {
 		left: 0;
+	}
+	
+	#tasks_wrapper {
+		.task {
+			padding: 3px 0px;
+		}
 	}
 }
