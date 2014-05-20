@@ -15,18 +15,20 @@
 			</div>
 		<% end %>
 
-		<ul class="folder_<%= @folder.id %>_comments comments">
-			<% if @folder.comments.empty? %>
-				<li class="no_comments">
-					<h3>This folder has no comments!</h3>
-					<p>Be the first to comment by by typing a message in the box below, then press &lt;ENTER&gt;!</p>
-				</li>
-			<% end %>
+		<div class="mini_content_wrapper">
+			<ul class="folder_<%= @folder.id %>_comments comments">
+				<% if @folder.comments.empty? %>
+					<li class="no_comments">
+						<h3>This folder has no comments!</h3>
+						<p>Be the first to comment by by typing a message in the box below, then press &lt;ENTER&gt;!</p>
+					</li>
+				<% end %>
 			
-			<%= render @comments %>
-		</ul>
+				<%= render @comments %>
+			</ul>
+		</div>
 		
-		<%= form_for [@folder, Comment.new], url: folder_comments_path(@org.permalink, @folder), remote: true do |f| %>
+		<%= form_for [@folder, Comment.new], url: folder_comments_path(@org, @folder), remote: true do |f| %>
 			<%= f.text_field :body, value: nil, placeholder: "What's on your mind?", autocomplete: "off" %>
 		<% end %>
 	</div>

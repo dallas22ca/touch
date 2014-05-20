@@ -7,7 +7,7 @@
 				<li>
 					<%= foldership.folder.name %> by
 					<%= foldership.folder.creator.name %>
-					<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+					<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
 				</li>
 			<% end %>
 		</ul>
@@ -15,26 +15,28 @@
 	
 	<ul>
 		<li>
-			<%= link_to "<i class=\"fa fa-bars\"></i> <span class=\"word\">#{@folder.name}</span>".html_safe, folder_comments_path(@org.permalink, @folder), class: "choose_folder" %>
+			<%= link_to "<i class=\"fa fa-bars\"></i> <span class=\"word\">#{@folder.name}</span>".html_safe, folder_comments_path(@org, @folder), class: "choose_folder" %>
 			
 			<ul class="folders_list">
-				<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+				<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
+
 				<% @member.folders.each do |folder| %>
-					<li><%= link_to folder.name, folder_comments_path(@org.permalink, folder) %></li>
+					<li><%= link_to folder.name, folder_comments_path(@org, folder) %></li>
 				<% end %>
 			</ul>
 		</li>
-		<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_comments_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_tasks_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_homes_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_documents_path(@org.permalink, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org.permalink, @folder), class: "start_transition #{"selected" if request.path == folder_folderships_path(@org.permalink, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_comments_path(@org, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_tasks_path(@org, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_homes_path(@org, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_documents_path(@org, @folder)}" %></li>
+		<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_folderships_path(@org, @folder)}" %></li>
+		<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
 	</ul>
 </div>
 	
 	<ul class="mobile_folders_list">
-		<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+		<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
 		<% @member.folders.each do |folder| %>
-			<li><%= link_to folder.name, folder_comments_path(@org.permalink, folder) %></li>
+			<li><%= link_to folder.name, folder_comments_path(@org, folder) %></li>
 		<% end %>
 	</ul>

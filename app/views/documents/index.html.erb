@@ -9,20 +9,20 @@
 	<div class="main has_sidebar">
 		<div class="loading"></div>
 		
-		<div id="documents_wrapper">
+		<div id="documents_wrapper" class="mini_content_wrapper">
 			<% if @foldership.permits? :documents, :read %>
 				
 				<% if @foldership.permits? :documents, :write %>
 					<%= link_to "Upload A Document", "#", class: "upload_document right button big blue_bg" %>
 					
-					<%= form_for [@folder, Document.new], url: folder_documents_path(@org.permalink, @folder) do |f| %>
+					<%= form_for [@folder, Document.new], url: folder_documents_path(@org, @folder) do |f| %>
 						<%= f.file_field :file %>
 					<% end %>
 				<% end %>
 				
 				<div class="clear"></div>
 			
-				<table id="documents" <%= "data-delete" if @foldership.permits? :documents, :delete %>>
+				<table id="documents" class="table" <%= "data-delete" if @foldership.permits? :documents, :delete %>>
 					<thead>
 						<tr>
 							<th>File Name</th>

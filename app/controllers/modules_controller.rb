@@ -20,7 +20,7 @@ class ModulesController < ApplicationController
   
   def attendance
     if @org.rooms.any?
-      redirect_to room_path(@org.permalink, @org.rooms.first)
+      redirect_to room_path(@org, @org.rooms.first)
     else
       render "modules/attendance/index"
     end

@@ -3,10 +3,10 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
 
-  <div><%= f.label :email %><br />
+  <div><%= f.label :email, class: "label" %>
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :password, class: "label" %>
     <%= f.password_field :password, autocomplete: "off" %></div>
 
   <% if devise_mapping.rememberable? -%>

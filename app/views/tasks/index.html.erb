@@ -9,8 +9,8 @@
 	<div class="main has_sidebar">
 		<div class="loading"></div>
 		
-		<div id="tasks_wrapper">
-			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
+		<div id="tasks_wrapper" class="mini_content_wrapper">
+			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
 				<%= render @folder.tasks.incomplete.by_ordinal %>
 			</ul>
 			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
@@ -18,7 +18,7 @@
 			</ul>
 			
 			<% if @foldership.permits? :tasks, :write %>
-				<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+				<%= form_for [@folder, Task.new], url: folder_tasks_path(@org, @folder), remote: true do |f| %>
 					<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
 				<% end %>
 			<% end %>

@@ -2,10 +2,6 @@
 	display: none;
 }
 
-.mobile_folders_list {
-	display: none;
-}
-
 #folder_sidebar {
 	a {
 		font-size: 18px;
@@ -42,6 +38,7 @@
 			i {
 				float: right;
 				margin-right: 0;
+				color: #bbb;
 			}
 		}
 	}
@@ -51,7 +48,7 @@
 		position: absolute;
 		width: 221px;
 		background: #999;
-		min-height: 300px;
+		min-height: 350px;
 		
 		a {
 			border-bottom: 1px solid #bbb;
@@ -67,73 +64,15 @@
 	}
 }
 
-#folderships_wrapper {
-	width: 100%;
-	max-width: 500px;
-	margin: 0 auto 70px auto;
-	padding: 8px;
-	padding-top: 50px;
-	
+#folderships_wrapper {	
 	#folderships {
-		width: 100%;
 		margin-top: 20px;
-		border: 1px solid #333;
 		
 		&[data-delete] {
 			.document {
 				.delete {
 					display: block;
 				}
-			}
-		}
-		
-		th {
-			font-size: 11px;
-			line-height: 11px;
-			text-transform: uppercase;
-			background: #686868;
-			background: -moz-linear-gradient(top,  #686868 0%, #4f4f4f 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#686868), color-stop(100%,#4f4f4f));
-			background: -webkit-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: -o-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: -ms-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: linear-gradient(to bottom,  #686868 0%,#4f4f4f 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#4f4f4f',GradientType=0 );
-			color: #aaa;
-			text-align: left;
-			padding: 7px;
-		}
-
-		.foldership {
-			background: #fff;
-			font-size: 14px;
-			line-height: 14px;
-			
-			&:nth-child(even) {
-				background: #fafafa;
-			}
-			
-			&:hover {
-				background: #eee;
-			}
-			
-			.name {
-				width: 75%;
-			}
-		
-			.created_at {
-				width: 25%;
-			}
-			
-			a {
-				display: block;
-				padding: 7px;
-			}
-		
-			.delete {
-				visibility: hidden;
-				color: maroon;
-				display: none;
 			}
 		}
 	}
@@ -155,6 +94,10 @@
 			float: left;
 			width: 16.666666666666%;
 			text-align: center;
+			
+			&.folder_options_li {
+				display: none;
+			}
 			
 			&:last-child a {
 				border-right: none;

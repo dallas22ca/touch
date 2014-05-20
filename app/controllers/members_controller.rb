@@ -34,7 +34,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @this_member.update(member_params)
-        format.html { redirect_to member_path(@org.permalink, @this_member), notice: 'Room was successfully updated.' }
+        format.html { redirect_to member_path(@org, @this_member), notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @this_member }
         format.js
       else
@@ -48,7 +48,7 @@ class MembersController < ApplicationController
   def destroy
     @this_member.destroy
     respond_to do |format|
-      format.html { redirect_to members_path(@org.permalink), notice: 'Room was successfully destroyed.' }
+      format.html { redirect_to members_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end

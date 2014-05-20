@@ -12,7 +12,7 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
-    redirect_to folder_comments_path(@org.permalink, @folder)
+    redirect_to folder_comments_path(@org, @folder)
   end
 
   # GET /folders/new
@@ -33,7 +33,7 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully created.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Folder was successfully created.' }
         format.json { render :show, status: :created, location: @folder }
         format.js
       else
@@ -49,7 +49,7 @@ class FoldersController < ApplicationController
   def update
     respond_to do |format|
       if @folder.update(folder_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Folder was successfully updated.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Folder was successfully updated.' }
         format.json { render :show, status: :ok, location: @folder }
         format.js
       else
@@ -65,7 +65,7 @@ class FoldersController < ApplicationController
   def destroy
     @folder.destroy
     respond_to do |format|
-      format.html { redirect_to folders_url(@org.permalink), notice: 'Folder was successfully destroyed.' }
+      format.html { redirect_to folders_url(@org), notice: 'Folder was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

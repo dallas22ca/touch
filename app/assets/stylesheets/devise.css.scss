@@ -1,0 +1,27 @@
+.org_info {
+	background: #eee;
+	padding: 20px;
+	border: 1px solid #ddd;
+	margin: 20px 0;
+	border-radius: 4px;
+}
+
+.field {
+	margin-bottom: 20px;
+	
+	.label {
+		display: block;
+		color: #777;
+		font-size: 12px;
+		line-height: 12px;
+		text-transform: uppercase;
+		margin-bottom: 4px;
+	}
+}
+
+.links {
+	text-align: center;
+	color: #aaa;
+	font-size: 13px;
+	margin-bottom: 20px;
+}

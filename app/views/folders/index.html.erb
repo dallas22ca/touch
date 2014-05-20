@@ -2,9 +2,9 @@
 	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 	<ul class="sub_menu">
 		<% if @folder && @folder.persisted? %>
-			<li><%= link_to "Edit This Room", edit_folder_path(@org.permalink, @folder), remote: true %></li>
+			<li><%= link_to "Edit This Room", edit_folder_path(@org, @folder), remote: true %></li>
 		<% end %>
-		<li><%= link_to "Create A Folder", new_folder_path(@org.permalink), remote: true %></li>
+		<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
 	</ul>
 <% end %>
 
@@ -15,7 +15,7 @@
 			<li>
 				<%= foldership.folder.name %> by
 				<%= foldership.folder.creator.name %>
-				<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization.permalink, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+				<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
 			</li>
 		<% end %>
 	</ul>
@@ -25,6 +25,7 @@
 	<ul id="folders">
 		<li class="folder panel center">
 			<a href="<%= new_folder_path %>" data-remote="true">
+				<h3>Create A Folder</h3>
 				<%= image_tag "/imgs/plus.png", class: "plus" %>
 			</a>
 		</li>

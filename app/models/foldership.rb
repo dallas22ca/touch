@@ -90,6 +90,11 @@ class Foldership < ActiveRecord::Base
           write: true,
           delete: true
         },
+        homes: {
+          read: true,
+          write: true,
+          delete: true
+        },
         folderships: {
           read: true,
           write: true,

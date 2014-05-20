@@ -1,10 +1,4 @@
-#documents_wrapper {
-	width: 100%;
-	max-width: 500px;
-	margin: 0 auto 70px auto;
-	padding: 8px;
-	padding-top: 50px;
-	
+#documents_wrapper {	
 	#new_document {
 		display: none;
 	}
@@ -12,7 +6,6 @@
 	#documents {
 		width: 100%;
 		margin-top: 20px;
-		border: 1px solid #333;
 		
 		&[data-delete] {
 			.document {
@@ -21,48 +14,14 @@
 				}
 			}
 		}
-		
-		th {
-			font-size: 11px;
-			line-height: 11px;
-			text-transform: uppercase;
-			background: #686868;
-			background: -moz-linear-gradient(top,  #686868 0%, #4f4f4f 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#686868), color-stop(100%,#4f4f4f));
-			background: -webkit-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: -o-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: -ms-linear-gradient(top,  #686868 0%,#4f4f4f 100%);
-			background: linear-gradient(to bottom,  #686868 0%,#4f4f4f 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#4f4f4f',GradientType=0 );
-			color: #aaa;
-			text-align: left;
-			padding: 7px;
-		}
 
-		.document {
-			background: #fff;
-			font-size: 14px;
-			line-height: 14px;
-			
-			&:nth-child(even) {
-				background: #fafafa;
-			}
-			
-			&:hover {
-				background: #eee;
-			}
-			
+		.document {			
 			.name {
 				width: 75%;
 			}
 		
 			.created_at {
 				width: 25%;
-			}
-			
-			a {
-				display: block;
-				padding: 7px;
 			}
 		
 			.delete {

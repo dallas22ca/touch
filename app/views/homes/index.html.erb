@@ -8,40 +8,37 @@
 
 	<div class="main has_sidebar">
 		<div class="loading"></div>
-		
-		<h1><%= @folder.name %> Homes</h1>
 	
-		<table>
-		  <thead>
-		    <tr>
-		      <th>Address</th>
-		      <th>City</th>
-		      <th>Province</th>
-		      <th>Postal code</th>
-		      <th>Beds</th>
-		      <th>Baths</th>
-		      <th>Data</th>
-		      <th colspan="3"></th>
-		    </tr>
-		  </thead>
+		<div class="mini_content_wrapper">			
+			<ul class="mini_meta">
+				<li><%= link_to "Show Map", "#", class: "big button grey_bg" %></li>
+				<% if @foldership.permits? :homes, :write %>
+					<li><%= link_to "Add A Home", new_folder_home_path(@org, @folder), class: "button big blue_bg" %></li>
+				<% end %>
+			</ul>
+			
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th>Address</th>
+			      <th>Beds</th>
+			      <th>Baths</th>
+						<th></th>
+			    </tr>
+			  </thead>
 
-		  <tbody>
-		    <% @homes.each do |home| %>
-		      <tr>
-		        <td><%= home.address %></td>
-		        <td><%= home.city %></td>
-		        <td><%= home.province %></td>
-		        <td><%= home.postal_code %></td>
-		        <td><%= home.beds %></td>
-		        <td><%= home.baths %></td>
-		        <td><%= home.data %></td>
-		        <td><%= link_to 'Show', home %></td>
-		        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-		        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
+			  <tbody>
+			    <% @homes.each do |home| %>
+			      <tr>
+			        <td><%= link_to home.address, folder_home_path(home.folder.organization, home.folder, home) %></td>
+			        <td><%= link_to home.beds, folder_home_path(home.folder.organization, home.folder, home) %></td>
+			        <td><%= link_to home.baths, folder_home_path(home.folder.organization, home.folder, home) %></td>
+			        <td><%= link_to 'Destroy', folder_home_path(home.folder.organization, home.folder, home), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		</div>
 		
 	</div>
 </div>

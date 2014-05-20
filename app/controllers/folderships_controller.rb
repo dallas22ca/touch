@@ -19,7 +19,7 @@ class FoldershipsController < ApplicationController
 
     respond_to do |format|
       if @foldership.permits?(:folderships, :write) && @fship.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully created.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @fship }
         format.js
       else
@@ -37,7 +37,7 @@ class FoldershipsController < ApplicationController
   def update
     respond_to do |format|
       if @foldership.permits?(:folderships, :write) && @folder.creator != @fship.member && @fship.update!(foldership_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully updated.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @fship }
         format.js
       else
@@ -51,7 +51,7 @@ class FoldershipsController < ApplicationController
   def destroy
     @fship.destroy if @foldership.permits? :folderships, :delete
     respond_to do |format|
-      format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end
@@ -67,16 +67,16 @@ class FoldershipsController < ApplicationController
 
       if @member
         if @folder.members.include? @member
-          redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+          redirect_to folder_path(@fship.folder.organization, @fship.folder)
         else
           @fship.accept
-          redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+          redirect_to folder_path(@fship.folder.organization, @fship.folder)
         end
       else
         @member = @org.members.create! user: current_user
         @fship.update member: @member
         @fship.accept
-        redirect_to folder_path(@fship.folder.organization.permalink, @fship.folder)
+        redirect_to folder_path(@fship.folder.organization, @fship.folder)
       end
     else
       redirect_to new_user_registration_path(token: params[:token])

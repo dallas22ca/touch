@@ -4,7 +4,7 @@ Hi <%= @member.name %>,
 
 To accept this invitation, click on the following link:
 
-<%= foldership_invitation_url(@folder.organization.permalink, @foldership.token) %>
+<%= foldership_invitation_url(@folder.organization, @foldership.token) %>
 
 Thanks,
 

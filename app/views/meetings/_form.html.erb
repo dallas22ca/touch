@@ -2,7 +2,7 @@
 <h1><%= @meeting.new_record? ? "Create A" : "Edit" %> Meeting</h1>
 	
 <div class="content">
-	<%= form_for [@room, @meeting], url: @meeting.new_record? ? room_meetings_path(@org.permalink, @room) : room_meeting_path(@org.permalink, @room, @meeting), remote: true do |f| %>
+	<%= form_for [@room, @meeting], url: @meeting.new_record? ? room_meetings_path(@org, @room) : room_meeting_path(@org, @room, @meeting), remote: true do |f| %>
 	  <% if @meeting.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
@@ -16,7 +16,7 @@
 	  <% end %>
 	
 	  <div class="field">
-	    <%= f.label :date %><br>
+	    <%= f.label :date, class: "label" %>
 	    <%= f.date_select :date %>
 	  </div>
 	  <div class="actions">
@@ -25,7 +25,7 @@
 			<%= link_to "Close", "#", class: "close_lightbox" %>
 			
 			<% if @meeting.persisted? %>
-				<%= link_to "Delete", room_meeting_path(@org.permalink, @room, @meeting), method: :delete, data: { confirm: "Are you sure you want to delete this meeting?" } %>
+				<%= link_to "Delete", room_meeting_path(@org, @room, @meeting), method: :delete, data: { confirm: "Are you sure you want to delete this meeting?" } %>
 			<% end %>
 	  </div>
 	<% end %>

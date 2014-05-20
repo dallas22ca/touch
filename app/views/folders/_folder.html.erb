@@ -1,3 +1,13 @@
 <%= content_tag_for :li, folder, class: "panel" do %>
-	<%= link_to folder.name, folder_path(folder.organization.permalink, folder) %>
+	<a href="<%= folder_path(folder.organization.permalink, folder) %>">
+		<h3><%= folder.name %></h3>
+		<ul class="members">
+			<% folder.users.limit(5).each do |member| %>
+				<li>
+					<%= image_tag member.avatar.url %>
+				</li>
+			<% end %>
+		</ul>
+		<span class="clear"></span>
+	</a>
 <% end %>

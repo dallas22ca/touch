@@ -24,7 +24,7 @@ RSpec.configure do |config|
   end
   
   def sign_in(user, org = false)
-    visit org ? signin_path(org.permalink) : new_user_session_path
+    visit org ? signin_path(org) : new_user_session_path
     fill_in "Email",    with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"

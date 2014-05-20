@@ -1,31 +1,76 @@
-.folder_header {
-	position: fixed;
-	background: #fff;
-	left: 0;
-	top: 50px;
-	right: 0;
-	z-index: 9999;
+.panel {
+	background: #eee;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 16px;
+	line-height: 24px;
+	height: 120px;
+	
+	&.right {
+		width: 34%;
+		clear: right;
+	}
+	
+	&.left {
+		width: 63%;
+	}
+	
+	&.top_space {
+		margin-top: 3%;
+	}
+	
+	.plus {
+		height: 60px;
+		margin-top: -10px;
+	}
+	
+	&.notttttt_surround {
+		padding: 0px;
+		border: 0;
+		background: none;
+	}
+	
+	h3 {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 24px;
+		margin-bottom: 10px;
+		text-align: left;
+	}
+	
+	a {
+		display: block;
+		padding: 20px;
+	}
+}
 
-	.brokerage_logo {
-		float: right;
-		max-width: 180px;
-		max-height: 125px;
-	}
-	
-	.user_avatar {
+
+#folders {
+	padding-top: 20px;
+
+	.folder {
 		float: left;
-		width: 120px;
-	}
-	
-	.profile {
-		float: left;
-		margin-left: 20px;
-		margin-top: 10px;
+		width: 31.333333%;
+		margin: 0 1% 2%;
 		
-		.user_name {
-			font-weight: bold;
-			font-size: 21px;
-			line-height: 32px;
+		.members {
+			li {
+				float: left;
+				width: 17%;
+				margin: 0 1.5%;
+				
+				img {
+					border-radius: 100px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#folders {
+		.folder {
+			width: 100%;
 		}
 	}
 }

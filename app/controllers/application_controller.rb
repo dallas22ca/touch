@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
   
   def send_to_folder
-    redirect_to folder_path(@folder.organization.permalink, @folder)
+    redirect_to folder_path(@folder.organization, @folder)
   end
   
   def redirect_to_root

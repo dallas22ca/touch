@@ -1,4 +1,4 @@
 <%= content_tag_for :li, home do %>
 	<p><%= home.address %></p>
-	<%= link_to "x", folder_home_path(home.folder.organization.permalink, home.folder, home), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this home?" } %>
+	<%= link_to "x", folder_home_path(home.folder.organization, home.folder, home), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this home?" } %>
 <% end %>

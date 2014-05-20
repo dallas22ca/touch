@@ -24,14 +24,14 @@
 			</h3>
 			<h2>
 				<%= @folder.name %>
-				<%= link_to "Rename", edit_folder_path(@folder.organization.permalink, @folder), remote: true if @foldership.permits? :folders, :write %>
+				<%= link_to "Rename", edit_folder_path(@folder.organization, @folder), remote: true if @foldership.permits? :folders, :write %>
 			</h2>
 		</div>
 
 		<% if @foldership.permits? :folderships, :read %>
 			<div class="panel right">
 				<% if @foldership.permits? :folderships, :write %>
-					<%= link_to "Invite", new_folder_foldership_path(@folder.organization.permalink, @folder), class: "invite_member right button small blue_bg", remote: true %>
+					<%= link_to "Invite", new_folder_foldership_path(@folder.organization, @folder), class: "invite_member right button small blue_bg", remote: true %>
 				<% end %>
 				
 				<h3>Who's Here?</h3>
@@ -44,7 +44,7 @@
 		<% if @foldership.permits? :tasks, :read %>
 			<div id="tasks_wrapper" class="panel notepad left">
 				<h3>What's Next?</h3>
-				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org.permalink, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
+				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
 					<%= render @folder.tasks.incomplete.by_ordinal %>
 				</ul>
 				<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
@@ -52,7 +52,7 @@
 				</ul>
 				
 				<% if @foldership.permits? :tasks, :write %>
-					<%= form_for [@folder, Task.new], url: folder_tasks_path(@org.permalink, @folder), remote: true do |f| %>
+					<%= form_for [@folder, Task.new], url: folder_tasks_path(@org, @folder), remote: true do |f| %>
 						<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
 					<% end %>
 				<% end %>
@@ -69,7 +69,7 @@
 		<div class="top_space panel">
 					<h3>Homes</h3>
 					<ul>
-						<li><%= link_to "New Home", new_folder_home_path(@org.permalink, @folder) %></li>
+						<li><%= link_to "New Home", new_folder_home_path(@org, @folder) %></li>
 						<%= render @folder.homes.order("updated_at desc") %>
 					</ul>
 				</div>-->

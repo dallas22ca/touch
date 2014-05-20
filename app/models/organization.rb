@@ -14,12 +14,20 @@ class Organization < ActiveRecord::Base
   
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
   
-  validates_uniqueness_of :permalink
+  before_validation :format_permalink
+  before_validation :format_website
   
-  before_save :format_website
+  validates_presence_of :permalink
+  validates_uniqueness_of :permalink
   
   def format_website
     self.website = "http://#{website}" unless website.blank? || website =~ /http/
+  end
+  
+  def format_permalink
+    self.permalink = name if permalink.blank?
+    self.name = permalink.humanize.capitalize if name.blank?
+    self.permalink = permalink.parameterize
   end
   
   def to_param

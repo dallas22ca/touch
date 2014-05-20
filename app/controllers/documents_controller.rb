@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @foldership.permits?(:documents, :write) && @document.save!
-        format.html { redirect_to folder_documents_path(@org.permalink, @folder), notice: 'Document was successfully created.' }
+        format.html { redirect_to folder_documents_path(@org, @folder), notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @foldership.permits?(:documents, :write) && @document.update(document_params)
-        format.html { redirect_to folder_documents_path(@org.permalink, @folder), notice: 'Document was successfully updated.' }
+        format.html { redirect_to folder_documents_path(@org, @folder), notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class DocumentsController < ApplicationController
   def destroy
     @document.destroy if @foldership.permits? :documents, :delete
     respond_to do |format|
-      format.html { redirect_to folder_documents_path(@org.permalink, @folder), notice: 'Document was successfully destroyed.' }
+      format.html { redirect_to folder_documents_path(@org, @folder), notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end

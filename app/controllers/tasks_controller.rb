@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @foldership.permits?(:tasks, :write) && @task.save
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully created.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
         format.js
       else
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @foldership.permits?(:tasks, :write) && @task.update(task_params)
-        format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully updated.' }
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
         format.js
       else
@@ -63,7 +63,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy if @foldership.permits? :tasks, :delete
     respond_to do |format|
-      format.html { redirect_to folder_path(@org.permalink, @folder), notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end

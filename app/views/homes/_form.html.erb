@@ -1,45 +1,59 @@
-<%= form_for(@home) do |f| %>
-  <% if @home.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@home.errors.count, "error") %> prohibited this home from being saved:</h2>
-
-      <ul>
-      <% @home.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :province %><br>
-    <%= f.text_field :province %>
-  </div>
-  <div class="field">
-    <%= f.label :postal_code %><br>
-    <%= f.text_field :postal_code %>
-  </div>
-  <div class="field">
-    <%= f.label :beds %><br>
-    <%= f.text_field :beds %>
-  </div>
-  <div class="field">
-    <%= f.label :baths %><br>
-    <%= f.text_field :baths %>
-  </div>
-  <div class="field">
-    <%= f.label :data %><br>
-    <%= f.text_field :data %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% title do %>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 <% end %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+	
+		<div class="mini_content_wrapper">
+
+			<%= form_for [@folder, @home], url: folder_homes_path(@org, @folder) do |f| %>
+			  <% if @home.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@home.errors.count, "error") %> prohibited this home from being saved:</h2>
+
+			      <ul>
+			      <% @home.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+			  <div class="field">
+			    <%= f.label :address, class: "label" %>
+			    <%= f.text_field :address %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :city, class: "label" %>
+			    <%= f.text_field :city %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :province, class: "label" %>
+			    <%= f.text_field :province %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :postal_code, class: "label" %>
+			    <%= f.text_field :postal_code %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :beds, class: "label" %>
+			    <%= f.text_field :beds %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :baths, class: "label" %>
+			    <%= f.text_field :baths %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit "Save Home", class: "big blue_bg button" %>
+			  </div>
+			<% end %>
+
+		</div>
+	
+	</div>
+</div>
