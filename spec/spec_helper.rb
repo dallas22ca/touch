@@ -6,7 +6,7 @@ require 'capybara/rspec'
 require 'sidekiq/testing'
 
 DatabaseCleaner.strategy = :truncation
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
@@ -28,6 +28,5 @@ RSpec.configure do |config|
     fill_in "Email",    with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"
-    page.should have_content "Signed in"
   end
 end

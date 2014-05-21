@@ -11,7 +11,7 @@
 	
 		<div class="mini_content_wrapper">
 
-			<%= form_for [@folder, @home], url: folder_homes_path(@org, @folder) do |f| %>
+			<%= form_for [@folder, @home], url: @home.new_record? ? folder_homes_path(@org, @folder) : folder_home_path(@org, @folder, @home) do |f| %>
 			  <% if @home.errors.any? %>
 			    <div id="error_explanation">
 			      <h2><%= pluralize(@home.errors.count, "error") %> prohibited this home from being saved:</h2>
@@ -47,6 +47,10 @@
 			  <div class="field">
 			    <%= f.label :baths, class: "label" %>
 			    <%= f.text_field :baths %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :price, class: "label" %>
+			    <%= f.text_field :price %>
 			  </div>
 			  <div class="actions">
 			    <%= f.submit "Save Home", class: "big blue_bg button" %>

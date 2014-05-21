@@ -19,8 +19,8 @@
 			<% end %>
 		
 		  <div class="field">
-		    <%= f.label :role, "Access Level", class: "label" %>
-		    <%= f.select :role, options_for_select([["Agent (all-access)", "admin"], ["Client (read-only access)", "read_only"], ["Lawyer (documents-only)", "documents_only"]], @fship.role) %>
+		    <%= f.label :preset, "Access Level", class: "label" %>
+		    <%= f.select :preset, options_for_select([["Agent (all-access)", "admin"], ["Client (read-only access)", "read_only"], ["Lawyer (documents-only)", "documents_only"]], @fship.role) %>
 		  </div>
 		  <div class="actions">
 				<%= f.submit @fship.new_record? ? "Send Invitation" : "Save Permissions", class: "big blue_bg button" %>

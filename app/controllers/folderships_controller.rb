@@ -1,8 +1,9 @@
 class FoldershipsController < ApplicationController
   layout :choose_layout
   before_action :set_organization, except: [:accept]
-  before_action :set_folder_with_permissions
+  before_action :set_folder_with_permissions, except: [:accept]
   before_action :set_fship, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }, only: [:index]
   
   def index
     @folderships = @member.folderships.unaccepted
@@ -59,24 +60,24 @@ class FoldershipsController < ApplicationController
   
   def accept
     @org = Organization.where(permalink: params[:permalink]).first
-    @fship = @org.folderships.where(token: params[:token]).first
-    @folder = @fship.folder
+    @foldership = params[:token] ? @org.folderships.where(token: params[:token]).first : @org.folderships.find(params[:foldership_id])
+    @folder = @foldership.folder
     
     if user_signed_in?
       @member = @org.members.where(user_id: current_user.id).first
 
       if @member
-        if @folder.members.include? @member
-          redirect_to folder_path(@fship.folder.organization, @fship.folder)
+        if @folder.members.accepted.include? @member
+          redirect_to folder_path(@foldership.folder.organization, @foldership.folder)
         else
-          @fship.accept
-          redirect_to folder_path(@fship.folder.organization, @fship.folder)
+          @foldership.accept
+          redirect_to folder_path(@foldership.folder.organization, @foldership.folder)
         end
       else
         @member = @org.members.create! user: current_user
-        @fship.update member: @member
-        @fship.accept
-        redirect_to folder_path(@fship.folder.organization, @fship.folder)
+        @foldership.update member: @member
+        @foldership.accept
+        redirect_to folder_path(@foldership.folder.organization, @foldership.folder)
       end
     else
       redirect_to new_user_registration_path(token: params[:token])
@@ -90,7 +91,7 @@ class FoldershipsController < ApplicationController
     end
   
     def foldership_params
-      params.require(:foldership).permit(:name, :email, :role, :resend)
+      params.require(:foldership).permit(:name, :email, :preset, :resend)
     end
     
     def choose_layout

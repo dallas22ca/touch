@@ -17,12 +17,13 @@
 				<% end %>
 			</ul>
 			
-			<table class="table">
+			<table class="table" <%= "data-delete" if @foldership.permits? :homes, :delete %>>
 			  <thead>
 			    <tr>
 			      <th>Address</th>
 			      <th>Beds</th>
 			      <th>Baths</th>
+						<th>Price</th>
 						<th></th>
 			    </tr>
 			  </thead>

@@ -20,6 +20,18 @@ class Organization < ActiveRecord::Base
   validates_presence_of :permalink
   validates_uniqueness_of :permalink
   
+  after_save :add_modules_to_admins, if: :modules_changed?
+  
+  def add_modules_to_admins
+    members.where("roles ilike ?", "%admin%").each do |m|
+      modules.each do |mod|
+        m.add_preset mod.to_sym
+        m.save
+      end
+    end
+    
+  end
+  
   def format_website
     self.website = "http://#{website}" unless website.blank? || website =~ /http/
   end

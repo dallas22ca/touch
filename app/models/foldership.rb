@@ -1,16 +1,20 @@
 class Foldership < ActiveRecord::Base
+  serialize :roles, Array
+  
   attr_accessor :resend
 
   belongs_to :folder
   belongs_to :member
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   
-  validates_presence_of :folder_id, :member_id, :role
+  validates_presence_of :folder_id, :roles
+  validates_presence_of :member_id, if: Proc.new { email.blank? || name.blank? }
   validates_presence_of :email, if: Proc.new { !member && new_record? }
   validates_presence_of :name, if: Proc.new { !member && new_record? }
   validates_uniqueness_of :member_id, scope: [:folder_id], message: "is already present", if: :member
   
-  before_validation :link_to_member
+  before_validation :set_roles, if: :preset_changed?
+  before_create :link_to_member
   before_save :generate_token, if: Proc.new { token.blank? }
   after_create :send_email
   after_save :send_email, if: :resend
@@ -22,28 +26,30 @@ class Foldership < ActiveRecord::Base
     FolderMailer.invitation(id).deliver unless member == folder.creator
   end
   
+  def name_and_email
+    "#{name} <#{email}>"
+  end
+  
   def accept
-    update accepted: true
+    member.roles.push "folders/read"
+    member.roles.push "folders/write" if preset.to_s == "admin"
+    update accepted: true if member.save!
   end
   
   def link_to_member
     unless self.member
       org = folder.organization
       self.member = org.members.where("data -> 'email' = ?", email).first
-      
-      unless self.member
-        self.member = org.members.create! user: User.new(name: name, email: email), permissions: ["user"]
-      end
     end
     
     if self.member
-      self.name = self.member.name
-      self.email = self.member.data["email"]
+      self.name = member.name
+      self.email = member.data["email"]
     end
   end
   
   def role_explained
-    case role
+    case preset
     when "admin"
       "Agent"
     when "read_only"
@@ -66,64 +72,43 @@ class Foldership < ActiveRecord::Base
   
   def permits?(resource, action)
     return true if resource.is_a?(Object) && resource.try(:creator_id) == member_id
-    resource = resource.class.name.downcase.pluralize unless resource.is_a? Symbol
+    resource = resource.class.name.downcase.pluralize unless resource.is_a?(Symbol) || resource.is_a?(String)
     action = action.to_sym unless action.is_a? Symbol
-    r = Foldership.permissions[role.to_sym]
-    r.has_key?(resource) && r[resource][action] == true
+    permit = roles.include? "#{resource}/#{action}"
+    logger.info "Attempting to gain permissions to #{resource}/#{action}... #{permit ? "\033[0;32msuccess\033[0m" : "\033[0;31mfail\033[0m"}"
+    permit
+  end
+  
+  def set_roles
+    self.roles = Foldership.permissions.select { |p| p[Foldership.presets[preset.to_s.to_sym]] }
+  end
+  
+  def self.presets
+    {
+      admin: /\//,
+      read_only: /\/read/,
+      documents_only: /((documents|folderships)\/)|(\/read)/
+    }
   end
   
   def self.permissions
-    {
-      admin: {
-        folders: {
-          read: true,
-          write: true,
-          delete: true
-        },
-        documents: {
-          read: true,
-          write: true,
-          delete: true
-        },
-        tasks: {
-          read: true,
-          write: true,
-          delete: true
-        },
-        homes: {
-          read: true,
-          write: true,
-          delete: true
-        },
-        folderships: {
-          read: true,
-          write: true,
-          delete: true
-        }
-      },
-      read_only: {
-        folders: {},
-        documents: {
-          read: true
-        },
-        tasks: {
-          read: true
-        },
-        folderships: {
-          read: true
-        }
-      },
-      documents_only: {
-        folders: {},
-        documents: {
-          read: true,
-          write: true
-        },
-        tasks: {},
-        folderships: {
-          read: true
-        }
-      }
-    }
+    [
+      "folders/write",
+      "comments/read",
+      "comments/write",
+      "comments/delete",
+      "tasks/read",
+      "tasks/write",
+      "tasks/delete",
+      "documents/read",
+      "documents/write",
+      "documents/delete",
+      "homes/read",
+      "homes/write",
+      "homes/delete",
+      "folderships/read",
+      "folderships/write",
+      "folderships/delete"
+    ]
   end
 end

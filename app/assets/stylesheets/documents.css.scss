@@ -6,14 +6,6 @@
 	#documents {
 		width: 100%;
 		margin-top: 20px;
-		
-		&[data-delete] {
-			.document {
-				.delete {
-					display: block;
-				}
-			}
-		}
 
 		.document {			
 			.name {
@@ -22,12 +14,6 @@
 		
 			.created_at {
 				width: 25%;
-			}
-		
-			.delete {
-				visibility: hidden;
-				color: maroon;
-				display: none;
 			}
 		}
 	}

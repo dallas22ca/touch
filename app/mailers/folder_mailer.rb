@@ -4,9 +4,8 @@ class FolderMailer < ActionMailer::Base
   def invitation(foldership_id)
     @foldership = Foldership.find(foldership_id)
     @folder = @foldership.folder
-    @member = @foldership.member
     @inviter = @foldership.creator
 
-    mail to: @member.name_and_email, subject: "You've been invited to a folder"
+    mail to: @foldership.name_and_email, subject: "You've been invited to a folder"
   end
 end

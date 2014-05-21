@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_organization
   before_action :set_folder_with_permissions
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }
 
   # GET /tasks
   # GET /tasks.json

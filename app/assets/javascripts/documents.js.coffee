@@ -3,7 +3,7 @@ $(document).on
 		$(this).find(".delete").css "visibility", "visible"
 	mouseleave: ->
 		$(this).find(".delete").css "visibility", "hidden"
-, "#documents .document"
+, "[data-delete] tr, [data-delete] li"
 
 $(document).on "change", "#document_file", ->
 	$(this).closest("form").trigger "submit"

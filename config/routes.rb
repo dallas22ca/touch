@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   
   devise_scope :user do
-    devise_for :users
+    devise_for :users,
+      controllers: {
+        registrations: "registrations"
+      }
+
+    get "/:permalink/sign-in" => "devise/sessions#new"
     
     authenticate :user do
       scope "/:permalink" do
         get "/attendance" => "modules#attendance", as: :attendance
         get "/permissions" => "modules#permissions", as: :permissions
-        post "/track" => "modules#presence", as: :track
+        post "/track" => "rooms#presence", as: :track
         get "/my-account" => "devise/registrations#edit"
       
         resources :members, path: :contacts
@@ -34,7 +39,7 @@ Rails.application.routes.draw do
         end
       end
 
-      get "/:permalink" => "modules#redirect"
+      get "/:permalink" => "modules#redirect", as: :redirector
     end
   
     scope "/:permalink" do

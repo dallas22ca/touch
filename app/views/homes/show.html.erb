@@ -1,36 +1,51 @@
-<p id="notice"><%= notice %></p>
+<% title do %>
+	<h1 class="avatar"><%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
+<% end %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @home.address %>
-</p>
+<div class="has_header">
+	<%= render "folders/sidebar" %>
 
-<p>
-  <strong>City:</strong>
-  <%= @home.city %>
-</p>
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+	
+		<div class="mini_content_wrapper">			
+			<p>
+			  <strong>Address:</strong>
+			  <%= @home.address %>
+			</p>
 
-<p>
-  <strong>Province:</strong>
-  <%= @home.province %>
-</p>
+			<p>
+			  <strong>City:</strong>
+			  <%= @home.city %>
+			</p>
 
-<p>
-  <strong>Postal code:</strong>
-  <%= @home.postal_code %>
-</p>
+			<p>
+			  <strong>Province:</strong>
+			  <%= @home.province %>
+			</p>
 
-<p>
-  <strong>Beds:</strong>
-  <%= @home.beds %>
-</p>
+			<p>
+			  <strong>Postal code:</strong>
+			  <%= @home.postal_code %>
+			</p>
 
-<p>
-  <strong>Baths:</strong>
-  <%= @home.baths %>
-</p>
+			<p>
+			  <strong>Beds:</strong>
+			  <%= @home.beds %>
+			</p>
 
-<p>
-  <strong>Data:</strong>
-  <%= @home.data %>
-</p>
+			<p>
+			  <strong>Baths:</strong>
+			  <%= @home.baths %>
+			</p>
+
+			<p>
+			  <strong>Data:</strong>
+			  <%= @home.data %>
+			</p>
+			
+		</div>
+		
+	</div>
+</div>

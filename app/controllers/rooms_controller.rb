@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_filter :set_organization
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_root, unless: Proc.new { @member.permits? :rooms, action_type }
 
   # GET /rooms
   # GET /rooms.json
@@ -75,6 +76,46 @@ class RoomsController < ApplicationController
       format.html { redirect_to rooms_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def presence
+    @room = @org.rooms.find(params[:room_id])
+    @meeting = @room.meetings.find(params[:meeting_id])
+    @this_member = @org.this_members.where(id: params[:this_member_id]).first
+    present = params[:this_member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
+    verb = present ? "attended" : "did not attend"
+    exists = @org.events.where("data @> 'contact.key=>#{@this_member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @this_member
+
+    if present
+      if !exists
+        if params[:this_member_id] == "new"
+          @user = User.create!(
+            name: params[:name],
+            ignore_password: true,
+            ignore_email: true
+          )
+          @this_member = @org.this_members.create! user: @user
+        end
+      
+        @org.events.create!(
+          description: "{{ contact.name }} #{verb} {{ room.name }}",
+          verb: verb,
+          created_at: @meeting.date,
+          json_data: {
+            present: present,
+            meeting: @meeting.attributes,
+            room: @room.attributes,
+            contact: {
+              key: @this_member.key
+            }
+          }
+        )
+      end
+    else
+      exists.destroy
+    end
+    
+    render "modules/attendance/presence"
   end
 
   private

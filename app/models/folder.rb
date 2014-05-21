@@ -17,10 +17,12 @@ class Folder < ActiveRecord::Base
   after_create :create_foldership, if: Proc.new { folderships.empty? }
   after_create :seed_tasks, unless: Proc.new { seed.blank? }
   
+  scope :accepted, -> { where "folderships.accepted = ?", true }
+  
   def create_foldership
     folderships.create!(
       member: creator, 
-      role: "admin",
+      preset: "admin",
       accepted: true
     )
   end

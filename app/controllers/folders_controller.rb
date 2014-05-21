@@ -1,12 +1,12 @@
 class FoldersController < ApplicationController
   before_filter :set_organization
-  before_action :set_folder_with_permissions, only: [:show, :edit, :update, :destroy]
-  before_filter :send_to_folder, unless: Proc.new { @foldership.permits? :folders, :write }, only: [:edit, :update, :destroy]
+  before_action :set_folder_with_permissions
+  before_filter :redirect_to_root, unless: Proc.new { @member.permits? :folders, action_type }
 
   # GET /folders
   # GET /folders.json
   def index
-    @folders = @member.folders
+    @folders = @member.folders.accepted
   end
 
   # GET /folders/1

@@ -13,6 +13,7 @@
 			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
 				<%= render @folder.tasks.incomplete.by_ordinal %>
 			</ul>
+
 			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
 				<%= render @folder.tasks.complete.by_completed_at %>
 			</ul>

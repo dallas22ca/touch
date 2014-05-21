@@ -3,19 +3,15 @@ class ModulesController < ApplicationController
   before_filter :check_if_org
   
   def redirect
-    if @org.modules.include?("contacts") && @member.permits?("contacts")
+    if @member.permits? :members, :read
       redirect_to members_path(current_user.organizations.first)
-    elsif @org.modules.include?("attendance") && @member.permits?("attendance")
+    elsif @member.permits? :attendance, :read
       redirect_to attendance_path(current_user.organizations.first)
-    elsif @org.modules.include?("folders") && @member.permits?("folders")
+    elsif @member.permits? :folders, :read
       redirect_to folders_path(current_user.organizations.first)
     else
       redirect_to edit_user_registration_path
     end
-  end
-  
-  def permissions
-    render "modules/permissions/index"
   end
   
   def attendance
@@ -26,55 +22,9 @@ class ModulesController < ApplicationController
     end
   end
   
-  def presence
-    @room = @org.rooms.find(params[:room_id])
-    @meeting = @room.meetings.find(params[:meeting_id])
-    @member = @org.members.where(id: params[:member_id]).first
-    present = params[:member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
-    verb = present ? "attended" : "did not attend"
-    exists = @org.events.where("data @> 'contact.key=>#{@member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @member
-
-    if present
-      if !exists
-        if params[:member_id] == "new"
-          @user = User.create!(
-            name: params[:name],
-            ignore_password: true,
-            ignore_email: true
-          )
-          @member = @org.members.create! user: @user
-        end
-      
-        @org.events.create!(
-          description: "{{ contact.name }} #{verb} {{ room.name }}",
-          verb: verb,
-          created_at: @meeting.date,
-          json_data: {
-            present: present,
-            meeting: @meeting.attributes,
-            room: @room.attributes,
-            contact: {
-              key: @member.key
-            }
-          }
-        )
-      end
-    else
-      exists.destroy
-    end
-    
-    render "modules/attendance/presence"
-  end
-  
   private
   
   def check_if_org
     redirect_to members_path(current_user.organizations.first) if !@org
-
-    if %w[contacts permissions attendance].include? action_name
-      unless @org.modules.include?(action_name) && @member.permits?(action_name)
-        redirect_to root_path
-      end
-    end
   end
 end

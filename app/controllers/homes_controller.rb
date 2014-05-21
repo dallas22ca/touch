@@ -2,6 +2,7 @@ class HomesController < ApplicationController
   before_action :set_organization
   before_action :set_folder_with_permissions
   before_action :set_home, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }
 
   # GET /homes
   # GET /homes.json
@@ -72,6 +73,6 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:address, :city, :province, :postal_code, :beds, :baths, :data)
+      params.require(:home).permit(:address, :city, :province, :postal_code, :beds, :baths, :price, :data)
     end
 end

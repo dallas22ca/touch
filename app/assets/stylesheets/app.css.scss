@@ -222,6 +222,18 @@ hr {
 	border: 0;
 }
 
+.delete {
+	display: none;
+}
+
+[data-delete] {
+	.delete {
+		visibility: hidden;
+		color: maroon;
+		display: block;
+	}
+}
+
 @media screen and (min-width: 601px) {
 	#topbar .nav {
 		display: block !important;

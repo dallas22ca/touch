@@ -25,12 +25,30 @@
 				<% end %>
 			</ul>
 		</li>
-		<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_comments_path(@org, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_tasks_path(@org, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_homes_path(@org, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_documents_path(@org, @folder)}" %></li>
-		<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_folderships_path(@org, @folder)}" %></li>
-		<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
+		
+		<% if @foldership.permits? :comments, :read %>
+			<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_comments_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :tasks, :read %>
+			<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_tasks_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :homes, :read %>
+			<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_homes_path(@org, @folder)}" %></li>
+		<% end %>
+			
+		<% if @foldership.permits? :documents, :read %>
+			<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_documents_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :folderships, :read %>
+			<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_folderships_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @member.permits? :folders, :write %>
+			<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
+		<% end %>
 	</ul>
 </div>
 	

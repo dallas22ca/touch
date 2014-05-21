@@ -1,7 +1,11 @@
 <h2>Sign in</h2>
+<% @org = Organization.where(permalink: params[:permalink]).first %>
+<%= image_tag @org.logo.url if @org %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
+	<%= hidden_field_tag :permalink, params[:permalink] if params[:permalink] %>
+	<%= hidden_field_tag :domain, cookies[:domain] %>
 
   <div><%= f.label :email, class: "label" %>
   <%= f.email_field :email %></div>
@@ -13,7 +17,7 @@
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
+  <div><%= f.submit "Sign In" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>
