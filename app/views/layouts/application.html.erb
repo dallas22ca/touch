@@ -35,7 +35,10 @@
 
 			<% if yield(:title).blank? %>
 				<% if @org %>
-					<h1 class="avatar"><%= link_to image_tag(current_user.avatar.url, class: "user_avatar"), root_path, target: :blank %></h1>
+					<% if current_user.avatar.exists? %>
+						<h1 class="avatar"><%= link_to image_tag(current_user.avatar.url, class: "user_avatar"), root_path, target: :blank %></h1>
+					<% end %>
+					
 					<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 				<% else %>
 					<h1><%= link_to(@website["name"], root_path) %></h1>
