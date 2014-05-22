@@ -33,7 +33,7 @@ class Foldership < ActiveRecord::Base
   def accept
     member.roles.push "folders/read"
     member.roles.push "folders/write" if preset.to_s == "admin"
-    update accepted: true if member.save!
+    update! accepted: true if member.save!
   end
   
   def link_to_member
@@ -87,7 +87,7 @@ class Foldership < ActiveRecord::Base
     {
       admin: /\//,
       read_only: /\/read/,
-      documents_only: /((documents|folderships)\/)|(\/read)/
+      documents_only: /documents|folderships\/read/
     }
   end
   

@@ -81,20 +81,20 @@ class RoomsController < ApplicationController
   def presence
     @room = @org.rooms.find(params[:room_id])
     @meeting = @room.meetings.find(params[:meeting_id])
-    @this_member = @org.this_members.where(id: params[:this_member_id]).first
-    present = params[:this_member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
+    @this_member = @org.members.where(id: params[:member_id]).first
+    present = params[:member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
     verb = present ? "attended" : "did not attend"
     exists = @org.events.where("data @> 'contact.key=>#{@this_member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @this_member
 
     if present
       if !exists
-        if params[:this_member_id] == "new"
+        if params[:member_id] == "new"
           @user = User.create!(
             name: params[:name],
             ignore_password: true,
             ignore_email: true
           )
-          @this_member = @org.this_members.create! user: @user
+          @this_member = @org.members.create! user: @user
         end
       
         @org.events.create!(

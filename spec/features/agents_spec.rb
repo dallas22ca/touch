@@ -21,10 +21,13 @@ describe "Agent", js: true do
     fill_in "Email", with: "joeschmoe77@realtxn.com"
     fill_in "Password", with: "joeschmoe77"
     fill_in "user_password_confirmation", with: "joeschmoe77"
-    fill_in "Permalink", with: "joe"
     click_button "Sign Up"
+    
+    fill_in "Name", with: "RLP"
+    fill_in "Permalink", with: "rlp"
+    click_button "Save Organization"
+    
     page.should have_content "Folders"
-    page.should have_content "Contacts"
   end
   
   it "sets the domain cookie" do
@@ -104,26 +107,94 @@ describe "Agent", js: true do
     page.should have_content @folder.name
   end
   
-  it "client accepts invite with existing, unlinked account" do
+  it "client accepts invitation with an existing, unlinked membership" do
     client = FactoryGirl.create(:user)
-    @client = client.members.first
+    @org.users.push client
     
     @folder = @org.folders.create name: "New Folder", creator: @member, organization: @org
-    @foldership = @folder.folderships.create! preset: "read_only", name: "client.name", email: "client.email", creator: @member
+    @foldership = @folder.folderships.create! preset: "documents_only", name: "Random Person", email: "random@realtxn.com", creator: @member
+    assert !@foldership.accepted?
+    
+    visit foldership_invitation_path(@org, @foldership.token)
+    current_url.should have_content new_user_registration_path(token: @foldership.token)
+
+    click_link "Sign In"
+    fill_in "Email", with: client.email
+    fill_in "Password", with: client.password
+    click_button "Sign In"
+    sleep 0.5
+
+    assert @foldership.reload.accepted?
+    visit root_path
+    page.should have_content @folder.name
+    page.should_not have_content "Tasks"
+    page.should have_content "Documents"
+  end
+  
+  it "client accepts invite with new, unlinked account" do
+    client = FactoryGirl.create(:user)
+    
+    @folder = @org.folders.create name: "New Folder", creator: @member, organization: @org
+    @foldership = @folder.folderships.create! preset: "read_only", name: "Client Name", email: "client.email@realtxn.com", creator: @member
     assert !@foldership.accepted?
     
     visit foldership_invitation_path(@org, @foldership.token)
     current_url.should have_content new_user_registration_path(token: @foldership.token)
     
-    # Sign up process for name (prepop), email (prepop), password
-    # FB?
-
+    page.should have_xpath("//input[@value='#{@foldership.name}']")
+    assert_equal @foldership.token, find("#user_invitation_token", visible: false).value
+    
+    fill_in "Password", with: "secret123"
+    fill_in "user_password_confirmation", with: "secret123"
+    click_button "Sign Up"
+    
+    sleep 0.5
     assert @foldership.reload.accepted?
+
     visit root_path
     page.should have_content @folder.name
+    page.should have_content "Tasks"
+    page.should_not have_content "Create A Folder"
+    
+    visit folder_homes_path(@org, @folder)
+    page.should_not have_content "Add A Home"
+    page.should have_content "Show Map"
   end
   
-  # they can see the folders they're supposed to
-  # they can't create folders if just client
-  # permissions actually hold up
+  it "folder permissions hold up" do
+    @folder = @org.folders.create creator: @member, name: "Wow"
+    @foldership = @folder.folderships.first
+    
+    sign_in @user
+    
+    visit folder_path(@org, @folder)
+    page.should have_content "Tasks"
+    
+    @foldership.update roles: @foldership.roles - ["tasks/read"]
+    visit folder_path(@org, @folder)
+    page.should_not have_content "Tasks"
+    
+    @member.update roles: []
+    visit folder_path(@org, @folder)
+    page.should have_content "AVATAR"
+  end
+  
+  it "they can see the folders they're supposed to" do
+    @folder = @org.folders.create creator_id: 11, name: "Inaccessible"
+    sign_in @user
+    visit folders_path(@org, @folder)
+    page.should_not have_content @folder.name
+  end
+  
+  it "they can't create folders if just client" do
+    client = FactoryGirl.create(:user)
+    @org.users.push client
+    @client = client.members.first
+    @folder = @org.folders.create name: "New Folder", creator: @member, organization: @org
+    @foldership = @folder.folderships.create! preset: "read_only", member: @client, creator: @member, accepted: true
+    
+    sign_in client
+    visit new_folder_path(@org)
+    page.should_not have_content "Copy tasks from a template"
+  end
 end

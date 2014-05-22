@@ -95,7 +95,7 @@ class Member < ActiveRecord::Base
       members: /members\//,
       contacts: /members\//,
       folders: /folders\//,
-      attendance: /(rooms|events)\//
+      attendance: /(rooms\/)|(members\/(write|delete))/
     }
   end
   
@@ -111,10 +111,7 @@ class Member < ActiveRecord::Base
       "folders/delete",
       "rooms/read",
       "rooms/write",
-      "rooms/delete",
-      "events/read",
-      "events/write",
-      "events/delete"
+      "rooms/delete"
     ]
   end
 end

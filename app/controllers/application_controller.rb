@@ -32,11 +32,11 @@ class ApplicationController < ActionController::Base
   end
   
   def set_member
-    @member = current_user.members.where(organization_id: @org.id).first
+    @member = current_user.members.where(organization_id: @org.id).first if @org
   end
   
   def set_website
-    cookies[:domain] ||= Rails.env.development? ? "realtxn.com" : request.domain
+    cookies[:domain] ||= !Rails.env.production? ? "realtxn.com" : request.domain
     @website = CONFIG["sites"][cookies[:domain]]
   end
   
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   def action_type
     if %w[index show].include? action_name
       :read
-    elsif %w[new create edit update sort].include? action_name
+    elsif %w[new create edit update sort presence].include? action_name
       :write
     elsif %w[destroy].include? action_name
       :delete

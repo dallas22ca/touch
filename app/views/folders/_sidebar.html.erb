@@ -18,7 +18,9 @@
 			<%= link_to "<i class=\"fa fa-bars\"></i> <span class=\"word\">#{@folder.name}</span>".html_safe, folder_comments_path(@org, @folder), class: "choose_folder" %>
 			
 			<ul class="folders_list">
-				<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
+				<% if @member.permits? :folders, :write %>
+					<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
+				<% end %>
 
 				<% @member.folders.each do |folder| %>
 					<li><%= link_to folder.name, folder_comments_path(@org, folder) %></li>

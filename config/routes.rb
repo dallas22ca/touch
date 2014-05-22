@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
   
+  resources :identities
+
   devise_scope :user do
     devise_for :users,
       controllers: {
-        registrations: "registrations"
+        omniauth_callbacks: "omniauth_callbacks",
+        registrations: "registrations",
+        sessions: "sessions"
       }
 
     get "/:permalink/sign-in" => "devise/sessions#new"
     
     authenticate :user do
+      resources :organizations, only: [:new, :create]
+      
       scope "/:permalink" do
         get "/attendance" => "modules#attendance", as: :attendance
         get "/permissions" => "modules#permissions", as: :permissions

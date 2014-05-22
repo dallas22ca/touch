@@ -17,6 +17,7 @@ gem 'exception_notification'
 gem 'skylight'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk'
+gem 'omniauth-facebook'
 
 gem 'sidekiq'
 gem 'sinatra', require: false

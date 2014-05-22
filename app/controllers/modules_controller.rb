@@ -5,7 +5,7 @@ class ModulesController < ApplicationController
   def redirect
     if @member.permits? :members, :read
       redirect_to members_path(current_user.organizations.first)
-    elsif @member.permits? :attendance, :read
+    elsif @member.permits? :rooms, :read
       redirect_to attendance_path(current_user.organizations.first)
     elsif @member.permits? :folders, :read
       redirect_to folders_path(current_user.organizations.first)
@@ -25,6 +25,6 @@ class ModulesController < ApplicationController
   private
   
   def check_if_org
-    redirect_to members_path(current_user.organizations.first) if !@org
+    redirect_to new_organization_path if !@org
   end
 end

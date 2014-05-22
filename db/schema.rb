@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521163300) do
+ActiveRecord::Schema.define(version: 20140522095948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,20 @@ ActiveRecord::Schema.define(version: 20140521163300) do
   add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
   add_index "homes", ["folder_id"], name: "index_homes_on_folder_id", using: :btree
 
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "username"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
     t.datetime "date"
@@ -119,6 +133,7 @@ ActiveRecord::Schema.define(version: 20140521163300) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "permissions",     default: "--- []\n"
     t.string   "key"
     t.hstore   "data",            default: {}
     t.text     "roles",           default: "--- []\n"

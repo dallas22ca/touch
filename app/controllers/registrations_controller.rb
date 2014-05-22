@@ -1,12 +1,23 @@
 class RegistrationsController < Devise::RegistrationsController
   def new
-    super
+    build_resource {}
+
+    if params[:token]
+      foldership = Foldership.where(token: params[:token]).first
+      resource.name = foldership.name
+      resource.email = foldership.email
+    end
+    
+    if foldership && foldership.accepted?
+      render text: "This invitation has already been accepted."
+    else
+      respond_with self.resource
+    end
   end
 
   def create
     build_resource(sign_up_params)
 
-    resource.organizations.first.modules = @website["modules"]
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
@@ -23,9 +34,5 @@ class RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with resource
     end
-  end
-
-  def update
-    super
   end
 end 

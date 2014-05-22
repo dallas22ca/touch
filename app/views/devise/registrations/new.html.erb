@@ -1,6 +1,7 @@
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+	<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
   <%= devise_error_messages! %>
 	
   <div><%= f.label :name, class: "label" %>
@@ -8,14 +9,6 @@
 
   <div><%= f.label :email, class: "label" %>
   <%= f.email_field :email %></div>
-	
-	<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
-	
-	<% resource.organizations.build if !params[:token] && resource.organizations.empty? %>
-	<%= f.fields_for :organizations do |o| %>
-	  <div><%= o.label :permalink, class: "label" %>
-	  <%= o.text_field :permalink %></div>
-	<% end %>
 
   <div><%= f.label :password, class: "label" %>
     <%= f.password_field :password, autocomplete: "off" %></div>
@@ -24,4 +17,6 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
   <div><%= f.submit "Sign Up" %></div>
+	
+	<%= link_to "Sign In", new_user_session_path(token: params[:token]) %>
 <% end %>
