@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   serialize :roles, Array
   
   belongs_to :user
-  belongs_to :organization
+  belongs_to :organization, counter_cache: true
   
   has_many :events, dependent: :destroy
   has_many :folderships, dependent: :destroy
@@ -11,9 +11,9 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :key, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
-  
+
+  before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
   before_create :set_roles
-  before_create :set_initial_admin, if: Proc.new { Organization.find(organization_id).members.count == 0 }
 
   after_create :set_user_data, if: :user
   after_create :set_key, unless: :key

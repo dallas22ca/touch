@@ -49,16 +49,6 @@ describe "Agent", js: true do
     end
   end
   
-  it "simple member cannot see folders or log in" do
-    @user = FactoryGirl.create(:user)
-    @org.users.push @user
-    sign_in @user
-    visit root_path
-    page.should_not have_content "Folders"
-    visit folders_path(@org)
-    page.should_not have_content "Create A Folder"
-  end
-  
   it "cannot see contacts if not an allowed module" do
     sign_in @user
     visit members_path(@org)
@@ -117,14 +107,14 @@ describe "Agent", js: true do
     
     visit foldership_invitation_path(@org, @foldership.token)
     current_url.should have_content new_user_registration_path(token: @foldership.token)
-
+    
     click_link "Sign In"
     fill_in "Email", with: client.email
     fill_in "Password", with: client.password
     click_button "Sign In"
 
     sleep 0.5
-    assert @foldership.reload.accepted?
+    assert_equal Foldership.count, Foldership.accepted.count
     assert !client.members.last.reload.roles.include?("folders/write")
 
     visit root_path
@@ -143,13 +133,12 @@ describe "Agent", js: true do
     
     page.should have_xpath("//input[@value='#{@foldership.name}']")
     assert_equal @foldership.token, find("#user_invitation_token", visible: false).value
-    
     fill_in "Password", with: "secret123"
     fill_in "user_password_confirmation", with: "secret123"
     click_button "Sign Up"
     
     sleep 0.5
-    assert @foldership.reload.accepted?
+    assert_equal Foldership.count, Foldership.accepted.count
     assert !Member.last.roles.include?("folders/write")
 
     visit root_path
@@ -192,10 +181,11 @@ describe "Agent", js: true do
     @org.users.push client
     @client = client.members.first
     @folder = @org.folders.create name: "New Folder", creator: @member, organization: @org
-    @foldership = @folder.folderships.create! preset: "read_only", member: @client, creator: @member, accepted: true
+    @foldership = @folder.folderships.create! preset: "read_only", member: @client, creator: @member
+    @foldership.accept
     
     sign_in client
-    visit new_folder_path(@org)
-    page.should_not have_content "Copy tasks from a template"
+    page.should_not have_content "Create A Folder"
+    page.should have_content "Tasks"
   end
 end

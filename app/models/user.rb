@@ -20,19 +20,15 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   
   before_save :format_website
-  after_save :add_to_folder, if: :invitation_token
-  after_save :remove_invitation_token, if: :invitation_token
+  after_save :accept_invitation, if: :invitation_token
   
-  def remove_invitation_token
-    self.invitation_token = nil
-  end
-  
-  def add_to_folder
+  def accept_invitation
     foldership = Foldership.where(token: invitation_token).first!
     org = foldership.folder.organization
-    member = Member.where(user: self, organization: org).first_or_create!
+    member = org.members.where(user_id: id).first_or_create!
     foldership.update! member: member
     foldership.accept
+    update! invitation_token: nil
   end
   
   def format_website

@@ -12,12 +12,10 @@ class SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_flashing_format?
-
-    if params[:user] && params[:user][:invitation_token]
-      foldership = Foldership.where(token: params[:user][:invitation_token]).first
-      member = resource.members.where(organization_id: foldership.folder.organization_id).first_or_create!
-      foldership.update! member: member
-      foldership.accept
+    
+    if params[:user][:invitation_token]
+      resource.invitation_token = params[:user][:invitation_token]
+      resource.accept_invitation
     end
     
     sign_in(resource_name, resource)
