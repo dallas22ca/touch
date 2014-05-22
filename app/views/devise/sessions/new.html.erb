@@ -21,7 +21,7 @@
 		<% end %>
 		
 		<div class="signin_method" data-signin="fb" style="<%= "display: none;" if useful_alert %>">
-			<%= link_to "Sign in with Facebook <i class=\"fa fa-facebook\"></i>".html_safe, omniauth_authorize_path(resource_name, :facebook), class: "big fb_bg button with_icon full_width" %><br />
+			<%= link_to "Sign in using Facebook <i class=\"fa fa-facebook\"></i>".html_safe, omniauth_authorize_path(resource_name, :facebook), class: "big fb_bg button with_icon full_width" %><br />
 			<%= link_to "I'd rather sign in using my email address.", "#", class: "help_link toggle_signin_method", data: { signin: "email" } %>
 		</div>
 
