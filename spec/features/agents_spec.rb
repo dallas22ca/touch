@@ -17,14 +17,14 @@ describe "Agent", js: true do
   
   it "signs up and receives correct modules" do
     visit new_user_registration_path
+    click_link "I'd rather sign up with my email address."
     fill_in "Name", with: "Joe Schmoe"
     fill_in "Email", with: "joeschmoe77@realtxn.com"
     fill_in "Password", with: "joeschmoe77"
     fill_in "user_password_confirmation", with: "joeschmoe77"
     click_button "Sign Up"
     
-    fill_in "Name", with: "RLP"
-    fill_in "Permalink", with: "rlp"
+    fill_in "organization_name", with: "RLP"
     click_button "Save Organization"
     
     page.should have_content "Folders"
@@ -108,7 +108,8 @@ describe "Agent", js: true do
     visit foldership_invitation_path(@org, @foldership.token)
     current_url.should have_content new_user_registration_path(token: @foldership.token)
     
-    click_link "Sign In"
+    click_link "Help: I already have an account!"
+    click_link "I'd rather sign in with my email address."
     fill_in "Email", with: client.email
     fill_in "Password", with: client.password
     click_button "Sign In"
@@ -131,6 +132,7 @@ describe "Agent", js: true do
     visit foldership_invitation_path(@org, @foldership.token)
     current_url.should have_content new_user_registration_path(token: @foldership.token)
     
+    click_link "I'd rather sign up with my email address."
     page.should have_xpath("//input[@value='#{@foldership.name}']")
     assert_equal @foldership.token, find("#user_invitation_token", visible: false).value
     fill_in "Password", with: "secret123"

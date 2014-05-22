@@ -35,4 +35,17 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+  
+  def update
+    @user = User.find(current_user.id)
+    params[:user].delete(:current_password)
+
+    if @user.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
+      set_flash_message :notice, :updated
+      sign_in @user, bypass: true
+      redirect_to root_path
+    else
+      render "edit"
+    end
+  end
 end 

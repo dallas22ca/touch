@@ -17,15 +17,17 @@
 		
 		<% if alert %>
 			<% useful_alert = alert != "You need to sign in or sign up before continuing." %>
-			<p class="alert"><%= alert %></p>
+			<p class="error"><%= alert %></p>
 		<% end %>
 
-		<div class="signin_method" data-signin="fb" style="<%= "display: none;" if useful_alert %>">
-			<%= link_to "Sign up using Facebook <i class=\"fa fa-facebook\"></i>".html_safe, omniauth_authorize_path(resource_name, :facebook), class: "big fb_bg button with_icon full_width" %><br />
-			<%= link_to "I'd rather sign up using my email address.", "#", class: "help_link toggle_signin_method", data: { signin: "email" } %>
+		<div class="signin_method" data-signin="fb" style="<%= "display: none;" unless resource.errors.empty? %>">
+			<%= link_to "Sign up with Facebook <i class=\"fa fa-facebook\"></i>".html_safe, omniauth_authorize_path(resource_name, :facebook), class: "big fb_bg button with_icon full_width" %><br />
+			<%= link_to "I'd rather sign up with my email address.", "#", class: "help_link toggle_signin_method", data: { signin: "email" } %>
 		</div>
 
-		<div class="signin_method" data-signin="email" style="<%= "display: none;" unless useful_alert %>">
+		<div class="signin_method" data-signin="email" style="<%= "display: none;" if resource.errors.empty? %>">
+			<%= devise_error_messages! %>
+			
 		  <div class="field">
 				<%= f.label :name, class: "label" %>
 				<%= f.text_field :name %>
@@ -49,13 +51,13 @@
 		  <div class="actions">
 				<%= f.hidden_field :remember_me, value: true %>
 				<%= f.button "Sign Up <i class=\"fa fa-paper-plane\"></i>".html_safe, class: "big blue_bg button full_width" %>
-				<%= link_to "I'd rather sign in using Facebook.", "#", class: "help_link toggle_signin_method", data: { signin: "fb" } %>
+				<%= link_to "I'd rather sign in with Facebook.", "#", class: "help_link toggle_signin_method", data: { signin: "fb" } %>
 			</div>
 		</div>
 	<% end %>
 
 	<div class="center">
-		<%= link_to "Help: I already have an account!", new_user_session_path, class: "help_link" %>
+		<%= link_to "Help: I already have an account!", new_user_session_path(token: params[:token]), class: "help_link" %>
 	</div>
 
 </div>

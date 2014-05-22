@@ -77,13 +77,13 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    if ignore_password || identities.empty?
+    if ignore_password
       false
     else
-      if encrypted_password.blank?
-        super
-      else
+      if identities.any?
         false
+      else
+        super
       end
     end
   end
