@@ -32,7 +32,7 @@ class Foldership < ActiveRecord::Base
   
   def accept
     member.roles.push "folders/read"
-    member.roles.push "folders/write" if preset.to_s == "admin"
+    member.roles.push "folders/write" if member.roles.include? "admin"
     update! accepted: true if member.save!
   end
   

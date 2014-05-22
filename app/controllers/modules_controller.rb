@@ -4,11 +4,11 @@ class ModulesController < ApplicationController
   
   def redirect
     if @member.permits? :members, :read
-      redirect_to members_path(current_user.organizations.first)
-    elsif @member.permits? :rooms, :read
-      redirect_to attendance_path(current_user.organizations.first)
+      redirect_to members_path(@member.organization)
     elsif @member.permits? :folders, :read
-      redirect_to folders_path(current_user.organizations.first)
+      redirect_to folders_path(@member.organization)
+    elsif @member.permits? :rooms, :read
+      redirect_to attendance_path(@member.organization)
     else
       redirect_to edit_user_registration_path
     end

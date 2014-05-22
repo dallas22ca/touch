@@ -1,7 +1,8 @@
 class FoldershipsController < ApplicationController
   layout :choose_layout
   before_action :set_organization, except: [:accept]
-  before_action :set_folder_with_permissions, except: [:accept]
+  before_action :set_folder, except: [:accept]
+  before_action :set_permissions, except: [:accept]
   before_action :set_fship, only: [:show, :edit, :update, :destroy]
   before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }, only: [:index]
   

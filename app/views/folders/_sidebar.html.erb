@@ -48,7 +48,7 @@
 			<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_folderships_path(@org, @folder)}" %></li>
 		<% end %>
 		
-		<% if @member.permits? :folders, :write %>
+		<% if @foldership.permits? :folders, :write %>
 			<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
 		<% end %>
 	</ul>

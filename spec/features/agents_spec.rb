@@ -122,9 +122,11 @@ describe "Agent", js: true do
     fill_in "Email", with: client.email
     fill_in "Password", with: client.password
     click_button "Sign In"
-    sleep 0.5
 
+    sleep 0.5
     assert @foldership.reload.accepted?
+    assert !client.members.last.reload.roles.include?("folders/write")
+
     visit root_path
     page.should have_content @folder.name
     page.should_not have_content "Tasks"
@@ -132,8 +134,6 @@ describe "Agent", js: true do
   end
   
   it "client accepts invite with new, unlinked account" do
-    client = FactoryGirl.create(:user)
-    
     @folder = @org.folders.create name: "New Folder", creator: @member, organization: @org
     @foldership = @folder.folderships.create! preset: "read_only", name: "Client Name", email: "client.email@realtxn.com", creator: @member
     assert !@foldership.accepted?
@@ -150,6 +150,7 @@ describe "Agent", js: true do
     
     sleep 0.5
     assert @foldership.reload.accepted?
+    assert !Member.last.roles.include?("folders/write")
 
     visit root_path
     page.should have_content @folder.name

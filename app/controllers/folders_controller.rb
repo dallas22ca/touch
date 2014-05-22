@@ -1,7 +1,9 @@
 class FoldersController < ApplicationController
   before_filter :set_organization
-  before_action :set_folder_with_permissions
+  before_action :set_folder
+  before_action :set_permissions
   before_filter :redirect_to_root, unless: Proc.new { @member.permits? :folders, action_type }
+  before_filter :redirect_to_root, unless: Proc.new { @foldership.permits? :folders, action_type }, only: [:edit, :update, :destroy]
 
   # GET /folders
   # GET /folders.json
@@ -16,7 +18,12 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
-    redirect_to folder_comments_path(@org, @folder)
+    %w[comments tasks homes documents folderships].each do |controller|
+      if @foldership.permits? controller, :read
+        redirect_to polymorphic_path([@folder, controller.to_sym], permalink: @org.permalink)
+        break
+      end
+    end
   end
 
   # GET /folders/new
@@ -75,11 +82,7 @@ class FoldersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = @member.folders.find(params[:id])
-    end
-
+  
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
       params.require(:folder).permit(:name, :archived, :seed)

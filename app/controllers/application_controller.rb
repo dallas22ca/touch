@@ -48,9 +48,8 @@ class ApplicationController < ActionController::Base
     redirect_to folder_path(@org, @folder)
   end
   
-  def set_folder_with_permissions
+  def set_folder
     if @member
-      redirect_to root_path unless @member.permits? "folders", action_type
       id = params[:folder_id] ? params[:folder_id] : params[:id]
       @foldership = @member.folderships.accepted.where(folder_id: id).first
       @folder = @foldership.folder if @foldership
@@ -59,8 +58,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def set_permissions
+    foldership_required = %w[comments tasks homes documents folderships]
+    permitter = foldership_required.include?(controller_name) ? @foldership : @member
+    redirect_to root_path if !permitter || !permitter.permits?(controller_name, action_type)
+  end
+  
   def action_type
-    if %w[index show].include? action_name
+    if %w[index show download].include? action_name
       :read
     elsif %w[new create edit update sort presence].include? action_name
       :write

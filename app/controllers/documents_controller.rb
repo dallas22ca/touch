@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_organization
-  before_action :set_folder_with_permissions
+  before_action :set_folder
+  before_action :set_permissions
   before_action :set_document, only: [:show, :edit, :update, :destroy, :download]
   before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }
 

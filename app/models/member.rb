@@ -13,12 +13,13 @@ class Member < ActiveRecord::Base
   before_validation :parameterize_key, if: :key_changed?
   
   before_create :set_roles
-  before_create :set_initial_admin, if: Proc.new { organization.members.count == 0 }
-  before_save :flatten_roles, if: :roles_changed?
-  
+  before_create :set_initial_admin, if: Proc.new { Organization.find(organization_id).members.count == 0 }
+
   after_create :set_user_data, if: :user
-  after_save :set_user_data, if: :user_id_changed?
   after_create :set_key, unless: :key
+  
+  before_save :flatten_roles, if: :roles_changed?
+  after_save :set_user_data, if: :user_id_changed?
   
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }

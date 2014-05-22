@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   def add_to_folder
     foldership = Foldership.where(token: invitation_token).first!
     org = foldership.folder.organization
-    member = org.members.where(user_id: id).first_or_create!
+    member = Member.where(user: self, organization: org).first_or_create!
     foldership.update! member: member
     foldership.accept
   end

@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_organization
-  before_action :set_folder_with_permissions
+  before_action :set_folder
+  before_action :set_permissions
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments

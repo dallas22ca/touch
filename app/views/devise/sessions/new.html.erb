@@ -18,5 +18,5 @@
   <% end -%>
 
   <div><%= f.submit "Sign In" %></div>
-	<%= link_to "Sign Up", new_user_registration_path(token: params[:token]) %>
+	<%= render "devise/shared/links" %>
 <% end %>
