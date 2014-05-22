@@ -188,4 +188,12 @@ describe "Agent", js: true do
     page.should_not have_content "Create A Folder"
     page.should have_content "Tasks"
   end
+  
+  it "change in modules should change admin roles" do
+    assert_equal ["admin", "folders/read", "folders/write", "folders/delete", "member"], @member.roles
+    @org.update modules: ["members"]
+    assert_equal ["admin", "member", "members/read", "members/write", "members/delete"], @member.reload.roles
+    @org.update modules: ["members", "folders"]
+    assert_equal ["admin", "member", "members/read", "members/write", "members/delete", "folders/read", "folders/write", "folders/delete"], @member.reload.roles
+  end
 end

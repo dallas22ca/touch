@@ -26,6 +26,7 @@ RSpec.configure do |config|
   
   def sign_in(user, org = false)
     visit org ? signin_path(org) : new_user_session_path
+    click_link "I'd rather sign in using my email address."
     fill_in "Email",    with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"

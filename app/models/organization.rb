@@ -10,26 +10,30 @@ class Organization < ActiveRecord::Base
   has_many :folderships, through: :folders
   
   has_attached_file :logo,
-    default_url: "/imgs/no_org_logo.jpg"
+    default_url: "/imgs/no_org_logo.png"
   
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
   
   before_validation :format_permalink
   before_validation :format_website
   
-  validates_presence_of :permalink
+  validates_presence_of :name, :permalink
   validates_uniqueness_of :permalink
   
   after_save :add_modules_to_admins, if: :modules_changed?
   
   def add_modules_to_admins
     members.where("roles ilike ?", "%admin%").each do |m|
-      modules.each do |mod|
-        m.add_preset mod.to_sym
-        m.save
+      (modules + modules_was).uniq.each do |mod|
+        if modules_was.include?(mod) && !modules.include?(mod)
+          m.remove_preset mod.to_sym
+          m.save
+        else
+          m.add_preset mod.to_sym
+          m.save
+        end
       end
     end
-    
   end
   
   def format_website
@@ -37,8 +41,16 @@ class Organization < ActiveRecord::Base
   end
   
   def format_permalink
-    self.permalink = name if permalink.blank?
-    self.name = permalink.humanize.capitalize if name.blank?
+    if permalink.blank?
+      split = name.downcase.split(" ")
+      base = split.length > 1 ? split.map{ |s| s[0] }.join : name.downcase
+      
+      self.permalink = (1..10000000).each do |n|
+        perma = n == 1 ? base : "#{base}-#{n}"
+        break perma unless Organization.exists?(permalink: perma)
+      end
+    end
+    
     self.permalink = permalink.parameterize
   end
   

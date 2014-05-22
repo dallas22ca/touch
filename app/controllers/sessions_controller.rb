@@ -1,8 +1,13 @@
 class SessionsController < Devise::SessionsController
   def new
-    foldership = Foldership.where(token: params[:token]).first if params[:token]
+    params[:token] = params[:user][:invitation_token] if params[:user] && params[:user][:invitation_token]
     
-    if foldership && foldership.accepted?
+    if params[:token]
+      @foldership = Foldership.where(token: params[:token]).first
+      @org = @foldership.folder.organization
+    end
+    
+    if @foldership && @foldership.accepted?
       render text: "This invitation has already been accepted."
     else
       super
@@ -14,6 +19,7 @@ class SessionsController < Devise::SessionsController
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     
     if params[:user][:invitation_token]
+      @foldership = Foldership.where(token: params[:user][:invitation_token]).first
       resource.invitation_token = params[:user][:invitation_token]
       resource.accept_invitation
     end

@@ -36,7 +36,13 @@ class ApplicationController < ActionController::Base
   end
   
   def set_website
-    cookies[:domain] ||= !Rails.env.production? ? "realtxn.com" : request.domain
+    domain ||= (
+      cookies[:domain] = if Rails.env.production?
+        request.domain
+      else
+        "realtxn.com"
+      end
+    )
     @website = CONFIG["sites"][cookies[:domain]]
   end
   

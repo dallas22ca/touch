@@ -22,7 +22,19 @@
 		border: 1px solid #186fb2;
 	}
 	
+	&.fb_bg {
+		border: 1px solid #2D3F89;
+	}
+	
 	&.grey_bg {
 		border: 1px solid #777777;
+	}
+	
+	&.with_icon {
+		margin-right: -10px;		
+	}
+	
+	i {
+		margin-left: 10px;
 	}
 }

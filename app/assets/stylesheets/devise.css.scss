@@ -13,9 +13,13 @@
 		display: block;
 		color: #777;
 		font-size: 12px;
-		line-height: 12px;
+		line-height: 18px;
 		text-transform: uppercase;
 		margin-bottom: 4px;
+		
+		&.inline {
+			display: inline-block;
+		}
 	}
 }
 
@@ -24,4 +28,57 @@
 	color: #aaa;
 	font-size: 13px;
 	margin-bottom: 20px;
+}
+
+.sessions_new, .registrations_new, .organizations_new, .organizations_create {
+	margin-top: 11%;
+	margin-bottom: 11%;
+	background: #eee;
+	
+	#logo {
+		display: block;
+		margin-bottom: 15px;
+		
+		img {
+			max-width: 65%;
+		}
+	}
+	
+	h2 {
+		font-weight: bold;
+		font-size: 21px;
+		line-height: 28px;
+		margin-bottom: 15px;
+	}
+	
+	form {
+		background: #fff;
+		padding: 30px;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		
+		.tagline {
+			margin-bottom: 20px;
+			font-size: 15px;
+			line-height: 22px;
+			color: #333;
+			text-align: center;
+		}
+		
+		input[type="text"], input[type="email"], input[type="password"] {
+			width: 100%;
+			font-size: 21px;
+			line-height: 28px;
+		}
+	}
+	
+	.help_link {
+		display: block;
+		margin-top: 15px;
+		color: #777;
+		text-align: center;
+		font-size: 12px;
+		line-height: 18px;
+	}
 }
