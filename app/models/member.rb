@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   serialize :roles, Array
   
   belongs_to :user
-  belongs_to :organization, counter_cache: true
+  belongs_to :organization, counter_cache: true, touch: true
   
   has_many :events, dependent: :destroy
   has_many :folderships, dependent: :destroy
@@ -20,6 +20,8 @@ class Member < ActiveRecord::Base
   
   before_save :flatten_roles, if: :roles_changed?
   after_save :set_user_data, if: :user_id_changed?
+  
+  after_commit :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
@@ -78,7 +80,14 @@ class Member < ActiveRecord::Base
   
   def set_initial_admin
     self.roles.push "admin"
-    organization.modules.map { |m| add_preset m.to_sym }
+    
+    organization.modules.each do |m|
+      add_preset m.to_sym
+    end
+  end
+  
+  def seed_data
+    organization.seed_first_folder
   end
   
   def permits?(resource, action)

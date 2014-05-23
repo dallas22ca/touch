@@ -22,18 +22,25 @@ class Organization < ActiveRecord::Base
   
   after_save :add_modules_to_admins, if: :modules_changed?
   
+  def admins
+    members.where("roles ilike ?", "%admin%")
+  end
+  
   def add_modules_to_admins
-    members.where("roles ilike ?", "%admin%").each do |m|
+    admins.each do |m|
       (modules + modules_was).uniq.each do |mod|
         if modules_was.include?(mod) && !modules.include?(mod)
           m.remove_preset mod.to_sym
-          m.save
         else
           m.add_preset mod.to_sym
-          m.save
         end
       end
+      
+      m.save
     end
+    
+    reload
+    seed_first_folder if !modules_was.include?("folders") && modules.include?("folders") && folders.empty? && admins.any?
   end
   
   def format_website
@@ -149,7 +156,10 @@ class Organization < ActiveRecord::Base
     
     members = members.where(id: member_ids) if include_events
     members = members.where(queries.join(" and ")) if queries.any?
-    
     members
+  end
+  
+  def seed_first_folder
+    folders.create! name: "Jack & Jill", creator: admins.first
   end
 end

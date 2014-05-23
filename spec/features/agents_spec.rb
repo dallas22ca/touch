@@ -28,6 +28,7 @@ describe "Agent", js: true do
     click_button "Save Organization"
     
     page.should have_content "Folders"
+    assert_equal 1, Organization.last.folders.count
   end
   
   it "sets the domain cookie" do
@@ -197,5 +198,15 @@ describe "Agent", js: true do
     assert_equal ["admin", "member", "members/read", "members/write", "members/delete"], @member.reload.roles
     @org.update modules: ["members", "folders"]
     assert_equal ["admin", "member", "members/read", "members/write", "members/delete", "folders/read", "folders/write", "folders/delete"], @member.reload.roles
+  end
+  
+  it "seeds folder" do
+    @org = FactoryGirl.create(:organization, permalink: "Org ##{rand(999..9999)}", modules: [])
+    @user = FactoryGirl.create(:user)
+    @org.users.push @user
+    @member = @user.members.first
+    assert_equal 0, @org.reload.folders.count
+    @org.update modules: ["folders"]
+    assert_equal 1, @org.reload.folders.count
   end
 end
