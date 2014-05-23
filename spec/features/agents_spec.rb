@@ -41,6 +41,7 @@ describe "Agent", js: true do
     visit root_path
     page.should have_content "Folders"
     click_link "Folders"
+    click_link @org.folders.first.name
     click_link "Create A Folder"
     fill_in "Name", with: "My New Folder"
     click_button "Save Folder"
