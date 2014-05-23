@@ -75,6 +75,18 @@ class FoldersController < ApplicationController
   # DELETE /folders/1.json
   def destroy
     @folder.destroy
+
+    respond_to do |format|
+      format.html { redirect_to folders_url(@org), notice: 'Folder was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  
+  def reset
+    if @folder.destroy
+      @org.seed_first_folder
+    end
+
     respond_to do |format|
       format.html { redirect_to folders_url(@org), notice: 'Folder was successfully destroyed.' }
       format.json { head :no_content }

@@ -160,6 +160,14 @@ class Organization < ActiveRecord::Base
   end
   
   def seed_first_folder
-    folders.create! name: "Jack & Jill", creator: admins.first
+    admin = admins.first
+    
+    folder = folders.create name: "Jack & Jill", creator: admin, seed: "buyer"
+    
+    file = File.open("#{Rails.root}/public/resources/32 Marketing Ideas.pdf")
+    doc = folder.documents.create file: file, creator: admin
+    file.close
+    
+    folder.homes.create address: "61 Westfield Crescent", price: 450000, beds: 4, baths: 3
   end
 end

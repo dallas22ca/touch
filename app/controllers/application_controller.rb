@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
       :read
     elsif %w[new create edit update sort presence].include? action_name
       :write
-    elsif %w[destroy].include? action_name
+    elsif %w[destroy reset].include? action_name
       :delete
     else
       action_name.to_sym
