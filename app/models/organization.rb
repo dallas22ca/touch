@@ -40,7 +40,7 @@ class Organization < ActiveRecord::Base
     end
     
     reload
-    seed_first_folder if !modules_was.include?("folders") && modules.include?("folders") && folders.empty? && admins.any?
+    seed_first_folder if !modules_was.include?("folders") && modules.include?("folders") && folders.count == 0 && admins.any?
   end
   
   def format_website

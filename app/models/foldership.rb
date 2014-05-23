@@ -93,7 +93,9 @@ class Foldership < ActiveRecord::Base
   
   def self.permissions
     [
+      "folders/read",
       "folders/write",
+      "folders/delete",
       "comments/read",
       "comments/write",
       "comments/delete",

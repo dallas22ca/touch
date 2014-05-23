@@ -43,34 +43,3 @@
 		padding: 20px;
 	}
 }
-
-
-#folders {
-	padding-top: 20px;
-
-	.folder {
-		float: left;
-		width: 31.333333%;
-		margin: 0 1% 2%;
-		
-		.members {
-			li {
-				float: left;
-				width: 17%;
-				margin: 0 1.5%;
-				
-				img {
-					border-radius: 100px;
-				}
-			}
-		}
-	}
-}
-
-@media screen and (max-width: 600px) {
-	#folders {
-		.folder {
-			width: 100%;
-		}
-	}
-}

@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = @org.rooms
+    redirect_to room_path(@org, @org.rooms.first) if @rooms.count == 1
   end
 
   # GET /rooms/1
@@ -42,6 +43,7 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = @org.rooms.new(room_params)
+    @room.creator = @member
 
     respond_to do |format|
       if @room.save

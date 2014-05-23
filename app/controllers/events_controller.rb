@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   before_filter :set_organization
   
+  def index
+    @events = @org.events.order("created_at desc")
+  end
+  
   def track
     if params[:data]
       # args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access

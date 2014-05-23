@@ -27,7 +27,7 @@
 					<% end %>
 				
 					<% if @member.permits? :rooms, :read %>
-						<li><%= link_to "Attendance", attendance_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
+						<li><%= link_to "Attendance", rooms_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
 					<% end %>
 					
 					<li><%= link_to "My Account", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
@@ -36,10 +36,6 @@
 
 			<% if yield(:title).blank? %>
 				<% if @org %>
-					<% if current_user.avatar.exists? %>
-						<h1 class="avatar"><%= link_to image_tag(current_user.avatar.url, class: "user_avatar"), root_path, target: :blank %></h1>
-					<% end %>
-					
 					<h1><%= link_to image_tag(@org.logo.url), root_path %></h1>
 				<% else %>
 					<h1><%= link_to image_tag("/#{@website["domain"]}/imgs/top_logo.png"), root_path %></h1>

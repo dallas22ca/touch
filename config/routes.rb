@@ -16,13 +16,13 @@ Rails.application.routes.draw do
       resources :organizations, only: [:new, :create]
       
       scope "/:permalink" do
-        get "/attendance" => "modules#attendance", as: :attendance
         get "/permissions" => "modules#permissions", as: :permissions
         post "/track" => "rooms#presence", as: :track
         get "/my-account" => "devise/registrations#edit"
       
         resources :members, path: :contacts
         resources :segments
+        resources :events
         resources :folderships, only: :index
 
         resources :rooms, path: :attendance do

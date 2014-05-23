@@ -16,7 +16,7 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
-    @meeting = Meeting.new
+    @meeting = Meeting.new(date: Time.zone.now.beginning_of_day + 9.hours)
   end
 
   # GET /meetings/1/edit

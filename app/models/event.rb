@@ -16,7 +16,10 @@ class Event < ActiveRecord::Base
       if member
         self.member_id = member.user_id
         self.json_data[:contact] = self.json_data[:contact].merge(
-          member.data.merge(id: member.id)
+          member.data.merge({
+            id: member.id,
+            name: member.name
+          })
         )
       end
     end

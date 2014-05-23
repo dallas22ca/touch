@@ -8,23 +8,15 @@ class ModulesController < ApplicationController
     elsif @member.permits? :folders, :read
       redirect_to folders_path(@member.organization)
     elsif @member.permits? :rooms, :read
-      redirect_to attendance_path(@member.organization)
+      redirect_to rooms_path(@member.organization)
     else
       redirect_to edit_user_registration_path
-    end
-  end
-  
-  def attendance
-    if @org.rooms.any?
-      redirect_to room_path(@org, @org.rooms.first)
-    else
-      render "modules/attendance/index"
     end
   end
   
   private
   
   def check_if_org
-    redirect_to new_organization_path if !@org
+    redirect_to new_organization_path if !@org && current_user.organizations.empty?
   end
 end

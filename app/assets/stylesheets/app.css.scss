@@ -288,6 +288,36 @@ hr {
 	}
 }
 
+.panels {
+	padding-top: 20px;
+
+	.panel {
+		float: left;
+		width: 31.333333%;
+		margin: 0 1% 2%;
+		
+		.members {
+			li {
+				float: left;
+				width: 17%;
+				margin: 0 1.5%;
+				
+				img {
+					border-radius: 100px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.panels {
+		.panel {
+			width: 100%;
+		}
+	}
+}
+
 @media screen and (min-width: 601px) {
 	#topbar .nav {
 		display: block !important;
