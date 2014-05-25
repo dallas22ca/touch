@@ -1,3 +1,15 @@
+Jibe.events["events"] =
+	afterCreate: (event, data, scope) ->
+		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
+		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index})").find(".presence_toggle")
+		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index - 1})").addClass "present"
+		Attendance.tallyTotals()
+	
+	afterDestroy: (event, data, scope) ->
+		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
+		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index - 1})").removeClass "present"
+		Attendance.tallyTotals()
+
 $(document).on "click", ".presence_toggle", ->
 	name = false
 	index = $(this).index()
@@ -10,15 +22,12 @@ $(document).on "click", ".presence_toggle", ->
 	if member_id == "new"
 		name = $(".add_on_the_fly .name").text()
 		$(this).toggleClass "load"
-	else
-		$(this).toggleClass "present"
-		Attendance.tallyTotals()
 
 	$.post url,
 		member_id: member_id
 		meeting_id: meeting_id
 		room_id: room_id
-		present: $(this).hasClass("present")
+		present: !$(this).hasClass("present")
 		name: name
 
 	false

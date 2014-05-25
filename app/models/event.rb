@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  jibe
+  
   serialize :json_data, JSON
 
   belongs_to :organization

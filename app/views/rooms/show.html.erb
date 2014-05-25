@@ -23,7 +23,7 @@
 					<th class="unused"></th>
 				<% end %>
 			
-				<%= render @meetings %>
+				<%= jibe @meetings %>
 
 				<th class="row_for_new">
 					<%= link_to "+", new_room_meeting_path(@org, @room), remote: true, class: "add_date" %>
@@ -38,6 +38,8 @@
 		</thead>
 	</table>
 </div>
+
+<%= content_tag :script, nil, type: "x-jibe", data: { strategy: "append", resource: "events", silent: true } %>
 
 <table id="attendance" class="table center">
 	<tbody>
@@ -60,7 +62,7 @@
 		</tr>
 		
 		<% @members.each do |member| %>
-			<tr>
+			<tr data-member-id="<%= member.id %>">
 				
 				<% @nils.times do %>
 					<td class="unused"></td>
