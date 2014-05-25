@@ -8,11 +8,11 @@
 		
 		<div id="tasks_wrapper" class="mini_content_wrapper">
 			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
-				<%= render @folder.tasks.incomplete.by_ordinal %>
+				<%= jibe @folder.tasks.incomplete.by_ordinal %>
 			</ul>
 
 			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
-				<%= render @folder.tasks.complete.by_completed_at %>
+				<%= jibe @folder.tasks.complete.by_completed_at, scope: "completed", restrict_to: [@folder, current_user] %>
 			</ul>
 			
 			<% if @foldership.permits? :tasks, :write %>

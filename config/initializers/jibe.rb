@@ -1,0 +1,1 @@
+Jibe.director = :pusher

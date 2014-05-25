@@ -73,7 +73,7 @@ class TasksController < ApplicationController
   
   def sort
     params[:task].each_with_index do |id, index|
-      @folder.tasks.find(id).update ordinal: index + 1
+      @folder.tasks.find(id).update_columns ordinal: index + 1
     end
     render nothing: true
   end

@@ -1,3 +1,18 @@
+Jibe.events["tasks"] =
+	beforeCreate: (task, data, scope) ->
+		task.remove() if scope == "complete"
+		Tasks.makeEditable()
+
+	afterUpdate: (task, data) ->
+		if data.complete_changed
+			if data.complete
+				task.prependTo(".folder_#{data.folder_id}_completed_tasks")
+			else
+				task.appendTo(".folder_#{data.folder_id}_tasks")
+				$("#tasks").trigger("sortupdate")
+		
+		Tasks.makeEditable()
+
 $(document).on "click", ".show_completed_tasks", ->
 	$(this).text if $(this).text() == "Show Completed Tasks" then "Hide Completed Tasks" else "Show Completed Tasks"
 	$("#completed_tasks").slideToggle 150

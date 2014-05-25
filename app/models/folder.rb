@@ -23,7 +23,8 @@ class Folder < ActiveRecord::Base
     folderships.create!(
       member: creator, 
       preset: "admin",
-      accepted: true
+      accepted: true,
+      skip_jibe: true
     )
   end
   
@@ -39,6 +40,7 @@ class Folder < ActiveRecord::Base
         t = task.dup
         t.creator = self.creator
         t.complete = false
+        t.skip_jibe
         self.tasks.push t
       end
     
@@ -46,11 +48,16 @@ class Folder < ActiveRecord::Base
         d = self.documents.new
         d.creator = self.creator
         d.file = document.file
+        d.skip_jibe
         d.save
       end
     end
     
-    # delete users of folder
+    # add me as user of folder
+  end
+  
+  def channel
+    "folder-#{id}"
   end
   
   def self.sample_seller

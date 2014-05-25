@@ -8,6 +8,7 @@
 	<%= tag :meta, name: "apple-mobile-web-app-capable", content: "yes" %>
 	<%= tag :meta, name: "apple-mobile-web-app-status-bar-style", content: "black" %>
 	<%= tag :meta, name: "viewport", content: "initial-scale=1, maximum-scale=1" %>
+	<%= tag :meta, name: "pusher-key", content: CONFIG["pusher_key"] %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= "#{controller_name}_#{action_name}" %>">

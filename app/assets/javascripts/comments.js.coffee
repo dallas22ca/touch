@@ -4,6 +4,18 @@ $(document).on "keypress", "#comment_body", (e) ->
 		$(this).closest("form").trigger "submit"
 		false
 
+Jibe.events["comments"] =
+	beforeCreate: (comment, data) ->
+		comment.hide()
+		
+	afterCreate: (comment, data) ->
+		$(".no_comments").remove()
+		Comments.init()
+		comment.fadeIn()
+
+	afterDestroy: (comment, data) ->
+		comment.remove()
+
 @Comments =
 	init: ->
 		if $(".comments").length

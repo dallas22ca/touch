@@ -1,4 +1,6 @@
 class Home < ActiveRecord::Base
+  jibe
+
   serialize :data, JSON
 
   belongs_to :folder

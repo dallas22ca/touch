@@ -1,4 +1,6 @@
 class Foldership < ActiveRecord::Base
+  jibe
+  
   serialize :roles, Array
   
   attr_accessor :resend

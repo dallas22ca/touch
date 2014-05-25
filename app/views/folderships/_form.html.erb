@@ -1,5 +1,5 @@
 <%= link_to "x", "#", class: "close_lightbox close_button" %>
-<h1><%= @fship.new_record? ? "Send An Invitation" : @fship.member.name %></h1>
+<h1><%= @fship.member ? @fship.member.name : "#{@fship.new_record? ? "Send" : "Edit"} An Invitation" %></h1>
 	
 <div class="content">
 	<% if @folder.creator_id == @fship.member_id %>
@@ -28,7 +28,7 @@
 				<%= link_to "Close", "#", class: "close_lightbox" %>
 			
 				<% if @fship.persisted? %>
-					<%= link_to "Revoke Access", folder_foldership_path(@org, @folder, @fship), method: :delete, remote: true, data: { confirm: "Are you sure you want to revoke #{@fship.member.name}'s access?" } %>
+					<%= link_to "Revoke Access", folder_foldership_path(@org, @folder, @fship), method: :delete, remote: true, data: { confirm: "Are you sure you want to revoke #{@fship.name}'s access?" } %>
 				<% end %>
 		  </div>
 		<% end %>

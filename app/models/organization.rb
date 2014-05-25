@@ -165,7 +165,7 @@ class Organization < ActiveRecord::Base
     folder = folders.create name: "Jack & Jill", creator: admin, seed: "buyer"
     
     file = File.open("#{Rails.root}/public/resources/32 Marketing Ideas.pdf")
-    doc = folder.documents.create file: file, creator: admin
+    doc = folder.documents.create file: file, creator: admin, skip_jibe: true
     file.close
     
     folder.homes.create address: "61 Westfield Crescent", price: 450000, beds: 4, baths: 3

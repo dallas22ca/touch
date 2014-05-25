@@ -338,6 +338,10 @@ hr {
 	}
 	
 	#topbar {
+		h1.avatar {
+			display: none;
+		}
+
 		.show_nav {
 			display: block;
 			float: right;
