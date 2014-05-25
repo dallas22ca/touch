@@ -25,7 +25,7 @@ class MembersController < ApplicationController
       @members = []
     end
 
-    render "modules/contacts/index"
+    render "modules/members/index"
   end
   
   def edit

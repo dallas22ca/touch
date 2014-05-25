@@ -45,14 +45,14 @@ describe "Filter" do
     @org.members.each_with_index do |m, n|
       (10 - n).times do
         @org.events.create!(
-          description: "{{ contact.name }} attended {{ room.name }}",
+          description: "{{ member.name }} attended {{ room.name }}",
           verb: "attended",
           json_data: {
             present: "true",
             room: {
               name: "Test Conference"
             },
-            contact: {
+            member: {
               key: m.key
             }
           }

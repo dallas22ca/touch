@@ -1,6 +1,6 @@
 <%= form_tag members_path(@org, format: :js), id: "filter_form" do %>
 	<select id="choose_segment">
-		<option value="<%= members_path(@org, format: :js) %>">All Contacts</option>
+		<option value="<%= members_path(@org, format: :js) %>">All members</option>
 		<% @org.segments.each do |segment| %>
 			<%= content_tag :option, value: members_path(@org, segment_id: segment.id, format: :js), data: { filters: segment.filters }, selected: @segment && @segment.id == segment.id do %>
 				<%= segment.name %>

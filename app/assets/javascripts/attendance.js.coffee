@@ -1,13 +1,14 @@
 Jibe.events["events"] =
 	afterCreate: (event, data, scope) ->
 		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
-		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index})").find(".presence_toggle")
-		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index - 1})").addClass "present"
+		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index - 1})").addClass "present"
+		$(".presence_toggle").removeClass "load"
 		Attendance.tallyTotals()
 	
 	afterDestroy: (event, data, scope) ->
 		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
-		$("tr[data-member-id='#{data.data["contact.id"]}']").find("td:eq(#{index - 1})").removeClass "present"
+		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index - 1})").removeClass "present"
+		$(".presence_toggle").removeClass "load"
 		Attendance.tallyTotals()
 
 $(document).on "click", ".presence_toggle", ->
@@ -18,11 +19,10 @@ $(document).on "click", ".presence_toggle", ->
 	room_id = $("#attendance_header").data("room-id")
 	meeting_id = $("#attendance_header").find("th:eq(#{index})").data("id")
 	url = $("#attendance_header").data("event-path")
+	name = $(".add_on_the_fly .name").text() if member_id == "new"
 	
-	if member_id == "new"
-		name = $(".add_on_the_fly .name").text()
-		$(this).toggleClass "load"
-
+	$(this).addClass "load"
+	
 	$.post url,
 		member_id: member_id
 		meeting_id: meeting_id

@@ -51,7 +51,7 @@ describe "Agent", js: true do
     end
   end
   
-  it "cannot see contacts if not an allowed module" do
+  it "cannot see members if not an allowed module" do
     sign_in @user
     visit members_path(@org)
     page.should_not have_content "FIRST NAME"

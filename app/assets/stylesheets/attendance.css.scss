@@ -143,6 +143,10 @@
 					
 					&.load {
 						background: url(/imgs/loading_small.gif) center no-repeat #fafafa;
+						
+						.here {
+							display: none;
+						}
 					}
 		
 					.not_here {

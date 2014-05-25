@@ -86,7 +86,7 @@ class RoomsController < ApplicationController
     @this_member = @org.members.where(id: params[:member_id]).first
     present = params[:member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
     verb = present ? "attended" : "did not attend"
-    exists = @org.events.where("data @> 'contact.key=>#{@this_member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @this_member
+    exists = @org.events.where("data @> 'member.key=>#{@this_member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @this_member
 
     if present
       if !exists
@@ -100,14 +100,14 @@ class RoomsController < ApplicationController
         end
       
         @org.events.create!(
-          description: "{{ contact.name }} #{verb} {{ room.name }}",
+          description: "{{ member.name }} #{verb} {{ room.name }}",
           verb: verb,
           created_at: @meeting.date,
           json_data: {
             present: present,
             meeting: @meeting.attributes,
             room: @room.attributes,
-            contact: {
+            member: {
               key: @this_member.key
             }
           }

@@ -2572,7 +2572,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <ul class="m_ftr_site">
             <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Old REALTOR.ca']);"><a id="OldRealtor" href="http://www.realtor.ca/splash.aspx?opt=1" target="_blank">Old REALTOR.ca</a></li>
             <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Mobile']);"><a href="/Mobile.aspx" id="ftr_mobile"><span>Mobile</span></a></li>
-            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'Contact Us']);"><a href="/ContactUs.aspx" id="ftr_contact"><span id="Label2">Contact Us</span></a></li>
+            <li onclick="_gaq.push(['_trackEvent', 'Bottom Menu', 'member Us']);"><a href="/memberUs.aspx" id="ftr_member"><span id="Label2">member Us</span></a></li>
 
         </ul>
     
@@ -2645,7 +2645,7 @@ function __doPostBack(eventTarget, eventArgument) {
 </div>
 
 <!-- EMAIL COMPARE FORM-->
-<div id="email_contactus_form" class="d_base" style="display:none;">
+<div id="email_memberus_form" class="d_base" style="display:none;">
     <div class="d_loading" style="display:none;">
         <img src="Presentation/Images/common/icons/loading.gif" id="Image1" alt="Loading"><span id="Label1">Loading</span>
     </div>

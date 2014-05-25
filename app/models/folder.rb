@@ -86,7 +86,7 @@ class Folder < ActiveRecord::Base
       "Send Seller links to all websites to show marketing plan",
       "Send emails to other agents to announce new listing", 
       "Send out Just Listed postcards or flyers", 
-      "Contact Seller and give status update", 
+      "member Seller and give status update", 
       "Review preliminary title for any issues",
       "Schedule an open house",
       "Schedule an agent's open house", 

@@ -46,7 +46,7 @@ $(document).on "click", "#filters input[type='checkbox']", ->
 $(document).on "submit", "#filter_form, #q_form", ->
 	filters = Filters.generate()
 	url = $("#choose_segment").val()
-	$("#contacts").find(".loading").show()
+	$("#members").find(".loading").show()
 	
 	if $("#q").val() != ""
 		filters.push
