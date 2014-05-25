@@ -1,5 +1,3 @@
-@Jibe ||= { events: {} }
-
 $(document).on "click", "#topbar .nav a", ->
 	$("#topbar .nav a").removeClass "selected"
 	$(this).addClass "selected"

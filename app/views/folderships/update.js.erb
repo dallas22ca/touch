@@ -4,7 +4,6 @@
 	<% if @fship.resend %>
 		alert("The invitation to <%= @fship.member.name %> has been re-sent.")
 	<% else %>
-		$("#<%= dom_id @fship %>").replaceWith("<%= j render @fship %>")
 		Lightbox.close()
 	<% end %>
 <% end %>

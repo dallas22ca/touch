@@ -13,7 +13,8 @@ class Task < ActiveRecord::Base
   
   def jibe_data
     attributes.merge({
-      complete_changed: complete_changed?
+      complete_changed: complete_changed?,
+      ordinal_changed: ordinal_changed?
     })
   end
 end

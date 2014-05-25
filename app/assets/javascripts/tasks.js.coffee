@@ -3,13 +3,19 @@ Jibe.events["tasks"] =
 		task.remove() if scope == "complete"
 		Tasks.makeEditable()
 
-	afterUpdate: (task, data) ->
+	afterUpdate: (task, data, scope) ->
 		if data.complete_changed
 			if data.complete
-				task.prependTo(".folder_#{data.folder_id}_completed_tasks")
+				if scope != "completed"
+					task.prependTo ".folder_#{data.folder_id}_completed_tasks"
 			else
-				task.appendTo(".folder_#{data.folder_id}_tasks")
-				$("#tasks").trigger("sortupdate")
+				if scope == "completed"
+					task.appendTo(".folder_#{data.folder_id}_tasks")
+					$("#tasks").trigger("sortupdate")
+
+		if scope != "completed"
+			if data.ordinal_changed
+				task.insertAfter "#tasks .task:eq(#{data.ordinal - 1})"
 		
 		Tasks.makeEditable()
 

@@ -9,8 +9,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
 gem 'devise'
 gem 'mustache'
 gem 'exception_notification'
@@ -19,6 +17,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk'
 gem 'omniauth-facebook'
 gem 'pusher'
+gem 'jibe'# , path: '/Users/dallasread/apps/jibe'
 
 gem 'sidekiq'
 gem 'sinatra', require: false
@@ -29,6 +28,7 @@ group :development do
   gem 'capistrano-maintenance'
   gem "net-ssh", "~> 2.7.0"
   gem "letter_opener"
+  gem 'spring'
 end
 
 group :test do
