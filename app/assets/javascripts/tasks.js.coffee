@@ -6,10 +6,10 @@ Jibe.events["tasks"] =
 	afterUpdate: (task, data, scope) ->
 		if data.complete_changed
 			if data.complete
-				if scope != "completed"
+				if !Jibe.inScope "completed", scope
 					task.prependTo ".folder_#{data.folder_id}_completed_tasks"
 			else
-				if scope == "completed"
+				if Jibe.inScope "completed", scope
 					task.appendTo(".folder_#{data.folder_id}_tasks")
 					$("#tasks").trigger("sortupdate")
 

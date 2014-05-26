@@ -21,7 +21,7 @@ class Member < ActiveRecord::Base
   before_save :flatten_roles, if: :roles_changed?
   after_save :set_user_data, if: :user_id_changed?
   
-  after_commit :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
+  after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }

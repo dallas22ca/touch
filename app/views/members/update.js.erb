@@ -1,2 +1,3 @@
 Lightbox.close()
 $("#member_<%= @this_member.id %>").replaceWith("<%= j render @this_member %>")
+$(".row_head[data-member-id='<%= @this_member.id %>']").find(".pretty_name, .search").text("<%= @this_member.pretty_name %>")
