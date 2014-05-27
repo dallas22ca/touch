@@ -79,7 +79,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
   
   config.action_mailer.default_url_options = {
-    host: "oneattendance.com",
+    host: "app.realtxn.com",
     protocol: "https"
   }
   
