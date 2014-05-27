@@ -40,7 +40,7 @@ class Organization < ActiveRecord::Base
     end
     
     reload
-    seed_first_folder if !modules_was.include?("folders") && modules.include?("folders") && folders.count == 0 && admins.any?
+    seed_first_folder if modules.include?("folders") && folders.count == 0 && admins.any?
   end
   
   def format_website
@@ -161,13 +161,15 @@ class Organization < ActiveRecord::Base
   
   def seed_first_folder
     admin = admins.first
+
+    if admin
+      folder = folders.create name: "Jack & Jill", creator: admin, seed: "buyer"
     
-    folder = folders.create name: "Jack & Jill", creator: admin, seed: "buyer"
+      file = File.open("#{Rails.root}/public/resources/32 Marketing Ideas.pdf")
+      doc = folder.documents.create file: file, creator: admin, skip_jibe: true
+      file.close
     
-    file = File.open("#{Rails.root}/public/resources/32 Marketing Ideas.pdf")
-    doc = folder.documents.create file: file, creator: admin, skip_jibe: true
-    file.close
-    
-    folder.homes.create address: "61 Westfield Crescent", price: 450000, beds: 4, baths: 3
+      folder.homes.create address: "61 Westfield Crescent", price: 450000, beds: 4, baths: 3, creator: admin
+    end
   end
 end

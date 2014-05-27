@@ -46,7 +46,7 @@ describe "Agent", js: true do
     fill_in "Name", with: "My New Folder"
     click_button "Save Folder"
     
-    ["My New Folder", "Newsfeed", "Tasks", "Homes", "Documents", "Who's Here?", "Folder Settings"].each do |content|
+    ["Jack & Jill", "Newsfeed", "Tasks", "Homes", "Documents", "Who's Here?", "Folder Settings"].each do |content|
       page.should have_content content
     end
   end
