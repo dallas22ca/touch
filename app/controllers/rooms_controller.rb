@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
-    @members = @org.members.last_name_asc
+    @members = @org.members.last_name_desc
     @meetings = Meeting
     @meetings = @meetings.where(room_id: @room.id)
     @last_meeting = @meetings.date_desc.first

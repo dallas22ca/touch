@@ -26,7 +26,8 @@ class Member < ActiveRecord::Base
   
   after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   
-  scope :last_name_asc, -> { order("members.data->'last_name' desc") }
+  scope :last_name_asc, -> { order("members.data->'last_name' asc") }
+  scope :last_name_desc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
   
   def intercept_full_name
