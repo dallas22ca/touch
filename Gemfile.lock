@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/dallasread/jibe.git
-  revision: 2b1ce84def8d894744810dda60013a14fa329380
-  specs:
-    jibe (0.0.4)
-
-GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: 266a32a5230af67e397e92a9e8c2f314ff4fe555
   specs:
@@ -113,6 +107,7 @@ GEM
     jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jibe (0.0.5)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -277,7 +272,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails (~> 4.0)
   jbuilder (~> 2.0)
-  jibe!
+  jibe
   jquery-rails
   letter_opener
   mustache
