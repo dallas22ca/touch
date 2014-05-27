@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dallasread/jibe.git
-  revision: 46c238f961b01555e5143439350b7d29bdc2fe0f
+  revision: 2b1ce84def8d894744810dda60013a14fa329380
   specs:
     jibe (0.0.4)
 
