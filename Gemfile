@@ -21,6 +21,7 @@ gem 'jibe', github: "dallasread/jibe"#, path: '/Users/dallasread/apps/jibe'#
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'newrelic_rpm'
 
 gem 'capybara'
 gem 'capybara-webkit'
