@@ -17,7 +17,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk'
 gem 'omniauth-facebook'
 gem 'pusher'
-gem 'jibe', path: '/Users/dallasread/apps/jibe'#, github: "dallasread/jibe"# 
+gem 'jibe', github: "dallasread/jibe"#, path: '/Users/dallasread/apps/jibe'# 
 
 gem 'sidekiq'
 gem 'sinatra', require: false

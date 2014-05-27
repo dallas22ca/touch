@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/dallasread/jibe.git
+  revision: 46c238f961b01555e5143439350b7d29bdc2fe0f
+  specs:
+    jibe (0.0.4)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: 266a32a5230af67e397e92a9e8c2f314ff4fe555
   specs:
@@ -7,11 +13,6 @@ GIT
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-
-PATH
-  remote: /Users/dallasread/apps/jibe
-  specs:
-    jibe (0.0.4)
 
 GEM
   remote: https://rubygems.org/
