@@ -22,6 +22,10 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 
+gem 'capybara'
+gem 'capybara-webkit'
+gem 'selenium-webdriver'
+
 group :development do
   gem 'capistrano', '~> 2.15', require: false
   gem 'capistrano-maintenance'
@@ -32,9 +36,6 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'capybara'
-  gem 'capybara-webkit'
-  gem 'selenium-webdriver'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner'
 end
