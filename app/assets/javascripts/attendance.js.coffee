@@ -29,12 +29,13 @@ $(document).on "click", ".presence_toggle", ->
 	
 	$(this).addClass "load"
 	
-	$.post url,
-		member_id: member_id
-		meeting_id: meeting_id
-		room_id: room_id
-		present: !$(this).hasClass("present")
-		name: name
+	if (member_id != "new") || (member_id == "new" && name.length)
+		$.post url,
+			member_id: member_id
+			meeting_id: meeting_id
+			room_id: room_id
+			present: !$(this).hasClass("present")
+			name: name
 
 	false
 

@@ -96,4 +96,14 @@ describe "Agent", js: true do
     assert_equal 0, @org.reload.events.count
     assert page.has_css? ".present", count: 0
   end
+  
+  it "can add a room" do
+    @room = @org.rooms.create name: "Room #4", creator: @member
+    @meeting = @room.meetings.create date: Time.zone.now
+    sign_in @member.user
+    visit rooms_path(@org)
+    page.should have_content "Create A Room"
+    click_link "Create A Room"
+    page.should have_content "Save Room"
+  end
 end

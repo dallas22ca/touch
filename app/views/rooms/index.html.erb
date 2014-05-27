@@ -1,10 +1,14 @@
+<% title do %>
+	<h1><%= link_to image_tag(@org.logo.url), rooms_path(@org) %></h1>
+<% end %>
+
 <div class="container">
 	<% if @rooms.empty? %>
 		<p>You have no rooms. <%= link_to "Create one", new_room_path, remote: true %>.</p>
 	<% end %>
 
 	<ul id="rooms" class="panels">
-		<li class="room panel">
+		<li class="room panel text_only">
 			<h3><%= link_to "Create A Room", new_room_path(@org), remote: true %></h3>
 		</li>
 		<%= render @rooms %>

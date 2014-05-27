@@ -24,6 +24,14 @@
 		margin-top: -10px;
 	}
 	
+	&.text_only {
+		height: auto;
+		
+		a {
+			height: 120px;
+		}
+	}
+	
 	&.notttttt_surround {
 		padding: 0px;
 		border: 0;
