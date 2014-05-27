@@ -24,7 +24,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%= jibe @folder.folderships.order("created_at asc") %>
+						<%= jibe @folder.folderships.order("created_at asc"), scope: [@folder] %>
 					</tbody>
 				</table>
 			<% end %>

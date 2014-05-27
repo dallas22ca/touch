@@ -1,5 +1,5 @@
 <div class="container narrow" style="margin-top: 100px; font-size: 11px; ">
 	<ul>
-		<%= jibe @events, strategy: "prepend" %>
+		<%= jibe @events, strategy: "prepend", scope: [@org] %>
 	</ul>
 </div>

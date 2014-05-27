@@ -11,7 +11,7 @@ GIT
 PATH
   remote: /Users/dallasread/apps/jibe
   specs:
-    jibe (0.0.3)
+    jibe (0.0.4)
 
 GEM
   remote: https://rubygems.org/

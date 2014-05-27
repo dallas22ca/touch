@@ -1,15 +1,21 @@
 Jibe.events["events"] =
 	afterCreate: (event, data, scope) ->
 		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
-		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index - 1})").addClass "present"
+		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index})").addClass "present"
 		$(".presence_toggle").removeClass "load"
 		Attendance.tallyTotals()
 	
 	afterDestroy: (event, data, scope) ->
 		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
-		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index - 1})").removeClass "present"
+		$("tr[data-member-id='#{data.data["member.id"]}']").find("td:eq(#{index})").removeClass "present"
 		$(".presence_toggle").removeClass "load"
 		Attendance.tallyTotals()
+		
+$(document).on "keyup", "#attendance_header #q", ->
+	name_field = $(".add_on_the_fly .pretty_name")
+	name = encodeURI name_field.find(".name").text()
+	url = name_field.data("url")
+	name_field.attr "href", "#{url}#{name}"
 
 $(document).on "click", ".presence_toggle", ->
 	name = false
@@ -78,7 +84,8 @@ $(document).on "keyup", "#attendance_header #q", ->
 		clone.find(".row_head .pretty_name").text data.pretty_name
 		clone.find(".row_head .search").text data.name
 		clone.find(".row_head").data("member-id", data.id)
-		clone.find("td:eq(#{index})").addClass "present"
+		clone.find("td:eq(#{index})").addClass "present" if typeof data.meeting_id != "undefined"
+		clone.attr "data-member-id", data.id
 		clone.insertAfter "#attendance .add_on_the_fly"
 		clone.show()
 		

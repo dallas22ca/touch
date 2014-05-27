@@ -1,0 +1,7 @@
+<% if @this_member %>
+	Attendance.addRow("<%= j ({ 
+		name: @this_member.name, 
+		pretty_name: @this_member.pretty_name, 
+		id: @this_member.id
+	}).to_json.html_safe %>")
+<% end %>

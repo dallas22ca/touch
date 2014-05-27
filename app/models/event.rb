@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
       member = organization.members.where(key: json_data[:member][:key]).first
       
       if member
-        self.member_id = member.user_id
+        self.member_id = member.id
         self.json_data[:member] = self.json_data[:member].merge(
           member.data.merge({
             id: member.id,

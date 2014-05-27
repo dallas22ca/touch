@@ -24,8 +24,22 @@ class MembersController < ApplicationController
     else
       @members = []
     end
+  end
+  
+  def create
+    @this_member = @org.members.new(member_params)
 
-    render "modules/members/index"
+    respond_to do |format|
+      if @this_member.save
+        format.html { redirect_to members_path(@org), notice: 'Member was successfully created.' }
+        format.json { render :show, status: :created, location: @this_member }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @this_member.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
   end
   
   def edit
@@ -61,7 +75,7 @@ class MembersController < ApplicationController
   end
   
   def member_params
-    params.require(:member).permit(:key).tap do |whitelisted|
+    params.require(:member).permit(:key, :full_name).tap do |whitelisted|
       whitelisted[:data] = params[:member][:data]
     end
   end

@@ -1,4 +1,6 @@
 class Member < ActiveRecord::Base
+  attr_accessor :full_name
+  
   serialize :roles, Array
   
   belongs_to :user
@@ -11,6 +13,7 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :key, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
+  before_validation :intercept_full_name, if: :full_name
 
   before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
   before_create :set_roles
@@ -25,6 +28,15 @@ class Member < ActiveRecord::Base
   
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
+  
+  def intercept_full_name
+    d = self.data
+    d = {}
+    split = full_name.split(" ")
+    d["first_name"] = split.first
+    d["last_name"] = split.last == split.first ? "" : split.last
+    self.data = d
+  end
   
   def flatten_roles
     self.roles = self.roles.flatten

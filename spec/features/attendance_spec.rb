@@ -25,29 +25,75 @@ describe "Agent", js: true do
     fill_in "Name", with: "Room #1"
     assert_equal 0, @org.reload.rooms.count
     click_button "Save Room"
-    sleep 0.5
+    sleep 1
     assert_equal 1, @org.reload.rooms.count
   end
   
   it "can create a meeting" do
-    @room = @org.rooms.create name: "Room #2", creator: @member
+    @room = @org.rooms.create name: "Room #2"
     sign_in @member.user
     visit room_path(@org, @room)
     click_link "+"
     click_button "Save Meeting"
-    sleep 0.5
+    sleep 1
     assert_equal 1, @room.meetings.count
   end
   
-  it "can create a presence event" do
+  it "can create/destroy a presence event" do
     @room = @org.rooms.create name: "Room #3", creator: @member
-    @meeting = @room.meetings.create date: Time.zone.now, creator: @member
+    @meeting = @room.meetings.create date: Time.zone.now
     sign_in @member.user
     visit room_path(@org, @room)
+    
+    assert_equal 0, @meeting.reload.events.count
+    page.should have_content "0"
+    
     first(".presence_toggle").click
+    sleep 1
+    assert_equal 1, @meeting.reload.events.count
+    page.should have_content "1"
+    
+    first(".presence_toggle").click  
+    sleep 1
+    assert_equal 0, @meeting.reload.events.count
+    page.should have_content "0"
   end
   
-  it "can destroy a presence event"
-  it "can add a member on the fly by clicking on Add"
-  it "can add a member on the fly by creating presence"
+  it "can add a member on the fly by clicking on Add" do
+    @room = @org.rooms.create name: "Room #3", creator: @member
+    @meeting = @room.meetings.create date: Time.zone.now
+    sign_in @member.user
+    
+    fill_in "q", with: "New Person"
+    assert_equal 1, @org.reload.members.count
+    first(".add_on_the_fly .pretty_name").click
+    sleep 1
+    assert_equal 2, @org.reload.members.count
+    
+    fill_in "q", with: "Person"
+    assert_equal 2, @org.reload.members.count
+    first(".add_on_the_fly .pretty_name").click
+    sleep 1
+    assert_equal 3, @org.reload.members.count
+  end
+  
+  it "can add a member on the fly by creating presence" do
+    @room = @org.rooms.create name: "Room #4", creator: @member
+    @meeting = @room.meetings.create date: Time.zone.now
+    sign_in @member.user
+    
+    fill_in "q", with: "Another Person"
+    assert_equal 1, @org.reload.members.count
+    assert page.has_css? ".present", count: 0
+    
+    first(".add_on_the_fly .presence_toggle").click
+    sleep 1
+    assert_equal 2, @org.reload.members.count
+    assert page.has_css? ".present", count: 1
+    
+    first(".presence_toggle").click
+    sleep 1
+    assert_equal 0, @org.reload.events.count
+    assert page.has_css? ".present", count: 0
+  end
 end

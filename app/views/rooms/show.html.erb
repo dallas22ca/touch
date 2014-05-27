@@ -23,7 +23,7 @@
 					<th class="unused"></th>
 				<% end %>
 			
-				<%= jibe @meetings %>
+				<%= render @meetings %>
 
 				<th class="row_for_new">
 					<%= link_to "+", new_room_meeting_path(@org, @room), remote: true, class: "add_date" %>
@@ -39,7 +39,8 @@
 	</table>
 </div>
 
-<%= content_tag :script, nil, type: "x-jibe", data: { strategy: "append", resource: "events", silent: true } %>
+<%= content_tag :script, nil, type: "x-jibe", data: { resource: "meetings", scope: "room_id=#{@room.id}" } %>
+<%= content_tag :script, nil, type: "x-jibe", data: { resource: "events", silent: true } %>
 
 <table id="attendance" class="table center">
 	<tbody>
@@ -54,9 +55,9 @@
 			
 			<td class="here row_for_new"></td>
 			<td class="row_head">
-				<span class="pretty_name">
+				<%= link_to "#", class: "pretty_name", remote: true, method: :post, data: { url: members_path(@org, member: { full_name: "" }) } do %>
 					Add <span class="name"></span>
-				</span>
+				<% end %>
 				<span class="search"></span>
 			</td>
 		</tr>
@@ -69,7 +70,7 @@
 				<% end %>
 				
 				<% @meeting_events.each do |meeting_id, member_ids| %>
-					<%= render "presence_toggle", present: member_ids.include?(member.user_id) %>
+					<%= render "presence_toggle", present: member_ids.include?(member.id) %>
 				<% end %>
 
 				<td class="here row_for_new"></td>

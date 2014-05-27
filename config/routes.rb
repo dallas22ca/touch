@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         post "/track" => "rooms#presence", as: :track
         get "/my-account" => "devise/registrations#edit"
       
-        resources :members, path: :members
+        resources :members
         resources :segments
         resources :events
         resources :folderships, only: :index

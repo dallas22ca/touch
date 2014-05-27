@@ -210,11 +210,13 @@
 		.table {
 			font-size: 15px;
 			
-			td, th {				
+			th {
 				&:nth-child(4) {
-					width: 10px;
+					display: none;
 				}
+			}
 			
+			td, th {			
 				&.row_head {
 					width: 60% !important;
 				}
@@ -233,6 +235,10 @@
 			.date_headers {
 				th {
 					&:nth-child(5) .prev {
+						display: block;
+					}
+					
+					&:nth-child(5) .next {
 						display: block;
 					}
 					

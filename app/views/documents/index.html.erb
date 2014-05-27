@@ -28,7 +28,7 @@
 						</tr>
 					</thead>
 					<tbody id="documents" class="folder_<%= @folder.id %>_documents">
-						<%= jibe @folder.documents.order("updated_at desc"), strategy: "prepend" %>
+						<%= jibe @folder.documents.order("updated_at desc"), strategy: "prepend", scope: [@folder] %>
 					</tbody>
 				</table>
 				
