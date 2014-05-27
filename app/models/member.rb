@@ -34,8 +34,18 @@ class Member < ActiveRecord::Base
     d = self.data
     d = {}
     split = full_name.split(" ")
-    d["first_name"] = split.first
-    d["last_name"] = split.last == split.first ? "" : split.last
+    
+    if split.length == 1
+      d["first_name"] = split.first
+      d["last_name"] = ""
+    elsif split.length == 2
+      d["first_name"] = split.first
+      d["last_name"] = split.last
+    else
+      d["first_name"] = split.first
+      d["last_name"] = full_name.gsub(d["first_name"], "").strip
+    end
+    
     self.data = d
   end
   

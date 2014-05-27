@@ -13,7 +13,7 @@ Jibe.events["events"] =
 		
 $(document).on "keyup", "#attendance_header #q", ->
 	name_field = $(".add_on_the_fly .pretty_name")
-	name = encodeURI name_field.find(".name").text()
+	name = encodeURI $(this).val()
 	url = name_field.data("url")
 	name_field.attr "href", "#{url}#{name}"
 

@@ -84,7 +84,7 @@ describe "Agent", js: true do
     sign_in @member.user
     visit room_path(@org, @room)
     
-    fill_in "q", with: "Another Person"
+    fill_in "q", with: "Joe"
     assert_equal 1, @org.reload.members.count
     assert page.has_css? ".present", count: 0
     
@@ -92,6 +92,7 @@ describe "Agent", js: true do
     sleep 1
     assert_equal 2, @org.reload.members.count
     assert page.has_css? ".present", count: 1
+    assert page.should have_content "Joe"
     
     first(".presence_toggle").click
     sleep 1
