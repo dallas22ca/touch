@@ -1,12 +1,6 @@
 .table {
 	width: 100%;
 	color: #333;
-
-	tbody {
-		tr:hover {
-			background: #D4DEE7;
-		}
-	}
 	
 	tr {
 		&:nth-child(even) {
