@@ -20,7 +20,7 @@ class MembersController < ApplicationController
     end
     
     if request.format == :js
-      @members = @org.filter_members(params[:filters])
+      @members = @org.filter_members(params[:filters]).last_name_asc
     else
       @members = []
     end
