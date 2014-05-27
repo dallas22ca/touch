@@ -1,7 +1,7 @@
 <%= content_tag_for :tr, home do %>
-  <td><%= link_to home.address, folder_home_path(home.folder.organization, home.folder, home) %></td>
-  <td><%= link_to home.beds, folder_home_path(home.folder.organization, home.folder, home) %></td>
-  <td><%= link_to home.baths, folder_home_path(home.folder.organization, home.folder, home) %></td>
-	<td><%= link_to number_to_currency(home.price, precision: 0).to_s, folder_home_path(home.folder.organization, home.folder, home) %></td>
+  <td><%= link_to home.address, edit_folder_home_path(home.folder.organization, home.folder, home) %></td>
+  <td><%= link_to home.beds, edit_folder_home_path(home.folder.organization, home.folder, home) %></td>
+  <td><%= link_to home.baths, edit_folder_home_path(home.folder.organization, home.folder, home) %></td>
+	<td><%= link_to number_to_currency(home.price, precision: 0).to_s, edit_folder_home_path(home.folder.organization, home.folder, home) %></td>
   <td><%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, folder_home_path(home.folder.organization, home.folder, home), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this home?" }, class: "delete" %></td>
 <% end %>

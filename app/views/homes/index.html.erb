@@ -1,14 +1,18 @@
 <%= render "folders/header" %>
 
-<div class="has_header">
+<div id="homes_wrapper" class="has_header">
 	<%= render "folders/sidebar" %>
 
 	<div class="main has_sidebar">
 		<div class="loading"></div>
+		
+		<div id="map_wrapper" data-homes="<%= @homes.to_json %>">
+			<div id="map"></div>
+		</div>
 	
 		<div class="mini_content_wrapper">			
 			<ul class="mini_meta">
-				<li><%= link_to "Show Map", "#", class: "big button grey_bg" %></li>
+				<li><%= link_to "Show Map", "#", class: "big button grey_bg show_map" %></li>
 				<% if @foldership.permits? :homes, :write %>
 					<li><%= link_to "Add A Home", new_folder_home_path(@org, @folder), class: "button big blue_bg" %></li>
 				<% end %>
@@ -30,6 +34,7 @@
 			  </tbody>
 			</table>
 		</div>
+		
 		
 	</div>
 </div>

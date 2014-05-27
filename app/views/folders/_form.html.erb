@@ -33,7 +33,7 @@
 		<% if @folder.new_record? %>
 		  <div class="field">
 		    <%= f.label :seed, "Copy tasks from a template or other folder", class: "label" %>
-		    <%= f.select :seed, options_for_select([["Sample Buyer Template", "buyer"]] + @org.folders.map{ |f| [f.name, f.id] }, "buyer"), include_blank: "Don't copy any tasks" %>
+		    <%= f.select :seed, options_for_select([["Sample Seller Template", "buyer"]] + @org.folders.map{ |f| [f.name, f.id] }, "buyer"), include_blank: "Don't copy any tasks" %>
 		  </div>
 		<% end %>
 		

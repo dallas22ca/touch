@@ -81,10 +81,13 @@ $(document).on "keyup", "#attendance_header #q", ->
 		on_the_fly.hide()
 
 		clone = on_the_fly.clone()
+		a = clone.find(".row_head").find("a")
 		clone.removeClass "add_on_the_fly"
 		clone.find(".row_head .pretty_name").text data.pretty_name
 		clone.find(".row_head .search").text data.name
 		clone.find(".row_head").data("member-id", data.id)
+		a.removeAttr("data-method")
+		a.attr "href", a.data("created-url").replace("%", data.id)
 		clone.find("td:eq(#{index})").addClass "present" if typeof data.meeting_id != "undefined"
 		clone.attr "data-member-id", data.id
 		clone.insertAfter "#attendance .add_on_the_fly"

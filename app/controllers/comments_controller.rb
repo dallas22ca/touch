@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = @folder.comments.joins(:creator)
+    @comments = @folder.comments.joins(:creator).order("created_at asc")
   end
 
   # GET /comments/1

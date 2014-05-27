@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523161112) do
+ActiveRecord::Schema.define(version: 20140527212024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,12 +94,15 @@ ActiveRecord::Schema.define(version: 20140523161112) do
     t.string   "postal_code"
     t.string   "beds"
     t.string   "baths"
-    t.text     "data",        default: "{}"
+    t.text     "data",         default: "{}"
     t.integer  "folder_id"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "price"
+    t.text     "long_address"
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
   add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree

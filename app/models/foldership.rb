@@ -88,7 +88,7 @@ class Foldership < ActiveRecord::Base
   def self.presets
     {
       admin: /\//,
-      read_only: /\/read/,
+      read_only: /(\/read)|(comments\/write)/,
       documents_only: /documents|folderships\/read/
     }
   end

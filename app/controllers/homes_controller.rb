@@ -33,7 +33,7 @@ class HomesController < ApplicationController
 
     respond_to do |format|
       if @home.save
-        format.html { redirect_to folder_home_path(@org, @folder, @home), notice: 'Home was successfully created.' }
+        format.html { redirect_to folder_homes_path(@org, @folder), notice: 'Home was successfully created.' }
         format.json { render :show, status: :created, location: @home }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class HomesController < ApplicationController
   def update
     respond_to do |format|
       if @home.update(home_params)
-        format.html { redirect_to folder_home_path(@org, @folder, @home), notice: 'Home was successfully updated.' }
+        format.html { redirect_to folder_homes_path(@org, @folder), notice: 'Home was successfully updated.' }
         format.json { render :show, status: :ok, location: @home }
       else
         format.html { render :edit }
@@ -74,6 +74,6 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:address, :city, :province, :postal_code, :beds, :baths, :price, :data)
+      params.require(:home).permit(:long_address, :address, :city, :province, :postal_code, :beds, :baths, :price, :longitude, :latitude, :data)
     end
 end

@@ -37,6 +37,7 @@ load = ->
 	Filters.init()
 	Tasks.init()
 	Comments.init()
+	Homes.init()
 
 $ ->
 	Lightbox.init()

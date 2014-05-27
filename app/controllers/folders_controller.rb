@@ -9,10 +9,7 @@ class FoldersController < ApplicationController
   # GET /folders.json
   def index
     @folders = @member.folders.accepted
-    
-    if @folders.count == 1
-      redirect_to folder_path(@org, @folders.first)
-    end
+    redirect_to folder_path(@org, @folders.first) if @folders.count == 1
   end
 
   # GET /folders/1

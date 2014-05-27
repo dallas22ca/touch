@@ -8,6 +8,9 @@
 	
 		<div class="mini_content_wrapper">			
 			<p>
+				<%= link_to "Edit", edit_folder_home_path(@org, @folder, @home) %>
+			</p>
+			<p>
 			  <strong>Address:</strong>
 			  <%= @home.address %>
 			</p>
@@ -35,11 +38,6 @@
 			<p>
 			  <strong>Baths:</strong>
 			  <%= @home.baths %>
-			</p>
-
-			<p>
-			  <strong>Data:</strong>
-			  <%= @home.data %>
 			</p>
 			
 		</div>

@@ -1,2 +1,3 @@
 Lightbox.close()
-$("#<%= dom_id @member %>").remove()
+$("#<%= dom_id @this_member %>").remove()
+$("tr[data-member-id='<%= @this_member.id %>']").remove()

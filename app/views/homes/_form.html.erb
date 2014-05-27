@@ -7,6 +7,8 @@
 		<div class="loading"></div>
 	
 		<div class="mini_content_wrapper">
+			
+			<%= link_to "&larr; Back".html_safe, folder_homes_path(@org, @folder), class: "small grey_bg button" %><br><br>
 
 			<%= form_for [@folder, @home], url: @home.new_record? ? folder_homes_path(@org, @folder) : folder_home_path(@org, @folder, @home) do |f| %>
 			  <% if @home.errors.any? %>
@@ -22,20 +24,24 @@
 			  <% end %>
 
 			  <div class="field">
+			    <%= f.label :long_address, class: "label" %>
+			    <%= f.text_field :long_address, autocomplete: :off, autofill: :off %>
+			  </div>
+			  <div class="field">
 			    <%= f.label :address, class: "label" %>
-			    <%= f.text_field :address %>
+			    <%= f.text_field :address, autocomplete: :off, autofill: :off, data: { address: true } %>
 			  </div>
 			  <div class="field">
 			    <%= f.label :city, class: "label" %>
-			    <%= f.text_field :city %>
+			    <%= f.text_field :city, data: { city: true } %>
 			  </div>
 			  <div class="field">
 			    <%= f.label :province, class: "label" %>
-			    <%= f.text_field :province %>
+			    <%= f.text_field :province, data: { province: true } %>
 			  </div>
 			  <div class="field">
 			    <%= f.label :postal_code, class: "label" %>
-			    <%= f.text_field :postal_code %>
+			    <%= f.text_field :postal_code, data: { postal_code: true } %>
 			  </div>
 			  <div class="field">
 			    <%= f.label :beds, class: "label" %>
@@ -48,6 +54,14 @@
 			  <div class="field">
 			    <%= f.label :price, class: "label" %>
 			    <%= f.text_field :price %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :longitude, class: "label" %>
+			    <%= f.text_field :longitude, data: { longitude: true } %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :latitude, class: "label" %>
+			    <%= f.text_field :latitude, data: { latitude: true } %>
 			  </div>
 			  <div class="actions">
 			    <%= f.submit "Save Home", class: "big blue_bg button" %>
