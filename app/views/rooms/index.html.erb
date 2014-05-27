@@ -9,7 +9,10 @@
 
 	<ul id="rooms" class="panels">
 		<li class="room panel text_only">
-			<h3><%= link_to "Create A Room", new_room_path(@org), remote: true %></h3>
+			<a href="<%= new_room_path(@org) %>" data-remote="true">
+				<h3>Create A Room</h3>
+				<span class="clear"></span>
+			</a>
 		</li>
 		<%= render @rooms %>
 	</ul>

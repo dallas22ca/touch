@@ -63,6 +63,7 @@ describe "Agent", js: true do
     @room = @org.rooms.create name: "Room #3", creator: @member
     @meeting = @room.meetings.create date: Time.zone.now
     sign_in @member.user
+    visit room_path(@org, @room)
     
     fill_in "q", with: "New Person"
     assert_equal 1, @org.reload.members.count
@@ -81,6 +82,7 @@ describe "Agent", js: true do
     @room = @org.rooms.create name: "Room #4", creator: @member
     @meeting = @room.meetings.create date: Time.zone.now
     sign_in @member.user
+    visit room_path(@org, @room)
     
     fill_in "q", with: "Another Person"
     assert_equal 1, @org.reload.members.count
@@ -104,6 +106,6 @@ describe "Agent", js: true do
     visit rooms_path(@org)
     page.should have_content "Create A Room"
     click_link "Create A Room"
-    page.should have_content "Save Room"
+    page.should have_content "Close"
   end
 end
