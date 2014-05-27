@@ -116,7 +116,7 @@ class Member < ActiveRecord::Base
     {
       admin: /\//,
       members: /members\//,
-      members: /members\//,
+      contacts: /members\//,
       folders: /folders\//,
       attendance: /(rooms\/)|(members\/(write|delete))/
     }
