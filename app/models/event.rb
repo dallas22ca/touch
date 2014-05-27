@@ -47,6 +47,7 @@ class Event < ActiveRecord::Base
   def story
     d = {}
     data.map { |k, v| d[k.gsub(".", "_")] = v }
-    Mustache.render description.gsub(".", "_"), d
+    story = Mustache.render description.gsub(".", "_"), d
+    story.html_safe
   end
 end
