@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  jibe
+  
   serialize :json_data, JSON
 
   belongs_to :organization
@@ -10,13 +12,16 @@ class Event < ActiveRecord::Base
   before_save :save_flattened_data
   
   def parse_json
-    if json_data[:contact] && json_data[:contact][:key]
-      member = organization.members.where(key: json_data[:contact][:key]).first
+    if json_data[:member] && json_data[:member][:key]
+      member = organization.members.where(key: json_data[:member][:key]).first
       
       if member
-        self.member_id = member.user_id
-        self.json_data[:contact] = self.json_data[:contact].merge(
-          member.data.merge(id: member.id)
+        self.member_id = member.id
+        self.json_data[:member] = self.json_data[:member].merge(
+          member.data.merge({
+            id: member.id,
+            name: member.name
+          })
         )
       end
     end

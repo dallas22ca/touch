@@ -1,0 +1,9 @@
+<% if @fship.errors.any? %>
+	alert("<%= @fship.errors.full_messages.join(", ") %>")
+<% else %>
+	<% if @fship.resend %>
+		alert("The invitation to <%= @fship.member.name %> has been re-sent.")
+	<% else %>
+		Lightbox.close()
+	<% end %>
+<% end %>

@@ -1,12 +1,32 @@
-<h2>Forgot your password?</h2>
+<div class="container narrow">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+	<div class="center">
+		<% if @org %>
+			<%= link_to image_tag(@org.logo.url), request.path, id: "logo" %>
+		<% else %>
+			<%= link_to image_tag("/#{@website["domain"]}/imgs/logo.png"), root_url(subdomain: "www"), id: "logo" %>
+		<% end %>
+	</div>
+	
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	  <p class="tagline">
+			Enter your email address and we'll send you password reset instructions.
+		</p>
+		
+		<%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+	  <div class="field">
+			<%= f.label :email, class: "label" %>
+		  <%= f.email_field :email %>
+		</div>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+	  <div class="actions">
+			<%= f.submit "Email Me Reset Instructions", class: "big blue_bg button full_width" %>
+		</div>
+	<% end %>
 
-<%= render "devise/shared/links" %>
+	<div class="center">
+		<%= link_to "Help: I need to sign up!", new_user_registration_path, class: "help_link" %>
+	</div>
+
+</div>

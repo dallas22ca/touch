@@ -1,27 +1,63 @@
-<h2>Sign up</h2>
+<div class="container narrow">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+	<div class="center">
+		<% if @org %>
+			<%= link_to image_tag(@org.logo.url), request.path, id: "logo" %>
+		<% else %>
+			<%= link_to image_tag("/#{@website["domain"]}/imgs/logo.png"), root_url(subdomain: "www"), id: "logo" %>
+		<% end %>
+	</div>
 	
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		<%= f.hidden_field :invitation_token, value: params[:token] if params[:token] %>
+		<%= hidden_field_tag :permalink, params[:permalink] if params[:permalink] %>
+		<%= hidden_field_tag :domain, cookies[:domain] %>
+		
+		<p class="tagline"><%= @website["tagline"] %></p>
+		
+		<% if alert %>
+			<% useful_alert = alert != "You need to sign in or sign up before continuing." %>
+			<p class="error"><%= alert %></p>
+		<% end %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-	
-	<% resource.organizations.build unless resource.organizations.any? %>
-	<%= f.fields_for :organizations do |o| %>
-	  <div><%= o.label :permalink %><br />
-	  <%= o.text_field :permalink %></div>
+		<div class="signin_method" data-signin="fb" style="<%= "display: none;" unless resource.errors.empty? %>">
+			<%= link_to "Sign up with Facebook <i class=\"fa fa-facebook\"></i>".html_safe, omniauth_authorize_path(resource_name, :facebook), class: "big fb_bg button with_icon full_width" %><br />
+			<%= link_to "I'd rather sign up with my email address.", "#", class: "help_link toggle_signin_method", data: { signin: "email" } %>
+		</div>
+
+		<div class="signin_method" data-signin="email" style="<%= "display: none;" if resource.errors.empty? %>">
+			<%= devise_error_messages! %>
+			
+		  <div class="field">
+				<%= f.label :name, class: "label" %>
+				<%= f.text_field :name %>
+			</div>
+		  
+			<div class="field">
+				<%= f.label :email, class: "label" %>
+				<%= f.email_field :email %>
+			</div>
+
+		  <div class="field">
+				<%= f.label :password, class: "label" %>
+				<%= f.password_field :password, autocomplete: "off" %>
+			</div>
+			
+		  <div class="field">
+				<%= f.label :password_confirmation, "Confirm Your Password", class: "label" %>
+				<%= f.password_field :password_confirmation, autocomplete: "off" %>
+			</div>
+
+		  <div class="actions">
+				<%= f.hidden_field :remember_me, value: true %>
+				<%= f.button "Sign Up <i class=\"fa fa-paper-plane\"></i>".html_safe, class: "big blue_bg button full_width" %>
+				<%= link_to "I'd rather sign in with Facebook.", "#", class: "help_link toggle_signin_method", data: { signin: "fb" } %>
+			</div>
+		</div>
 	<% end %>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+	<div class="center">
+		<%= link_to "Help: I already have an account!", new_user_session_path(token: params[:token]), class: "help_link" %>
+	</div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -1,22 +1,46 @@
 class Member < ActiveRecord::Base
-  serialize :permissions, Array
+  attr_accessor :full_name
+  
+  serialize :roles, Array
   
   belongs_to :user
-  belongs_to :organization
+  belongs_to :organization, counter_cache: true, touch: true
   
   has_many :events, dependent: :destroy
+  has_many :folderships, dependent: :destroy
+  has_many :folders, through: :folderships
 
   validates_uniqueness_of :key, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
-  
-  before_create :set_initial_admin
-  before_create :permissions
-  
-  after_create :set_user_data
+  before_validation :intercept_full_name, if: :full_name
+
+  before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
+  before_create :set_roles
+
+  after_create :set_user_data, if: :user
   after_create :set_key, unless: :key
   
+  before_save :flatten_roles, if: :roles_changed?
+  after_save :set_user_data, if: :user_id_changed?
+  
+  after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
+  
   scope :last_name_asc, -> { order("members.data->'last_name' desc") }
+  scope :accepted, -> { where "folderships.accepted = ?", true }
+  
+  def intercept_full_name
+    d = self.data
+    d = {}
+    split = full_name.split(" ")
+    d["first_name"] = split.first
+    d["last_name"] = split.last == split.first ? "" : split.last
+    self.data = d
+  end
+  
+  def flatten_roles
+    self.roles = self.roles.flatten
+  end
   
   def set_user_data
     split = user.name.split(" ")
@@ -31,6 +55,7 @@ class Member < ActiveRecord::Base
   def name
     name = data["first_name"]
     name += " " + data["last_name"] unless data["last_name"].blank? 
+    name
   end
   
   def pretty_name
@@ -47,15 +72,68 @@ class Member < ActiveRecord::Base
     update key: id.to_s
   end
   
+  def name_and_email
+    "#{name} <#{data["email"]}>"
+  end
+  
+  def set_roles
+    self.roles.push "member"
+  end
+  
+  def add_preset(preset)
+    new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
+    self.roles = (self.roles + new_roles).uniq
+  end
+  
+  def remove_preset(preset)
+    new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
+    self.roles = (self.roles - new_roles).uniq
+  end
+  
   def set_initial_admin
-    self.permissions = ["admin"] if organization.members.empty?
+    self.roles.push "admin"
+    
+    organization.modules.each do |m|
+      add_preset m.to_sym
+    end
   end
   
-  def set_permissions
-    self.permissions ||= ["member"]
+  def seed_data
+    organization.seed_first_folder
   end
   
-  def permits?(clearance)
-    permissions.include?("admin") || permissions.include?(clearance)
+  def permits?(resource, action)
+    return true if resource.is_a?(Object) && resource.try(:creator_id) == id
+    resource = resource.class.name.downcase.pluralize unless resource.is_a?(Symbol) || resource.is_a?(String)
+    action = action.to_sym unless action.is_a? Symbol
+    permit = roles.include? "#{resource}/#{action}"
+    logger.info "Attempting to gain permissions to #{resource}/#{action}... #{permit ? "\033[0;32msuccess\033[0m" : "\033[0;31mfail\033[0m"}"
+    permit
+  end
+  
+  def self.presets
+    {
+      admin: /\//,
+      members: /members\//,
+      members: /members\//,
+      folders: /folders\//,
+      attendance: /(rooms\/)|(members\/(write|delete))/
+    }
+  end
+  
+  def self.permissions
+    [
+      "admin",
+      "member",
+      "members/read",
+      "members/write",
+      "members/delete",
+      "folders/read",
+      "folders/write",
+      "folders/delete",
+      "rooms/read",
+      "rooms/write",
+      "rooms/delete"
+    ]
   end
 end

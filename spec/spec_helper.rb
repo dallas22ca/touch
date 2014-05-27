@@ -6,7 +6,7 @@ require 'capybara/rspec'
 require 'sidekiq/testing'
 
 DatabaseCleaner.strategy = :truncation
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
@@ -20,14 +20,15 @@ RSpec.configure do |config|
   end
 
   config.after :each do
+    Capybara.reset_sessions!
     DatabaseCleaner.clean
   end
   
   def sign_in(user, org = false)
-    visit org ? signin_path(org.permalink) : new_user_session_path
+    visit org ? signin_path(org) : new_user_session_path
+    click_link "I'd rather sign in with my email address."
     fill_in "Email",    with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"
-    page.should have_content "Signed in"
   end
 end

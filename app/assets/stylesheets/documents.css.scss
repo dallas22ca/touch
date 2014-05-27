@@ -1,0 +1,20 @@
+#documents_wrapper {	
+	#new_document {
+		display: none;
+	}
+	
+	#documents {
+		width: 100%;
+		margin-top: 20px;
+
+		.document {			
+			.name {
+				width: 75%;
+			}
+		
+			.created_at {
+				width: 25%;
+			}
+		}
+	}
+}

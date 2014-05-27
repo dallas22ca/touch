@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_filter :set_organization
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_root, unless: Proc.new { @member.permits? :rooms, action_type }
 
   # GET /rooms
   # GET /rooms.json
@@ -41,10 +42,11 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = @org.rooms.new(room_params)
+    @room.creator = @member
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Room was successfully created.' }
+        format.html { redirect_to room_path(@org, @room), notice: 'Room was successfully created.' }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new }
@@ -58,7 +60,7 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Room was successfully updated.' }
+        format.html { redirect_to room_path(@org, @room), notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit }
@@ -72,9 +74,49 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
-      format.html { redirect_to rooms_path(@org.permalink), notice: 'Room was successfully destroyed.' }
+      format.html { redirect_to rooms_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def presence
+    @room = @org.rooms.find(params[:room_id])
+    @meeting = @room.meetings.find(params[:meeting_id])
+    @this_member = @org.members.where(id: params[:member_id]).first
+    present = params[:member_id] == "new" || params[:present].to_s =~ /true|t|1/ ? true : false
+    verb = present ? "attended" : "did not attend"
+    exists = @org.events.where("data @> 'member.key=>#{@this_member.key}' AND data @> 'meeting.id=>#{@meeting.id}' AND data @> 'room.id=>#{@room.id}'").first if @this_member
+
+    if present
+      if !exists
+        if params[:member_id] == "new"
+          @user = User.create!(
+            name: params[:name],
+            ignore_password: true,
+            ignore_email: true
+          )
+          @this_member = @org.members.create! user: @user
+        end
+      
+        @org.events.create!(
+          description: "{{ member.name }} #{verb} {{ room.name }}",
+          verb: verb,
+          created_at: @meeting.date,
+          json_data: {
+            present: present,
+            meeting: @meeting.attributes,
+            room: @room.attributes,
+            member: {
+              key: @this_member.key
+            }
+          }
+        )
+      end
+    else
+      exists.destroy
+    end
+    
+    render "modules/attendance/presence"
   end
 
   private

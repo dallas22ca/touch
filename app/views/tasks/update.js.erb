@@ -1,0 +1,5 @@
+<% if @folder.tasks.complete.any? %>
+	$(".show_completed_tasks").show()
+<% else %>
+	$(".show_completed_tasks").hide()
+<% end %>

@@ -1,0 +1,66 @@
+<div id="folder_sidebar_mobile_placeholder"></div>
+<div id="folder_sidebar" class="sidebar without_padding">
+	<% if @member.folderships.unaccepted.any? %>
+		<h3>Invitations</h3>
+		<ul>
+			<% @member.folderships.unaccepted.each do |foldership| %>
+				<li>
+					<%= foldership.folder.name %> by
+					<%= foldership.folder.creator.name %>
+					<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+	
+	<ul>
+		<li>
+			<%= link_to "<i class=\"fa fa-bars\"></i> <span class=\"word\">#{@folder.name}</span>".html_safe, folder_comments_path(@org, @folder), class: "choose_folder" %>
+			
+			<ul class="folders_list">
+				<% if @member.permits? :folders, :write %>
+					<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
+				<% end %>
+
+				<% @member.folders.each do |folder| %>
+					<li><%= link_to folder.name, folder_comments_path(@org, folder) %></li>
+				<% end %>
+			</ul>
+		</li>
+		
+		<% if @foldership.permits? :comments, :read %>
+			<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Newsfeed</span>".html_safe, folder_comments_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_comments_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :tasks, :read %>
+			<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_tasks_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :homes, :read %>
+			<li><%= link_to "<i class=\"fa fa-home\"></i> <span class=\"word\">Homes</span>".html_safe, folder_homes_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_homes_path(@org, @folder)}" %></li>
+		<% end %>
+			
+		<% if @foldership.permits? :documents, :read %>
+			<li><%= link_to "<i class=\"fa fa-suitcase\"></i> <span class=\"word\">Documents</span>".html_safe, folder_documents_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_documents_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :folderships, :read %>
+			<li><%= link_to "<i class=\"fa fa-users\"></i> <span class=\"word\">Who's Here?</span>".html_safe, folder_folderships_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_folderships_path(@org, @folder)}" %></li>
+		<% end %>
+		
+		<% if @foldership.permits? :folders, :write %>
+			<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
+			
+			<% if @folder.name == "Jack & Jill" %>
+				<li class="folder_options_li"><%= link_to "<i class=\"fa fa-refresh\"></i> <span class=\"word\">Reset Folder</span>".html_safe, folder_reset_path(@org, @folder), method: :delete, data: { confirm: "Do you want to reset this folder?" } %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+	
+	<ul class="mobile_folders_list">
+		<li><%= link_to "Create A Folder", new_folder_path(@org), remote: true %></li>
+		<% @member.folders.each do |folder| %>
+			<li><%= link_to folder.name, folder_comments_path(@org, folder) %></li>
+		<% end %>
+	</ul>

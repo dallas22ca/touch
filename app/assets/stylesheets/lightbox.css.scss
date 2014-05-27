@@ -32,34 +32,29 @@ body {
 	background: #fff;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 	z-index: 99999;
-	border-radius: 7px;
+	border-radius: 5px;
 	overflow-y: auto;
-	font-size: 18px;
-	line-height: 24px;
+	font-size: 17px;
+	line-height: 25px;
+	color: #333;
 	
 	.close_button {
 		float: right;
-		padding: 13px 20px;
+		margin-left: -50px;
+		padding: 15px 20px;
 		font-weight: bold;
-		color: #777;
+		color: #aaa;
 	}
 	
 	h1 {
-		background: #eeeeee;
-		background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%);
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc));
-		background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
-		background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
-		background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
-		background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+		background: #eee;
 		padding: 15px;
 		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
 		font-weight: bold;
-		color: #333;
+		color: #555;
 		font-size: 21px;
 		text-align: center;
-		border-bottom: 1px solid #bbb;
+		border-bottom: 1px solid #ddd;
 		box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 	}
 	
@@ -68,6 +63,16 @@ body {
 		
 		.field {
 			margin: 20px 0;
+		}
+		
+		.actions {
+			a {
+				float: right;
+				color: #aaa;
+				font-size: 13px;
+				margin-left: 20px;
+				margin-top: 20px;
+			}
 		}
 	}
 }
@@ -78,5 +83,7 @@ body {
 		left: 15px;
 		width: auto;
 		margin-left: 0;
+		font-size: 15px;
+		line-height: 23px;
 	}
 }

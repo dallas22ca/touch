@@ -2,9 +2,9 @@
 	padding: 15px;
 	background: #fff;
 	position: fixed;
-	left: 22%;
+	left: 222px;
 	right: 0;
-	top: 60px;
+	top: 75px;
 	height: 65px;
 	border-bottom: 1px solid #ddd;
 	
@@ -12,5 +12,13 @@
 		float: right;
 		color: #333;
 		margin-top: 7px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.has_sidebar {
+		#searcher {
+			left: 0;
+		}
 	}
 }

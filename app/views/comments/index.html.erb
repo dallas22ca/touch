@@ -1,0 +1,48 @@
+<%= render "folders/header" %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<% if 1 == 0 %>
+			<div class="center">
+				<%= link_to "Load more", "#", class: "big blue_bg button" %>
+			</div>
+		<% end %>
+
+		<div class="mini_content_wrapper">
+			<ul class="folder_<%= @folder.id %>_comments comments">
+				<% if @folder.name == "Jack & Jill" %>	
+					<li class="jack_and_jill">
+						<h3>Welcome to <%= @website["name"] %>!</h3>
+						<p>
+							We've added your first folder - so have a peek around and play with it. We've added a handy "Reset Folder" button on the sidebar if you need it ;)
+						</p>
+						<p>
+							What's a folder? It's simply a group of related things. When you want to create your first real folder, click &nbsp; <i class="fa fa-bars"></i> &nbsp; (top left) and then "Create A Folder".
+						</p>
+						<p>
+							This is the Newsfeed - it's used to send messages. You can type your first message in the box below.
+						</p>
+						<p>
+							To delete this folder, click "Folder Settings", then "Delete" (bottom left).
+						</p>
+					</li>
+				<% elsif @folder.comments.empty? %>
+					<li class="no_comments">
+						<h3>This folder has no comments!</h3>
+						<p>Be the first to comment by by typing a message in the box below, then press &lt;ENTER&gt;!</p>
+					</li>
+				<% end %>
+			
+				<%= jibe @comments, scope: [@folder] %>
+			</ul>
+		</div>
+		
+		<%= form_for [@folder, Comment.new], url: folder_comments_path(@org, @folder), remote: true do |f| %>
+			<%= f.text_field :body, value: nil, placeholder: "What's on your mind?", autocomplete: "off" %>
+		<% end %>
+	</div>
+</div>

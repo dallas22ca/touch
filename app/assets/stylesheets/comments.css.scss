@@ -1,0 +1,89 @@
+.comments {	
+	li {
+		margin-top: 30px;
+		font-size: 14px;
+		line-height: 21px;
+		
+		&:first-child {
+			margin-top: 0;
+		}
+		
+		&.jack_and_jill p {
+			margin-bottom: 15px;
+		}
+		
+		&.no_comments {
+			margin: 100px 0 30px;
+			text-align: center;
+			
+			h3 {
+				font-size: 24px;
+				line-height: 34px;
+				font-weight: bold;
+				margin-bottom: 10px;
+				color: #333;
+			}
+			
+			p {
+				font-size: 14px;
+				line-height: 21px;
+				padding: 0px 50px;
+				color: #aaa;
+			}
+		}
+		
+		.left_meta {
+			float: left;
+			width: 40px;
+			margin-top: 3px;
+			
+			img {
+				width: 40px;
+				height: 40px;
+			}
+		}
+		
+		.right_meta {
+			margin-left: 50px;
+			
+			.creator_name {
+				color: #006EB5;
+				font-weight: bold;
+			}
+			
+			.created_at {
+				color: #bbb;
+				float: right;
+				font-size: 11px;
+			}
+			
+			.body {
+				color: #333;
+			}
+		}
+	}
+}
+
+#new_comment {
+	position: fixed;
+	bottom: 0;
+	left: 222px;
+	right: 0;
+	background: #fff;
+	text-align: center;
+	padding: 8px;
+	border-top: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	
+	#comment_body {
+		height: 32px;
+		width: 100%;
+		max-width: 500px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#new_comment {
+		left: 0;
+	}
+}

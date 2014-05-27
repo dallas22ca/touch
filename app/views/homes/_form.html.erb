@@ -1,0 +1,60 @@
+<%= render "folders/header" %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+	
+		<div class="mini_content_wrapper">
+
+			<%= form_for [@folder, @home], url: @home.new_record? ? folder_homes_path(@org, @folder) : folder_home_path(@org, @folder, @home) do |f| %>
+			  <% if @home.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@home.errors.count, "error") %> prohibited this home from being saved:</h2>
+
+			      <ul>
+			      <% @home.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+			  <div class="field">
+			    <%= f.label :address, class: "label" %>
+			    <%= f.text_field :address %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :city, class: "label" %>
+			    <%= f.text_field :city %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :province, class: "label" %>
+			    <%= f.text_field :province %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :postal_code, class: "label" %>
+			    <%= f.text_field :postal_code %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :beds, class: "label" %>
+			    <%= f.text_field :beds %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :baths, class: "label" %>
+			    <%= f.text_field :baths %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :price, class: "label" %>
+			    <%= f.text_field :price %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit "Save Home", class: "big blue_bg button" %>
+			  </div>
+			<% end %>
+
+		</div>
+	
+	</div>
+</div>

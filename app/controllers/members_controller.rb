@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_filter :set_organization
   before_action :set_this_member, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_root, unless: Proc.new { @member.permits? :members, action_type }
   
   def index
     params[:filters] ||= []
@@ -18,8 +19,27 @@ class MembersController < ApplicationController
       # @segment.filters.map { |f| params[:filters].push f } if @segment && !@segment.filters.blank?
     end
     
-    @members = @org.filter_members(params[:filters])
-    render "modules/contacts/index"
+    if request.format == :js
+      @members = @org.filter_members(params[:filters])
+    else
+      @members = []
+    end
+  end
+  
+  def create
+    @this_member = @org.members.new(member_params)
+
+    respond_to do |format|
+      if @this_member.save
+        format.html { redirect_to members_path(@org), notice: 'Member was successfully created.' }
+        format.json { render :show, status: :created, location: @this_member }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @this_member.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
   end
   
   def edit
@@ -27,22 +47,22 @@ class MembersController < ApplicationController
   
   def update
     respond_to do |format|
-      if @member.update(member_params)
-        format.html { redirect_to member_path(@org.permalink, @member), notice: 'Room was successfully updated.' }
-        format.json { render :show, status: :ok, location: @member }
+      if @this_member.update(member_params)
+        format.html { redirect_to member_path(@org, @this_member), notice: 'Room was successfully updated.' }
+        format.json { render :show, status: :ok, location: @this_member }
         format.js
       else
         format.html { render :edit }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.json { render json: @this_member.errors, status: :unprocessable_entity }
         format.js
       end
     end
   end
   
   def destroy
-    @member.destroy
+    @this_member.destroy
     respond_to do |format|
-      format.html { redirect_to members_path(@org.permalink), notice: 'Room was successfully destroyed.' }
+      format.html { redirect_to members_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end
@@ -51,11 +71,11 @@ class MembersController < ApplicationController
   private
   
   def set_this_member
-    @member = @org.members.find(params[:id])
+    @this_member = @org.members.find(params[:id])
   end
   
   def member_params
-    params.require(:member).permit(:key).tap do |whitelisted|
+    params.require(:member).permit(:key, :full_name).tap do |whitelisted|
       whitelisted[:data] = params[:member][:data]
     end
   end

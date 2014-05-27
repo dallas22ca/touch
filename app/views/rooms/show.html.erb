@@ -1,19 +1,19 @@
 <% title do %>
-	<h1><%= link_to "#{@room.name} &nbsp; &darr;".html_safe, "#", class: "show_sub_menu" %></h1>
+	<h1><%= link_to image_tag(@org.logo.url), rooms_path(@org) %></h1>
 	<ul class="sub_menu">
-		<li><%= link_to "Edit This Room", edit_room_path(@org.permalink, @room), remote: true %></li>
+		<li><%= link_to "Edit This Room", edit_room_path(@org, @room), remote: true %></li>
 		
 		<% @org.rooms.each do |room| %>
 			<% if room != @room %>
-				<li><%= link_to room.name, room_path(@org.permalink, room) %></li>
+				<li><%= link_to room.name, room_path(@org, room) %></li>
 			<% end %>
 		<% end %>
 		
-		<li><%= link_to "Create A New Room", new_room_path(@org.permalink), remote: true %></li>
+		<li><%= link_to "Create A New Room", new_room_path(@org), remote: true %></li>
 	</ul>
 <% end %>
 
-<div id="attendance_header" data-room-id="<%= @room.id %>" data-event-path="<%= track_path(@org.permalink) %>" data-last-meeting-id="<%= @last_meeting ? @last_meeting.id : 0 %>" data-first-meeting-id="<%= @first_meeting ? @first_meeting.id : 0 %>">
+<div id="attendance_header" data-room-id="<%= @room.id %>" data-event-path="<%= track_path(@org) %>" data-last-meeting-id="<%= @last_meeting ? @last_meeting.id : 0 %>" data-first-meeting-id="<%= @first_meeting ? @first_meeting.id : 0 %>">
 	<div class="loading"></div>
 	<table class="table center date_headers">
 		<thead>
@@ -26,7 +26,7 @@
 				<%= render @meetings %>
 
 				<th class="row_for_new">
-					<%= link_to "+", new_room_meeting_path(@org.permalink, @room), remote: true, class: "add_date" %>
+					<%= link_to "+", new_room_meeting_path(@org, @room), remote: true, class: "add_date" %>
 				</th>
 				<th class="row_head">
 					<%= form_for request.path, method: :get, remote: true do %>
@@ -38,6 +38,9 @@
 		</thead>
 	</table>
 </div>
+
+<%= content_tag :script, nil, type: "x-jibe", data: { resource: "meetings", scope: "room_id=#{@room.id}" } %>
+<%= content_tag :script, nil, type: "x-jibe", data: { resource: "events", silent: true } %>
 
 <table id="attendance" class="table center">
 	<tbody>
@@ -52,27 +55,27 @@
 			
 			<td class="here row_for_new"></td>
 			<td class="row_head">
-				<span class="pretty_name">
+				<%= link_to "#", class: "pretty_name", remote: true, method: :post, data: { url: members_path(@org, member: { full_name: "" }) } do %>
 					Add <span class="name"></span>
-				</span>
+				<% end %>
 				<span class="search"></span>
 			</td>
 		</tr>
 		
 		<% @members.each do |member| %>
-			<tr>
+			<tr data-member-id="<%= member.id %>">
 				
 				<% @nils.times do %>
 					<td class="unused"></td>
 				<% end %>
 				
 				<% @meeting_events.each do |meeting_id, member_ids| %>
-					<%= render "presence_toggle", present: member_ids.include?(member.user_id) %>
+					<%= render "presence_toggle", present: member_ids.include?(member.id) %>
 				<% end %>
 
 				<td class="here row_for_new"></td>
 				<td class="row_head" data-member-id="<%= member.id %>">
-					<a href="<%= edit_member_path(@org.permalink, member) %>" data-remote="true">
+					<a href="<%= edit_member_path(@org, member) %>" data-remote="true">
 						<span class="pretty_name"><%= member.pretty_name %></span>
 						<span class="search"><%= member.name %></span>
 					</a>

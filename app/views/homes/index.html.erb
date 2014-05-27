@@ -1,0 +1,35 @@
+<%= render "folders/header" %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+	
+		<div class="mini_content_wrapper">			
+			<ul class="mini_meta">
+				<li><%= link_to "Show Map", "#", class: "big button grey_bg" %></li>
+				<% if @foldership.permits? :homes, :write %>
+					<li><%= link_to "Add A Home", new_folder_home_path(@org, @folder), class: "button big blue_bg" %></li>
+				<% end %>
+			</ul>
+			
+			<table class="table" <%= "data-delete" if @foldership.permits? :homes, :delete %>>
+			  <thead>
+			    <tr>
+			      <th>Address</th>
+			      <th>Beds</th>
+			      <th>Baths</th>
+						<th>Price</th>
+						<th></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <%= jibe @homes, scope: [@folder] %>
+			  </tbody>
+			</table>
+		</div>
+		
+	</div>
+</div>

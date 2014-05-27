@@ -1,0 +1,7 @@
+<% cache foldership do %>
+	<%= content_tag_for :tr, foldership do %>
+		<td><%= link_to foldership.name_or_member_name, edit_folder_foldership_path(foldership.folder.organization, foldership.folder, foldership), remote: true %></td>
+		<td><%= link_to foldership.role_explained, edit_folder_foldership_path(foldership.folder.organization, foldership.folder, foldership), remote: true %></td>
+		<td><%= link_to "Re-send", folder_foldership_path(foldership.folder.organization, foldership.folder, foldership, foldership: { resend: true }), method: :patch, remote: true, class: "resend" unless foldership.accepted? %></td>
+	<% end %>
+<% end %>

@@ -46,7 +46,7 @@ $(document).on "click", "#filters input[type='checkbox']", ->
 $(document).on "submit", "#filter_form, #q_form", ->
 	filters = Filters.generate()
 	url = $("#choose_segment").val()
-	$("#contacts").find(".loading").show()
+	$("#members").find(".loading").show()
 	
 	if $("#q").val() != ""
 		filters.push
@@ -65,51 +65,52 @@ $(document).on "submit", "#filter_form, #q_form", ->
 			$("#filter_form").trigger "submit"
 		
 	updateWithSegment: ->
-		split = $("#choose_segment").val().split("=")
-		segment_id = split[1] if split.length > 1
-		option = $("#choose_segment option:selected")
-		segment_name = $.trim option.text()
-		Filters.resetFilters()
+		if $("#choose_segment").length
+			split = $("#choose_segment").val().split("=")
+			segment_id = split[1] if split.length > 1
+			option = $("#choose_segment option:selected")
+			segment_name = $.trim option.text()
+			Filters.resetFilters()
 		
-		if segment_id
-			filters = $("#filters")
-			$(".segment_meta, .save_this_segment").show()
-			$(".segment_name").text segment_name
+			if segment_id
+				filters = $("#filters")
+				$(".segment_meta, .save_this_segment").show()
+				$(".segment_name").text segment_name
 			
-			$("#filter_form a[data-href]").each ->
-				href = $(this).data "href"
-				$(this).attr "href", href.replace("-", segment_id)
+				$("#filter_form a[data-href]").each ->
+					href = $(this).data "href"
+					$(this).attr "href", href.replace("-", segment_id)
 			
-			for filter in option.data("filters")
-				if typeof filter.event == "undefined"
-					field = filters.find("input[data-field][value='#{filter.field}']")
-					li = field.closest(".disablable")
-					li.find("input[data-value]").val filter.value
-					disabled = field.closest(".disabled")
-					disabled.removeClass "disabled"
-					disabled.find("input[type='checkbox']").prop "checked", true
-				else
-					console.log filter
-					clone = $(".templates").find(".event_filter_template").clone()
-					clone.removeClass "event_filter_template"
-					clone.find("input[type='checkbox']:lt(2)").each ->
-						$(this).closest(".disablable").removeClass "disabled"
-						$(this).prop "checked", true
+				for filter in option.data("filters")
+					if typeof filter.event == "undefined"
+						field = filters.find("input[data-field][value='#{filter.field}']")
+						li = field.closest(".disablable")
+						li.find("input[data-value]").val filter.value
+						disabled = field.closest(".disabled")
+						disabled.removeClass "disabled"
+						disabled.find("input[type='checkbox']").prop "checked", true
+					else
+						console.log filter
+						clone = $(".templates").find(".event_filter_template").clone()
+						clone.removeClass "event_filter_template"
+						clone.find("input[type='checkbox']:lt(2)").each ->
+							$(this).closest(".disablable").removeClass "disabled"
+							$(this).prop "checked", true
 					
-					clone.find(".disablable").each ->
-						unless $(this).find(".disablable").length
-							field = $(this).find("input[data-field][value='#{filter.field}']")
-							matcher = $(this).find("input[data-matcher][value='#{filter.matcher}']")
-							event = $(this).find("input[data-event][value='#{filter.event}']")
+						clone.find(".disablable").each ->
+							unless $(this).find(".disablable").length
+								field = $(this).find("input[data-field][value='#{filter.field}']")
+								matcher = $(this).find("input[data-matcher][value='#{filter.matcher}']")
+								event = $(this).find("input[data-event][value='#{filter.event}']")
 							
-							if field.length && matcher.length && event.length
-								$(this).removeClass "disabled"
-								$(this).find("input[type='checkbox']").prop "checked", true
-								$(this).find("[data-value]").val filter.value
+								if field.length && matcher.length && event.length
+									$(this).removeClass "disabled"
+									$(this).find("input[type='checkbox']").prop "checked", true
+									$(this).find("[data-value]").val filter.value
 					
-					clone.insertBefore "#filters .insert_before"
-		else
-			$(".segment_meta, .save_this_segment").hide()
+						clone.insertBefore "#filters .insert_before"
+			else
+				$(".segment_meta, .save_this_segment").hide()
 	
 	resetFilters: ->
 		filters = $("#filters")

@@ -1,0 +1,4 @@
+<% if @fship.errors.empty? %>
+	$("#<%= dom_id @fship %>").remove()
+	Lightbox.close()
+<% end %>

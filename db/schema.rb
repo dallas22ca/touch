@@ -11,11 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509122140) do
+ActiveRecord::Schema.define(version: 20140523161112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "comments", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["creator_id"], name: "index_comments_on_creator_id", using: :btree
+  add_index "comments", ["folder_id"], name: "index_comments_on_folder_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "documents", ["creator_id"], name: "index_documents_on_creator_id", using: :btree
+  add_index "documents", ["folder_id"], name: "index_documents_on_folder_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "description"
@@ -30,6 +55,69 @@ ActiveRecord::Schema.define(version: 20140509122140) do
 
   add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
   add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
+
+  create_table "folders", force: true do |t|
+    t.string   "name"
+    t.boolean  "archived",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "organization_id"
+    t.integer  "creator_id"
+  end
+
+  add_index "folders", ["creator_id"], name: "index_folders_on_creator_id", using: :btree
+  add_index "folders", ["organization_id"], name: "index_folders_on_organization_id", using: :btree
+
+  create_table "folderships", force: true do |t|
+    t.integer  "folder_id"
+    t.integer  "member_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.boolean  "accepted",   default: false
+    t.string   "token"
+    t.string   "name"
+    t.string   "email"
+    t.text     "roles",      default: "--- []\n"
+    t.string   "preset"
+  end
+
+  add_index "folderships", ["creator_id"], name: "index_folderships_on_creator_id", using: :btree
+  add_index "folderships", ["folder_id"], name: "index_folderships_on_folder_id", using: :btree
+  add_index "folderships", ["member_id"], name: "index_folderships_on_member_id", using: :btree
+
+  create_table "homes", force: true do |t|
+    t.string   "address"
+    t.string   "city"
+    t.string   "province"
+    t.string   "postal_code"
+    t.string   "beds"
+    t.string   "baths"
+    t.text     "data",        default: "{}"
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "price"
+  end
+
+  add_index "homes", ["creator_id"], name: "index_homes_on_creator_id", using: :btree
+  add_index "homes", ["folder_id"], name: "index_homes_on_folder_id", using: :btree
+
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "username"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "meetings", force: true do |t|
     t.integer  "room_id"
@@ -48,7 +136,7 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.text     "permissions",     default: "--- []\n"
     t.string   "key"
     t.hstore   "data",            default: {}
-    t.string   "email"
+    t.text     "roles",           default: "--- []\n"
   end
 
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
@@ -58,7 +146,14 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "modules",    default: "---\n- contacts\n"
+    t.text     "modules",           default: "--- []\n"
+    t.string   "name"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "website"
+    t.integer  "members_count",     default: 0
   end
 
   create_table "rooms", force: true do |t|
@@ -66,8 +161,10 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "creator_id"
   end
 
+  add_index "rooms", ["creator_id"], name: "index_rooms_on_creator_id", using: :btree
   add_index "rooms", ["organization_id"], name: "index_rooms_on_organization_id", using: :btree
 
   create_table "segments", force: true do |t|
@@ -79,6 +176,19 @@ ActiveRecord::Schema.define(version: 20140509122140) do
   end
 
   add_index "segments", ["organization_id"], name: "index_segments_on_organization_id", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.text     "content"
+    t.integer  "folder_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "complete",   default: false
+    t.integer  "ordinal",    default: 9999
+  end
+
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
+  add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -94,6 +204,12 @@ ActiveRecord::Schema.define(version: 20140509122140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "phone"
+    t.string   "website"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

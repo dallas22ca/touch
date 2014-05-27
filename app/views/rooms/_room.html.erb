@@ -1,0 +1,6 @@
+<%= content_tag_for :li, room, class: "panel text_only" do %>
+	<a href="<%= room_path(room.organization.permalink, room) %>">
+		<h3><%= room.name %></h3>
+		<span class="clear"></span>
+	</a>
+<% end %>

@@ -1,0 +1,26 @@
+<% if @member.folderships.unaccepted.any? %>
+	<h3>Invitations</h3>
+	<ul>
+		<% @member.folderships.unaccepted.each do |foldership| %>
+			<li>
+				<%= foldership.folder.name %> by
+				<%= foldership.folder.creator.name %>
+				<%= link_to "Accept", folder_foldership_accept_path(foldership.folder.organization, foldership.folder, foldership, foldership: { accepted: true }), method: :post %>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<div class="container">
+	<ul id="folders" class="panels">
+		<% if @member.permits? :folders, :write %>
+			<li class="folder panel center">
+				<a href="<%= new_folder_path %>" data-remote="true">
+					<h3>Create A Folder</h3>
+					<%= image_tag "/imgs/plus.png", class: "plus" %>
+				</a>
+			</li>
+		<% end %>
+	  <%= render @folders %>
+	</ul>
+</div>

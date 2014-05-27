@@ -4,6 +4,6 @@ module ApplicationHelper
   end
   
   def clearances
-    %w[contacts permissions attendance]
+    %w[members permissions attendance]
   end
 end

@@ -1,0 +1,34 @@
+<%= render "folders/header" %>
+
+<div class="has_header">
+	<%= render "folders/sidebar" %>
+
+	<div class="main has_sidebar">
+		<div class="loading"></div>
+		
+		<div id="folderships_wrapper" class="mini_content_wrapper">
+			<% if @foldership.permits? :folderships, :read %>
+				
+				<% if @foldership.permits? :folderships, :write %>
+					<%= link_to "Send An Invitation", new_folder_foldership_path(@folder.organization, @folder), class: "invite_member right button big blue_bg", remote: true %>
+				<% end %>
+			
+				<div class="clear"></div>
+			
+				<table id="folderships" class="table folder_<%= @folder.id %>_folderships" <%= "data-write" if @foldership.permits? :folderships, :write %>>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Permission</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= jibe @folder.folderships.order("created_at asc"), scope: [@folder] %>
+					</tbody>
+				</table>
+			<% end %>
+		</div>
+		
+	</div>
+</div>

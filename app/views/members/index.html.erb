@@ -1,0 +1,30 @@
+<div class="sidebar">
+	<%= render "filters" %>
+</div>
+
+<div class="main has_sidebar">
+	<div id="searcher">
+		<%= form_tag members_path(@org, format: :js), id: "q_form" do %>
+			<%= text_field_tag :q, nil, placeholder: "Search..." %>
+			<%= submit_tag "Search", class: "small grey_bg button" %>
+			<span class="members_count"><%= pluralize @members.count, "Result" %></span>
+		<% end %>
+	</div>
+	
+	<table id="members" class="table">
+		<thead>
+			<tr>
+				<th>
+					<div class="loading" style="display: block; "></div>
+					<%= check_box_tag :nice %>
+				</th>
+				<th style="width: 33%">First Name</th>
+				<th style="width: 33%">Last Name</th>
+				<th style="width: 33%">Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%= render @members %>
+		</tbody>
+	</table>
+</div>

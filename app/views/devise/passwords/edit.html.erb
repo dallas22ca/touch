@@ -1,16 +1,38 @@
-<h2>Change your password</h2>
+<div class="container narrow">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+	<div class="center">
+		<% if @org %>
+			<%= link_to image_tag(@org.logo.url), request.path, id: "logo" %>
+		<% else %>
+			<%= link_to image_tag("/#{@website["domain"]}/imgs/logo.png"), root_url(subdomain: "www"), id: "logo" %>
+		<% end %>
+	</div>
+	
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+		<%= f.hidden_field :reset_password_token %>
+	  <%= devise_error_messages! %>
+		
+		<p class="tagline">
+			Choose a new password.
+		</p>
 
-  <div><%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
+	  <div class="field">
+			<%= f.label :password, "New password", class: "label" %>
+	    <%= f.password_field :password, autocomplete: "off" %>
+		</div>
+		
+	  <div class="field">
+			<%= f.label :password_confirmation, "Confirm new password", class: "label" %>
+	    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+		</div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+	  <div class="actions">
+			<%= f.submit "Save My New Password", class: "big blue_bg button full_width" %>
+		</div>
+	<% end %>
 
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
+	<div class="center">
+		<%= link_to "Help: I need to sign up!", new_user_registration_path, class: "help_link" %>
+	</div>
 
-<%= render "devise/shared/links" %>
+</div>

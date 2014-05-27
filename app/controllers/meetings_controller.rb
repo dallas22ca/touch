@@ -16,7 +16,7 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
-    @meeting = Meeting.new
+    @meeting = Meeting.new(date: Time.zone.now.beginning_of_day + 9.hours)
   end
 
   # GET /meetings/1/edit
@@ -30,7 +30,7 @@ class MeetingsController < ApplicationController
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully created.' }
+        format.html { redirect_to room_path(@org, @room), notice: 'Meeting was successfully created.' }
         format.json { render :show, status: :created, location: @meeting }
         format.js
       else
@@ -46,7 +46,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully updated.' }
+        format.html { redirect_to room_path(@org, @room), notice: 'Meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
         format.js
       else
@@ -62,7 +62,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to room_path(@org.permalink, @room), notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to room_path(@org, @room), notice: 'Meeting was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

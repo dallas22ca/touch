@@ -1,4 +1,6 @@
 class Meeting < ActiveRecord::Base
+  jibe
+  
   belongs_to :room
   
   validates_presence_of :room_id, :date

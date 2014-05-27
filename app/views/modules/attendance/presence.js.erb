@@ -1,9 +1,9 @@
 <% if params[:member_id] == "new" %>
 	Attendance.addRow("<%= j ({ 
-		name: @member.name, 
-		pretty_name: @member.pretty_name, 
+		name: @this_member.name, 
+		pretty_name: @this_member.pretty_name, 
 		meeting_id: @meeting.id,
-		id: @member.id
+		id: @this_member.id
 	}).to_json.html_safe %>")
 <% end %>
 

@@ -1,6 +1,6 @@
 #attendance_header {
 	position: fixed;
-	top: 60px;
+	top: 75px;
 	left: 0;
 	right: 0;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -8,7 +8,7 @@
 	.loading {
 		background: url(/imgs/loading.gif) center no-repeat rgba(255, 255, 255, 0.8);
 		position: fixed;
-		top: 60px;
+		top: 75px;
 		right: 0;
 		bottom: 0;
 		left: 0;
@@ -143,6 +143,10 @@
 					
 					&.load {
 						background: url(/imgs/loading_small.gif) center no-repeat #fafafa;
+						
+						.here {
+							display: none;
+						}
 					}
 		
 					.not_here {
@@ -206,11 +210,13 @@
 		.table {
 			font-size: 15px;
 			
-			td, th {				
+			th {
 				&:nth-child(4) {
-					width: 10px;
+					display: none;
 				}
+			}
 			
+			td, th {			
 				&.row_head {
 					width: 60% !important;
 				}
@@ -229,6 +235,10 @@
 			.date_headers {
 				th {
 					&:nth-child(5) .prev {
+						display: block;
+					}
+					
+					&:nth-child(5) .next {
 						display: block;
 					}
 					

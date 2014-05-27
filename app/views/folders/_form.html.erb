@@ -1,0 +1,50 @@
+<%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, "#", class: "close_lightbox close_button" %>
+<h1><%= @folder.new_record? ? "Create A" : "Edit" %> Folder</h1>
+	
+<div class="content">
+	<%= form_for @folder, url: @folder.new_record? ? folders_path(@org) : folder_path(@org, @folder), remote: true do |f| %>
+	  <% if @folder.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+	      <ul>
+	      <% @folder.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+		
+		<% if @folder.new_record? %>
+			<p class="tagline">
+				What's a folder? It's simply a group of related things. We recommend using the client's name as the folder name (eg. Bob &amp; Sue, John Smith).
+			</p>
+		<% end %>
+
+	  <div class="field">
+	    <%= f.label :name, class: "label" %>
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :archived, class: "label" %>
+	    <%= f.check_box :archived %>
+	  </div>
+		
+		<% if @folder.new_record? %>
+		  <div class="field">
+		    <%= f.label :seed, "Copy tasks from a template or other folder", class: "label" %>
+		    <%= f.select :seed, options_for_select([["Sample Buyer Template", "buyer"]] + @org.folders.map{ |f| [f.name, f.id] }, "buyer"), include_blank: "Don't copy any tasks" %>
+		  </div>
+		<% end %>
+		
+	  <div class="actions">
+			<%= f.submit "Save Folder", class: "big blue_bg button" %>
+			
+			<%= link_to "Close", "#", class: "close_lightbox" %>
+			
+			<% if @folder.persisted? %>
+				<%= link_to "Delete", folder_path(@org, @folder), method: :delete, data: { confirm: "Are you sure you want to delete this folder?" } %>
+			<% end %>
+	  </div>
+	<% end %>
+</div>

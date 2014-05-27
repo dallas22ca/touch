@@ -29,7 +29,7 @@ class SegmentsController < ApplicationController
 
     respond_to do |format|
       if @segment.save
-        format.html { redirect_to members_path(@org.permalink, segment_id: @segment.id), notice: 'Segment was successfully created.' }
+        format.html { redirect_to members_path(@org, segment_id: @segment.id), notice: 'Segment was successfully created.' }
         format.json { render :show, status: :created, location: @segment }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SegmentsController < ApplicationController
   def update
     respond_to do |format|
       if @segment.update(segment_params)
-        format.html { redirect_to members_path(@org.permalink, segment_id: @segment.id), notice: 'Segment was successfully updated.' }
+        format.html { redirect_to members_path(@org, segment_id: @segment.id), notice: 'Segment was successfully updated.' }
         format.json { render :show, status: :ok, location: @segment }
         format.js
       else
