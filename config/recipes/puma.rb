@@ -17,4 +17,9 @@ namespace :puma do
     run "#{sudo} update-rc.d -f puma_#{application} defaults"
   end
   after "deploy:setup", "puma:setup"
+  
+  task :do_restart do
+    sleep 5
+    puma.restart
+  end
 end
