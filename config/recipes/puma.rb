@@ -19,7 +19,7 @@ namespace :puma do
   after "deploy:setup", "puma:setup"
   
   task :do_restart do
-    sleep 5
+    sleep 15
     puma.restart
   end
 end
