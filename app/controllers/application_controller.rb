@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       cookies[:domain] = if Rails.env.production?
         request.domain
       else
-        "realtxn.com"
+        "oneattendance.com"
       end
     )
     @website = CONFIG["sites"][cookies[:domain]]

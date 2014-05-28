@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessor :ignore_password, :ignore_email, :invitation_token
+  attr_accessor :ignore_password, :ignore_email, :invitation_token, :ignore_unique_email
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
   
   has_many :identities
   has_many :members
@@ -15,9 +15,15 @@ class User < ActiveRecord::Base
   
   validates_attachment_content_type :avatar, content_type: /jpeg|jpg|gif|png/
   
-  accepts_nested_attributes_for :organizations, reject_if: Proc.new { |o| o["permalink"].blank? }
+  validates_presence_of   :email, if: :email_required?
+  validates_uniqueness_of :email, allow_blank: true, if: -> { email_changed? && !ignore_unique_email }
+  validates_format_of     :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed?
+
+  validates_presence_of     :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
+  validates_length_of       :password, within: Devise.password_length, allow_blank: true
   
-  validates_presence_of :name
+  accepts_nested_attributes_for :organizations, reject_if: Proc.new { |o| o["permalink"].blank? }
   
   before_save :format_website
   after_save :accept_invitation, if: :invitation_token
@@ -35,21 +41,17 @@ class User < ActiveRecord::Base
     self.website = "http://#{website}" unless website.blank? || website =~ /http/
   end
   
-  def self.from_omniauth(auth)
-    identity = Identity.where(auth.slice(:provider, :uid)).first_or_initialize
+  def self.from_omniauth(auth, domain)
+    identity = Identity.where(auth.slice(:provider, :uid).merge({ domain: domain })).first_or_initialize
     
     unless identity.user
       identity.username = auth.info.nickname
       user = User.new
-      
-      if auth.info.email.blank?
-        user.ignore_email = true
-      else
-        user.email = auth.info.email
-      end
-      
-      user.name = auth.extra.raw_info.name
+      user.ignore_email = true
+      user.ignore_unique_email = true
       user.ignore_password = true
+      user.email = auth.info.email
+      user.name = auth.extra.raw_info.name
       
       unless auth.info.image.blank?
         uri = URI.parse(auth.info.image)
@@ -102,5 +104,8 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+  
+  def save_with_domain(domain)
   end
 end

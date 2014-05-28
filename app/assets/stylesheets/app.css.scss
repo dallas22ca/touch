@@ -160,6 +160,31 @@ i, em {
 	display: block;
 }
 
+.small_link {
+	color: #777;
+	font-size: 12px;
+	line-height: 18px;
+	margin-left: 10px;
+}
+
+input[type="submit"], .button[type="submit"] {
+	.disabled {
+		display: none;
+	}
+	
+	&:disabled {
+		background: #888888;
+		background: -moz-linear-gradient(top,  #888888 0%, #555555 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888888), color-stop(100%,#555555));
+		background: -webkit-linear-gradient(top,  #888888 0%,#555555 100%);
+		background: -o-linear-gradient(top,  #888888 0%,#555555 100%);
+		background: -ms-linear-gradient(top,  #888888 0%,#555555 100%);
+		background: linear-gradient(to bottom,  #888888 0%,#555555 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888888', endColorstr='#555555',GradientType=0 );
+		border: 1px solid #777;
+	}
+}
+
 .blue_bg {
 	background: #3f90c6;
 	background: -moz-linear-gradient(top,  #3f90c6 0%, #186fb2 100%);

@@ -24,7 +24,10 @@
 		<% end %>
 		
 	  <div class="actions">
-	    <%= f.submit "Save Organization", class: "full_width big blue_bg button" %>
+			<%= f.button type: :submit, class: "full_width big blue_bg button" do %>
+				<span class="enabled">Create Organization</span>
+				<span class="disabled">Creating...</span>
+			<% end %>
 	  </div>
 	<% end %>
 

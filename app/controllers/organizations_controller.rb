@@ -5,11 +5,11 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(organization_params)
-    @organization.users.push current_user
     @organization.modules = @website["modules"]
 
     respond_to do |format|
       if @organization.save
+        @organization.users.push current_user
         format.html { redirect_to root_path, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else

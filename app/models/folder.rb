@@ -40,7 +40,7 @@ class Folder < ActiveRecord::Base
         t = task.dup
         t.creator = self.creator
         t.complete = false
-        t.skip_jibe
+        t.skip_jibe = true
         self.tasks.push t
       end
     
@@ -48,7 +48,7 @@ class Folder < ActiveRecord::Base
         d = self.documents.new
         d.creator = self.creator
         d.file = document.file
-        d.skip_jibe
+        d.skip_jibe = true
         d.save
       end
     end

@@ -9,10 +9,9 @@ class Organization < ActiveRecord::Base
   has_many :folders
   has_many :folderships, through: :folders
   
-  has_attached_file :logo,
-    default_url: "/imgs/no_org_logo.png"
-  
+  has_attached_file :logo, default_url: "default_org_logo"
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
+  validates_presence_of :name, :permalink
   
   before_validation :format_permalink
   before_validation :format_website
@@ -169,7 +168,18 @@ class Organization < ActiveRecord::Base
       doc = folder.documents.create file: file, creator: admin, skip_jibe: true
       file.close
     
-      folder.homes.create address: "61 Westfield Crescent", price: 450000, beds: 4, baths: 3, creator: admin
+      folder.homes.create(
+        address: "301 Front St W", 
+        city: "Toronto",
+        province: "Ontario",
+        postal_code: "M5V 2T6",
+        beds: 4,
+        baths: 3,
+        longitude: -79.38703799999996,
+        latitude: 43.64251,
+        price: 450000,
+        creator: admin
+      )
     end
   end
 end

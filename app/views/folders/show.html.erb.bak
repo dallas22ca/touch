@@ -2,7 +2,7 @@
 	<div class="container">
 		
 		<div class="header">
-			<%= link_to image_tag(@org.logo.url, class: "brokerage_logo"), @org.website.to_s, target: :blank %>
+			<%= link_to image_tag(parse_default(@org.logo.url), class: "brokerage_logo"), @org.website.to_s, target: :blank %>
 			<%= link_to image_tag(@folder.creator.user.avatar.url, class: "user_avatar"), @folder.creator.user.website.to_s, target: :blank %>
 	
 	    <div class="profile" data-no-turbolink>

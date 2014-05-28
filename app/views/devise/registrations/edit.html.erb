@@ -46,18 +46,21 @@
 			</div>
 		<% end %>
 
-	  <div class="field">
-			<%= f.label :password, "New Password (leave blank if you don't want to change it)".html_safe, class: "label" %>
-	    <%= f.password_field :password, autocomplete: "off" %>
-		</div>
+		<div class="new_password_fields" style="<%= "display: none; " if !resource.password_required? %>">
+		  <div class="field">
+				<%= f.label :password, "New Password (leave blank if you don't want to change it)".html_safe, class: "label" %>
+		    <%= f.password_field :password, autocomplete: "off" %>
+			</div>
 
-	  <div class="field">
-			<%= f.label :password_confirmation, "New Password Confirmation", class: "label" %>
-	    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+		  <div class="field">
+				<%= f.label :password_confirmation, "New Password Confirmation", class: "label" %>
+		    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+			</div>
 		</div>
 
 	  <div class="actions">
 			<%= f.submit "Save My Account", class: "big blue_bg button" %>
+			<%= link_to "Add A Password", "#", class: "show_new_password_fields small_link", style: "#{"display: none; " if resource.password_required?}" %>
 		</div>
 	<% end %>
 </div>

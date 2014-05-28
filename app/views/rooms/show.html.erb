@@ -1,5 +1,5 @@
 <% title do %>
-	<h1><%= link_to image_tag(@org.logo.url), rooms_path(@org) %></h1>
+	<h1><%= link_to image_tag(parse_default(@org.logo.url)), rooms_path(@org) %></h1>
 	<ul class="sub_menu">
 		<li><%= link_to "Edit This Room", edit_room_path(@org, @room), remote: true %></li>
 		

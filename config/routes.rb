@@ -9,8 +9,10 @@ Rails.application.routes.draw do
         registrations: "registrations",
         sessions: "sessions"
       }
-
+      
+    get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
     get "/:permalink/sign-in" => "devise/sessions#new"
+    get "/:permalink/sign-up" => "devise/registrations#new"
     
     authenticate :user do
       resources :organizations, only: [:new, :create]

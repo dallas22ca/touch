@@ -13,13 +13,13 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :key, scope: :organization
   
   before_validation :parameterize_key, if: :key_changed?
+  before_validation :set_key, unless: :key
   before_validation :intercept_full_name, if: :full_name
 
   before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
   before_create :set_roles
 
   after_create :set_user_data, if: :user
-  after_create :set_key, unless: :key
   
   before_save :flatten_roles, if: :roles_changed?
   after_save :set_user_data, if: :user_id_changed?
@@ -80,7 +80,10 @@ class Member < ActiveRecord::Base
   end
   
   def set_key
-    update key: id.to_s
+    self.key = loop do
+      random_key = SecureRandom.urlsafe_base64.gsub(/-|_/, "")
+      break random_key unless Member.exists?(organization_id: organization_id, key: random_key)
+    end
   end
   
   def name_and_email

@@ -52,7 +52,7 @@
 			<li class="folder_options_li"><%= link_to "<i class=\"fa fa-cogs\"></i> <span class=\"word\">Folder Settings</span>".html_safe, edit_folder_path(@org, @folder), remote: true %></li>
 			
 			<% if @folder.name == "Jack & Jill" %>
-				<li class="folder_options_li"><%= link_to "<i class=\"fa fa-refresh\"></i> <span class=\"word\">Reset Folder</span>".html_safe, folder_reset_path(@org, @folder), method: :delete, data: { confirm: "Do you want to reset this folder?" } %></li>
+				<li class="folder_options_li"><%= link_to "<i class=\"fa fa-refresh\"></i> <span class=\"word\">Reset Folder</span>".html_safe, folder_reset_path(@org, @folder), method: :delete, data: { confirm: "Do you want to reset this folder (it may take a few seconds)?" } %></li>
 			<% end %>
 		<% end %>
 	</ul>

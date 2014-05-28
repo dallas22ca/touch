@@ -1,5 +1,6 @@
 <% if @folder.errors.any? %>
-	alert("<%= @folder.errors.full_messages.join(", ") %>")
+	alert("<%= @folder.errors.full_messages.join(", ").html_safe %>")
 <% else %>
 	window.location = "<%= folder_path @org, @folder %>"
 <% end %>
+$("form").trigger("touch:enable")

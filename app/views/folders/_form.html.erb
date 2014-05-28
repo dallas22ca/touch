@@ -38,7 +38,10 @@
 		<% end %>
 		
 	  <div class="actions">
-			<%= f.submit "Save Folder", class: "big blue_bg button" %>
+			<%= f.button type: :submit, class: "big blue_bg button" do %>
+				<span class="enabled">Save Folder</span>
+				<span class="disabled">Saving...</span>
+			<% end %>
 			
 			<%= link_to "Close", "#", class: "close_lightbox" %>
 			

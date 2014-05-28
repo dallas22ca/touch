@@ -3,3 +3,4 @@
 <% else %>
 	window.location = "<%= folder_path @folder.organization, @folder %>"
 <% end %>
+$("form").trigger("touch:enable")
