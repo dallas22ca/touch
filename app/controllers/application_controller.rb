@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_website
   before_filter :authenticate_user!, unless: Proc.new { action_name == "accept" }
   before_filter :configure_devise_params, if: :devise_controller?
+  before_filter :set_organization, if: :devise_controller?
   
   def configure_devise_params
     set_organization
@@ -13,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def after_sign_in_path_for(user)
     if params[:permalink]
-      redirector_path(params[:permalink])
+      root_path
     else
       super
     end
@@ -28,6 +29,8 @@ class ApplicationController < ActionController::Base
       end
     
       set_member
+    else
+      @org = Organization.where(permalink: params[:permalink]).first
     end
   end
   

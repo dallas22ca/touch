@@ -7,9 +7,11 @@
 		<div class="loading"></div>
 	
 		<div class="mini_content_wrapper">			
-			<p>
-				<%= link_to "Edit", edit_folder_home_path(@org, @folder, @home) %>
-			</p>
+			<% if @foldership.permits? :homes, :write %>
+				<p>
+					<%= link_to "Edit", edit_folder_home_path(@org, @folder, @home) %>
+				</p>
+			<% end %>
 			<p>
 			  <strong>Address:</strong>
 			  <%= @home.address %>

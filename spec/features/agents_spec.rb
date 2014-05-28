@@ -39,8 +39,9 @@ describe "Agent", js: true do
   it "can create a folder" do
     sign_in @user
     visit root_path
-    page.should have_content "Folders"
+    page.should have_content "Create A Folder"
     click_link "Folders"
+    visit folder_path(@org, @org.folders.first)
     click_link @org.folders.first.name
     click_link "Create A Folder"
     fill_in "Name", with: "My New Folder"
@@ -220,5 +221,12 @@ describe "Agent", js: true do
     @org.users.push @newb
     sign_in @newb
     page.should_not have_content "Your Organization"
+  end
+  
+  it "should see the org's logo on the sign up/in pages" do
+    visit signin_path(@org)
+    page.find("#logo img")["alt"].should have_content @org.name
+    visit signup_path(@org)
+    page.find("#logo img")["alt"].should have_content @org.name
   end
 end
