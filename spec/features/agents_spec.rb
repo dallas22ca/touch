@@ -117,7 +117,7 @@ describe "Agent", js: true do
     fill_in "Password", with: client.password
     click_button "Sign In"
 
-    sleep 0.5
+    sleep 1
     assert_equal Foldership.count, Foldership.accepted.count
     assert !client.members.last.reload.roles.include?("folders/write")
 
@@ -142,7 +142,7 @@ describe "Agent", js: true do
     fill_in "user_password_confirmation", with: "secret123"
     click_button "Sign Up"
     
-    sleep 0.5
+    sleep 1
     assert_equal Foldership.count, Foldership.accepted.count
     assert !Member.last.roles.include?("folders/write")
 
