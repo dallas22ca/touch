@@ -25,7 +25,7 @@ describe "Agent", js: true do
     click_button "Sign Up"
     
     fill_in "organization_name", with: "RLP"
-    click_button "Save Organization"
+    click_button "Create Organization"
     
     page.should have_content "Folders"
     assert_equal 1, Organization.last.folders.count
