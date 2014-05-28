@@ -38,8 +38,6 @@ class ApplicationController < ActionController::Base
   def set_website
     cookies[:domain] = Rails.env.production? ? request.domain : "realtxn.com"
     @website = CONFIG["sites"][cookies[:domain]]
-    p @website
-    p CONFIG["sites"]
   end
   
   def redirect_to_root
