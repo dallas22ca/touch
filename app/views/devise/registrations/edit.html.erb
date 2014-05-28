@@ -26,24 +26,26 @@
 	  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
 	    <div class="field">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
 	  <% end %>
-	
-		<% resource.organizations.build unless resource.organizations.any? %>
-		<%= f.fields_for :organizations do |o| %>
-			<div class="org_info">
-				<h3>Your Organization</h3>
-			  <div class="field">
-					<%= o.label :name, class: "label" %>
-				  <%= o.text_field :name %>
+		
+		<% if @org.admins.include? @member %>
+			<% resource.organizations.build unless resource.organizations.any? %>
+			<%= f.fields_for :organizations do |o| %>
+				<div class="org_info">
+					<h3>Your Organization</h3>
+				  <div class="field">
+						<%= o.label :name, class: "label" %>
+					  <%= o.text_field :name %>
+					</div>
+				  <div class="field">
+						<%= o.label :permalink, "Permalink (https://#{@website["domain"]}/xxxxx)", class: "label" %>
+					  <%= o.text_field :permalink %>
+					</div>
+				  <div class="field">
+						<%= o.label :logo, class: "label" %>
+					  <%= o.file_field :logo %>
+					</div>
 				</div>
-			  <div class="field">
-					<%= o.label :permalink, "Permalink (https://#{@website["domain"]}/xxxxx)", class: "label" %>
-				  <%= o.text_field :permalink %>
-				</div>
-			  <div class="field">
-					<%= o.label :logo, class: "label" %>
-				  <%= o.file_field :logo %>
-				</div>
-			</div>
+			<% end %>
 		<% end %>
 
 		<div class="new_password_fields" style="<%= "display: none; " if !resource.password_required? %>">

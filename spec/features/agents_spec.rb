@@ -210,4 +210,15 @@ describe "Agent", js: true do
     @org.update modules: ["folders"]
     assert_equal 1, @org.reload.folders.count
   end
+  
+  it "cannot edit an org that it does not own" do
+    sign_in @user
+    visit edit_user_registration_path
+    page.should have_content "Your Organization"
+    Capybara.reset_sessions!
+    @newb = FactoryGirl.create(:user)
+    @org.users.push @newb
+    sign_in @newb
+    page.should_not have_content "Your Organization"
+  end
 end
