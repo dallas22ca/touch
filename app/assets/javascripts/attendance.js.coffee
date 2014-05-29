@@ -1,11 +1,12 @@
 Jibe.events["members"] =
 	afterCreate: (member, data, scope) ->
-		json =
-			name: data.name
-			pretty_name: data.pretty_name
-			id: data.id
-		Attendance.addRow JSON.stringify(json)
-		Noterizer.open "#{data.name} was added."
+		if !Jibe.inScope "room_id=#{data.id}", scope
+			json =
+				name: data.name
+				pretty_name: data.pretty_name
+				id: data.id
+			Attendance.addRow JSON.stringify(json)
+			Noterizer.open "#{data.name} was added."
 	afterUpdate: (member, data, scope) ->
 		$("tr[data-member-id='#{data.id}'] .row_head").find(".pretty_name").text data.pretty_name
 		$("tr[data-member-id='#{data.id}'] .row_head").find(".search").text data.name

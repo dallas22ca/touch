@@ -41,7 +41,7 @@
 
 <%= jibe "meetings", scope: [@room] %>
 <%= jibe "events", scope: [@org], silent: true %>
-<%= jibe "members", scope: [@org], silent: true %>
+<%= jibe "members", scope: [@org, @room], silent: true %>
 
 <table id="attendance" class="table center">
 	<tbody>
