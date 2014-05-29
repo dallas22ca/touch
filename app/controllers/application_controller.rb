@@ -2,14 +2,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_website
   before_filter :authenticate_user!, unless: Proc.new { action_name == "accept" }
+  before_filter :set_time_zone, if: :user_signed_in?
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :set_organization, if: :devise_controller?
   
   def configure_devise_params
     set_organization
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:invitation_token, :remember_me, :name, :email, :password, :password_confirmation, organizations_attributes: [:id, :permalink, :name]) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:time_zone, :invitation_token, :remember_me, :name, :email, :password, :password_confirmation, organizations_attributes: [:id, :permalink, :name]) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:invitation_token, :remember_me, :email, :password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password, :phone, :website, :avatar, organizations_attributes: [:id, :permalink, :name, :logo, :website]) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:time_zone, :name, :email, :password, :password_confirmation, :current_password, :phone, :website, :avatar, organizations_attributes: [:id, :permalink, :name, :logo, :website]) }
+  end
+  
+  def set_time_zone
+    Time.zone = current_user.time_zone
   end
   
   def after_sign_in_path_for(user)
