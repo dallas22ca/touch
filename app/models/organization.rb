@@ -8,6 +8,7 @@ class Organization < ActiveRecord::Base
   has_many :segments
   has_many :folders
   has_many :folderships, through: :folders
+  has_many :fields
   
   has_attached_file :logo, default_url: "default_org_logo"
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
@@ -20,6 +21,15 @@ class Organization < ActiveRecord::Base
   validates_uniqueness_of :permalink
   
   after_save :add_modules_to_admins, if: :modules_changed?
+  after_create :add_default_fields
+  
+  def add_default_fields
+    fields.create([
+      { name: "First Name", permalink: "first_name" },
+      { name: "Last Name", permalink: "last_name" },
+      { name: "Email", permalink: "email" }
+    ])
+  end
   
   def admins
     members.where("roles ilike ?", "%admin%")

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529163006) do
+ActiveRecord::Schema.define(version: 20140529170650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20140529163006) do
 
   add_index "events", ["member_id"], name: "index_events_on_member_id", using: :btree
   add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
+
+  create_table "fields", force: true do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fields", ["organization_id"], name: "index_fields_on_organization_id", using: :btree
 
   create_table "folders", force: true do |t|
     t.string   "name"
@@ -195,12 +205,12 @@ ActiveRecord::Schema.define(version: 20140529163006) do
   add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",                           null: false
+    t.string   "encrypted_password",     default: "",                           null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -214,7 +224,7 @@ ActiveRecord::Schema.define(version: 20140529163006) do
     t.datetime "avatar_updated_at"
     t.string   "phone"
     t.string   "website"
-    t.string   "time_zone"
+    t.string   "time_zone",              default: "Eastern Time (US & Canada)"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

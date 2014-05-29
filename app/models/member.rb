@@ -17,6 +17,7 @@ class Member < ActiveRecord::Base
   before_validation :parameterize_key, if: :key_changed?
   before_validation :set_key, unless: :key
   before_validation :intercept_full_name, if: :full_name
+  before_validation :parameterize_data, if: :data
 
   before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
   before_create :set_roles
@@ -27,10 +28,23 @@ class Member < ActiveRecord::Base
   after_save :set_user_data, if: :user_id_changed?
   
   after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
+  after_save :update_organization_fields
   
   scope :last_name_asc, -> { order("members.data->'last_name' asc") }
   scope :last_name_desc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
+  
+  def parameterize_data
+    d = {}
+    self.data.map { |k, v| d[k.parameterize.underscore] = v }
+    self.data = d
+  end
+  
+  def update_organization_fields
+    self.data.each do |k, v|
+      organization.fields.where(permalink: k).first_or_create!
+    end
+  end
   
   def intercept_full_name
     d = self.data

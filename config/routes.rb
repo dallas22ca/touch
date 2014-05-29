@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :fields
+
   resources :identities
 
   devise_scope :user do
