@@ -1,5 +1,5 @@
 <%= link_to "x", "#", class: "close_lightbox close_button" %>
-<h1><%= @this_member.new_record? ? "Create A" : "Edit" %> Meeting</h1>
+<h1><%= @this_member.new_record? ? "Create A" : "Edit" %> Member</h1>
 
 <div class="content">
 	<%= form_for @this_member, url: @this_member.new_record? ? members_path(@org) : member_path(@org, @this_member), remote: @this_member.persisted? do |f| %>
