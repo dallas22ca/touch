@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    @does_have_sidebar = true
     @tasks = @folder.tasks.includes(:creator) if @foldership.permits?(:tasks, :read)
   end
 

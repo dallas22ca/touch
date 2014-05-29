@@ -3,7 +3,7 @@
 <div id="homes_wrapper" class="has_header">
 	<%= render "folders/sidebar" %>
 
-	<div class="main has_sidebar">
+	<div class="main <%= "has_sidebar" if @does_have_sidebar %>">
 		<div class="loading"></div>
 		
 		<div id="map_wrapper" data-homes="<%= @homes.to_json %>">

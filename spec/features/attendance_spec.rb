@@ -67,12 +67,14 @@ describe "Agent", js: true do
     
     fill_in "q", with: "New Person"
     assert_equal 1, @org.reload.members.count
+    page.driver.browser.execute_script "$('#noterizer').hide()"
     first(".add_on_the_fly .pretty_name").click
     sleep 1
     assert_equal 2, @org.reload.members.count
     
     fill_in "q", with: "Person"
     assert_equal 2, @org.reload.members.count
+    page.driver.browser.execute_script "$('#noterizer').hide()"
     first(".add_on_the_fly .pretty_name").click
     sleep 1
     assert_equal 3, @org.reload.members.count
@@ -89,13 +91,13 @@ describe "Agent", js: true do
     assert page.has_css? ".present", count: 0
     
     first(".add_on_the_fly .presence_toggle").click
-    sleep 1
+    sleep 1.5
     assert_equal 2, @org.reload.members.count
     assert page.has_css? ".present", count: 1
     assert page.should have_content "Joe"
     
     first(".presence_toggle").click
-    sleep 1
+    sleep 1.5
     assert_equal 0, @org.reload.events.count
     assert page.has_css? ".present", count: 0
   end

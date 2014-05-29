@@ -4,6 +4,7 @@ class MembersController < ApplicationController
   before_filter :redirect_to_root, unless: Proc.new { @member.permits? :members, action_type }
   
   def index
+    @does_have_sidebar = true
     params[:filters] ||= []
     params[:filters] = params[:filters].map { |k, v| v } if params[:filters].kind_of? Hash
   

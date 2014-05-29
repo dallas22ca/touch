@@ -1,3 +1,18 @@
+Jibe.events["members"] =
+	afterCreate: (member, data, scope) ->
+		json =
+			name: data.name
+			pretty_name: data.pretty_name
+			id: data.id
+		Attendance.addRow JSON.stringify(json)
+		Noterizer.open "#{data.name} was added."
+	afterUpdate: (member, data, scope) ->
+		$("tr[data-member-id='#{data.id}'] .row_head").find(".pretty_name").text data.pretty_name
+		$("tr[data-member-id='#{data.id}'] .row_head").find(".search").text data.name
+		Noterizer.open "#{data.name} was updated."
+	afterDestroy: (member, data, scope) ->
+		Noterizer.open "#{data.name} was deleted.", "fail"
+
 Jibe.events["events"] =
 	afterCreate: (event, data, scope) ->
 		index = $("#attendance_header").find("th[data-id='#{data.data["meeting.id"]}']").index()
@@ -72,29 +87,30 @@ $(document).on "keyup", "#attendance_header #q", ->
 			Attendance.hideMeetingArrows()
 			
 	addRow: (data) ->
-		data = $.parseJSON(data)
-		index = $("#attendance_header tr").find("th[data-id='#{data.meeting_id}']").index()
+		if $("#attendance_header").length
+			data = $.parseJSON(data)
+			index = $("#attendance_header tr").find("th[data-id='#{data.meeting_id}']").index()
 		
-		on_the_fly = $(".add_on_the_fly")
-		on_the_fly.find(".load").removeClass "load"
-		on_the_fly.find(".name").text ""
-		on_the_fly.hide()
+			on_the_fly = $(".add_on_the_fly")
+			on_the_fly.find(".load").removeClass "load"
+			on_the_fly.find(".name").text ""
+			on_the_fly.hide()
 
-		clone = on_the_fly.clone()
-		a = clone.find(".row_head").find("a")
-		clone.removeClass "add_on_the_fly"
-		clone.find(".row_head .pretty_name").text data.pretty_name
-		clone.find(".row_head .search").text data.name
-		clone.find(".row_head").data("member-id", data.id)
-		a.removeAttr("data-method")
-		a.attr "href", a.data("created-url").replace("%", data.id)
-		clone.find("td:eq(#{index})").addClass "present" if typeof data.meeting_id != "undefined"
-		clone.attr "data-member-id", data.id
-		clone.insertAfter "#attendance .add_on_the_fly"
-		clone.show()
+			clone = on_the_fly.clone()
+			a = clone.find(".row_head").find("a")
+			clone.removeClass "add_on_the_fly"
+			clone.find(".row_head .pretty_name").text data.pretty_name
+			clone.find(".row_head .search").text data.name
+			clone.find(".row_head").data("member-id", data.id)
+			a.removeAttr("data-method")
+			a.attr "href", a.data("created-url").replace("%", data.id)
+			clone.find("td:eq(#{index})").addClass "present" if typeof data.meeting_id != "undefined"
+			clone.attr "data-member-id", data.id
+			clone.insertAfter "#attendance .add_on_the_fly"
+			clone.show()
 		
-		Attendance.sort()
-		Attendance.tallyTotals()
+			Attendance.sort()
+			Attendance.tallyTotals()
 	
 	updateRoomCount: (meeting_id, total) ->
 		index = $("#attendance_header tr").find("th[data-id='#{meeting_id}']").index()

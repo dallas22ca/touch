@@ -2,6 +2,7 @@ Jibe.events["tasks"] =
 	beforeCreate: (task, data, scope) ->
 		task.remove() if scope == "complete"
 		Tasks.makeEditable()
+		Noterizer.open "Task was added to your list."
 
 	afterUpdate: (task, data, scope) ->
 		if data.complete_changed
@@ -18,6 +19,7 @@ Jibe.events["tasks"] =
 				task.insertAfter "#tasks .task:eq(#{data.ordinal - 1})"
 		
 		Tasks.makeEditable()
+		Noterizer.open "Task was updated."
 
 $(document).on "click", ".show_completed_tasks", ->
 	$(this).text if $(this).text() == "Show Completed Tasks" then "Hide Completed Tasks" else "Show Completed Tasks"

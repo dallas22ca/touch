@@ -8,6 +8,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
+    @does_have_sidebar = true
     @documents = @folder.documents if @foldership.permits?(:documents, :read)
   end
 

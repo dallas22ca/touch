@@ -1,4 +1,6 @@
 class Member < ActiveRecord::Base
+  jibe
+
   attr_accessor :full_name
   
   serialize :roles, Array
@@ -72,7 +74,7 @@ class Member < ActiveRecord::Base
   def pretty_name
     pretty_name = ""
     pretty_name += "#{data["last_name"]}, " unless data["last_name"].blank?
-    pretty_name += data["first_name"]
+    pretty_name += data["first_name"] unless data["first_name"].blank?
   end
   
   def parameterize_key
@@ -95,13 +97,17 @@ class Member < ActiveRecord::Base
   end
   
   def add_preset(preset)
-    new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
-    self.roles = (self.roles + new_roles).uniq
+    if Member.presets.has_key? preset.downcase.to_sym
+      new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
+      self.roles = (self.roles + new_roles).uniq
+    end
   end
   
   def remove_preset(preset)
-    new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
-    self.roles = (self.roles - new_roles).uniq
+    if Member.presets.has_key? preset.downcase.to_sym
+      new_roles = Member.permissions.select { |p| p[Member.presets[preset.to_sym]] }
+      self.roles = (self.roles - new_roles).uniq
+    end
   end
   
   def set_initial_admin
@@ -149,5 +155,12 @@ class Member < ActiveRecord::Base
       "rooms/write",
       "rooms/delete"
     ]
+  end
+  
+  def jibe_data
+    attributes.merge({
+      name: name,
+      pretty_name: pretty_name
+    })
   end
 end

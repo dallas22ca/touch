@@ -2,7 +2,7 @@
 	<%= render "filters" %>
 </div>
 
-<div class="main has_sidebar">
+<div class="main <%= "has_sidebar" if @does_have_sidebar %>">
 	<div id="searcher">
 		<%= form_tag members_path(@org, format: :js), id: "q_form" do %>
 			<%= text_field_tag :q, nil, placeholder: "Search..." %>
@@ -10,6 +10,8 @@
 			<span class="members_count"><%= pluralize @members.count, "Result" %></span>
 		<% end %>
 	</div>
+	
+	<%= jibe "members", scope: [@org] %>
 	
 	<table id="members" class="table">
 		<thead>
@@ -24,7 +26,6 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%= render @members %>
 		</tbody>
 	</table>
 </div>

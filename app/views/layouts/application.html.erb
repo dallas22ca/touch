@@ -11,8 +11,8 @@
 	<%= tag :meta, name: "pusher-key", content: CONFIG["pusher_key"] %>
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= "#{controller_name}_#{action_name}" %>">
-
+<body class="<%= "#{controller_name}_#{action_name}" %> <%= "does_have_sidebar" if @does_have_sidebar %>">
+	
 	<% if user_signed_in? %>
 		<div id="topbar">
 			<%= link_to "<i class=\"fa fa-bars\"></i>".html_safe, "#", class: "show_nav" %>
@@ -50,6 +50,7 @@
 	<%= yield %>
 	
 	<%= render "lightbox" %>
+	<%= render "noterizer" %>
 
 </body>
 </html>

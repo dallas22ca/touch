@@ -7,6 +7,7 @@ class FoldershipsController < ApplicationController
   before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }, only: [:index]
   
   def index
+    @does_have_sidebar = true
     @folderships = @member.folderships.unaccepted
   end
   

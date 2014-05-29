@@ -15,6 +15,7 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
+    @does_have_sidebar = true
     %w[comments tasks homes documents folderships].each do |controller|
       if @foldership.permits? controller, :read
         redirect_to polymorphic_path([@folder, controller.to_sym], permalink: @org.permalink)

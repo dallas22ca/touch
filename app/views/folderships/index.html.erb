@@ -3,7 +3,7 @@
 <div class="has_header">
 	<%= render "folders/sidebar" %>
 
-	<div class="main has_sidebar">
+	<div class="main <%= "has_sidebar" if @does_have_sidebar %>">
 		<div class="loading"></div>
 		
 		<div id="folderships_wrapper" class="mini_content_wrapper">

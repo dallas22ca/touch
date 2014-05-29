@@ -1,3 +1,11 @@
+Jibe.events["homes"] =
+	afterCreate: (home, data, scope) ->
+		Noterizer.open "#{data.address} was added."
+	afterUpdate: (home, data, scope) ->
+		Noterizer.open "#{data.address} was updated."
+	afterDestroy: (home, data, scope) ->
+		Noterizer.open "#{data.address} was deleted.", "fail"
+
 $(document).on "keypress", "#home_long_address", (e) ->
 	code = if e.keyCode then e.keyCode else e.which
 	false if code == 13

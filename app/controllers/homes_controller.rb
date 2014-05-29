@@ -8,26 +8,31 @@ class HomesController < ApplicationController
   # GET /homes
   # GET /homes.json
   def index
+    @does_have_sidebar = true
     @homes = @folder.homes
   end
 
   # GET /homes/1
   # GET /homes/1.json
   def show
+    @does_have_sidebar = true
   end
 
   # GET /homes/new
   def new
+    @does_have_sidebar = true
     @home = Home.new
   end
 
   # GET /homes/1/edit
   def edit
+    @does_have_sidebar = true
   end
 
   # POST /homes
   # POST /homes.json
   def create
+    @does_have_sidebar = true
     @home = @folder.homes.new(home_params)
     @home.creator = @member
 
@@ -45,6 +50,7 @@ class HomesController < ApplicationController
   # PATCH/PUT /homes/1
   # PATCH/PUT /homes/1.json
   def update
+    @does_have_sidebar = true
     respond_to do |format|
       if @home.update(home_params)
         format.html { redirect_to folder_homes_path(@org, @folder), notice: 'Home was successfully updated.' }

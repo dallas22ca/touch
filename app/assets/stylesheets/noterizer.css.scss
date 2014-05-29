@@ -1,0 +1,74 @@
+body {
+	&.rooms_show {
+		#noterizer {
+			top: 138px;
+			bottom: auto;
+		}
+	}
+	
+	&.tasks_index, &.comments_index {
+		#noterizer {
+			bottom: 48px;
+		}
+	}
+	
+	&.does_have_sidebar {
+		#noterizer {
+			left: 222px;
+		}
+	}
+}
+
+#noterizer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 6px;
+	z-index: 9;
+	
+	&.successed {
+		background: #3f90c6;
+		background: -moz-linear-gradient(top,  #3f90c6 0%, #186fb2 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3f90c6), color-stop(100%,#186fb2));
+		background: -webkit-linear-gradient(top,  #3f90c6 0%,#186fb2 100%);
+		background: -o-linear-gradient(top,  #3f90c6 0%,#186fb2 100%);
+		background: -ms-linear-gradient(top,  #3f90c6 0%,#186fb2 100%);
+		background: linear-gradient(to bottom,  #3f90c6 0%,#186fb2 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f90c6', endColorstr='#186fb2',GradientType=0 );
+	}
+	
+	&.failed {
+		background: #ea7669;
+		background: -moz-linear-gradient(top,  #ea7669 0%, #ea6556 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ea7669), color-stop(100%,#ea6556));
+		background: -webkit-linear-gradient(top,  #ea7669 0%,#ea6556 100%);
+		background: -o-linear-gradient(top,  #ea7669 0%,#ea6556 100%);
+		background: -ms-linear-gradient(top,  #ea7669 0%,#ea6556 100%);
+		background: linear-gradient(to bottom,  #ea7669 0%,#ea6556 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea7669', endColorstr='#ea6556',GradientType=0 );
+	}
+	
+	p {
+		text-align: center;
+		color: #fff;
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+		font-size: 13px;
+		line-height: 19px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#noterizer {
+		left: 0 !important;
+	}
+	
+	body {
+		&.rooms_show {
+			#noterizer {
+				top: auto !important;
+				bottom: 0;
+			}
+		}
+	}
+}

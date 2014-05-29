@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
+    @does_have_sidebar = true
     @comments = @folder.comments.includes(:creator).order("created_at asc")
   end
 
