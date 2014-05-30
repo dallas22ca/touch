@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     set_organization
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:time_zone, :invitation_token, :remember_me, :name, :email, :password, :password_confirmation, organizations_attributes: [:id, :permalink, :name]) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:invitation_token, :remember_me, :email, :password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:time_zone, :name, :email, :password, :password_confirmation, :current_password, :phone, :website, :avatar, organizations_attributes: [:id, :permalink, :name, :logo, :website]) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:time_zone, :name, :email, :password, :password_confirmation, :current_password, :phone, :website, :avatar, organizations_attributes: [:id, :permalink, :name, :logo, :website, :full_address]) }
   end
   
   def set_time_zone
