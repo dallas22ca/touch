@@ -1,0 +1,33 @@
+<%= link_to "x", "#", class: "close_lightbox close_button" %>
+<h1><%= @message.new_record? ? "Create A" : "Edit" %> Message</h1>
+
+<div class="content">
+	<%= form_for @message, url: @message.new_record? ? messages_path(@org) : message_path(@org, @message), remote: true do |f| %>
+	  <div class="field">
+	    <%= label_tag :from, "From", class: "label" %>
+	    <%=	select_tag :from, options_for_select(["#{@member.name} <#{current_user.email}>"]), class: "full_width" %>
+	  </div>
+	
+	  <div class="field">
+			<%= label_tag :to, "To", class: "label" %>
+			<% @message.members.each_with_index do |member, index| %>
+		    <%= hidden_field_tag "message[member_ids][]", member.id %>
+				<%= text_field_tag "message_member_#{index}", member.name, class: "full_width", disabled: true %>
+			<% end %>
+	  </div>
+
+	  <div class="field">
+	    <%= f.label :subject, class: "label" %>
+	    <%= f.text_field :subject, class: "full_width" %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :body, "Message", class: "label" %>
+	    <%= f.text_area :body, class: "full_width" %>
+	  </div>
+
+	  <div class="actions">
+	    <%= f.submit "Save Message", class: "big blue_bg button" %>
+			<%= link_to "Close", "#", class: "close_lightbox" %>
+	  </div>		
+	<% end %>
+</div>

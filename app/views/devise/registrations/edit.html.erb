@@ -45,6 +45,14 @@
 						<%= o.label :permalink, "Permalink (https://#{@website["domain"]}/xxxxx)", class: "label" %>
 					  <%= o.text_field :permalink %>
 					</div>
+					
+					<% if @org.modules.include? "messages" %>
+					  <div class="field">
+							<%= o.label :full_address, class: "label" %>
+						  <%= o.text_field :full_address %>
+						</div>
+					<% end %>
+					
 				  <div class="field">
 						<%= o.label :logo, class: "label" %>
 					  <%= o.file_field :logo %>

@@ -2,35 +2,45 @@ body {
 	&.show_lightbox {
 		overflow: hidden;
 		
-		#lightbox_overlay, #lightbox {
+		.lightbox_overlay, .lightbox {
 			display: block;
 		}
 	}
 	
-	#lightbox_overlay, #lightbox {
+	.lightbox_overlay, .lightbox {
 		display: none;
 	}
 }
 
-#lightbox_overlay {
+.lightbox_overlay {
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: #000;
 	z-index: 99998;
-	background: rgba(0, 0, 0, 0.6);
+	
+	&:last-child {
+		background: #000;
+		background: rgba(0, 0, 0, 0.6);
+		
+		.lightbox {
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+	
+			h1 {
+				box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
 }
 
-#lightbox {
+.lightbox {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	width: 500px;
 	margin-left: -250px;
 	background: #fff;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 	z-index: 99999;
 	border-radius: 5px;
 	overflow-y: auto;
@@ -49,13 +59,12 @@ body {
 	h1 {
 		background: #eee;
 		padding: 15px;
-		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
 		font-weight: bold;
 		color: #555;
 		font-size: 21px;
 		text-align: center;
 		border-bottom: 1px solid #ddd;
-		box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+		text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
 	}
 	
 	.content {
@@ -78,7 +87,7 @@ body {
 }
 
 @media screen and (max-width: 720px) {
-	#lightbox {
+	.lightbox {
 		right: 15px;
 		left: 15px;
 		width: auto;

@@ -151,7 +151,8 @@ class Member < ActiveRecord::Base
       members: /members\//,
       contacts: /members\//,
       folders: /folders\//,
-      attendance: /(rooms\/)|(members\/(write|delete))/
+      attendance: /(rooms\/)|(members\/(write|delete))/,
+      messages: /messages\//
     }
   end
   
@@ -167,7 +168,10 @@ class Member < ActiveRecord::Base
       "folders/delete",
       "rooms/read",
       "rooms/write",
-      "rooms/delete"
+      "rooms/delete",
+      "messages/read",
+      "messages/write",
+      "messages/delete"
     ]
   end
   
@@ -176,5 +180,9 @@ class Member < ActiveRecord::Base
       name: name,
       pretty_name: pretty_name
     })
+  end
+  
+  def emailable?
+    subscribed? && !data["email"].blank?
   end
 end

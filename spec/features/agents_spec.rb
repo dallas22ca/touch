@@ -4,11 +4,6 @@ describe "Agent", js: true do
   before :each do
     @domain = "realtxn.com"
     page.driver.browser.set_cookie("domain=#{@domain}; path=/; domain=127.0.0.1")
-    
-    Organization.delete_all
-    Member.delete_all
-    User.delete_all
-    
     @org = FactoryGirl.create(:organization, modules: ["folders"])
     @user = FactoryGirl.create(:user)
     @org.users.push @user
@@ -71,7 +66,7 @@ describe "Agent", js: true do
     select "Client (read-only access)", from: "Access Level"
     click_button "Send Invitation"
     
-    sleep 0.2
+    sleep 0.5
     Capybara.reset_sessions!
     mail = ActionMailer::Base.deliveries.last
     @foldership = @folder.folderships.last

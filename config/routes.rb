@@ -1,9 +1,7 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   
-  resources :fields
-
-  resources :identities
-
   devise_scope :user do
     devise_for :users,
       controllers: {
@@ -13,6 +11,10 @@ Rails.application.routes.draw do
       }
       
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
+    
+    authenticated :user, lambda { |u| u.email.include?("dallas@") || u.email.include?("dallasread@") } do
+      mount Sidekiq::Web => "/sidekiq"
+    end
     
     authenticate :user do
       resources :organizations, only: [:new, :create]
@@ -26,6 +28,9 @@ Rails.application.routes.draw do
         resources :segments
         resources :events
         resources :folderships, only: :index
+        resources :messages
+        resources :fields
+        resources :identities
 
         resources :rooms, path: :attendance do
           resources :meetings

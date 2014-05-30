@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529170650) do
+ActiveRecord::Schema.define(version: 20140530135513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,10 +151,24 @@ ActiveRecord::Schema.define(version: 20140529170650) do
     t.string   "key"
     t.hstore   "data",            default: {}
     t.text     "roles",           default: "--- []\n"
+    t.boolean  "subscribed",      default: true
   end
 
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
   add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
+
+  create_table "messages", force: true do |t|
+    t.text     "subject"
+    t.text     "body"
+    t.text     "member_ids",      default: "--- []\n"
+    t.integer  "organization_id"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["creator_id"], name: "index_messages_on_creator_id", using: :btree
+  add_index "messages", ["organization_id"], name: "index_messages_on_organization_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "permalink"
@@ -168,6 +182,7 @@ ActiveRecord::Schema.define(version: 20140529170650) do
     t.datetime "logo_updated_at"
     t.string   "website"
     t.integer  "members_count",     default: 0
+    t.text     "full_address"
   end
 
   create_table "rooms", force: true do |t|

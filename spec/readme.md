@@ -5,13 +5,6 @@ When someone wants to send a message to a group
 - fill body
 - click send
 
-When someone wants to send a message to one person
-- click Contact Name
-- click Send Message
-- fill subject
-- fill body
-- click send
-
 When someone opens the message
 - Event should be created
 
@@ -25,7 +18,7 @@ When someone creates a new Task
 - select date
 - click Save Task
 
-When someone wants to create a course
+When someone wants to create a course/sequence/path
 - click Create Course
 - fill in name
 - choose Update Current Contacts

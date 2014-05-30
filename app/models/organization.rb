@@ -9,6 +9,7 @@ class Organization < ActiveRecord::Base
   has_many :folders
   has_many :folderships, through: :folders
   has_many :fields
+  has_many :messages
   
   has_attached_file :logo, default_url: "default_org_logo"
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/

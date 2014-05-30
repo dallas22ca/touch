@@ -1,12 +1,6 @@
 require "spec_helper"
 
 describe "Fields" do
-  before :each do
-    Organization.delete_all
-    Member.delete_all
-    User.delete_all
-  end
-  
   it "adds default fields to a new organization" do
     @org = FactoryGirl.create(:organization, modules: ["members"])
     assert @org.fields.count == 3

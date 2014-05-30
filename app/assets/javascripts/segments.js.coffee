@@ -22,4 +22,4 @@ $(document).on "change", "#choose_segment", ->
 			value.appendTo wrapper
 			event.appendTo wrapper unless typeof event == "undefined"
 			
-			wrapper.appendTo "#lightbox .hidden_filters"
+			wrapper.appendTo ".lightbox .hidden_filters"

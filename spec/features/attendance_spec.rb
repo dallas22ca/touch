@@ -4,13 +4,6 @@ describe "Agent", js: true do
   before :each do
     @domain = "oneattendance.com"
     page.driver.browser.set_cookie("domain=#{@domain}; path=/; domain=127.0.0.1")
-    
-    Organization.delete_all
-    Member.delete_all
-    User.delete_all
-    Room.delete_all
-    Meeting.delete_all
-    
     @org = FactoryGirl.create(:organization, modules: ["attendance"])
     @user = FactoryGirl.create(:user)
     @org.users.push @user

@@ -1,12 +1,6 @@
 require "spec_helper"
 
 describe "Filter" do
-  before :each do
-    Organization.delete_all
-    Member.delete_all
-    User.delete_all    
-  end
-  
   it "default returns all" do
     @org = FactoryGirl.create(:organization)
     5.times.map { @org.users.push FactoryGirl.create(:user) }

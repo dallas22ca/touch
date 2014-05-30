@@ -16,6 +16,14 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before :each do
+    Message.delete_all
+    Organization.delete_all
+    Task.delete_all
+    Home.delete_all
+    Comment.delete_all
+    User.delete_all
+    Member.delete_all
+    
     DatabaseCleaner.start
   end
 
@@ -26,6 +34,7 @@ RSpec.configure do |config|
   
   def sign_in(user, org = false)
     visit org ? signin_path(org) : new_user_session_path
+    page.should have_content "I'd rather sign in with my email address."
     click_link "I'd rather sign in with my email address."
     fill_in "Email",    with: user.email
     fill_in "Password", with: user.password
