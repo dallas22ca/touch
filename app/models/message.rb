@@ -35,14 +35,15 @@ class Message < ActiveRecord::Base
     Mustache.render content.to_s.gsub(/\n/, "<br>"), d
   end
   
-  def linked_body_for(member)
+  def linked_body_for(member, output = "content")
     content = Message.content_for(body, member)
+    links = URI::extract(content, ["http", "ftp", "https", "mailto"])
 
-    URI::extract(content, ["http", "ftp", "https", "mailto"]).each_with_index do |href, index|
+    links.each_with_index do |href, index|
       url = click_url(organization, id * CONFIG["secret_number"], member.id * CONFIG["secret_number"], index, href: CGI::escape(href))
       content = content.sub(href, "<a href=\"#{url}\">#{href}</a>")
     end
     
-    content
+    output == "count" ? links.count : content
   end
 end

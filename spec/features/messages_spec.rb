@@ -42,6 +42,7 @@ describe "Message", js: true do
     site = "http://fifa.com."
     @message = @org.messages.create! member_ids: [@clicker.id], subject: "Why?", body: "You should go to #{site}", creator: @member
     assert @message.linked_body_for(@member).include? "<a href"
+    assert @message.linked_body_for(@member).include? "/0?href="
     assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site)

@@ -109,7 +109,7 @@ class MessagesController < ApplicationController
     rescue
     end
     
-    redirect_to params[:href]
+    redirect_to CGI::unescape(params[:href])
   end
 
   private
