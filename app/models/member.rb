@@ -185,4 +185,8 @@ class Member < ActiveRecord::Base
   def emailable?
     subscribed? && !data["email"].blank?
   end
+  
+  def toggle_subscribe
+    update subscribed: !subscribed?
+  end
 end

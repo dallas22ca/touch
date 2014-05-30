@@ -42,12 +42,12 @@ describe "Agent", js: true do
     page.should have_content "0"
     
     first(".presence_toggle").click
-    sleep 1
+    sleep 1.5
     assert_equal 1, @meeting.reload.events.count
     page.should have_content "1"
     
     first(".presence_toggle").click  
-    sleep 1
+    sleep 1.5
     assert_equal 0, @meeting.reload.events.count
     page.should have_content "0"
   end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_website
-  before_filter :authenticate_user!, unless: Proc.new { action_name == "accept" }
+  before_filter :authenticate_user!, unless: -> { ["accept", "unsubscribe"].include? action_name }
   before_filter :set_time_zone, if: :user_signed_in?
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :set_organization, if: :devise_controller?

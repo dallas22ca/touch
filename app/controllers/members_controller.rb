@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_filter :set_organization
   before_action :set_this_member, only: [:show, :edit, :update, :destroy]
-  before_filter :redirect_to_root, unless: Proc.new { @member.permits? :members, action_type }
+  before_filter :redirect_to_root, if: -> { action_name != "unsubscribe" && !@member.permits?(:members, action_type) }
   
   def index
     @does_have_sidebar = true
@@ -66,6 +66,16 @@ class MembersController < ApplicationController
       format.html { redirect_to members_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }
       format.js
+    end
+  end
+  
+  def unsubscribe
+    @this_member = @org.members.find(params[:token].to_i / CONFIG["secret_number"].to_i)
+
+    if @this_member && @this_member.toggle_subscribe
+      render text: "You are now #{@this_member.subscribed? ? "re" : "un"}-subscribed."
+    else
+      render text: "We could not find your subscription. Please contact dallas@#{@website["domain"]}."
     end
   end
   

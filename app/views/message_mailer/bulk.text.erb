@@ -1,5 +1,6 @@
 <%= @message.body %>
 
 ====
+Unsubscribe: <%= unsubscribe_url(@message.organization, @unsubscribe_token) %>
 Sent by <%= @message.organization.name %>
 <%= @message.organization.full_address %>

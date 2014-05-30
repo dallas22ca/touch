@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     get "/:permalink" => "devise/sessions#new", as: :signin
   
     scope "/:permalink" do
+      get "/unsubscribe/:token" => "members#unsubscribe", as: :unsubscribe
       get "/accept/:token" => "folderships#accept", as: :foldership_invitation
       get "/sign-up" => "devise/registrations#new", as: :signup
     end
