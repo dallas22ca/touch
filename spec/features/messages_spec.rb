@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe "Message", js: true do
   before :each do
-    Sidekiq::Testing.inline!
     @org = FactoryGirl.create(:organization, modules: ["members", "messages"])
     @user = FactoryGirl.create(:user)
     @org.users.push @user
@@ -35,6 +34,18 @@ describe "Message", js: true do
   end
   
   it "links are parsed" do
+    @clicker = FactoryGirl.create(:user)
+    @org.users.push @clicker
+    @clicker = @clicker.members.first
+    assert Event.count == 0
     
+    site = "http://fifa.com."
+    @message = @org.messages.create! member_ids: [@clicker.id], subject: "Why?", body: "You should go to #{site}", creator: @member
+    assert @message.linked_body_for(@member).include? "<a href"
+    assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
+    
+    visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site)
+    page.should have_content "Invalid Hostname"
+    assert Event.count == 1
   end
 end

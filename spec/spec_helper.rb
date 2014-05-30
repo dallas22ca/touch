@@ -16,6 +16,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before :each do
+    Event.delete_all
     Message.delete_all
     Organization.delete_all
     Task.delete_all
@@ -24,6 +25,7 @@ RSpec.configure do |config|
     User.delete_all
     Member.delete_all
     
+    Sidekiq::Testing.inline!
     DatabaseCleaner.start
   end
 

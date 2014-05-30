@@ -1,4 +1,4 @@
-<%= Message.content_for(@message.body, @member).html_safe %><br><br><br>
+<%= @message.linked_body_for(@member).html_safe %><br><br><br>
 =====<br>
 Sent by <%= @message.organization.name %><br>
 <%= @message.organization.full_address %><br>

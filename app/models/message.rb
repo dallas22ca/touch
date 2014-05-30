@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+  
   serialize :member_ids, Array
 
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
@@ -31,5 +33,16 @@ class Message < ActiveRecord::Base
     }
     
     Mustache.render content.to_s.gsub(/\n/, "<br>"), d
+  end
+  
+  def linked_body_for(member)
+    content = Message.content_for(body, member)
+
+    URI::extract(content, ["http", "ftp", "https", "mailto"]).each_with_index do |href, index|
+      url = click_url(organization, id * CONFIG["secret_number"], member.id * CONFIG["secret_number"], index, href: CGI::escape(href))
+      content = content.sub(href, "<a href=\"#{url}\">#{href}</a>")
+    end
+    
+    content
   end
 end

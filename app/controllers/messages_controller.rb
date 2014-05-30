@@ -87,6 +87,30 @@ class MessagesController < ApplicationController
     
     render text: Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), content_type: 'image/gif'
   end
+  
+  def click
+    begin
+      @this_message = @org.messages.find(params[:message_token].to_i / CONFIG["secret_number"].to_i)
+      @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
+      verb = "clicked"
+
+      @org.events.create!(
+        description: "{{ member.name }} #{verb} {{ message.subject }}",
+        verb: verb,
+        json_data: {
+          ordinal: params[:ordinal],
+          href: params[:href],
+          message: @this_message.attributes,
+          member: {
+            key: @this_member.key
+          }
+        }
+      )
+    rescue
+    end
+    
+    redirect_to params[:href]
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
