@@ -25,11 +25,11 @@ $(document).on "click", ".presence_toggle", ->
 	room_id = $("#attendance_header").data("room-id")
 	meeting_id = $("#attendance_header").find("th:eq(#{index})").data("id")
 	url = $("#attendance_header").data("event-path")
-	name = $(".add_on_the_fly .name").text() if member_id == "new"
+	name = $("#attendance_header #q").val() if member_id == "new"
 	
 	$(this).addClass "load"
 	
-	if (member_id != "new") || (member_id == "new" && name.length)
+	if (member_id != "new") || (member_id == "new" && name != "")
 		$.post url,
 			member_id: member_id
 			meeting_id: meeting_id

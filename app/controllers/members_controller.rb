@@ -60,7 +60,7 @@ class MembersController < ApplicationController
   end
   
   def destroy
-    @this_member.destroy
+    @this_member.destroy if !@org.admins.include?(@member) && @this_member != @member
     respond_to do |format|
       format.html { redirect_to members_path(@org), notice: 'Room was successfully destroyed.' }
       format.json { head :no_content }

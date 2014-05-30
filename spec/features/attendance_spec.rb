@@ -84,7 +84,7 @@ describe "Agent", js: true do
     assert page.has_css? ".present", count: 0
     
     first(".add_on_the_fly .presence_toggle").click
-    sleep 1
+    sleep 1.5
     page.driver.browser.execute_script "$('#noterizer').hide()"
     assert_equal 2, @org.reload.members.count
     assert_equal 1, @org.reload.events.count
@@ -92,7 +92,7 @@ describe "Agent", js: true do
     assert page.has_css? ".presence_toggle.present", count: 1
     
     first(".presence_toggle").click
-    sleep 1
+    sleep 1.5
     page.driver.browser.execute_script "$('#noterizer').hide()"
     assert_equal 0, @org.reload.events.count
     assert page.has_css? ".present", count: 0

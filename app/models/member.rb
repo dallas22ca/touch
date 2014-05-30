@@ -14,18 +14,16 @@ class Member < ActiveRecord::Base
 
   validates_uniqueness_of :key, scope: :organization
   
-  before_validation :parameterize_key, if: :key_changed?
   before_validation :set_key, unless: :key
+  before_validation :parameterize_key, if: :key_changed?
   before_validation :intercept_full_name, if: :full_name
-  before_validation :parameterize_data, if: :data
+  before_validation :flatten_roles, if: :roles_changed?
+  before_validation :set_user_data, if: -> { user && user_id_changed? }
 
   before_create :set_initial_admin, if: Proc.new { organization.reload.members_count == 0 }
-  before_create :set_roles
-
-  after_create :set_user_data, if: :user
+  before_create :set_member_role
   
-  before_save :flatten_roles, if: :roles_changed?
-  after_save :set_user_data, if: :user_id_changed?
+  before_save :parameterize_data
   
   after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   after_save :update_organization_fields
@@ -35,20 +33,22 @@ class Member < ActiveRecord::Base
   scope :accepted, -> { where "folderships.accepted = ?", true }
   
   def parameterize_data
+    self.data ||= {}
     d = {}
     self.data.map { |k, v| d[k.parameterize.underscore] = v }
-    self.data = d
+    self.data = self.data.merge(d)
   end
   
   def update_organization_fields
+    self.data ||= {}
     self.data.each do |k, v|
-      organization.fields.where(permalink: k).first_or_create!
+      organization.fields.where(permalink: k).first_or_create
     end
   end
   
   def intercept_full_name
     self.data ||= {}
-    d = data
+    d = {}
     split = full_name.split(" ")
     
     if split.length == 1
@@ -62,7 +62,7 @@ class Member < ActiveRecord::Base
       d["last_name"] = full_name.gsub(d["first_name"], "").strip
     end
     
-    self.data = d
+    self.data = self.data.merge(d)
   end
   
   def flatten_roles
@@ -70,13 +70,15 @@ class Member < ActiveRecord::Base
   end
   
   def set_user_data
+    self.data ||= {}
+    d = {}
+    
     split = user.name.split(" ")
-    d = self.data
-    d ||= {}
     d["first_name"] = split.first
     d["last_name"] = split.last == split.first ? "" : split.last
     d["email"] = user.email.to_s
-    update_columns data: d
+    
+    self.data = self.data.merge(d)
   end
   
   def name
@@ -106,7 +108,7 @@ class Member < ActiveRecord::Base
     "#{name} <#{data["email"]}>"
   end
   
-  def set_roles
+  def set_member_role
     self.roles.push "member"
   end
   

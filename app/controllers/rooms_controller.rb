@@ -90,12 +90,7 @@ class RoomsController < ApplicationController
     if present
       if !exists
         if params[:member_id] == "new"
-          @user = User.create!(
-            name: params[:name],
-            ignore_password: true,
-            ignore_email: true
-          )
-          @this_member = @org.members.create! user: @user
+          @this_member = @org.members.create full_name: params[:name]
         end
       
         @org.events.create!(
