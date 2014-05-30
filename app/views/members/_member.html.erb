@@ -1,5 +1,5 @@
 <tr id="member_<%= member.id %>" class="member">
-	<td class="add_padding"><%= check_box_tag :nice %></td>
+	<!--<td class="add_padding"><%= check_box_tag :nice %></td>-->
 	<td><%= link_to member.data["first_name"].to_s, edit_member_path(member.organization, member), remote: true %></td>
 	<td><%= link_to member.data["last_name"].to_s, edit_member_path(member.organization, member), remote: true %></td>
 	<td><%= link_to member.data["email"].to_s, edit_member_path(member.organization, member), remote: true %></td>

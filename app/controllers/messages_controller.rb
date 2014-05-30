@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = @org.messages
   end
 
   # GET /messages/1
@@ -16,7 +16,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = @org.messages.new(message_params)
+    @message = @org.messages.new()
+    @message.assign_attributes params.fetch(:message).permit(permitted) if params[:message]
   end
 
   # GET /messages/1/edit
@@ -115,11 +116,15 @@ class MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = @org.messages.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:subject, :body, member_ids: [])
+      params.require(:message).permit(permitted)
+    end
+    
+    def permitted
+      [:subject, :body, member_ids: [], segment_ids: []]
     end
 end

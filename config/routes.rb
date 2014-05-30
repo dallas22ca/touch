@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     end
     
     scope "/:permalink" do
+      post "/members/save" => "events#save_member", as: :add_member
+      get "/examples/:example" => "organizations#example", as: :example
       get "/unsubscribe/:member_token" => "members#unsubscribe", as: :unsubscribe
       get "/open/:message_token/:member_token" => "messages#open", as: :open, defaults: { format: :gif }
       get "/click/:message_token/:member_token/:ordinal" => "messages#click", as: :click

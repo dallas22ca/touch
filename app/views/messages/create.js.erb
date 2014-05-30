@@ -1,2 +1,8 @@
-Lightbox.close()
+<% if @message.errors.any? %>
+	alert("<%= @message.errors.full_messages.join(", ").html_safe %>")
+<% else %>
+	$("#new_message")[0].reset()
+	Lightbox.close()
+<% end %>
+
 $("form").trigger("touch:enable")

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530135513) do
+ActiveRecord::Schema.define(version: 20140530183220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20140530135513) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "segment_ids",     default: "--- []\n"
   end
 
   add_index "messages", ["creator_id"], name: "index_messages_on_creator_id", using: :btree
@@ -183,6 +184,8 @@ ActiveRecord::Schema.define(version: 20140530135513) do
     t.string   "website"
     t.integer  "members_count",     default: 0
     t.text     "full_address"
+    t.string   "publishable_key"
+    t.string   "secret_key"
   end
 
   create_table "rooms", force: true do |t|

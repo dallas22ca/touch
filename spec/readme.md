@@ -1,15 +1,7 @@
-When someone wants to send a message to a group
-- click Send Message
-- check off segments or all
-- fill subject
-- fill body
-- click send
-
-When someone opens the message
-- Event should be created
-
-When someone clicks the message
-- Event should be created
+When someone uploads a contact list
+- select file
+- choose Add To Courses If Necessary
+- click Upload
 
 When someone creates a new Task
 - should see todays task list
@@ -17,6 +9,11 @@ When someone creates a new Task
 - fill content
 - select date
 - click Save Task
+
+When someone subscribes to newsletter
+- fill Email
+- click Subscribe
+- course started
 
 When someone wants to create a course/sequence/path
 - click Create Course
@@ -40,11 +37,6 @@ Q: One course at a time? No.
 Q: Option for 1 email a day?
 Q: What happens when a course is deleted? Can only be archived. Remove future Tasks and Messages.
 
-When someone uploads a contact list
-- select file
-- choose Add To Courses If Necessary
-- click Upload
-
 When someone wants to add people to a course
 - click Contact Name
 - click Add To Course
@@ -58,7 +50,4 @@ When someone wants to add a group of people to a course
 - click Start Course
 
 When someone subscribes to newsletter
-- fill Email
-- click Subscribe
-- added to Newsletter
 - course started

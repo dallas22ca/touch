@@ -9,7 +9,14 @@
 	
 	&.big {
 		font-size: 15px;
+		line-height: 15px;
 		padding: 10px 15px;
+	}
+	
+	&.medium {
+		font-size: 13px;
+		line-height: 13px;
+		padding: 8px 13px;
 	}
 	
 	&.small {

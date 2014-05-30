@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    
+    <form action="<%= add_member_path(@org) %>" method="post">
+      
+      <input type="hidden" name="publishable_key" value="<%= @org.publishable_key %>">
+      
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="member[name]">
+      </div>
+      
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="member[email]">
+      </div>
+      
+      <div class="field">
+        <label for="birthday">Birthday (Random Field)</label>
+        <input type="text" id="birthday" name="member[birthday]">
+      </div>
+      
+      <div class="actions">
+        <input type="submit" value="Subscribe &rarr;">
+      </div>
+      
+    </form>
+    
+  </body>
+</html>

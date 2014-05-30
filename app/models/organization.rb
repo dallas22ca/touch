@@ -21,8 +21,21 @@ class Organization < ActiveRecord::Base
   validates_presence_of :name, :permalink
   validates_uniqueness_of :permalink
   
-  after_save :add_modules_to_admins, if: :modules_changed?
+  before_create :generate_keys
   after_create :add_default_fields
+  after_save :add_modules_to_admins, if: :modules_changed?
+  
+  def generate_keys
+    self.publishable_key = loop do
+      random_publishable_key = SecureRandom.urlsafe_base64(20, false).gsub(/-|_/, "")
+      break random_publishable_key unless Organization.exists?(publishable_key: random_publishable_key)
+    end
+    
+    self.secret_key = loop do
+      random_secret_key = SecureRandom.urlsafe_base64(20, false).gsub(/-|_/, "")
+      break random_secret_key unless Organization.exists?(secret_key: random_secret_key)
+    end
+  end
   
   def add_default_fields
     fields.create([

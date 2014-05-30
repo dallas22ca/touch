@@ -9,16 +9,33 @@
 	border-bottom: 1px solid #ddd;
 	
 	.members_count {
-		float: right;
-		color: #333;
-		margin-top: 7px;
+		color: #777;
+		margin-left: 17px;
+		font-size: 11px;
+	}
+	
+	.create_message {
+		margin-top: 3px;
 	}
 }
 
 @media screen and (max-width: 600px) {
 	.has_sidebar {
 		#searcher {
-			left: 0;
+			position: static;
+			margin-top: -65px;
+			height: auto;
 		}
+	}
+	
+	.members_count {
+		margin-top: 9px;
+		float: right;
+	}
+	
+	.create_message {
+		width: 100%;
+		margin-top: 0;
+		margin-bottom: 10px;
 	}
 }

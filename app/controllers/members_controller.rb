@@ -17,7 +17,6 @@ class MembersController < ApplicationController
     
     if params[:segment_id]
       @segment = @org.segments.find(params[:segment_id])
-      # @segment.filters.map { |f| params[:filters].push f } if @segment && !@segment.filters.blank?
     end
     
     if request.format == :js

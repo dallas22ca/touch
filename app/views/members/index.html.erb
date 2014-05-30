@@ -4,6 +4,8 @@
 
 <div class="main <%= "has_sidebar" if @does_have_sidebar %>">
 	<div id="searcher">
+		<%= link_to "Send A Message", new_message_path(@org), class: "medium blue_bg button right create_message", remote: true %>
+		
 		<%= form_tag members_path(@org, format: :js), id: "q_form" do %>
 			<%= text_field_tag :q, nil, placeholder: "Search..." %>
 			<%= submit_tag "Search", class: "small grey_bg button" %>
@@ -13,19 +15,20 @@
 	
 	<%= jibe "members", scope: [@org] %>
 	
-	<table id="members" class="table">
+	<table class="table">
 		<thead>
 			<tr>
-				<th>
+				<!-- <th>
 					<div class="loading" style="display: block; "></div>
 					<%= check_box_tag :nice %>
-				</th>
+				</th>-->
+
 				<th style="width: 33%">First Name</th>
 				<th style="width: 33%">Last Name</th>
 				<th style="width: 33%">Email</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="members">
 		</tbody>
 	</table>
 </div>

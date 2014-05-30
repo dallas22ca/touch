@@ -22,6 +22,38 @@ describe "Message", js: true do
     mail.subject.should have_content "What a message!"
   end
   
+  it "can send a message to all contacts" do
+    assert 0, @org.messages.count
+    sign_in @user
+    visit members_path(@org)
+    click_link "Send A Message"
+    page.check "message_segment_all"
+    fill_in "Subject", with: "What a message!"
+    fill_in "Message", with: "Entirely awesome message!"
+    find("#new_message input[type='submit']").click
+    sleep 0.5
+    assert 1, @org.messages.count
+    assert @org.reload.messages.first.segment_ids == [0]
+    mail = ActionMailer::Base.deliveries.last
+    mail.subject.should have_content "What a message!"
+  end
+  
+  it "can send a message to a segment" do
+    @segment = @org.segments.create name: "First Name like Test", filters: [{ field: "first_name", matcher: "like", search: "test" }]
+    sign_in @user
+    visit members_path(@org)
+    click_link "Send A Message"
+    page.check "message_segment_#{@segment.id}"
+    fill_in "Subject", with: "What a message!"
+    fill_in "Message", with: "Entirely awesome message!"
+    find("#new_message input[type='submit']").click
+    sleep 0.5
+    assert 1, @org.messages.count
+    assert @org.reload.messages.first.segment_ids == [@segment.id]
+    mail = ActionMailer::Base.deliveries.last
+    mail.subject.should have_content "What a message!"
+  end
+  
   it "is marked as opened" do
     @opener = FactoryGirl.create(:user)
     @org.users.push @opener

@@ -47,8 +47,8 @@ class Member < ActiveRecord::Base
   end
   
   def intercept_full_name
-    d = self.data
-    d = {}
+    self.data ||= {}
+    d = data
     split = full_name.split(" ")
     
     if split.length == 1

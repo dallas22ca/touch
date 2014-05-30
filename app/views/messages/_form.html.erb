@@ -14,6 +14,23 @@
 		    <%= hidden_field_tag "message[member_ids][]", member.id %>
 				<%= text_field_tag "message_member_#{index}", member.name, class: "full_width", disabled: true %>
 			<% end %>
+			<% if @message.members.empty? %>
+				<%= hidden_field_tag "message[segment_ids][]" %>
+			
+				<ul>
+					<li>
+						<%= check_box_tag "message_segment_all", 0, false, name: "message[segment_ids][]" %>
+						<%= label_tag "message_segment_all", "Everyone", class: "label inline" %>
+					</li>
+					
+					<% @org.segments.each_with_index do |segment| %>
+				    <li>
+							<%= check_box_tag "message_segment_#{segment.id}", segment.id, false, name: "message[segment_ids][]" %>
+							<%= label_tag "message_segment_#{segment.id}", segment.name, class: "label inline" %>
+						</li>
+					<% end %>
+				</ul>
+			<% end %>
 	  </div>
 
 	  <div class="field">
