@@ -6,12 +6,13 @@ class MessageMailer < ActionMailer::Base
     @member = @message.organization.members.find(member_id)
     
     if @member
-      @unsubscribe_token = @member.id * CONFIG["secret_number"]
+      @contact_token = @member.id * CONFIG["secret_number"]
+      @message_token = @message.id * CONFIG["secret_number"]
       
       mail(
         from: @message.creator.name_and_email,
         to: @member.name_and_email,
-        subject: @message.subject
+        subject: Message.content_for @message.subject, @member
       )
     end
   end

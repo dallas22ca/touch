@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_organization
-  before_action :set_permissions
+  before_action :set_permissions, except: [:open, :click]
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages
@@ -64,6 +64,28 @@ class MessagesController < ApplicationController
       format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def open
+    begin
+      @this_message = @org.messages.find(params[:message_token].to_i / CONFIG["secret_number"].to_i)
+      @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
+      verb = "opened"
+
+      @org.events.create!(
+        description: "{{ member.name }} #{verb} {{ message.subject }}",
+        verb: verb,
+        json_data: {
+          message: @this_message.attributes,
+          member: {
+            key: @this_member.key
+          }
+        }
+      )
+    rescue
+    end
+    
+    render text: Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), content_type: 'image/gif'
   end
 
   private

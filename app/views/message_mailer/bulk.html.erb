@@ -1,0 +1,6 @@
+<%= Message.content_for(@message.body, @member).html_safe %><br><br><br>
+=====<br>
+Sent by <%= @message.organization.name %><br>
+<%= @message.organization.full_address %><br>
+Unsubscribe: <%= unsubscribe_url(@message.organization, @contact_token) %>
+<%= image_tag open_url(@message.organization, @message_token, @contact_token, format: :gif) %>

@@ -16,7 +16,15 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => "/sidekiq"
     end
     
-    authenticate :user do
+    scope "/:permalink" do
+      get "/unsubscribe/:member_token" => "members#unsubscribe", as: :unsubscribe
+      get "/open/:message_token/:member_token" => "messages#open", as: :open, defaults: { format: :gif }
+      get "/click/:message_token/:member_token/:ordinal" => "messages#click", as: :click
+      get "/accept/:token" => "folderships#accept", as: :foldership_invitation
+      get "/sign-up" => "devise/registrations#new", as: :signup
+    end
+    
+    authenticated :user do
       resources :organizations, only: [:new, :create]
       
       scope "/:permalink" do
@@ -55,12 +63,6 @@ Rails.application.routes.draw do
     end
     
     get "/:permalink" => "devise/sessions#new", as: :signin
-  
-    scope "/:permalink" do
-      get "/unsubscribe/:token" => "members#unsubscribe", as: :unsubscribe
-      get "/accept/:token" => "folderships#accept", as: :foldership_invitation
-      get "/sign-up" => "devise/registrations#new", as: :signup
-    end
   end
   
   root to: "modules#redirect"

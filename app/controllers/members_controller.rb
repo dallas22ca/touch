@@ -70,7 +70,7 @@ class MembersController < ApplicationController
   end
   
   def unsubscribe
-    @this_member = @org.members.find(params[:token].to_i / CONFIG["secret_number"].to_i)
+    @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
 
     if @this_member && @this_member.toggle_subscribe
       render text: "You are now #{@this_member.subscribed? ? "re" : "un"}-subscribed."

@@ -22,4 +22,19 @@ describe "Message", js: true do
     mail = ActionMailer::Base.deliveries.last
     mail.subject.should have_content "What a message!"
   end
+  
+  it "is marked as opened" do
+    @opener = FactoryGirl.create(:user)
+    @org.users.push @opener
+    @opener = @opener.members.first
+    assert Event.count == 0
+    
+    @message = @org.messages.create! member_ids: [@opener.id], subject: "Why?", body: "Why Not?", creator: @member
+    visit open_path(@org, @message.id * CONFIG["secret_number"], @opener.id * CONFIG["secret_number"])
+    assert Event.count == 1
+  end
+  
+  it "links are parsed" do
+    
+  end
 end

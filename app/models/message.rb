@@ -4,6 +4,9 @@ class Message < ActiveRecord::Base
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   belongs_to :organization
   
+  validates_presence_of :subject, :body
+  validates_presence_of :member_ids
+  
   after_create :prepare_for_delivery
   
   def prepare_for_delivery
@@ -14,5 +17,19 @@ class Message < ActiveRecord::Base
   
   def members
     organization.members.where(id: member_ids)
+  end
+  
+  def self.content_for(content, member)
+    member_data = member.data.merge({
+      name: member.name,
+      pretty_name: member.pretty_name
+    })
+    
+    d = {
+      contact: member_data,
+      member: member_data
+    }
+    
+    Mustache.render content.to_s.gsub(/\n/, "<br>"), d
   end
 end
