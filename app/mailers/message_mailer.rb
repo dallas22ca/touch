@@ -7,11 +7,25 @@ class MessageMailer < ActionMailer::Base
       @contact_token = @member.id * CONFIG["secret_number"]
       @message_token = @message.id * CONFIG["secret_number"]
       
-      mail(
-        from: @message.creator.name_and_email,
-        to: @member.name_and_email,
-        subject: Message.content_for(@message.subject, @member)
-      )
+      if mail(
+          from: @message.creator.name_and_email,
+          to: @member.name_and_email,
+          subject: Message.content_for(@message.subject, @member)
+        )
+        
+        verb = "was sent"
+
+        @message.organization.events.create(
+          description: "{{ message.subject }} #{verb} to {{ member.name }}",
+          verb: verb,
+          json_data: {
+            message: @message.attributes,
+            member: {
+              key: @member.key
+            }
+          }
+        )
+      end
     end
   end
 end
