@@ -1,0 +1,8 @@
+<%= content_tag_for :tr, organization do %>
+	<td><%= link_to organization.name, edit_organization_path(organization) %></td>
+	<td><%= link_to organization.permalink, edit_organization_path(organization) %></td>
+	
+	<% Organization.available_modules.each do |feature| %>
+		<td class="center moduler"><%= link_to "#{organization.modules.include?(feature) ? "&check;" : "&nbsp;"}".html_safe, organization_path(organization, toggle_module: feature), method: :put, remote: true %></td>
+	<% end %>
+<% end %>

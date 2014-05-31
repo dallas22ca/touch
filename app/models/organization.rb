@@ -1,4 +1,6 @@
 class Organization < ActiveRecord::Base
+  jibe
+
   serialize :modules, Array
 
   has_many :members
@@ -180,6 +182,10 @@ class Organization < ActiveRecord::Base
     members = members.where(id: member_ids) if include_events
     members = members.where(queries.join(" and ")) if queries.any?
     members
+  end
+  
+  def self.available_modules
+    Member.presets.reject{ |m, v| m == :admin || m == :contacts }.map{ |k, v| k.to_s }
   end
   
   def seed_first_folder

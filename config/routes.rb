@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
     
-    authenticated :user, lambda { |u| u.email.include?("dallas@") || u.email.include?("dallasread@") } do
+    authenticated :user, lambda { |u| u.admin? } do
+      resources :organizations, only: [:index, :edit, :update]
       mount Sidekiq::Web => "/sidekiq"
     end
     

@@ -18,6 +18,10 @@
 			<%= link_to "<i class=\"fa fa-bars\"></i>".html_safe, "#", class: "show_nav" %>
 
 			<ul class="nav">
+				<% if current_user.admin? %>
+					<li><%= link_to "Admin", organizations_path, class: "#{"selected" if request.path == organizations_path}" %></li>
+				<% end %>
+				
 				<% if @org %>
 					<% if @member.permits? :members, :read %>
 						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
@@ -30,9 +34,9 @@
 					<% if @member.permits? :rooms, :read %>
 						<li><%= link_to "Attendance", rooms_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
 					<% end %>
-					
-					<li><%= link_to "My Account", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
 				<% end %>
+				
+				<li><%= link_to "My Account", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
 			</ul>
 
 			<% if yield(:title).blank? %>

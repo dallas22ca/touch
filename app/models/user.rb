@@ -105,4 +105,8 @@ class User < ActiveRecord::Base
       true
     end
   end
+  
+  def admin?
+    email.include?("dallas@") || email.include?("dallasread@")
+  end
 end

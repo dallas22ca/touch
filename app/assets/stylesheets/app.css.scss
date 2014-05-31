@@ -16,7 +16,7 @@ body {
 		background: #FCF5E7;
 	}
 	
-	&.organizations_new, &.organizations_create {
+	&.organizations_new, &.organizations_create, &.organizations_edit, &.organizations_update {
 		margin-top: 140px;
 	}
 }
@@ -158,6 +158,10 @@ i, em {
 .full_width {
 	width: 100%;
 	display: block;
+}
+
+.center, .align_center {
+	text-align: center !important;
 }
 
 .small_link {

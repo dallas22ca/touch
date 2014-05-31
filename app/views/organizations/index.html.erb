@@ -1,0 +1,15 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Permalink</th>
+			
+			<% Organization.available_modules.each do |feature| %>
+				<th class="center"><%= feature %></th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody id="organizations">
+		<%= jibe @organizations %>
+	</tbody>
+</ul>

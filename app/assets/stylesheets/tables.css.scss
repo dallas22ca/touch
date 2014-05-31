@@ -11,6 +11,10 @@
 			&.add_padding {
 				padding: 13px;
 			}
+			
+			&.load {
+				background: url(/imgs/loading_small.gif) center no-repeat #fafafa;
+			}
 		}
 		
 		th {
