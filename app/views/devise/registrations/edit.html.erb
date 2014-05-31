@@ -75,7 +75,7 @@
 
 	  <div class="actions">
 			<%= f.submit "Save My Account", class: "big blue_bg button" %>
-			<%= link_to "Add A Password", "#", class: "show_new_password_fields small_link", style: "#{"display: none; " if resource.password_required?}" %>
+			<%= link_to "#{resource.encrypted_password.blank? ? "Add A" : "Change Your"} Password", "#", class: "show_new_password_fields small_link", style: "#{"display: none; " if resource.password_required?}" %>
 		</div>
 	<% end %>
 </div>

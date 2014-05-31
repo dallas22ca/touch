@@ -10,11 +10,6 @@ When someone creates a new Task
 - select date
 - click Save Task
 
-When someone subscribes to newsletter
-- fill Email
-- click Subscribe
-- course started
-
 When someone wants to create a course/sequence/path
 - click Create Course
 - fill in name

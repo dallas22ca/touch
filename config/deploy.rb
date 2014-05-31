@@ -22,7 +22,7 @@ set :repository, "git@github.com:dallas22ca/#{application}.git"
 set :maintenance_template_path, File.expand_path("../recipes/templates/maintenance.html.erb", __FILE__)
 set :whenever_command, "bundle exec whenever"
 
-set :server_name, "188.226.234.90"
+set :server_name, "95.85.29.240"
 set :rails_env, "production"
 set :branch, "master"
 set :domains, ["app.oneattendance.com", "app.realtxn.com"]
