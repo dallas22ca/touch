@@ -55,30 +55,33 @@ describe "Message", js: true do
   end
   
   it "is marked as opened" do
+    Event.delete_all
     @opener = FactoryGirl.create(:user)
     @org.users.push @opener
     @opener = @opener.members.first
-    assert Event.count == 0
+    assert @org.reload.events.count == 0
     
     @message = @org.messages.create! member_ids: [@opener.id], subject: "Why?", body: "Why Not?", creator: @member
+    assert @org.reload.events.count == 1
     visit open_path(@org, @message.id * CONFIG["secret_number"], @opener.id * CONFIG["secret_number"])
-    assert Event.count == 1
+    assert @org.reload.events.count == 2
   end
   
   it "links are parsed" do
     @clicker = FactoryGirl.create(:user)
     @org.users.push @clicker
     @clicker = @clicker.members.first
-    assert Event.count == 0
+    assert @org.reload.events.count == 0
     
     site = "http://fifa.com."
     @message = @org.messages.create! member_ids: [@clicker.id], subject: "Why?", body: "You should go to #{site}", creator: @member
+    assert @org.reload.events.count == 1
     assert @message.linked_body_for(@member).include? "<a href"
     assert @message.linked_body_for(@member).include? "/0?href="
     assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
     
-    visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site)
+    visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
+    assert @org.reload.events.count == 2
     page.should have_content "Invalid Hostname"
-    assert Event.count == 1
   end
 end
