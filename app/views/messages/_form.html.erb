@@ -12,7 +12,7 @@
 			<%= label_tag :to, "To", class: "label" %>
 			<% @message.members.each_with_index do |member, index| %>
 		    <%= hidden_field_tag "message[member_ids][]", member.id %>
-				<%= text_field_tag "message_member_#{index}", member.name, class: "full_width", disabled: true %>
+				<%= text_field_tag "message_member_#{index}", member.name_and_email, class: "full_width", disabled: true %>
 			<% end %>
 			<% if @message.members.empty? %>
 				<%= hidden_field_tag "message[segment_ids][]" %>

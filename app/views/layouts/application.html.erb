@@ -4,6 +4,8 @@
   <title><%= "#{controller_name.capitalize} - #{@website["name"]}" %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= tag :link, rel: "apple-touch-icon", href: "/#{@website["domain"]}/imgs/touch_icon.png" %>
+	<%= tag :link, rel: "shortcut icon", href: "/#{@website["domain"]}/imgs/favicon.ico" %>
 	<%= tag :meta, name: "mobile-web-app-capable", content: "yes" %>
 	<%= tag :meta, name: "apple-mobile-web-app-capable", content: "yes" %>
 	<%= tag :meta, name: "apple-mobile-web-app-status-bar-style", content: "black" %>

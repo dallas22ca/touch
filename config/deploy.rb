@@ -1,7 +1,7 @@
 load 'deploy/assets'
 
 require "bundler/capistrano"
-# require 'sidekiq/capistrano'
+require 'sidekiq/capistrano'
 # require "whenever/capistrano"
 require 'puma/capistrano'
 
