@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+  
   jibe
   
   serialize :json_data, JSON
@@ -47,7 +49,28 @@ class Event < ActiveRecord::Base
   def story
     d = {}
     data.map { |k, v| d[k.gsub(".", "_")] = v }
+    Mustache.render description.gsub(".", "_"), d
+  end
+  
+  def linked_story
+    helpers = ActionController::Base.helpers
+    d = {}
+    
+    data.each do |k, v|
+      key = k.gsub(".", "_")
+
+      if k =~ /member/ || k =~ /contact/
+        content = helpers.link_to v, member_path(organization, member_id)
+      elsif k =~ /message/
+        content = helpers.link_to v, message_path(organization, data["message.id"])
+      else
+        content = v
+      end
+      
+      d[key] = content
+    end
+    
     story = Mustache.render description.gsub(".", "_"), d
-    story.html_safe
+    CGI::unescapeHTML story
   end
 end
