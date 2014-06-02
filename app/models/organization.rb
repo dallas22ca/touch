@@ -64,7 +64,6 @@ class Organization < ActiveRecord::Base
       m.save
     end
     
-    reload
     seed_first_folder if modules.include?("folders") && folders.count == 0 && admins.any?
   end
   

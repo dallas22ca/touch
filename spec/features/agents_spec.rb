@@ -191,10 +191,12 @@ describe "Agent", js: true do
   
   it "change in modules should change admin roles" do
     assert_equal ["admin", "folders/read", "folders/write", "folders/delete", "member"], @member.roles
-    @org.update modules: ["members"]
+    @org.modules = @org.modules + ["members"]
+    @org.save
+    assert_equal ["admin", "folders/read", "folders/write", "folders/delete", "member", "members/read", "members/write", "members/delete"], @member.reload.roles
+    @org.modules = @org.modules - ["folders"]
+    @org.save
     assert_equal ["admin", "member", "members/read", "members/write", "members/delete"], @member.reload.roles
-    @org.update modules: ["members", "folders"]
-    assert_equal ["admin", "member", "members/read", "members/write", "members/delete", "folders/read", "folders/write", "folders/delete"], @member.reload.roles
   end
   
   it "seeds folder" do

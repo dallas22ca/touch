@@ -36,11 +36,12 @@ class OrganizationsController < ApplicationController
     
     if params[:toggle_module]
       if @organization.modules.include? params[:toggle_module]
-        @organization.modules.delete params[:toggle_module]
+        modules = @organization.modules - [params[:toggle_module]]
       else
         modules = @organization.modules + [params[:toggle_module]]
-        @organization.modules = modules
       end
+      
+      @organization.modules = modules
     else
       @organization.assign_attributes(organization_params)
     end
