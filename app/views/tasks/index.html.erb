@@ -3,21 +3,50 @@
 		<div class="loading"></div>
 		
 		<div id="tasks_wrapper" class="mini_content_wrapper">
-			<ul id="tasks" class="member_<%= @member.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, 123) %>" <%= "data-write" if @member.permits? :tasks, :write %> <%= "data-delete" if @member.permits? :tasks, :delete %>>
-				<%= jibe @tasks.incomplete.by_ordinal, scope: [@member] %>
-			</ul>
 			
-			<ul id="completed_tasks" class="member_<%= @member.id %>_completed_tasks" <%= "data-write" if @member.permits? :tasks, :write %>>
-				<%= jibe @tasks.complete.by_completed_at, scope: ["completed", @member] %>
-			</ul>
+			<h2>
+				<%= @date.strftime("%A, %b %-d") %>
+			</h2>
+			
+			<div class="date_helpers">
+				<%= link_to "&larr; #{(@date - 1.day).strftime("%a, %b %-d")}".html_safe, tasks_path(@org, date: (@date - 1.day).strftime("%d-%m-%Y")), class: "left" %>
+				<%= link_to "#{(@date + 1.day).strftime("%a, %b %-d")} &rarr;".html_safe, tasks_path(@org, date: (@date + 1.day).strftime("%d-%m-%Y")), class: "right" %>
+				<div class="clear"></div>
+			</div>
+			
+			<% @incomplete.each do |due_at, tasks| %>
+				<% date = Time.parse(due_at.to_s) %>
+				
+				<div class="section overdue">
+					<h4>Overdue from <%= link_to date.strftime("%A, %b %-d"), tasks_path(@org, date: date.strftime("%d-%m-%Y")) %></h4>
+					<ul class="tasks member_tasks_not_today" data-url="<%= sort_tasks_path(@org) %>" <%= "data-write" if @member.permits? :tasks, :write %> <%= "data-delete" if @member.permits? :tasks, :delete %>>
+						<%= jibe tasks, scope: ["overdue", @member] %>
+					</ul>
+				</div>
+			<% end %>
+			
+			<div class="section incomplete">
+				<h4><%= @day_name %></h4>
+			
+				<ul class="tasks member_<%= @member.id %>_tasks" data-url="<%= sort_tasks_path(@org) %>" <%= "data-write" if @member.permits? :tasks, :write %> <%= "data-delete" if @member.permits? :tasks, :delete %>>
+					<%= jibe @tasks.incomplete.by_ordinal, scope: ["incompleted", @member] %>
+				</ul>
+			</div>
+			
+			<div class="section completed" style="<%= "display: none; " if @complete.empty? %>">
+				<h4>Completed</h4>
+				
+				<ul id="completed_tasks" class="tasks member_<%= @member.id %>_completed_tasks" <%= "data-write" if @member.permits? :tasks, :write %>>
+					<%= jibe @complete, scope: ["completed", @member] %>
+				</ul>
+			</div>
 			
 			<% if @member.permits? :tasks, :write %>
 				<%= form_for Task.new, remote: true do |f| %>
+					<%= f.hidden_field :due_at, value: @date %>
 					<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
 				<% end %>
 			<% end %>
-			
-			<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @tasks.complete.empty?}" %>
 		</div>
 
 	</div>

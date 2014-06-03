@@ -12,6 +12,12 @@ class Task < ActiveRecord::Base
   scope :incomplete, -> { where complete: false }
   scope :by_completed_at, -> { order "tasks.updated_at desc" }
   
+  before_save :update_completed_at, if: :complete_changed?
+  
+  def update_completed_at
+    self.completed_at = complete? ? Time.zone.now : nil
+  end
+  
   def jibe_data
     attributes.merge({
       complete_changed: complete_changed?,

@@ -160,7 +160,7 @@ describe "Agent", js: true do
     visit folder_path(@org, @folder)
     page.should have_content "Tasks"
     
-    @foldership.update roles: @foldership.roles - ["tasks/read"]
+    @foldership.update roles: @foldership.roles - ["folder_tasks/read"]
     visit folder_path(@org, @folder)
     page.should_not have_content "Tasks"
     

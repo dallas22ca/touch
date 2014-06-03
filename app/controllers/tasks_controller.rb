@@ -6,7 +6,33 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = @member.tasks
+    @date = params[:date] ? Time.parse(params[:date]).in_time_zone : Time.zone.now
+    @start = @date.beginning_of_day.in_time_zone
+    @finish = @date.end_of_day.in_time_zone
+    @tense = determine_tense @date
+    @day_name = @start == @now.beginning_of_day ? "Today" : @start.strftime("%a, %b %-d")
+    
+    @tasks = case @tense
+    when "past"
+      @member.tasks.where("(complete = :false and due_at >= :start and due_at <= :finish) or (complete = :true and completed_at >= :start and completed_at <= :finish)", 
+        true: true,
+        false: false,
+        nil: nil,
+        start: @start,
+        finish: @finish
+      )
+    when "present", "future"
+      @member.tasks.where("(due_at is :nil and complete = :false) or (complete = :false and due_at is not :nil and due_at >= :start and due_at <= :finish) or (complete = :true and completed_at is not :nil and completed_at >= :start and completed_at <= :finish)",
+        true: true,
+        false: false,
+        nil: nil,
+        start: @start,
+        finish: @finish
+      )
+    end
+    
+    @incomplete = @member.tasks.where("due_at < ?", @start).incomplete.by_ordinal.order(:due_at).group_by{ |t| p t.due_at.to_date }
+    @complete = @tasks.complete.by_completed_at
   end
 
   # GET /tasks/1
@@ -28,6 +54,7 @@ class TasksController < ApplicationController
   def create
     @task = @member.tasks.new(task_params)
     @task.creator = @member
+    @task.due_at ||= Time.zone.now
 
     respond_to do |format|
       if @task.save
@@ -84,6 +111,18 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:content, :complete)
+      params.require(:task).permit(:content, :complete, :due_at)
+    end
+    
+    def determine_tense(date)
+      @now = Time.zone.now
+      
+      if date.beginning_of_day < @now.beginning_of_day
+        "past"
+      elsif date.end_of_day > @now.end_of_day
+        "future"
+      else
+        "present"
+      end
     end
 end

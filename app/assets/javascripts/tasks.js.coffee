@@ -1,29 +1,33 @@
 Jibe.events["tasks"] =
 	afterCreate: (task, data, scope) ->
-		if $.inArray("completed", scope) != -1
+		if $.inArray("incompleted", scope) != -1
 			Noterizer.open "Task was added to your list."
+		else
 			task.remove()
 		Tasks.makeEditable()
 
 	afterUpdate: (task, data, scope) ->
 		if data.complete_changed
 			if data.complete
-				if $.inArray("completed", scope) == -1
+				if $.inArray("completed", scope) != -1
 					if $(".folder_#{data.folder_id}_completed_tasks").length
 						task.prependTo ".folder_#{data.folder_id}_completed_tasks"
 					else if $(".member_#{data.member_id}_completed_tasks").length
 						task.prependTo ".member_#{data.member_id}_completed_tasks"
+				else
+					task.remove()
 			else
 				if $.inArray("completed", scope) != -1
 					if $(".folder_#{data.folder_id}_tasks").length
 						task.appendTo(".folder_#{data.folder_id}_tasks")
 					else if $(".member_#{data.member_id}_tasks").length
 						task.appendTo(".member_#{data.member_id}_tasks")
-					$("#tasks").trigger("sortupdate")
+					$(".tasks").trigger("sortupdate")
 				else
 					task.remove()
-					
-		Tasks.makeEditable()
+			
+			Tasks.removeEmptySections()		
+			Tasks.makeEditable()
 	
 	beforeDestroy: (task, data, scope) ->
 		Noterizer.open "Task was deleted.", "fail" if $.inArray("completed", scope) != -1
@@ -74,14 +78,14 @@ $(document).on
 		$(this).find(".meta_links").show() unless Touch.mobile
 	mouseleave: ->
 		$(this).find(".meta_links").hide()
-, "#tasks .task"
+, ".tasks[data-url] .task"
 
 @Tasks =
 	init: ->
-		if $("#tasks").length
+		if $(".tasks").length
 			Tasks.makeEditable()
 			
-			$("#tasks").sortable
+			$(".tasks[data-url]").sortable
 				axis: "y"
 				items: ".task"
 				handle: ".handle"
@@ -97,11 +101,26 @@ $(document).on
 				start: (e, ui) ->
 					ui.placeholder.html ""
 			
-			$("#tasks").bind "sortupdate", ->
-				url = $("#tasks").data("url")
+			$(".tasks[data-url]").bind "sortupdate", ->
+				url = $(this).data("url")
 				$.post url, $(this).sortable("serialize")
 	
+	removeEmptySections: ->
+		$(".section:not(.incomplete)").each ->
+			if $(this).find(".task").length
+				$(this).show()
+			else
+				$(this).hide()
+
+		$(".task:not(.complete)").each ->
+			overdue = $(this).data("overdue")
+			section = $(".section.overdue:contains('#{overdue}')")
+
+			if section.length
+				$(this).appendTo section.find(".tasks")
+				section.show()
+
 	makeEditable: ->
-		$("#tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
+		$(".tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
 		$("#tasks").css "min-height", "auto"
 		$("#tasks").css "min-height", $("#tasks").height()

@@ -99,6 +99,8 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
+    groupdate (2.1.1)
+      activerecord (>= 3.0.0)
     hashie (2.1.1)
     highline (1.6.21)
     hike (1.2.3)
@@ -271,6 +273,7 @@ DEPENDENCIES
   devise
   exception_notification
   factory_girl_rails (~> 4.0)
+  groupdate
   jbuilder (~> 2.0)
   jibe
   jquery-rails

@@ -1,27 +1,14 @@
 <% cache task do %>
-	<% if task.folder %>
-		<%= content_tag_for :li, task, data: { url: folder_task_path(task.folder.organization, task.folder, task), content: task.content }, class: "#{"complete" if task.complete}" do %>
-			<div class="meta_links">
-				<%= link_to "x", folder_task_path(task.folder.organization, task.folder, task), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this task?" }, class: "delete" %>
-				<%= link_to "&uarr;&darr;".html_safe, "#", class: "handle" %>
-			</div>
-			<div class="meta">
-				<%= check_box_tag "#{dom_id task}_complete", false, task.complete %>
-			</div>
-			<p class="content"><%= task.content %></p>
-			<div class="clear"></div>
-		<% end %>
-	<% else %>
-		<%= content_tag_for :li, task, data: { url: task_path(task.member.organization, task), content: task.content }, class: "#{"complete" if task.complete}" do %>
-			<div class="meta_links">
-				<%= link_to "x", task_path(task.member.organization, task), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this task?" }, class: "delete" %>
-				<%= link_to "&uarr;&darr;".html_safe, "#", class: "handle" %>
-			</div>
-			<div class="meta">
-				<%= check_box_tag "#{dom_id task}_complete", false, task.complete %>
-			</div>
-			<p class="content"><%= task.content %></p>
-			<div class="clear"></div>
-		<% end %>
+	<% url = task.member ? task_path(task.creator.organization, task) : folder_task_path(task.creator.organization, task.folder, task) %>
+	<%= content_tag_for :li, task, data: { url: url, content: task.content, overdue: !task.due_at.nil? ? "Overdue from #{task.due_at.strftime("%A, %b %-d")}" : false }, class: "#{"complete" if task.complete}" do %>
+		<div class="meta_links">
+			<%= link_to "x", url, method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this task?" }, class: "delete" %>
+			<%= link_to "&uarr;&darr;".html_safe, "#", class: "handle" %>
+		</div>
+		<div class="meta">
+			<%= check_box_tag "#{dom_id task}_complete", false, task.complete %>
+		</div>
+		<p class="content"><%= task.content %></p>
+		<div class="clear"></div>
 	<% end %>
 <% end %>

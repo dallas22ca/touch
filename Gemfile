@@ -17,6 +17,7 @@ gem 'aws-sdk'
 gem 'omniauth-facebook'
 gem 'pusher'
 gem 'jibe'# , github: "dallasread/jibe" #, path: '/Users/dallasread/apps/jibe'#
+gem 'groupdate'
 
 gem 'sidekiq'
 gem 'sinatra', require: false

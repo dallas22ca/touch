@@ -23,18 +23,18 @@
 				<% if current_user.admin? %>
 					<li><%= link_to "Admin", organizations_path, class: "#{"selected" if request.path == organizations_path}" %></li>
 				<% end %>
-				
+					
 				<% if @org %>
+					<% if @member.permits? :tasks, :read %>
+						<li><%= link_to "Today", tasks_path(@org), class: "#{"selected" if request.path == tasks_path(@org)}" %></li>
+					<% end %>
+				
 					<% if @member.permits? :members, :read %>
 						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
 					<% end %>
 					
 					<% if @member.permits? :folders, :read %>
 						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
-					<% end %>
-					
-					<% if @member.permits? :tasks, :read %>
-						<li><%= link_to "Tasks", tasks_path(@org), class: "#{"selected" if request.path == tasks_path(@org)}" %></li>
 					<% end %>
 				
 					<% if @member.permits? :rooms, :read %>

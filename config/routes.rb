@@ -34,6 +34,7 @@ Rails.application.routes.draw do
         get "/permissions" => "modules#permissions", as: :permissions
         post "/track" => "rooms#presence", as: :track
         get "/my-account" => "devise/registrations#edit"
+        post "/tasks/sort" => "tasks#sort", as: :sort_tasks
       
         resources :members
         resources :segments
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
         end
       
         resources :folders do
-          post "/tasks/sort" => "tasks#sort", as: :sort_tasks
+          post "/tasks/sort" => "folder_tasks#sort", as: :sort_tasks
           delete "/reset" => "folders#reset", as: :reset
           resources :tasks, controller: "folder_tasks"
           resources :homes

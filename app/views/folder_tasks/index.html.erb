@@ -7,8 +7,8 @@
 		<div class="loading"></div>
 		
 		<div id="tasks_wrapper" class="mini_content_wrapper">
-			<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :folder_tasks, :write %> <%= "data-delete" if @foldership.permits? :folder_tasks, :delete %>>
-				<%= jibe @folder.tasks.incomplete.by_ordinal, scope: [@folder] %>
+			<ul class="tasks today folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :folder_tasks, :write %> <%= "data-delete" if @foldership.permits? :folder_tasks, :delete %>>
+				<%= jibe @folder.tasks.incomplete.by_ordinal, scope: ["incompleted", @folder] %>
 			</ul>
 
 			<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :folder_tasks, :write %>>

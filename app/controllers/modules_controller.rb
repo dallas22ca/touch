@@ -3,7 +3,9 @@ class ModulesController < ApplicationController
   before_filter :check_if_org
   
   def redirect
-    if @member.permits? :members, :read
+    if @member.permits? :tasks, :read
+    	redirect_to tasks_path(@org)
+    elsif @member.permits? :members, :read
       redirect_to members_path(@member.organization)
     elsif @member.permits? :folders, :read
       redirect_to folders_path(@member.organization)
