@@ -1,0 +1,24 @@
+<div class="has_header">
+	<div class="main">
+		<div class="loading"></div>
+		
+		<div id="tasks_wrapper" class="mini_content_wrapper">
+			<ul id="tasks" class="member_<%= @member.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, 123) %>" <%= "data-write" if @member.permits? :tasks, :write %> <%= "data-delete" if @member.permits? :tasks, :delete %>>
+				<%= jibe @tasks.incomplete.by_ordinal, scope: [@member] %>
+			</ul>
+			
+			<ul id="completed_tasks" class="member_<%= @member.id %>_completed_tasks" <%= "data-write" if @member.permits? :tasks, :write %>>
+				<%= jibe @tasks.complete.by_completed_at, scope: ["completed", @member] %>
+			</ul>
+			
+			<% if @member.permits? :tasks, :write %>
+				<%= form_for Task.new, remote: true do |f| %>
+					<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
+				<% end %>
+			<% end %>
+			
+			<%= link_to "Show Completed Tasks", "#", class: "show_completed_tasks", style: "#{"display: none; " if @tasks.complete.empty?}" %>
+		</div>
+
+	</div>
+</div>
