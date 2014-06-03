@@ -32,6 +32,10 @@
 					<% if @member.permits? :folders, :read %>
 						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
 					<% end %>
+					
+					<% if @member.permits? :tasks, :read %>
+						<li><%= link_to "Tasks", tasks_path(@org), class: "#{"selected" if request.path == tasks_path(@org)}" %></li>
+					<% end %>
 				
 					<% if @member.permits? :rooms, :read %>
 						<li><%= link_to "Attendance", rooms_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>

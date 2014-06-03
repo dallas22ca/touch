@@ -1,25 +1,32 @@
 Jibe.events["tasks"] =
-	beforeCreate: (task, data, scope) ->
-		task.remove() if scope == "complete"
+	afterCreate: (task, data, scope) ->
+		if $.inArray("completed", scope) != -1
+			Noterizer.open "Task was added to your list."
+			task.remove()
 		Tasks.makeEditable()
-		Noterizer.open "Task was added to your list."
 
 	afterUpdate: (task, data, scope) ->
 		if data.complete_changed
 			if data.complete
-				if !Jibe.inScope "completed", scope
-					task.prependTo ".folder_#{data.folder_id}_completed_tasks"
+				if $.inArray("completed", scope) == -1
+					if $(".folder_#{data.folder_id}_completed_tasks").length
+						task.prependTo ".folder_#{data.folder_id}_completed_tasks"
+					else if $(".member_#{data.member_id}_completed_tasks").length
+						task.prependTo ".member_#{data.member_id}_completed_tasks"
 			else
-				if Jibe.inScope "completed", scope
-					task.appendTo(".folder_#{data.folder_id}_tasks")
+				if $.inArray("completed", scope) != -1
+					if $(".folder_#{data.folder_id}_tasks").length
+						task.appendTo(".folder_#{data.folder_id}_tasks")
+					else if $(".member_#{data.member_id}_tasks").length
+						task.appendTo(".member_#{data.member_id}_tasks")
 					$("#tasks").trigger("sortupdate")
-
-		if scope != "completed"
-			if data.ordinal_changed
-				task.insertAfter "#tasks .task:eq(#{data.ordinal - 1})"
-		
+				else
+					task.remove()
+					
 		Tasks.makeEditable()
-		Noterizer.open "Task was updated."
+	
+	beforeDestroy: (task, data, scope) ->
+		Noterizer.open "Task was deleted.", "fail" if $.inArray("completed", scope) != -1
 
 $(document).on "click", ".show_completed_tasks", ->
 	$(this).text if $(this).text() == "Show Completed Tasks" then "Hide Completed Tasks" else "Show Completed Tasks"

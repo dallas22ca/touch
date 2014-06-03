@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_permissions
-    foldership_required = %w[comments tasks homes documents folderships]
+    foldership_required = %w[comments folder_tasks homes documents folderships]
     permitter = foldership_required.include?(controller_name) ? @foldership : @member
     redirect_to root_path if !permitter || !permitter.permits?(controller_name, action_type)
   end

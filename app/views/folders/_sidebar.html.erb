@@ -32,7 +32,7 @@
 			<li><%= link_to "<i class=\"fa fa-comment\"></i> <span class=\"word\">Chat</span>".html_safe, folder_comments_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_comments_path(@org, @folder)}" %></li>
 		<% end %>
 		
-		<% if @foldership.permits? :tasks, :read %>
+		<% if @foldership.permits? :folder_tasks, :read %>
 			<li><%= link_to "<i class=\"fa fa-check\"></i> <span class=\"word\">Tasks</span>".html_safe, folder_tasks_path(@org, @folder), class: "start_transition #{"selected" if request.path.include? folder_tasks_path(@org, @folder)}" %></li>
 		<% end %>
 		

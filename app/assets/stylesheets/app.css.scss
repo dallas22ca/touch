@@ -12,7 +12,7 @@ body {
 		margin-top: 140px;
 	}
 	
-	&.tasks_index {
+	&.tasks_index, &.folder_tasks_index {
 		background: #FCF5E7;
 	}
 	
@@ -146,7 +146,7 @@ i, em {
 	top: 75px;
 	right: 0;
 	bottom: 0;
-	left: 222px;
+	left: 0;
 	background: url(/imgs/loading.gif) center no-repeat rgba(255, 255, 255, 0.8);
 	z-index: 99999999999;
 }

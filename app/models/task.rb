@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :folder, touch: true
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
+  belongs_to :member
   
   validates_presence_of :creator, :content
   

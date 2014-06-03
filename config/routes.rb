@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         resources :members
         resources :segments
         resources :events
+        resources :tasks
         resources :folderships, only: :index
         resources :messages
         resources :fields
@@ -50,7 +51,7 @@ Rails.application.routes.draw do
         resources :folders do
           post "/tasks/sort" => "tasks#sort", as: :sort_tasks
           delete "/reset" => "folders#reset", as: :reset
-          resources :tasks
+          resources :tasks, controller: "folder_tasks"
           resources :homes
           resources :comments
 

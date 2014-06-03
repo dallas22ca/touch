@@ -41,17 +41,17 @@
 			</div>
 		<% end %>
 		
-		<% if @foldership.permits? :tasks, :read %>
+		<% if @foldership.permits? :folder_tasks, :read %>
 			<div id="tasks_wrapper" class="panel notepad left">
 				<h3>What's Next?</h3>
-				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :tasks, :write %> <%= "data-delete" if @foldership.permits? :tasks, :delete %>>
+				<ul id="tasks" class="folder_<%= @folder.id %>_tasks" data-url="<%= folder_sort_tasks_path(@org, @folder) %>" <%= "data-write" if @foldership.permits? :folder_tasks, :write %> <%= "data-delete" if @foldership.permits? :folder_tasks, :delete %>>
 					<%= render @folder.tasks.incomplete.by_ordinal %>
 				</ul>
-				<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :tasks, :write %>>
+				<ul id="completed_tasks" class="folder_<%= @folder.id %>_completed_tasks" <%= "data-write" if @foldership.permits? :folder_tasks, :write %>>
 					<%= render @folder.tasks.complete.by_completed_at %>
 				</ul>
 				
-				<% if @foldership.permits? :tasks, :write %>
+				<% if @foldership.permits? :folder_tasks, :write %>
 					<%= form_for [@folder, Task.new], url: folder_tasks_path(@org, @folder), remote: true do |f| %>
 						<%= f.text_field :content, value: nil, placeholder: "What else needs to be done?", autocomplete: "off" %>
 					<% end %>

@@ -1,12 +1,15 @@
-class TasksController < ApplicationController
+class FolderTasksController < ApplicationController
   before_action :set_organization
+  before_action :set_folder
   before_action :set_permissions
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_to_folder, unless: Proc.new { @foldership.permits? controller_name, action_type }
   
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = @member.tasks
+    @does_have_sidebar = true
+    @tasks = @folder.tasks.includes(:creator) if @foldership.permits?(:folder_tasks, :read)
   end
 
   # GET /tasks/1
@@ -26,12 +29,12 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = @member.tasks.new(task_params)
+    @task = @folder.tasks.new(task_params)
     @task.creator = @member
 
     respond_to do |format|
-      if @task.save
-        format.html { redirect_to tasks_path(@org), notice: 'Task was successfully created.' }
+      if @foldership.permits?(:folder_tasks, :write) && @task.save
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
         format.js
       else
@@ -46,8 +49,8 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to tasks_path(@org), notice: 'Task was successfully updated.' }
+      if @foldership.permits?(:folder_tasks, :write) && @task.update(task_params)
+        format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
         format.js
       else
@@ -61,7 +64,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
+    @task.destroy if @foldership.permits? :folder_tasks, :delete
     respond_to do |format|
       format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
@@ -71,7 +74,7 @@ class TasksController < ApplicationController
   
   def sort
     params[:task].each_with_index do |id, index|
-      @member.tasks.find(id).update ordinal: index + 1, skip_jibe: true
+      @folder.tasks.find(id).update ordinal: index + 1, skip_jibe: true
     end
     render nothing: true
   end
@@ -79,7 +82,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = @member.tasks.find(params[:id])
+      @task = @folder.tasks.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

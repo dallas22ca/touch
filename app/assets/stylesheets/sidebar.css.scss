@@ -22,6 +22,10 @@
 
 .has_sidebar {
 	margin-left: 222px;
+	
+	.loading {
+		left: 222px;
+	}
 }
 
 @media screen and (max-width: 600px) {

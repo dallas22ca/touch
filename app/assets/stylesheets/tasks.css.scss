@@ -107,8 +107,8 @@
 #new_task {
 	position: fixed;
 	bottom: 0;
-	left: 222px;
 	right: 0;
+	left: 0;
 	background: #FCF5E7;
 	text-align: center;
 	padding: 8px;
@@ -118,6 +118,12 @@
 		height: 32px;
 		width: 100%;
 		max-width: 500px;
+	}
+}
+
+body {
+	&.folder_tasks_index {
+		left: 222px;
 	}
 }
 

@@ -11,6 +11,7 @@ class Member < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :folderships, dependent: :destroy
   has_many :folders, through: :folderships
+  has_many :tasks
 
   validates_uniqueness_of :key, scope: :organization
   
@@ -154,7 +155,8 @@ class Member < ActiveRecord::Base
       contacts: /members\//,
       folders: /folders\//,
       attendance: /(rooms\/)|(members\/(write|delete))/,
-      messages: /messages\//
+      messages: /messages\//,
+      tasks: /^tasks\//
     }
   end
   
@@ -173,7 +175,10 @@ class Member < ActiveRecord::Base
       "rooms/delete",
       "messages/read",
       "messages/write",
-      "messages/delete"
+      "messages/delete",
+      "tasks/read",
+      "tasks/write",
+      "tasks/delete"
     ]
   end
   

@@ -5,7 +5,7 @@ body {
 		}
 	}
 	
-	&.tasks_index, &.comments_index {
+	&.tasks_index, &.folder_tasks_index, &.comments_index {
 		#noterizer {
 			bottom: 48px;
 		}
