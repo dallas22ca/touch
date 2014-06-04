@@ -76,7 +76,9 @@ describe "Tasks", js: true do
     page.should have_content 1.day.from_now.strftime("%a, %b %-d")
   end
   
-  # it "tasks have contact details" do
-  #   assert "Aweosme"
-  # end
+  it "tasks have contact details" do
+    task = Task.create creator: @member, content: "Call {{ contact.name }}.", contact: @member
+    assert task.content_for_contact.include? @member.name
+    assert task.linked_content.include? member_path(@org, @member)
+  end
 end

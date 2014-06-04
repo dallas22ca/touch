@@ -73,7 +73,7 @@ describe "Message", js: true do
     @clicker = @clicker.members.first
     assert @org.reload.events.count == 0
     
-    site = "http://fifa.com."
+    site = "http://fifa.com"
     @message = @org.messages.create! member_ids: [@clicker.id], subject: "Why?", body: "You should go to #{site}", creator: @member
     assert @org.reload.events.count == 1
     assert @message.linked_body_for(@member).include? "<a href"
@@ -82,6 +82,6 @@ describe "Message", js: true do
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
     assert @org.reload.events.count == 2
-    page.should have_content "Invalid Hostname"
+    page.should have_content "FIFA"
   end
 end

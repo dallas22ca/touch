@@ -27,7 +27,7 @@ Jibe.events["tasks"] =
 					task.remove()
 			
 			Tasks.removeEmptySections()		
-			Tasks.makeEditable()
+		Tasks.makeEditable()
 	
 	beforeDestroy: (task, data, scope) ->
 		Noterizer.open "Task was deleted.", "fail" if $.inArray("completed", scope) != -1
@@ -121,6 +121,7 @@ $(document).on
 				section.show()
 
 	makeEditable: ->
-		$(".tasks[data-write]").find(".task:not(.complete)").find(".content").attr "contenteditable", true
+		$(".tasks[data-write]").find(".task:not(.complete)").find(".content.editable").attr "contenteditable", true
+		$(".task a").attr "data-remote", true
 		$("#tasks").css "min-height", "auto"
 		$("#tasks").css "min-height", $("#tasks").height()

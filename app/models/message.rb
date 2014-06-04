@@ -50,6 +50,22 @@ class Message < ActiveRecord::Base
     organization.segments.where(id: segment_ids.reject { |a| a == 0 })
   end
   
+  def events
+    organization.events.where("data @> 'message.id=>#{id}'")
+  end
+  
+  def opens
+    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "opened")
+  end
+  
+  def clicks
+    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "clicked")
+  end
+  
+  def deliveries
+    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "was sent")
+  end
+  
   def self.content_for(content, member)
     member_data = member.data.merge({
       name: member.name,

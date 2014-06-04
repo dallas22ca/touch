@@ -26,6 +26,9 @@ class MembersController < ApplicationController
     end
   end
   
+  def show
+  end
+  
   def new
     @this_member = @org.members.new
   end

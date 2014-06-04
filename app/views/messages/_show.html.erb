@@ -1,0 +1,33 @@
+<%= link_to "x", "#", class: "close_lightbox close_button" %>
+<h1>Message Details</h1>
+
+<div class="content">
+	<h3>Details</h3>
+	<ul class="descriptive">
+		<li>
+			<strong>Subject:</strong><br>
+			<%= @message.subject %>
+		</li>
+		<li>
+			<strong>Opens:</strong><br>
+			<%= @message.opens.count %>
+		</li>
+		<li>
+			<strong>Clicks:</strong><br>
+			<%= @message.clicks.count %>
+		</li>
+		<li>
+			<strong>Deliveries:</strong><br>
+			<%= @message.deliveries.count %>
+		</li>
+		<li>
+			<strong>Body:</strong><br>
+			<%= simple_format @message.body %>
+		</li>
+	</ul>
+	
+	<h3>History</h3>
+	<ul class="descriptive">
+		<%= jibe @message.events.includes(:member).includes(:organization).order("created_at desc") %>
+	</ul>
+</div>

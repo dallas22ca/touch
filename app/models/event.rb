@@ -60,9 +60,9 @@ class Event < ActiveRecord::Base
       key = k.gsub(".", "_")
 
       if k =~ /member/ || k =~ /contact/
-        content = helpers.link_to v, member_path(organization, member_id)
+        content = helpers.link_to v, member_path(organization, member_id), remote: true
       elsif k =~ /message/
-        content = helpers.link_to v, message_path(organization, data["message.id"])
+        content = helpers.link_to v, message_path(organization, data["message.id"]), remote: true
       else
         content = v
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604123743) do
+ActiveRecord::Schema.define(version: 20140604183646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,8 +226,10 @@ ActiveRecord::Schema.define(version: 20140604123743) do
     t.integer  "member_id"
     t.datetime "due_at"
     t.datetime "completed_at"
+    t.integer  "contact_id"
   end
 
+  add_index "tasks", ["contact_id"], name: "index_tasks_on_contact_id", using: :btree
   add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
   add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
   add_index "tasks", ["member_id"], name: "index_tasks_on_member_id", using: :btree
