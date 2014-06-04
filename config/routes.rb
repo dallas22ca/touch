@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         post "/track" => "rooms#presence", as: :track
         get "/my-account" => "devise/registrations#edit"
         post "/tasks/sort" => "tasks#sort", as: :sort_tasks
+        post "/members/import" => "members#import", as: :import
       
         resources :members
         resources :segments

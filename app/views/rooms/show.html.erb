@@ -56,7 +56,7 @@
 			
 			<td class="here row_for_new"></td>
 			<td class="row_head">
-				<%= link_to "#", class: "pretty_name", remote: true, method: :post, data: { url: members_path(@org, member: { full_name: "" }), created_url: edit_member_path(@org, "%") } do %>
+				<%= link_to "#", class: "pretty_name", remote: true, method: :post, data: { url: members_path(@org, member: { data: { full_name: "" } }), created_url: edit_member_path(@org, "%") } do %>
 					Add <span class="name"></span>
 				<% end %>
 				<span class="search"></span>

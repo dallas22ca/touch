@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603123638) do
+ActiveRecord::Schema.define(version: 20140604123743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,17 +175,23 @@ ActiveRecord::Schema.define(version: 20140603123638) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "modules",           default: "--- []\n"
+    t.text     "modules",                     default: "--- []\n"
     t.string   "name"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "website"
-    t.integer  "members_count",     default: 0
+    t.integer  "members_count",               default: 0
     t.text     "full_address"
     t.string   "publishable_key"
     t.string   "secret_key"
+    t.string   "members_import_file_name"
+    t.string   "members_import_content_type"
+    t.integer  "members_import_file_size"
+    t.datetime "members_import_updated_at"
+    t.boolean  "importing",                   default: false
+    t.string   "import_progress"
   end
 
   create_table "rooms", force: true do |t|

@@ -6,7 +6,7 @@ class Foldership < ActiveRecord::Base
   attr_accessor :resend
 
   belongs_to :folder
-  belongs_to :member
+  belongs_to :member, dependent: :destroy
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   
   validates_presence_of :folder_id, :roles

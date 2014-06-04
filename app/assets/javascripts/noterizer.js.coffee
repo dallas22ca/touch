@@ -7,17 +7,22 @@
 			Noterizer.parsing = true
 			event = Noterizer.messages.shift()
 			Noterizer.show event
-	
+			
 			setTimeout ->
-				Noterizer.close ->
+				if event.sticky
 					Noterizer.parsing = false
 					Noterizer.parseEvents()
-			, 1500
+				else
+					Noterizer.close ->
+						Noterizer.parsing = false
+						Noterizer.parseEvents()
+			, 2000
 	
-	open: (content, mode = "success") ->
+	open: (content, mode = "success", sticky = false) ->
 		Noterizer.messages.push
 			content: content
 			mode: mode
+			sticky: sticky
 	
 	show: (event) ->
 		$("#noterizer").removeClass("failed").removeClass("successed").addClass "#{event.mode}ed"

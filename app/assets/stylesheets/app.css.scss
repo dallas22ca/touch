@@ -286,6 +286,24 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
 	line-height: 20px;
 }
 
+.warn {
+	background: #FFF2C0;
+	background: -moz-linear-gradient(top,  #FFF2C0 0%, #E5D8AC 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF2C0), color-stop(100%,#E5D8AC));
+	background: -webkit-linear-gradient(top,  #FFF2C0 0%,#E5D8AC 100%);
+	background: -o-linear-gradient(top,  #FFF2C0 0%,#E5D8AC 100%);
+	background: -ms-linear-gradient(top,  #FFF2C0 0%,#E5D8AC 100%);
+	background: linear-gradient(to bottom,  #FFF2C0 0%,#E5D8AC 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFF2C0', endColorstr='#E5D8AC',GradientType=0 );
+	border: 1px solid #A2874F;
+	color: #887242;
+	padding: 15px;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	font-size: 13px;
+	line-height: 20px;
+}
+
 #yield {
 	padding: 3%;
 }
@@ -333,6 +351,10 @@ hr {
 			}
 		}
 	}
+}
+
+#iframe {
+	display: none !important;
 }
 
 @media screen and (max-width: 600px) {

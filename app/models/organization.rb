@@ -15,6 +15,14 @@ class Organization < ActiveRecord::Base
   
   has_attached_file :logo, default_url: "default_org_logo"
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
+  
+  has_attached_file :members_import,
+    default_url: "default_org_logo",
+    storage: :filesystem,
+    path: "/tmp/:class/:attachment/:id_partition/:style/:filename",
+    url: "/tmp/:class/:attachment/:id_partition/:style/:filename"
+  validates_attachment_content_type :members_import, content_type: /plain|csv|xls|xlsx|ods/
+  
   validates_presence_of :name, :permalink
   
   before_validation :format_permalink
@@ -26,6 +34,23 @@ class Organization < ActiveRecord::Base
   before_create :generate_keys
   after_create :add_default_fields
   after_save :add_modules_to_admins, if: :modules_changed?
+  after_commit :sidekiq_import_members, if: -> { !importing? && members_import.exists? }
+  
+  def sidekiq_import_members
+    self.update importing: true, import_progress: "Grab a cup of coffee... we're importing your contacts."
+    ImportWorker.perform_async id
+  end
+  
+  def self.import_file(id)
+    org = Organization.find id
+    
+    begin
+      i = Importer.new(id)
+      i.import
+    rescue
+      org.update importing: false, members_import: nil, import_progress: "There was an error with your file. Please re-upload."
+    end
+  end
   
   def generate_keys
     self.publishable_key = loop do
@@ -210,5 +235,11 @@ class Organization < ActiveRecord::Base
         creator: admin
       )
     end
+  end
+  
+  def jibe_data
+    attributes.merge({
+      importing_changed: importing_changed?
+    })
   end
 end

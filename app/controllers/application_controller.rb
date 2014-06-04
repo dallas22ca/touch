@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
   def action_type
     if %w[index show download].include? action_name
       :read
-    elsif %w[new create edit update sort presence].include? action_name
+    elsif %w[new create edit update sort presence import].include? action_name
       :write
     elsif %w[destroy reset].include? action_name
       :delete

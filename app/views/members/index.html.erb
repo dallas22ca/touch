@@ -5,7 +5,11 @@
 <div class="main <%= "has_sidebar" if @does_have_sidebar %>">
 	<div id="searcher">
 		<% if @member.permits? :messages, :write %>
-			<%= link_to "Send A Message", new_message_path(@org), class: "medium blue_bg button right create_message", remote: true %>
+			<%= link_to "Send A Message", new_message_path(@org), class: "medium blue_bg button right create_message", remote: true, style: "margin-left: 10px; " %>
+		<% end %>
+		
+		<% if @member.permits? :members, :write %>
+			<%= link_to "Add Contact", new_member_path(@org), class: "medium grey_bg button right create_message", remote: true %>
 		<% end %>
 		
 		<%= form_tag members_path(@org, format: :js), id: "q_form" do %>

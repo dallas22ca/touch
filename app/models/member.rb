@@ -1,8 +1,8 @@
 class Member < ActiveRecord::Base
   jibe
-
-  attr_accessor :full_name
   
+  attr_accessor :bulk_action
+
   serialize :roles, Array
   
   belongs_to :user
@@ -17,7 +17,7 @@ class Member < ActiveRecord::Base
   
   before_validation :set_key, unless: :key
   before_validation :parameterize_key, if: :key_changed?
-  before_validation :intercept_full_name, if: :full_name
+  before_validation :intercept_full_name, if: -> { data.has_key? "full_name" }
   before_validation :flatten_roles, if: :roles_changed?
   before_validation :set_user_data, if: -> { user && user_id_changed? }
 
@@ -50,6 +50,8 @@ class Member < ActiveRecord::Base
   def intercept_full_name
     self.data ||= {}
     d = {}
+    self.data["full_name"] = self.data[:full_name] if self.data.has_key? :full_name
+    full_name = self.data["full_name"]
     split = full_name.split(" ")
     
     if split.length == 1
@@ -60,7 +62,14 @@ class Member < ActiveRecord::Base
       d["last_name"] = split.last
     else
       d["first_name"] = split.first
-      d["last_name"] = full_name.gsub(d["first_name"], "").strip
+      
+      if d["first_name"] =~ /\./
+        d["salutation"] = split[0]
+        d["first_name"] = split[1]
+        d["last_name"] = full_name.split(d["first_name"]).last.strip
+      else
+        d["last_name"] = full_name.gsub(d["first_name"], "").strip
+      end
     end
     
     self.data = self.data.merge(d)
@@ -185,7 +194,8 @@ class Member < ActiveRecord::Base
   def jibe_data
     attributes.merge({
       name: name,
-      pretty_name: pretty_name
+      pretty_name: pretty_name,
+      bulk_action: !bulk_action.blank?
     })
   end
   

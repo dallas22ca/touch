@@ -90,7 +90,7 @@ class RoomsController < ApplicationController
     if present
       if !exists
         if params[:member_id] == "new"
-          @this_member = @org.members.create full_name: params[:name]
+          @this_member = @org.members.create data: { full_name: params[:name] }
         end
       
         @org.events.create!(

@@ -26,6 +26,10 @@ class MembersController < ApplicationController
     end
   end
   
+  def new
+    @this_member = @org.members.new
+  end
+  
   def create
     @this_member = @org.members.new(member_params)
 
@@ -66,6 +70,15 @@ class MembersController < ApplicationController
       format.json { head :no_content }
       format.js
     end
+  end
+  
+  def import
+    if params[:organization]
+      @org.members_import = params[:organization][:members_import]
+      @org.save
+    end
+
+    render nothing: true
   end
   
   def unsubscribe

@@ -40,6 +40,18 @@
 					<% if @member.permits? :rooms, :read %>
 						<li><%= link_to "Attendance", rooms_path(@org), class: "#{"selected" if request.path.include? "attendance"}" %></li>
 					<% end %>
+					
+					<% if @member.roles.include? "admin" %>
+						<%= jibe "organizations", scope: ["id=#{@org.id}"], silent: true %>
+						
+						<% if @org.importing? %>
+							<script type="text/javascript">
+								setTimeout(function() {
+									Noterizer.open("Grab a cup of coffee... we're importing your contacts.", "success", true);
+								}, 100);
+							</script>
+						<% end %>
+					<% end %>
 				<% end %>
 				
 				<li><%= link_to "My Account", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
@@ -60,6 +72,7 @@
 	<%= yield %>
 	
 	<%= render "noterizer" %>
+	<iframe id="iframe" name="iframe"></iframe>
 
 </body>
 </html>
