@@ -35,5 +35,9 @@
 	
 	.has_sidebar {
 		margin-left: 0;
+		
+		.loading {
+			left: 0px;
+		}
 	}
 }
