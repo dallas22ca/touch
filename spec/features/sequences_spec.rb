@@ -9,19 +9,9 @@ describe "Sequence", js: true do
   end
   
   # The Plan
-    # => create tasks a month in advance
+    # => every morning, create tasks for the next 30 days (only for recurring, date-based)
   
-  # methods of getting on a sequence:
-    # => manual
-    # => added to segment
-    # => contact data changed
-    # => everyone
-  
-  # when can a segment start
-    # => Annual dates
-    # => Arbitrary dates
-  
-  # HOW TO CREATE TASKS
+  # WHEN TO CREATE TASKS
   it "should add tasks when sequence is created"
   it "should add/remove tasks when sequence is updated"
 
@@ -40,8 +30,14 @@ describe "Sequence", js: true do
   # SIMPLE FOLLOWUPS
   it "creates task 2 weeks after every birthday, then 1 week, then 3 weeks, without duplicates"
   it "sends email 5 days before December 25, then 7 days, then 3 days, without duplicates"
-  it "follows up once a month, then once a week, without duplicates"
+  it "creates a once a month, then once a week, without duplicates"
+  it "creates a once a week, then once a month, without duplicates"
+  it "creates tasks only for the days allotted"
+  it "creates tasks that are spread out evenly"
   
   # MULTIPLE STAGE TASKS
   it "creates birthday sequence tasks"
+  it "creates welcome sequence tasks"
+  it "creates course sequence tasks"
+  it "can't have steps with offset greater than recurrence"
 end
