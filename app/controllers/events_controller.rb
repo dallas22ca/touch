@@ -16,6 +16,7 @@ class EventsController < ApplicationController
       @this_member = @org.members.where(key: member[:key]).first if member.has_key?(:key)
       @this_member = @org.members.where("data -> 'email' = ?", member[:email]).first if member.has_key?(:email) && !@this_member
       @this_member = @org.members.new if !@this_member
+      @this_member.sequence_ids = params[:sequence_ids] if params[:sequence_ids]
       @this_member.created_at = member.delete :created_at if member.has_key? :created_at
       @this_member.data = @this_member.data.merge member
       @this_member.data["full_name"] = member.delete :name

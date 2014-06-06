@@ -2,7 +2,7 @@ load 'deploy/assets'
 
 require "bundler/capistrano"
 require 'sidekiq/capistrano'
-# require "whenever/capistrano"
+require "whenever/capistrano"
 require 'puma/capistrano'
 
 default_run_options[:pty] = true

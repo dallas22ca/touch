@@ -1,7 +1,7 @@
 class Member < ActiveRecord::Base
   jibe
   
-  attr_accessor :bulk_action
+  attr_accessor :bulk_action, :sequence_ids
 
   serialize :roles, Array
   
@@ -29,9 +29,23 @@ class Member < ActiveRecord::Base
   after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   after_save :update_organization_fields
   
+  after_save :add_to_sequences, if: :sequence_ids
+  after_save :apply_sequences, unless: :sequence_ids
+  after_destroy :apply_sequences
+  
   scope :last_name_asc, -> { order("members.data->'last_name' asc") }
   scope :last_name_desc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
+  
+  def add_to_sequences
+    organization.sequences.manual.where(id: sequence_ids).each do |sequence|
+      sequence.generate_tasks Time.zone.now, [id]
+    end
+  end
+  
+  def apply_sequences
+    organization.sequences.map { |s| s.generate_tasks }
+  end
   
   def parameterize_data
     self.data ||= {}

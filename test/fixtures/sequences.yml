@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  strategy: MyString
+  creator_id: 
+  interval: 1
+  date: 2014-06-05 11:49:38
+  organization_id: 
+
+two:
+  strategy: MyString
+  creator_id: 
+  interval: 1
+  date: 2014-06-05 11:49:38
+  organization_id: 

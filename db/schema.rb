@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604183646) do
+ActiveRecord::Schema.define(version: 20140606172909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20140604183646) do
     t.hstore   "data",            default: {}
     t.text     "roles",           default: "--- []\n"
     t.boolean  "subscribed",      default: true
+    t.text     "availability",    default: "---\n- 1\n- 2\n- 3\n- 4\n- 5\n"
   end
 
   add_index "members", ["organization_id"], name: "index_members_on_organization_id", using: :btree
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 20140604183646) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "segment_ids",     default: "--- []\n"
+    t.boolean  "template",        default: false
   end
 
   add_index "messages", ["creator_id"], name: "index_messages_on_creator_id", using: :btree
@@ -215,6 +217,34 @@ ActiveRecord::Schema.define(version: 20140604183646) do
 
   add_index "segments", ["organization_id"], name: "index_segments_on_organization_id", using: :btree
 
+  create_table "sequences", force: true do |t|
+    t.string   "strategy"
+    t.integer  "creator_id"
+    t.integer  "interval"
+    t.datetime "date"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "segment_ids",     default: "--- []\n"
+  end
+
+  add_index "sequences", ["creator_id"], name: "index_sequences_on_creator_id", using: :btree
+  add_index "sequences", ["organization_id"], name: "index_sequences_on_organization_id", using: :btree
+
+  create_table "steps", force: true do |t|
+    t.integer  "sequence_id"
+    t.integer  "offset"
+    t.string   "action"
+    t.integer  "task_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "steps", ["message_id"], name: "index_steps_on_message_id", using: :btree
+  add_index "steps", ["sequence_id"], name: "index_steps_on_sequence_id", using: :btree
+  add_index "steps", ["task_id"], name: "index_steps_on_task_id", using: :btree
+
   create_table "tasks", force: true do |t|
     t.text     "content"
     t.integer  "folder_id"
@@ -227,12 +257,18 @@ ActiveRecord::Schema.define(version: 20140604183646) do
     t.datetime "due_at"
     t.datetime "completed_at"
     t.integer  "contact_id"
+    t.boolean  "template",     default: false
+    t.integer  "year"
+    t.integer  "step_id"
+    t.integer  "message_id"
   end
 
   add_index "tasks", ["contact_id"], name: "index_tasks_on_contact_id", using: :btree
   add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
   add_index "tasks", ["folder_id"], name: "index_tasks_on_folder_id", using: :btree
   add_index "tasks", ["member_id"], name: "index_tasks_on_member_id", using: :btree
+  add_index "tasks", ["message_id"], name: "index_tasks_on_message_id", using: :btree
+  add_index "tasks", ["step_id"], name: "index_tasks_on_step_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",                           null: false

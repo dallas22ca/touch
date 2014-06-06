@@ -2,6 +2,10 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
+  resources :steps
+
+  resources :sequences
+
   devise_scope :user do
     devise_for :users,
       controllers: {
