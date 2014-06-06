@@ -27,23 +27,30 @@ class Sequence < ActiveRecord::Base
     case strategy
     when "recurring"
       occurances_within_time_period = (time_period / interval).floor
-      occurances_within_time_period.times do |n|
-        start = now + (interval * n)
-        finish = now + (interval * (n + 1))
-        random_date = rand(start..finish)
+
+      contact_ids.each do |contact_id|
+        start = now
+        finish = now + interval
+        base_date = rand(start..finish)
         
-        contact_ids.each do |contact_id|
-          last_task = false
-          
+        occurances_within_time_period.times do |n|
           steps.each do |step|
-            task = creator.tasks.where(due_at: start..finish, contact_id: contact_id).first
-            task = creator.tasks.new(contact_id: contact_id) unless task
-            due_at = last_task ? last_task.due_at + interval : random_date
-            task.assign_attributes content: step.task.content, due_at: due_at + step.offset.seconds, creator: creator
-            task.message = step.task.message if step.task.message
-            task.save!
-            last_task = task
+            due_at = base_date + (interval * n) + step.offset.seconds
+          
+            if due_at >= Time.zone.now
+              task = creator.tasks.where(step: step, due_at: start..finish, contact_id: contact_id).first
+              
+              if !task
+                task = creator.tasks.new(step: step, contact_id: contact_id)
+                task.assign_attributes content: step.task.content, due_at: due_at, creator: creator
+                task.message = step.task.message if step.task.message
+                task.save!
+              end
+            end
           end
+          
+          start += interval
+          finish += interval
         end
       end
       

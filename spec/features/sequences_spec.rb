@@ -196,15 +196,28 @@ describe "Sequence", js: true do
     assert "Tuesday", Task.not_a_template.first.due_at.strftime("%A")
   end
   
-  it "can create recurring sequences" do
+  it "can create recurring sequences, but only for future" do
     sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
-    step = sequence.steps.new offset: 0.days.to_i, action: "task"
+    step = sequence.steps.new offset: 0, action: "task"
     step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    
     sequence.save!
     assert_equal 4, Task.not_a_template.count
     assert Task.not_a_template.last.content_for_contact.include? @member.name
+    
+    sequence.generate_tasks
+    assert_equal 4, Task.not_a_template.count
+    
+    step = sequence.steps.new offset: 1.week * -1, action: "task"
+    step.build_task content: "Say hi to {{ contact.name }}.", template: true, step: step
+    sequence.save!
+    assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
+    
+    sequence.generate_tasks 1.day.ago
+    assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
   end
 
+#  it "changing dates works fine"
 #  it "members can change they're availability if touch base module"
 #  it "can't have steps with offset greater than recurrence"
 #  it "creates tasks that are spread out evenly"
