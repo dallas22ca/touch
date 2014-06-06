@@ -4,6 +4,7 @@ class Member < ActiveRecord::Base
   attr_accessor :bulk_action, :sequence_ids
 
   serialize :roles, Array
+  serialize :availability, Array
   
   belongs_to :user
   belongs_to :organization, counter_cache: true, touch: true
@@ -219,5 +220,12 @@ class Member < ActiveRecord::Base
   
   def toggle_subscribe
     update subscribed: !subscribed?
+  end
+  
+  def next_available_day_for(date)
+    loop do
+      break date if availability.include?(date.wday)
+      date = date + 1.day
+    end
   end
 end

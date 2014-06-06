@@ -6,10 +6,8 @@ describe "Sequence", js: true do
     @user = FactoryGirl.create(:user)
     @org.users.push @user
     @member = @user.members.first
+    @member.update_columns availability: [0, 1, 2, 3, 4, 5, 6]
   end
-  
-  # The Plan
-    # => every morning, create tasks for the next 30 days (only for recurring, date-based)
   
   # WHEN TO CREATE TASKS
   it "should add tasks when sequence created, updated when edited" do
@@ -49,12 +47,12 @@ describe "Sequence", js: true do
     assert @member.tasks.count == 2
     
     @new_member = @org.members.create! data: { full_name: "Billy Joe Armstrong" }
-    assert @member.tasks.last.due_at.strftime("%B %-d") == "December 25"
-    assert @member.tasks.count == 4
+    assert_equal "December 25", @member.tasks.last.due_at.strftime("%B %-d")
+    assert_equal 4, @member.tasks.count
     
     @new_member.destroy
-    assert @org.members.count == 1
-    assert @member.tasks.count == 2
+    assert_equal 1, @org.members.count
+    assert_equal 2, @member.tasks.count
   end
   
   it "should add tasks when bulk added manually to sequence" do
@@ -80,10 +78,10 @@ describe "Sequence", js: true do
     sequence.save!
     sequence.generate_tasks Time.zone.now, [@member.id]
     assert @member.tasks.last.due_at.strftime("%B %-d") == Time.zone.now.strftime("%B %-d")
-    assert @member.tasks.count == 1
+    assert_equal 1, @member.tasks.count
     
     sequence.remove_tasks_for [@member.id]
-    assert @member.tasks.count == 0
+    assert_equal 0, @member.tasks.count
   end
 
   it "should add/remove tasks when contact data changes" do
@@ -94,12 +92,12 @@ describe "Sequence", js: true do
     
     sequence.save!
     @member.update data: @member.data.merge(last_name: "Read")
-    assert @segment.member_ids.count == 1
-    assert @member.tasks.count == 2
+    assert_equal 1, @segment.member_ids.count
+    assert_equal 2, @member.tasks.count
     
     @member.update data: @member.data.merge(last_name: "Not Read")
-    assert @segment.member_ids.count == 0
-    assert @member.tasks.count == 0
+    assert_equal 0, @segment.member_ids.count
+    assert_equal 0, @member.tasks.count
   end
 
   it "creates email welcome sequence tasks" do
@@ -116,10 +114,10 @@ describe "Sequence", js: true do
     sequence.generate_tasks 3.days.from_now
     sequence.generate_tasks 3.days.ago
     
-    assert @member.tasks.count == 10
-    assert @member.tasks.where(
+    assert_equal 10, @member.tasks.count
+    assert_equal 2, @member.tasks.where(
       due_at: sequence.date.in_time_zone..sequence.date.in_time_zone + 3.days
-    ).count == 2
+    ).count
   end
   
   it "sends email immediately" do
@@ -186,11 +184,25 @@ describe "Sequence", js: true do
   end
   
   it "creates tasks only for the days allotted" do
+    @member.update availability: [1, 2, 3, 4, 5]
+    sequence = @org.sequences.new strategy: "annual", date: DateTime.parse("Sunday"), creator: @member
+    step = sequence.steps.new offset: 0.days.to_i, action: "task"
+    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    
+    sequence.save!
+    assert_equal "Monday", Task.not_a_template.first.due_at.strftime("%A")
+    
+    @member.update availability: [2]
+    assert "Tuesday", Task.not_a_template.first.due_at.strftime("%A")
   end
   
-#  it "can create recurring sequences"
+  it "can create recurring sequences"
+#  it "members can change they're availability if touch base module"
 #  it "can't have steps with offset greater than recurrence"
 #  it "creates tasks that are spread out evenly"
 
 #  it "can holiday"
+
+# The Plan
+  # => every morning, create tasks for the next 30 days (only for recurring, date-based)
 end

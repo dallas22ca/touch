@@ -34,9 +34,9 @@ class Sequence < ActiveRecord::Base
       
       if strategy == "annual"
         first_due = Time.zone.parse(date.strftime("%B %-d #{now.year}"))
-        due_dates = [first_due, first_due + 1.year]
+        due_dates = [creator.next_available_day_for(first_due), creator.next_available_day_for(first_due + 1.year)]
       else
-        due_dates = [now]
+        due_dates = [creator.next_available_day_for(now)]
       end
       
       steps.find_each do |step|
