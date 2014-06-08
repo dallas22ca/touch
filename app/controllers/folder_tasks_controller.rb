@@ -9,7 +9,7 @@ class FolderTasksController < ApplicationController
   # GET /tasks.json
   def index
     @does_have_sidebar = true
-    @tasks = @folder.tasks.includes(:creator) if @foldership.permits?(:folder_tasks, :read)
+    @tasks = @folder.tasks.by_ordinal.includes(:creator) if @foldership.permits?(:folder_tasks, :read)
   end
 
   # GET /tasks/1
