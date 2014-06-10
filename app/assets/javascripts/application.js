@@ -16,4 +16,4 @@
 //= require turbolinks
 //= require pusher.min
 //= require jibe
-//= require_tree .
+//= require_tree ./application
