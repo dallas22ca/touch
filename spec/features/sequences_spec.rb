@@ -117,152 +117,153 @@ describe "Sequence", js: true do
     assert_equal 0, @member.tasks.count
   end
 
-  # it "creates email welcome sequence tasks" do
-  #   now = Time.zone.now
-  #   sequence = @org.sequences.new strategy: "annual", date: Time.zone.parse("December 25"), creator: @member
-  #   
-  #   5.times do |n|
-  #     step = sequence.steps.new offset: (n * 2).days.to_i, action: "email"
-  #     message = @org.messages.create! subject: "Subject ##{n}", body: "This is the content of the ##{n} email to {{ contact.name }}.", template: true
-  #     step.build_task template: true, step: step, message: message
-  #   end
-  #   
-  #   sequence.save!
-  #   sequence.generate_tasks 3.days.from_now
-  #   sequence.generate_tasks 3.days.ago
-  #   
-  #   assert_equal 10, @member.tasks.count
-  #   assert_equal 2, @member.tasks.where(
-  #     due_at: sequence.date.in_time_zone..sequence.date.in_time_zone + 3.days
-  #   ).count
-  # end
-  # 
-  # it "sends email immediately" do
-  #   sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
-  #   step = sequence.steps.new offset: 0.days.to_i, action: "email"
-  #   message = @org.messages.create! subject: "Awesome {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-  #   step.build_task template: true, step: step, message: message
-  #   
-  #   sequence.save!
-  #   mail = ActionMailer::Base.deliveries.last
-  #   mail.subject.should have_content "Awesome #{@member.name}"
-  #   mail.body.should have_content @member.name
-  #   assert_equal 2, @member.tasks.count
-  #   assert_equal 1, @member.tasks.complete.count
-  # end
-  # 
-  # it "queues email to be sent in 3 days" do
-  #   sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
-  #   
-  #   step = sequence.steps.new offset: 3.days.to_i, action: "email"
-  #   message = @org.messages.create! subject: "First {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-  #   step.build_task template: true, step: step, message: message
-  #   
-  #   step = sequence.steps.new offset: 31.days.to_i, action: "email"
-  #   message = @org.messages.create! subject: "Second {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-  #   step.build_task template: true, step: step, message: message
-  #   
-  #   sequence.save!
-  #   assert ActionMailer::Base.deliveries.empty?
-  #   
-  #   Message.deliver_overdue Time.zone.now
-  #   assert ActionMailer::Base.deliveries.empty?
-  #   
-  #   Message.deliver_overdue 3.days.from_now
-  #   Message.deliver_overdue 1.week.from_now
-  #   Message.deliver_overdue 3.days.ago
-  #   assert_equal 1, ActionMailer::Base.deliveries.count
-  #   mail = ActionMailer::Base.deliveries.last
-  #   mail.subject.should have_content "First #{@member.name}"
-  #   
-  #   Message.deliver_overdue 14.days.from_now
-  #   assert_equal 1, ActionMailer::Base.deliveries.count
-  #   assert_equal 1, Task.complete.count
-  #   
-  #   Message.deliver_overdue 32.days.from_now
-  #   assert_equal 2, ActionMailer::Base.deliveries.count
-  #   assert_equal 2, Task.complete.count
-  #   mail = ActionMailer::Base.deliveries.last
-  #   mail.subject.should have_content "Second #{@member.name}"
-  # end
-  # 
-  # it "can create contact with attached sequence" do
-  #   sequence = @org.sequences.new strategy: "manual", creator: @member
-  #   step = sequence.steps.new offset: 0.days.to_i, action: "task"
-  #   step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
-  #   sequence.save!
-  #   
-  #   assert_equal 0, Task.not_a_template.count
-  #   
-  #   visit example_path(@org, "save_contact", sequence_ids: [sequence.id])
-  #   page.should have_content "Name"
-  #   fill_in "Name", with: "Jack Sparrow"
-  #   fill_in "Email", with: "jack@dallasread.com"
-  #   click_button "Subscribe"
-  #   
-  #   page.should have_content "a"
-  #   assert_equal 1, Task.not_a_template.count
-  # end
-  # 
-  # it "creates tasks only for the days allotted" do
-  #   @member.update availability: [1, 2, 3, 4, 5]
-  #   sequence = @org.sequences.new strategy: "annual", date: DateTime.parse("Sunday"), creator: @member
-  #   step = sequence.steps.new offset: 0.days.to_i, action: "task"
-  #   step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
-  #   
-  #   sequence.save!
-  #   assert_equal "Friday", Task.not_a_template.first.due_at.strftime("%A")
-  #   
-  #   @member.update availability: [2]
-  #   assert "Tuesday", Task.not_a_template.first.due_at.strftime("%A")
-  # end
-  # 
-  # it "can create recurring sequences, but only for future" do
-  #   sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
-  #   step = sequence.steps.new offset: 0, action: "task"
-  #   step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
-  #   
-  #   sequence.save!
-  #   assert_equal 4, Task.not_a_template.count
-  #   assert Task.not_a_template.last.content_for_contact.include? @member.name
-  #   
-  #   sequence.generate_tasks
-  #   assert_equal 4, Task.not_a_template.count
-  #   
-  #   step = sequence.steps.new offset: 1.week * -1, action: "task"
-  #   step.build_task content: "Say hi to {{ contact.name }}.", template: true, step: step
-  #   sequence.save!
-  #   assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
-  #   
-  #   sequence.generate_tasks 1.day.ago
-  #   assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
-  # end
-  # 
-  # it "changing recurrance creates new tasks" do
-  #   sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
-  #   step = sequence.steps.new offset: 0, action: "task"
-  #   step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
-  #   
-  #   sequence.save!
-  #   assert_equal 4, Task.not_a_template.count
-  #   
-  #   sequence.update interval: 120.days
-  #   assert_equal 3, Task.not_a_template.count
-  # end
-  # 
-  # it "changing recurrance creates new tasks" do
-  #   sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
-  #   step = sequence.steps.new offset: 0, action: "task"
-  #   step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
-  #   
-  #   sequence.save!
-  #   assert_equal 4, Task.not_a_template.count
-  #   last_task_date = Task.not_a_template.last.due_at
-  #   
-  #   @member.update data: @member.data.merge(cool: true)
-  #   assert_equal 4, Task.not_a_template.count
-  #   assert_equal last_task_date, Task.not_a_template.last.due_at
-  # end
+  # FROM HERE NEEDS TO BE UI-IFIED
+  it "creates email welcome sequence tasks" do
+    now = Time.zone.now
+    sequence = @org.sequences.new strategy: "annual", date: Time.zone.parse("December 25"), creator: @member
+    
+    5.times do |n|
+      step = sequence.steps.new offset: (n * 2).days.to_i, action: "email"
+      message = @org.messages.create! subject: "Subject ##{n}", body: "This is the content of the ##{n} email to {{ contact.name }}.", template: true, creator: @member
+      step.build_task template: true, step: step, message: message
+    end
+    
+    sequence.save!
+    sequence.generate_tasks 3.days.from_now
+    sequence.generate_tasks 3.days.ago
+    
+    assert_equal 10, @member.tasks.count
+    assert_equal 2, @member.tasks.where(
+      due_at: sequence.date.in_time_zone..sequence.date.in_time_zone + 3.days
+    ).count
+  end
+  
+  it "sends email immediately" do
+    sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
+    step = sequence.steps.new offset: 0.days.to_i, action: "email"
+    message = @org.messages.create! subject: "Awesome {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
+    step.build_task template: true, step: step, message: message
+    
+    sequence.save!
+    mail = ActionMailer::Base.deliveries.last
+    mail.subject.should have_content "Awesome #{@member.name}"
+    mail.body.should have_content @member.name
+    assert_equal 2, @member.tasks.count
+    assert_equal 1, @member.tasks.complete.count
+  end
+  
+  it "queues email to be sent in 3 days" do
+    sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
+    
+    step = sequence.steps.new offset: 3.days.to_i, action: "email"
+    message = @org.messages.create! subject: "First {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
+    step.build_task template: true, step: step, message: message
+    
+    step = sequence.steps.new offset: 31.days.to_i, action: "email"
+    message = @org.messages.create! subject: "Second {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
+    step.build_task template: true, step: step, message: message
+    
+    sequence.save!
+    assert ActionMailer::Base.deliveries.empty?
+    
+    Message.deliver_overdue Time.zone.now
+    assert ActionMailer::Base.deliveries.empty?
+    
+    Message.deliver_overdue 3.days.from_now
+    Message.deliver_overdue 1.week.from_now
+    Message.deliver_overdue 3.days.ago
+    assert_equal 1, ActionMailer::Base.deliveries.count
+    mail = ActionMailer::Base.deliveries.last
+    mail.subject.should have_content "First #{@member.name}"
+    
+    Message.deliver_overdue 14.days.from_now
+    assert_equal 1, ActionMailer::Base.deliveries.count
+    assert_equal 1, Task.complete.count
+    
+    Message.deliver_overdue 32.days.from_now
+    assert_equal 2, ActionMailer::Base.deliveries.count
+    assert_equal 2, Task.complete.count
+    mail = ActionMailer::Base.deliveries.last
+    mail.subject.should have_content "Second #{@member.name}"
+  end
+  
+  it "can create contact with attached sequence" do
+    sequence = @org.sequences.new strategy: "manual", creator: @member
+    step = sequence.steps.new offset: 0.days.to_i, action: "task"
+    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    sequence.save!
+    
+    assert_equal 0, Task.not_a_template.count
+    
+    visit example_path(@org, "save_contact", sequence_ids: [sequence.id])
+    page.should have_content "Name"
+    fill_in "Name", with: "Jack Sparrow"
+    fill_in "Email", with: "jack@dallasread.com"
+    click_button "Subscribe"
+    
+    page.should have_content "a"
+    assert_equal 1, Task.not_a_template.count
+  end
+  
+  it "creates tasks only for the days allotted" do
+    @member.update availability: [1, 2, 3, 4, 5]
+    sequence = @org.sequences.new strategy: "annual", date: DateTime.parse("Sunday"), creator: @member
+    step = sequence.steps.new offset: 0.days.to_i, action: "task"
+    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    
+    sequence.save!
+    assert_equal "Friday", Task.not_a_template.first.due_at.strftime("%A")
+    
+    @member.update availability: [2]
+    assert "Tuesday", Task.not_a_template.first.due_at.strftime("%A")
+  end
+  
+  it "can create recurring sequences, but only for future" do
+    sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
+    step = sequence.steps.new offset: 0, action: "task"
+    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    
+    sequence.save!
+    assert_equal 4, Task.not_a_template.count
+    assert Task.not_a_template.last.content_for_contact.include? @member.name
+    
+    sequence.generate_tasks
+    assert_equal 4, Task.not_a_template.count
+    
+    step = sequence.steps.new offset: 1.week * -1, action: "task"
+    step.build_task content: "Say hi to {{ contact.name }}.", template: true, step: step
+    sequence.save!
+    assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
+    
+    sequence.generate_tasks 1.day.ago
+    assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
+  end
+  
+  it "changing recurrance creates new tasks" do
+    sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
+    step = sequence.steps.new offset: 0, action: "task"
+    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    
+    sequence.save!
+    assert_equal 4, Task.not_a_template.count
+    
+    sequence.update interval: 120.days
+    assert_equal 3, Task.not_a_template.count
+  end
+  
+  it "changing recurrance creates new tasks" do
+    sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
+    step = sequence.steps.new offset: 0, action: "task"
+    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    
+    sequence.save!
+    assert_equal 4, Task.not_a_template.count
+    last_task_date = Task.not_a_template.last.due_at
+    
+    @member.update data: @member.data.merge(cool: true)
+    assert_equal 4, Task.not_a_template.count
+    assert_equal last_task_date, Task.not_a_template.last.due_at
+  end
 
 # => it "sidekiqs"
 # => it "members can change they're availability if touch base module"

@@ -26,7 +26,7 @@ class Sequence < ActiveRecord::Base
   end
   
   def generate_tasks(now = Time.zone.now, contact_ids = false)
-    if !contact_ids
+    if !contact_ids && strategy != "manual"
       contact_ids = member_ids
       creator.tasks.where(step_id: step_ids).incomplete.destroy_all if contact_ids.empty?
       creator.tasks.where(step_id: step_ids).where("contact_id not in (?)", contact_ids).incomplete.destroy_all if contact_ids.any?
