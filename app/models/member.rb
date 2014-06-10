@@ -90,9 +90,9 @@ class Member < ActiveRecord::Base
         if d["first_name"] =~ /\./
           d["salutation"] = split[0]
           d["first_name"] = split[1]
-          d["last_name"] = full_name.split(d["first_name"]).last.strip
+          d["last_name"] = full_name.split("#{d["first_name"]}").last.strip
         else
-          d["last_name"] = full_name.gsub(d["first_name"], "").strip
+          d["last_name"] = full_name.gsub("#{d["first_name"]}", "").strip
         end
       end
     

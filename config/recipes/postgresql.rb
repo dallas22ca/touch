@@ -43,6 +43,7 @@ namespace :postgresql do
     run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
     run "ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
     run "ln -nfs #{shared_path}/config/skylight.yml #{release_path}/config/skylight.yml"
+    run "ln -nfs #{shared_path}/config/sidekiq.yml #{release_path}/config/sidekiq.yml"
   end
   after "deploy:finalize_update", "postgresql:symlink"
   

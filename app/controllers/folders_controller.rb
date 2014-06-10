@@ -81,9 +81,7 @@ class FoldersController < ApplicationController
   end
   
   def reset
-    if @folder.destroy
-      @org.seed_first_folder
-    end
+    @org.seed_first_folder if @folder.destroy
 
     respond_to do |format|
       format.html { redirect_to folders_url(@org), notice: 'Folder was successfully destroyed.' }
