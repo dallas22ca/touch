@@ -1,8 +1,10 @@
 class MessageMailer < ActionMailer::Base
-  def bulk(message_id, member_id)
+  def bulk(message_id, member_id, task_id = false)
+    verb = "received"
     @message = Message.find(message_id)
+    @task = @message.creator.tasks.find(task_id) unless task_id.blank?
     @member = @message.organization.members.find(member_id)
-    
+
     if @member
       @contact_token = @member.id * CONFIG["secret_number"]
       @message_token = @message.id * CONFIG["secret_number"]
@@ -13,10 +15,8 @@ class MessageMailer < ActionMailer::Base
           subject: Message.content_for(@message.subject, @member)
         )
         
-        verb = "was sent"
-
-        @message.organization.events.create(
-          description: "{{ message.subject }} #{verb} to {{ member.name }}",
+        @event = @message.organization.events.new(
+          description: "{{ member.name }} #{verb} {{ message.subject }}",
           verb: verb,
           json_data: {
             message: @message.attributes,
@@ -25,6 +25,13 @@ class MessageMailer < ActionMailer::Base
             }
           }
         )
+        
+        if @task
+          @task.update complete: true
+          @event.json_data[:task] = @task.attributes
+        end
+
+        @event.save
       end
     end
   end

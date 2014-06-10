@@ -16,6 +16,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before :each do
+    ActionMailer::Base.deliveries = []
     Event.delete_all
     Message.delete_all
     Organization.delete_all

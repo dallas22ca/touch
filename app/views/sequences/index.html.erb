@@ -1,0 +1,34 @@
+<div class="main <%= "has_sidebar" if @does_have_sidebar %>">
+	<div class="loading"></div>
+	
+	<div id="searcher" class="main_header">
+		<% if @member.permits? :sequences, :write %>
+			<%= link_to "New Sequence", new_sequence_path, class: "blue_bg big button" %>
+		<% end %>
+	</div>
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Strategy</th>
+	      <th>Interval</th>
+	      <th>Date</th>
+	      <th>Steps</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @sequences.each do |sequence| %>
+	      <tr>
+	        <td><%= link_to sequence.strategy.capitalize, edit_sequence_path(@org, sequence) %></td>
+	        <td><%= link_to sequence.interval, edit_sequence_path(@org, sequence) %></td>
+	        <td><%= link_to sequence.date, edit_sequence_path(@org, sequence) %></td>
+	        <td><%= link_to "x", sequence_path(@org, sequence), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+
+</div>

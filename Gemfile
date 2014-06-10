@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'pusher'
 gem 'jibe'# , github: "dallasread/jibe" #, path: '/Users/dallasread/apps/jibe'#
 gem 'roo'
+gem 'whenever', require: false
 
 gem 'sidekiq'
 gem 'sinatra', require: false

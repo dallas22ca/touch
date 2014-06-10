@@ -5,8 +5,13 @@
   </head>
   <body>
     
-    <form action="<%= add_member_path(@org) %>" method="post">
-      
+    <form action="<%= add_member_path @org %>" method="post">
+			<% if params[:sequence_ids] %>
+				<% params[:sequence_ids].each do |id| %>
+					<input type="hidden" name="sequence_ids[]" value="<%= id %>">
+				<% end %>
+			<% end %>
+			
       <input type="hidden" name="publishable_key" value="<%= @org.publishable_key %>">
       
       <div class="field">

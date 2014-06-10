@@ -1,0 +1,94 @@
+<div class="has_header">
+	<div class="main">
+		<div class="loading"></div>
+	
+		<div class="mini_content_wrapper">
+			
+			<%= link_to "&larr; Back".html_safe, sequences_path(@org), class: "small grey_bg button" %><br><br>
+
+			<%= form_for @sequence, url: @sequence.new_record? ? sequences_path(@org) : sequence_path(@org, @sequence) do |f| %>
+				<% if @sequence.new_record? %>
+				  <div class="field">
+				    <%= f.label :strategy, class: "label" %>
+				    <%= f.select :strategy, options_for_select([["Annual", "annual"], ["Recurring", "recurring"], ["Manual", "manual"]]) %>
+				  </div>
+				<% end %>
+				
+			  <div class="field">
+			    <%= f.label :interval, class: "label" %>
+			    <%= f.select :interval, options_for_select([
+						["once a week", 1.week],
+						["once every 2 weeks", 2.weeks],
+						["once every 3 weeks", 3.weeks],
+						["once a month", 1.month],
+						["once every 2 months", 2.months],
+						["once every 3 months", 3.months],
+						["once every 4 months", 4.months],
+						["once every 6 months", 6.months],
+						["once every 9 months", 9.months],
+						["once a year", 1.year]
+			    ]) %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :date, "Annual Date", class: "label" %>
+			    <%= f.datetime_select :date %>
+			  </div>
+				
+				<div id="sequence_tasks">
+					<% @sequence.steps.build if @sequence.steps.empty? %>
+					
+					<%= f.fields_for :steps do |s| %>
+						<%= s.select :action, options_for_select([["Do something", "task"], ["Send an email", "email"]]) %>
+						<%= s.select :offset, options_for_select([
+							["Immediately", 0],
+							["1 Day Before", 1.day * -1],
+							["2 Days Before", 2.days * -1],
+							["3 Days Before", 3.days * -1],
+							["1 Week Before", 1.week * -1],
+							["2 Weeks Before", 2.weeks * -1],
+							["3 Weeks Before", 3.weeks * -1],
+							["1 Month Before", 1.month * -1],
+							["2 Months Before", 2.months * -1],
+							["3 Months Before", 3.months * -1],
+							["6 Months Before", 6.months * -1],
+							["1 Day After", 1.day],
+							["2 Days After", 2.days],
+							["3 Days After", 3.days],
+							["1 Week After", 1.week],
+							["2 Weeks After", 2.weeks],
+							["3 Weeks After", 3.weeks],
+							["1 Month After", 1.month],
+							["2 Months After", 2.months],
+							["3 Months After", 3.months],
+							["6 Months After", 6.months]
+						]) %>
+						
+							<% s.object.build_task unless s.object.task %>
+							
+							<%= s.fields_for :task do |t| %>
+								<% t.object.build_message unless t.object.message %>
+								<%= t.text_field :content, placeholder: "Task Content" %>
+								<%= t.hidden_field :template, value: true %>
+								
+								<%= t.fields_for :message do |m| %>
+									<%= m.text_field :subject, placeholder: "Subject" %>
+									<%= m.text_field :body, placeholder: "Body" %>
+									<%= m.hidden_field :template, value: true %>
+								<% end %>
+							<% end %>
+					<% end %>
+				</div>
+				
+			  <div class="actions">
+			    <%= submit_tag "Save Sequence", class: "big blue_bg button" %>
+			
+					<% if @sequence.persisted? && @member.permits?(@sequence, :delete) %>
+						<%= link_to "Delete", sequence_path(@org, @sequence), class: "close_lightbox", method: :delete, data: { confirm: "Are you sure you want to delete this sequence?" } %>
+					<% end %>
+			  </div>
+			<% end %>
+
+		</div>
+	
+	</div>
+</div>

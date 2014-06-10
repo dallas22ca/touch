@@ -1,0 +1,22 @@
+<%= link_to "x", "#", class: "close_lightbox close_button" %>
+<h1>Add To Sequence</h1>
+	
+<div class="content">
+	<%= form_for Sequence.new, url: sequence_bulk_add_path(@org), remote: true do |f| %>
+	
+		<div class="field">
+			<%= label_tag :sequence_id, "Add #{pluralize params[:member_ids].to_a.size, "member"} to which sequence?", class: "label" %>
+			<%= select_tag :sequence_id, options_for_select(@org.sequences.manual.map{ |s| [s.name, s.id] }) %>
+		</div>
+		
+		<% params[:member_ids].each do |id| %>
+			<%= hidden_field_tag "member_ids[]", id %>
+		<% end %>
+		
+	  <div class="actions">
+			<%= f.submit "Add To Sequence", class: "big blue_bg button" %>
+			
+			<%= link_to "Close", "#", class: "close_lightbox" %>
+	  </div>
+	<% end %>
+</div>

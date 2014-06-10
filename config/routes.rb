@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       }
       
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
+    get "/track/img/:args" => "events#track", as: :track_img
+    get "/track/redirect/:args" => "events#track", as: :track_redirect
     
     authenticated :user, lambda { |u| u.admin? } do
       resources :organizations, only: [:index, :edit, :update]
@@ -45,6 +47,11 @@ Rails.application.routes.draw do
         resources :messages
         resources :fields
         resources :identities
+        
+        match "/sequences/bulk/add" => "sequences#bulk_add", as: :sequence_bulk_add, via: [:get, :post]
+        match "/sequences/bulk/remove" => "sequences#bulk_add", as: :sequence_bulk_remove, via: [:get, :post]
+        
+        resources :sequences
 
         resources :rooms, path: :attendance do
           resources :meetings

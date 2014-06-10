@@ -1,9 +1,10 @@
 class Member < ActiveRecord::Base
   jibe
   
-  attr_accessor :bulk_action
+  attr_accessor :bulk_action, :sequence_ids
 
   serialize :roles, Array
+  serialize :availability, Array
   
   belongs_to :user
   belongs_to :organization, counter_cache: true, touch: true
@@ -17,7 +18,7 @@ class Member < ActiveRecord::Base
   
   before_validation :set_key, unless: :key
   before_validation :parameterize_key, if: :key_changed?
-  before_validation :intercept_full_name, if: -> { data.has_key? "full_name" }
+  before_validation :intercept_full_name
   before_validation :flatten_roles, if: :roles_changed?
   before_validation :set_user_data, if: -> { user && user_id_changed? }
 
@@ -29,9 +30,23 @@ class Member < ActiveRecord::Base
   after_create :seed_data, if: Proc.new { roles.include?("admin") && organization.modules.include?("folders") }
   after_save :update_organization_fields
   
+  after_save :add_to_sequences, if: :sequence_ids
+  after_save :apply_sequences, unless: :sequence_ids
+  after_destroy :apply_sequences
+  
   scope :last_name_asc, -> { order("members.data->'last_name' asc") }
   scope :last_name_desc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
+  
+  def add_to_sequences
+    organization.sequences.manual.where(id: sequence_ids).each do |sequence|
+      sequence.generate_tasks Time.zone.now, [id]
+    end
+  end
+  
+  def apply_sequences
+    organization.sequences.map { |s| s.generate_tasks }
+  end
   
   def parameterize_data
     self.data ||= {}
@@ -48,31 +63,41 @@ class Member < ActiveRecord::Base
   end
   
   def intercept_full_name
+    self.data = self.data.with_indifferent_access
     self.data ||= {}
-    d = {}
-    self.data["full_name"] = self.data[:full_name] if self.data.has_key? :full_name
-    full_name = self.data["full_name"]
-    split = full_name.split(" ")
     
-    if split.length == 1
-      d["first_name"] = split.first
-      d["last_name"] = ""
-    elsif split.length == 2
-      d["first_name"] = split.first
-      d["last_name"] = split.last
-    else
-      d["first_name"] = split.first
+    if self.data.has_key?("full_name") || self.data.has_key?("name")
+      d = {}
       
-      if d["first_name"] =~ /\./
-        d["salutation"] = split[0]
-        d["first_name"] = split[1]
-        d["last_name"] = full_name.split(d["first_name"]).last.strip
+      if self.data.has_key?("name") && !self.data.has_key?("full_name")
+        d["full_name"] = self.data["name"]
       else
-        d["last_name"] = full_name.gsub(d["first_name"], "").strip
+        d["full_name"] = self.data["full_name"]
       end
-    end
     
-    self.data = self.data.merge(d)
+      full_name = d["full_name"]
+      split = full_name.split(" ")
+    
+      if split.length == 1
+        d["first_name"] = split.first
+        d["last_name"] = ""
+      elsif split.length == 2
+        d["first_name"] = split.first
+        d["last_name"] = split.last
+      else
+        d["first_name"] = split.first
+      
+        if d["first_name"] =~ /\./
+          d["salutation"] = split[0]
+          d["first_name"] = split[1]
+          d["last_name"] = full_name.split(d["first_name"]).last.strip
+        else
+          d["last_name"] = full_name.gsub(d["first_name"], "").strip
+        end
+      end
+    
+      self.data = self.data.merge(d)
+    end
   end
   
   def flatten_roles
@@ -165,6 +190,7 @@ class Member < ActiveRecord::Base
       folders: /folders\//,
       attendance: /(rooms\/)|(members\/(write|delete))/,
       messages: /messages\//,
+      sequences: /sequences\//,
       tasks: /^tasks\//
     }
   end
@@ -187,7 +213,10 @@ class Member < ActiveRecord::Base
       "messages/delete",
       "tasks/read",
       "tasks/write",
-      "tasks/delete"
+      "tasks/delete",
+      "sequences/read",
+      "sequences/write",
+      "sequences/delete"
     ]
   end
   
@@ -205,5 +234,13 @@ class Member < ActiveRecord::Base
   
   def toggle_subscribe
     update subscribed: !subscribed?
+  end
+  
+  def next_available_day_for(date)
+    loop do
+      break date if availability.include?(date.wday)
+      break date - 1 if availability.include?(date.wday - 1)
+      date = date + 1.day
+    end
   end
 end

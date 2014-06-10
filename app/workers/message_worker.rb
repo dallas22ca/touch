@@ -5,7 +5,7 @@ class MessageWorker
   
   def perform(message_id, type, args = {})
     if type == "deliver"
-      MessageMailer.bulk(message_id, args["member_id"]).deliver
+      MessageMailer.bulk(message_id, args["member_id"], args["task_id"]).deliver
     end
   end
 end

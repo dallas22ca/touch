@@ -17,6 +17,17 @@ describe "Filter" do
     }]).count
   end
   
+  it "searches field with simple exists" do
+    @org = FactoryGirl.create(:organization)
+    5.times.map { @org.users.push FactoryGirl.create(:user) }
+    @org.members.limit(4).map { |m| m.update data: m.data.merge(awesome: true) }
+    
+    assert_equal 4, @org.filter_members([{
+      field: "awesome",
+      matcher: "exists"
+    }]).count
+  end
+  
   it "searches events field with simple greater_than" do
     @org = FactoryGirl.create(:organization)
     5.times.map { |n| @org.users.push FactoryGirl.create(:user) }

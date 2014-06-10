@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Strategy:</strong>
+  <%= @sequence.strategy %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @sequence.creator %>
+</p>
+
+<p>
+  <strong>Interval:</strong>
+  <%= @sequence.interval %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @sequence.date %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @sequence.organization %>
+</p>
+
+<%= link_to 'Edit', edit_sequence_path(@sequence) %> |
+<%= link_to 'Back', sequences_path %>

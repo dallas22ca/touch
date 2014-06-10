@@ -6,12 +6,21 @@ class Message < ActiveRecord::Base
 
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   belongs_to :organization
+  has_many :tasks
   
+  scope :not_a_template, -> { where template: false }
+  scope :template, -> { where template: true }
+  
+  before_validation :set_organization, unless: :organization_id
   before_validation :remove_blank_segment_ids, if: :segment_ids
-  validates_presence_of :subject, :body
-  validate :validate_recipients, if: -> { member_ids.empty? && segment_ids.empty? }
+  validates_presence_of :subject, :body, :creator_id
+  validate :validate_recipients, if: -> { !template? && member_ids.empty? && segment_ids.empty? }
   
-  after_create :prepare_for_delivery
+  after_create :prepare_for_delivery, if: -> { !template? }
+  
+  def set_organization
+    self.organization = creator.organization
+  end
   
   def remove_blank_segment_ids
     self.segment_ids = segment_ids.reject(&:blank?).map(&:to_i)
@@ -39,6 +48,12 @@ class Message < ActiveRecord::Base
     
     ids.uniq.each do |member_id|
       MessageWorker.perform_async id, "deliver", member_id: member_id
+    end
+  end
+  
+  def deliver_to(member_ids = [], task_id = false)
+    member_ids.each do |m|
+      MessageWorker.perform_async id, "deliver", member_id: m, task_id: task_id
     end
   end
   
@@ -90,5 +105,13 @@ class Message < ActiveRecord::Base
     end
     
     output == "count" ? links.count : content
+  end
+  
+  def self.deliver_overdue(now = Time.zone.now)
+    Task.where("due_at < ?", now).has_message.not_a_template.find_each do |task|
+      if task.creator.organization.events.where("verb = 'was sent' and data @> 'message.id=>#{task.message_id}' and data @> 'member.id=>#{task.contact_id}'").empty?
+        task.do_deliver_message
+      end
+    end
   end
 end

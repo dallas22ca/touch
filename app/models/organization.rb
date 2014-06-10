@@ -12,6 +12,7 @@ class Organization < ActiveRecord::Base
   has_many :folderships, through: :folders
   has_many :fields
   has_many :messages
+  has_many :sequences
   
   has_attached_file :logo, default_url: "default_org_logo"
   validates_attachment_content_type :logo, content_type: /jpeg|jpg|gif|png/
@@ -183,6 +184,8 @@ class Organization < ActiveRecord::Base
               queries.push "#{table}.#{field} > '#{value}'"
             when "less_than"
               queries.push "#{table}.#{field} < '#{value}'"
+            when "exists"
+              queries.push "#{table}.data is not null"
             end  
           else
             case matcher
@@ -196,6 +199,8 @@ class Organization < ActiveRecord::Base
               queries.push "#{table}.data -> '#{field}' > '#{value}'"
             when "less_than"
               queries.push "#{table}.data -> '#{field}' < '#{value}'"
+            when "exists"
+              queries.push "#{table}.data ? '#{field}'"
             end
           end
         end

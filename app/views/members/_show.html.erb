@@ -3,13 +3,18 @@
 
 <div class="content">
 	<% if @this_member.emailable? && @member.permits?(:messages, :write) %>
-		<%= link_to "Send Message", new_message_path(@org, message: { member_ids: [@this_member.id] }), remote: true, class: "small blue_bg button right" %>
+		<%= link_to "Send Message", new_message_path(@org, message: { member_ids: [@this_member.id] }), remote: true, class: "medium blue_bg button right" %>
 	<% end %>
 	
 	<h3>Profile <%= link_to "(Edit)", edit_member_path(@this_member.organization, @this_member), remote: true if @member.permits? @this_member, :write %></h3>
 	
 	<ul class="descriptive">
-		<% @this_member.data.each do |k, v| %>
+		<li>
+			Name:
+			<strong><%= @this_member.name %></strong>
+		</li>
+		
+		<% @this_member.data.reject{ |k| %w[full_name name first_name last_name].include? k }.each do |k, v| %>
 			<li>
 				<%= k.split("_").map { |w| w.capitalize }.join(" ") %>: 
 				<strong><%= v %></strong>
@@ -19,6 +24,6 @@
 	
 	<h3>History</h3>
 	<ul class="descriptive">
-		<%= jibe @this_member.events.includes(:organization).order("created_at desc") %>
+		<%= jibe @this_member.events.includes(:organization).order("created_at desc"), scope: [@this_member] %>
 	</ul>
 </div>
