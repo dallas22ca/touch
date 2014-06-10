@@ -24,6 +24,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'newrelic_rpm'
+gem 'skylight'
 
 gem 'capybara'
 gem 'capybara-webkit'
