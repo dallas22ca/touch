@@ -6,15 +6,21 @@ class Message < ActiveRecord::Base
 
   belongs_to :creator, foreign_key: :creator_id, class_name: "Member"
   belongs_to :organization
+  has_many :tasks
   
   scope :not_a_template, -> { where template: false }
   scope :template, -> { where template: true }
   
+  before_validation :set_organization, unless: :organization_id
   before_validation :remove_blank_segment_ids, if: :segment_ids
-  validates_presence_of :subject, :body
+  validates_presence_of :subject, :body, :creator_id
   validate :validate_recipients, if: -> { !template? && member_ids.empty? && segment_ids.empty? }
   
   after_create :prepare_for_delivery, if: -> { !template? }
+  
+  def set_organization
+    self.organization = creator.organization
+  end
   
   def remove_blank_segment_ids
     self.segment_ids = segment_ids.reject(&:blank?).map(&:to_i)
@@ -45,8 +51,10 @@ class Message < ActiveRecord::Base
     end
   end
   
-  def deliver_to(member_ids = [])
-    member_ids.map { |m| MessageWorker.perform_async id, "deliver", member_id: m }
+  def deliver_to(member_ids = [], task_id = false)
+    member_ids.each do |m|
+      MessageWorker.perform_async id, "deliver", member_id: m, task_id: task_id
+    end
   end
   
   def members

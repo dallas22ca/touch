@@ -8,6 +8,14 @@ body {
 		margin-top: 140px;
 	}
 	
+	&.sequences_index {
+		margin-top: 140px;
+		
+		.main_header {
+			left: 0;
+		}
+	}
+	
 	&.rooms_show {
 		margin-top: 140px;
 	}

@@ -1,4 +1,4 @@
-#searcher {
+.main_header {
 	padding: 15px;
 	background: #fff;
 	position: fixed;
@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 600px) {
 	.has_sidebar {
-		#searcher {
+		.main_header {
 			position: static;
 			margin-top: -65px;
 			height: auto;

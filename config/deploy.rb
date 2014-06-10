@@ -25,7 +25,7 @@ set :whenever_command, "bundle exec whenever"
 set :server_name, "95.85.29.240"
 set :rails_env, "production"
 set :branch, "master"
-set :domains, ["app.oneattendance.com", "app.realtxn.com"]
+set :domains, ["app.realtxn.com", "app.oneattendance.com", "app.touchbasenow.com", "secure.remetric.com"]
 set :root_url, "https://#{domains[0]}"
 set :mem_total, 2000
 set :mem_threshold, (mem_total * 0.75).round

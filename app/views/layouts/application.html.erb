@@ -33,6 +33,10 @@
 						<li><%= link_to "Contacts", members_path(@org), class: "#{"selected" if request.path == members_path(@org)}" %></li>
 					<% end %>
 					
+					<% if @member.permits? :sequences, :read %>
+						<li><%= link_to "Sequences", sequences_path(@org), class: "#{"selected" if request.path == sequences_path(@org)}" %></li>
+					<% end %>
+					
 					<% if @member.permits? :folders, :read %>
 						<li><%= link_to "Folders", folders_path(@org), class: "#{"selected" if request.path.include? "folders"}" %></li>
 					<% end %>

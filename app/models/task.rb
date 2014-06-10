@@ -21,8 +21,10 @@ class Task < ActiveRecord::Base
   scope :template, -> { where template: true }
   scope :has_message, -> { where("message_id is not ?", nil) }
   
+  accepts_nested_attributes_for :message
+  
   before_validation :create_task_content, if: :message
-  after_save :do_deliver_message, if: -> { !template? && message && message_overdue? }
+  after_create :do_deliver_message, if: -> { !template? && !complete? && message && message_overdue? }
   
   before_save :update_completed_at, if: :complete_changed?
   before_save :do_skip_jibe, if: :template?
@@ -32,11 +34,11 @@ class Task < ActiveRecord::Base
   end
   
   def do_deliver_message
-    message.deliver_to [contact_id]
+    message.deliver_to [contact_id], id
   end
   
   def create_task_content
-    self.content = "Send {{ message.subject }} to {{ contact.name }}."
+    self.content = "Send {{ message.subject }} to {{ contact.name }} (automatic)."
   end
   
   def do_skip_jibe
@@ -66,11 +68,16 @@ class Task < ActiveRecord::Base
       d = d.merge(mdata)
     end
     
+    if message
+      d["message_subject"] = message.subject
+      d["message_id"] = message.id
+    end
+    
     d
   end
   
   def content_for_contact
-    Mustache.render content.gsub("contact.", "contact_").gsub("member.", "member_"), story_data
+    Mustache.render content.gsub("contact.", "contact_").gsub("member.", "member_").gsub("message.", "message_"), story_data
   end
   
   def linked_content
@@ -91,7 +98,7 @@ class Task < ActiveRecord::Base
       d[key] = content
     end
     
-    story = Mustache.render content.gsub("contact.", "contact_").gsub("member.", "member_"), d
+    story = Mustache.render content.gsub("contact.", "contact_").gsub("member.", "member_").gsub("message.", "message_"), d
     CGI::unescapeHTML story
   end
   

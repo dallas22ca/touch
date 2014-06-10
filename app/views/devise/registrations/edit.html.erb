@@ -2,6 +2,11 @@
 	<h2>My Account</h2>
 	
 	<ul class="links">
+		<% current_user.organizations.each do |org| %>
+			<% if org.admins.include? org.members.where(user: current_user).first %>
+				<li>API Key: <strong><%= org.publishable_key %></strong></li>
+			<% end %>
+		<% end %>
 		<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 	</ul>
 

@@ -52,7 +52,6 @@ load = ->
 	Touch.mobileCheck()
 	
 	Attendance.init()
-	Event.init()
 	Segments.init()
 	Filters.init()
 	Tasks.init()

@@ -3,9 +3,13 @@
 </div>
 
 <div class="main <%= "has_sidebar" if @does_have_sidebar %>">
-	<div id="searcher">
+	<div id="searcher" class="main_header">
 		<% if @member.permits? :messages, :write %>
 			<%= link_to "Send A Message", new_message_path(@org), class: "medium blue_bg button right create_message", remote: true, style: "margin-left: 10px; " %>
+		<% end %>
+		
+		<% if @member.permits?(:sequences, :write) && @org.sequences.manual.any? %>
+			<%= link_to "Add To Sequence", sequence_bulk_add_path(@org), class: "medium blue_bg button right create_message add_to_sequence", remote: true, data: { url: sequence_bulk_add_path(@org) }, style: "margin-left: 10px; " %>
 		<% end %>
 		
 		<% if @member.permits? :members, :write %>
@@ -24,10 +28,10 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<!-- <th>
-					<div class="loading" style="display: block; "></div>
-					<%= check_box_tag :nice %>
-				</th>-->
+				<th>
+					<!-- <div class="loading" style="display: block; "></div>
+						<%= check_box_tag :nice %>-->
+				</th>
 
 				<th style="width: 33%">First Name</th>
 				<th style="width: 33%">Last Name</th>

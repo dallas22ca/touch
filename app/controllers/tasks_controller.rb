@@ -72,8 +72,10 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @task.assign_attributes task_params unless @task.message
+    
     respond_to do |format|
-      if @task.update(task_params)
+      if @task.save
         format.html { redirect_to tasks_path(@org), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
         format.js
@@ -88,7 +90,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
+    @task.destroy unless @task.complete
     respond_to do |format|
       format.html { redirect_to folder_path(@org, @folder), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
