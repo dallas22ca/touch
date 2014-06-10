@@ -15,19 +15,23 @@ class MessageMailer < ActionMailer::Base
           subject: Message.content_for(@message.subject, @member)
         )
         
-        @task.update complete: true if @task
-        
-        @message.organization.events.create(
+        @event = @message.organization.events.new(
           description: "{{ member.name }} #{verb} {{ message.subject }}",
           verb: verb,
           json_data: {
             message: @message.attributes,
-            task: @task.attributes,
             member: {
               key: @member.key
             }
           }
         )
+        
+        if @task
+          @task.update complete: true
+          @event.json_data[:task] = @task.attributes
+        end
+
+        @event.save
       end
     end
   end

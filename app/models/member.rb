@@ -71,6 +71,8 @@ class Member < ActiveRecord::Base
       
       if self.data.has_key?("name") && !self.data.has_key?("full_name")
         d["full_name"] = self.data["name"]
+      else
+        d["full_name"] = self.data["full_name"]
       end
     
       full_name = d["full_name"]
