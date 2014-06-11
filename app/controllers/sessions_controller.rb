@@ -24,6 +24,7 @@ class SessionsController < Devise::SessionsController
       resource.accept_invitation
     end
     
+    resource.remember_me!
     sign_in(resource_name, resource)
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
