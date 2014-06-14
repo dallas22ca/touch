@@ -35,7 +35,8 @@ class EventsController < ApplicationController
       redirect = args.delete :redirect
       member_args = args[:member]
       member_args = args[:contact] if member_args.blank?
-      key = member_args.delete(:key).parameterize
+      member_args = member_args.with_indifferent_access
+      key = "#{member_args.delete(:key)}".parameterize
       @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
       
       unless key.blank?
