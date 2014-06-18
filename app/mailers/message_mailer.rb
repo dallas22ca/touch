@@ -8,7 +8,7 @@ class MessageMailer < ActionMailer::Base
       @message_token = @message.id * CONFIG["secret_number"]
       
       if @message.attachment.exists?
-        attachments[@message.attachment_file_name] = open(@message.attachment.expiring_url(5)).read
+        attachments[@message.attachment_file_name] = open(@message.attachment.expiring_url(30)).read
       end
       
       if mail(

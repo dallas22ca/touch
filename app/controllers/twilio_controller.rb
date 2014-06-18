@@ -39,7 +39,7 @@ class TwilioController < ApplicationController
       @message = @org.messages.find @event.data["message.id"]
       @creator = @message.creator
       @from = Message.phone_numbers[@org.id % Message.phone_numbers.size]
-      Event.create_reply_for @message.id, @member.id, nil
+      Message.create_reply_for @message.id, @member.id, nil
     else
       render text: "No member found."
     end

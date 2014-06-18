@@ -26,11 +26,13 @@ class ApplicationController < ActionController::Base
   end
   
   def does_not_need_authorization
-    %w[accept unsubscribe open click example save_member track sms voice redirect].include?(action_name)
+    %w[accept unsubscribe open click example save_member track sms voice bitly].include?(action_name)
   end
   
   def set_organization
-    if !does_not_need_authorization && user_signed_in? 
+    if does_not_need_authorization || !user_signed_in?
+      @org = Organization.where(permalink: params[:permalink]).first
+    else
       if params[:permalink]
         @org = current_user.organizations.where(permalink: params[:permalink]).first
       else
@@ -38,8 +40,6 @@ class ApplicationController < ActionController::Base
       end
     
       set_member
-    else
-      @org = Organization.where(permalink: params[:permalink]).first
     end
   end
   

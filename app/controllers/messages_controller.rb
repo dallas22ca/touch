@@ -83,6 +83,10 @@ class MessagesController < ApplicationController
       @this_message = @org.messages.find(params[:message_token].to_i / CONFIG["secret_number"].to_i)
       @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
       
+      if @org.events.where(verb: "opened").where("data @> 'message.id=>#{@this_message.id}'").where("data @> 'member.id=>#{@this_member.id}'").empty?
+        Message.create_event_for @this_message.id, @this_member.id, nil, "opened"
+      end
+      
       verb = "clicked"
       @org.events.create!(
         description: "{{ member.name }} #{verb} {{ message.subject }}",
@@ -96,10 +100,6 @@ class MessagesController < ApplicationController
           }
         }
       )
-      
-      if @org.events.where(verb: "opened").where("data @> 'message.id=>#{@this_message.id}'").where("data @> 'member.id=>#{@this_member.id}'").empty?
-        Message.create_event_for @this_message.id, @this_member.id, nil, "opened"
-      end
     rescue
     end
     

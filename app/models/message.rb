@@ -124,7 +124,7 @@ class Message < ActiveRecord::Base
   
   def linked_body_for(member, output = "email")
     content = Message.content_for body, member
-    content += " #{attachment.url}" if attachment.exists?
+    content += " #{attachment.url}" if attachment.exists? && via == "sms"
     links = URI::extract(content, ["http", "ftp", "https", "mailto"])
 
     links.each_with_index do |href, index|
