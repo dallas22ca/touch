@@ -2,9 +2,9 @@ class BitliesController < ApplicationController
   def redirect
     bitly = Bitly.where(token: params[:token]).first
     
-    if bitly
+    begin
       redirect_to bitly.href
-    else
+    rescue
       render text: "This link could not be found."
     end
   end

@@ -9,11 +9,7 @@ class Bitly < ActiveRecord::Base
     end
   end
   
-  def path
-    "/c/#{token}"
-  end
-  
   def url
-    "https://tbnow.co#{path}"
+    "https://tbnow.co/#{token}"
   end
 end
