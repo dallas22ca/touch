@@ -19,6 +19,6 @@ class ModulesController < ApplicationController
   private
   
   def check_if_org
-    redirect_to new_organization_path if !@org && current_user.organizations.empty?
+    redirect_to new_organization_path if !@org && current_user && current_user.organizations.empty?
   end
 end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_website
-  before_filter :authenticate_user!, unless: -> { %w[accept unsubscribe open click example save_member track sms voice redirect].include? action_name }
+  before_filter :authenticate_user!, unless: :does_not_need_authorization
   before_filter :set_time_zone, if: :user_signed_in?
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :set_organization, if: :devise_controller?
@@ -25,8 +25,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def does_not_need_authorization
+    %w[accept unsubscribe open click example save_member track sms voice redirect].include?(action_name)
+  end
+  
   def set_organization
-    if user_signed_in?
+    if !does_not_need_authorization && user_signed_in? 
       if params[:permalink]
         @org = current_user.organizations.where(permalink: params[:permalink]).first
       else
