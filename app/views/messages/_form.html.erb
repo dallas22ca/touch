@@ -2,7 +2,7 @@
 <h1><%= @message.new_record? ? "Create A" : "Edit" %> Message</h1>
 
 <div class="content">
-	<%= form_for @message, url: @message.new_record? ? messages_path(@org) : message_path(@org, @message), remote: true do |f| %>
+	<%= form_for @message, url: @message.new_record? ? messages_path(@org) : message_path(@org, @message), remote: true, html: { target: "iframe" } do |f| %>
 	  <div class="field">
 	    <%= label_tag :from, "From", class: "label" %>
 	    <%=	select_tag :from, options_for_select(["#{@member.name} <#{current_user.email}>"]), class: "full_width" %>

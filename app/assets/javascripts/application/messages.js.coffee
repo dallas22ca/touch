@@ -12,3 +12,7 @@ $(document).on "keyup", "#message_body", ->
 	limit = 160
 	length = $(this).val().length	
 	$(".sms_length").text length
+
+$(document).on "submit", "#new_message"
+	$("#new_message")[0].reset()
+	Lightbox.close()
