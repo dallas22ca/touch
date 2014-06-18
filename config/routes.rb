@@ -10,8 +10,8 @@ Rails.application.routes.draw do
         sessions: "sessions"
       }
     
-    get "/twilio/voice"
-    get "/twilio/sms"
+    post "/twilio/voice"
+    post "/twilio/sms"
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
     get "/track/img/:args" => "events#track", as: :track_img
     get "/track/redirect/:args" => "events#track", as: :track_redirect
