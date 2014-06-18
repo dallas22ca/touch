@@ -89,7 +89,6 @@ describe "Message", js: true do
     assert @org.reload.events.count == 1
     assert @message.linked_body_for(@member).include? "<a href"
     assert @message.linked_body_for(@member).include? "tbnow.co/"
-    assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
     assert @org.reload.events.count == 3
