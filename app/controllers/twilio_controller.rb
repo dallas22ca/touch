@@ -3,7 +3,7 @@ class TwilioController < ApplicationController
   before_filter :find_latest_member
 
   def voice
-    response = Twilio::TwiML::Response.new do |r|
+    response = ::Twilio::TwiML::Response.new do |r|
       r.Say "Thanks for contacting #{@org.name}. We will contact you as soon as we can.", voice: "alice"
     end
 
@@ -18,7 +18,7 @@ class TwilioController < ApplicationController
   end
 
   def sms
-    client = Twilio::REST::Client.new CONFIG["twilio_account_sid"], CONFIG["twilio_auth_token"]
+    client = ::Twilio::REST::Client.new CONFIG["twilio_account_sid"], CONFIG["twilio_auth_token"]
     response = client.account.messages.create(
       from: @from,
       to: Member.prepare_phone(@creator.data["mobile"]),
