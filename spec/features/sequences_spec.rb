@@ -18,27 +18,32 @@ describe "Sequence", js: true do
     select "25", from: "sequence_date_3i"
     fill_in "sequence_steps_attributes_0_task_attributes_content", with: "Wish {{ contact.name }} a Merry Christmas!"
     click_button "Save Sequence"
-    
-    sleep 2
+
+    page.should have_content "Annual"
     sequence = @org.reload.sequences.first
     
     sequence.generate_tasks 3.days.from_now
+    sequence.touch
     assert @member.tasks.count == 2
     assert @member.tasks.last.due_at.strftime("%B %-d") == "December 25"
     
     sequence.generate_tasks 3.days.ago
+    sequence.touch
     assert @member.tasks.count == 2
     assert @member.tasks.last.due_at.strftime("%B %-d") == "December 25"
     
     sequence.steps.first.update offset: 3.days.to_i
+    sequence.touch
     assert @member.tasks.count == 2
     assert @member.tasks.last.due_at.strftime("%B %-d") == "December 28"
     
     sequence.steps.first.update offset: 3.days.to_i * -1
+    sequence.touch
     assert @member.tasks.count == 2
     assert @member.tasks.last.due_at.strftime("%B %-d") == "December 22"
     
     sequence.generate_tasks Time.zone.parse("January 1, #{Time.zone.now.year}")
+    sequence.touch
     assert @member.tasks.last.due_at.strftime("%B %-d") == "December 22"
     assert @member.tasks.count == 2
     
@@ -105,7 +110,7 @@ describe "Sequence", js: true do
     @segment = @org.segments.create! name: "New Segment", filters: [{ field: "last_name", matcher: "is", value: "Read" }]
     sequence = @org.sequences.new strategy: "annual", date: Time.zone.parse("December 25"), creator: @member, segment_ids: [@segment.id]
     step = sequence.steps.new offset: 0.days.to_i, action: "task"
-    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    step.create_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
     
     sequence.save!
     @member.update data: @member.data.merge(last_name: "Read")
@@ -125,7 +130,7 @@ describe "Sequence", js: true do
     5.times do |n|
       step = sequence.steps.new offset: (n * 2).days.to_i, action: "email"
       message = @org.messages.create! subject: "Subject ##{n}", body: "This is the content of the ##{n} email to {{ contact.name }}.", template: true, creator: @member
-      step.build_task template: true, step: step, message: message
+      step.create_task template: true, step: step, message: message
     end
     
     sequence.save!
@@ -142,7 +147,7 @@ describe "Sequence", js: true do
     sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
     step = sequence.steps.new offset: 0.days.to_i, action: "email"
     message = @org.messages.create! subject: "Awesome {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-    step.build_task template: true, step: step, message: message
+    step.create_task template: true, step: step, message: message
     
     sequence.save!
     mail = ActionMailer::Base.deliveries.last
@@ -157,11 +162,11 @@ describe "Sequence", js: true do
     
     step = sequence.steps.new offset: 3.days.to_i, action: "email"
     message = @org.messages.create! subject: "First {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-    step.build_task template: true, step: step, message: message
+    step.create_task template: true, step: step, message: message
     
     step = sequence.steps.new offset: 31.days.to_i, action: "email"
     message = @org.messages.create! subject: "Second {{ contact.name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
-    step.build_task template: true, step: step, message: message
+    step.create_task template: true, step: step, message: message
     
     sequence.save!
     assert ActionMailer::Base.deliveries.empty?
@@ -190,7 +195,7 @@ describe "Sequence", js: true do
   it "can create contact with attached sequence" do
     sequence = @org.sequences.new strategy: "manual", creator: @member
     step = sequence.steps.new offset: 0.days.to_i, action: "task"
-    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    step.create_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
     sequence.save!
     
     assert_equal 0, Task.not_a_template.count
@@ -209,7 +214,7 @@ describe "Sequence", js: true do
     @member.update availability: [1, 2, 3, 4, 5]
     sequence = @org.sequences.new strategy: "annual", date: DateTime.parse("Sunday"), creator: @member
     step = sequence.steps.new offset: 0.days.to_i, action: "task"
-    step.build_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
+    step.create_task content: "Welcome to the club, {{ contact.name }}!", template: true, step: step
     
     sequence.save!
     assert_equal "Friday", Task.not_a_template.first.due_at.strftime("%A")
@@ -221,7 +226,7 @@ describe "Sequence", js: true do
   it "can create recurring sequences, but only for future" do
     sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
     step = sequence.steps.new offset: 0, action: "task"
-    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    step.create_task content: "Touch base with {{ contact.name }}.", template: true, step: step
     
     sequence.save!
     assert_equal 4, Task.not_a_template.count
@@ -231,7 +236,8 @@ describe "Sequence", js: true do
     assert_equal 4, Task.not_a_template.count
     
     step = sequence.steps.new offset: 1.week * -1, action: "task"
-    step.build_task content: "Say hi to {{ contact.name }}.", template: true, step: step
+    step.create_task content: "Touch base again with {{ contact.name }}.", template: true, step: step
+
     sequence.save!
     assert_equal 0, Task.where("due_at < ?", Time.zone.now.end_of_day).not_a_template.count
     
@@ -242,7 +248,7 @@ describe "Sequence", js: true do
   it "changing recurrance creates new tasks" do
     sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
     step = sequence.steps.new offset: 0, action: "task"
-    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    step.create_task content: "Touch base with {{ contact.name }}.", template: true, step: step
     
     sequence.save!
     assert_equal 4, Task.not_a_template.count
@@ -254,7 +260,7 @@ describe "Sequence", js: true do
   it "changing recurrance creates new tasks" do
     sequence = @org.sequences.new strategy: "recurring", interval: 90.days, creator: @member
     step = sequence.steps.new offset: 0, action: "task"
-    step.build_task content: "Touch base with {{ contact.name }}.", template: true, step: step
+    step.create_task content: "Touch base with {{ contact.name }}.", template: true, step: step
     
     sequence.save!
     assert_equal 4, Task.not_a_template.count

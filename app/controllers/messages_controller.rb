@@ -125,6 +125,6 @@ class MessagesController < ApplicationController
     end
     
     def permitted
-      [:subject, :body, member_ids: [], segment_ids: []]
+      [:subject, :body, :via, member_ids: [], segment_ids: []]
     end
 end

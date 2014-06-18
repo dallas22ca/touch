@@ -43,6 +43,7 @@ describe "Message", js: true do
     sign_in @user
     visit members_path(@org)
     click_link "Send A Message"
+    page.uncheck "message_segment_all"
     page.check "message_segment_#{@segment.id}"
     fill_in "Subject", with: "What a message!"
     fill_in "Message", with: "Entirely awesome message!"
@@ -67,6 +68,16 @@ describe "Message", js: true do
     assert @org.reload.events.count == 2
   end
   
+  it "is isn't sent to unemailable" do
+    Event.delete_all
+    @opener = FactoryGirl.create(:user)
+    @org.users.push @opener
+    @opener = @opener.members.first
+    @opener.update subscribed: false
+    @message = @org.messages.create! member_ids: [@opener.id], subject: "Why?", body: "Why Not?", creator: @member
+    assert_equal 0, @org.reload.events.count
+  end
+  
   it "links are parsed" do
     @clicker = FactoryGirl.create(:user)
     @org.users.push @clicker
@@ -82,6 +93,46 @@ describe "Message", js: true do
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
     assert @org.reload.events.count == 2
+    assert @message.reload.deliveries.count == 1
     page.should have_content "FIFA"
+  end
+  
+  it "can send a message via SMS" do
+    @org.members.each do |member|
+      member.update data: member.data.merge(mobile: "+19029997606")
+    end
+    sign_in @user
+    visit members_path(@org)
+    click_link "Send A Message"
+    fill_in "Message", with: "Entirely awesome message!"
+    select "SMS", from: "message_via"
+    find("#new_message input[type='submit']").click
+    sleep 0.5
+    assert @org.messages.last.via == "sms"
+    assert ActionMailer::Base.deliveries.empty?
+    assert_equal 1, @org.reload.messages.last.deliveries.count
+    assert_equal "sms", Event.last.data["message.via"]
+  end
+  
+  it "can't send an SMS to unsmsable" do
+    sign_in @user
+    visit members_path(@org)
+    click_link "Send A Message"
+    fill_in "Subject", with: "What a message!"
+    fill_in "Message", with: "Entirely awesome message!"
+    select "SMS", from: "message_via"
+    find("#new_message input[type='submit']").click
+    sleep 2
+    assert @org.messages.last.via == "sms"
+    assert ActionMailer::Base.deliveries.empty?
+    assert_equal 0, @org.reload.messages.last.deliveries.count
+  end
+  
+  it "parses phone numbers" do
+    assert_equal "+19029997606", Member.prepare_phone("(902) 999-7606")
+    assert_equal "+19029997606", Member.prepare_phone("902.999.7606")
+    assert_equal "+19029997606", Member.prepare_phone("902 -999-7606")
+    assert_equal "+19029997606", Member.prepare_phone("1(902)999-7606")
+    assert_equal "+19029997606", Member.prepare_phone("1.902.999.7606")
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606172909) do
+ActiveRecord::Schema.define(version: 20140616183345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20140606172909) do
     t.datetime "updated_at"
     t.text     "segment_ids",     default: "--- []\n"
     t.boolean  "template",        default: false
+    t.string   "via",             default: "email"
   end
 
   add_index "messages", ["creator_id"], name: "index_messages_on_creator_id", using: :btree
@@ -271,12 +272,12 @@ ActiveRecord::Schema.define(version: 20140606172909) do
   add_index "tasks", ["step_id"], name: "index_tasks_on_step_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",                           null: false
-    t.string   "encrypted_password",     default: "",                           null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,                            null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -290,7 +291,7 @@ ActiveRecord::Schema.define(version: 20140606172909) do
     t.datetime "avatar_updated_at"
     t.string   "phone"
     t.string   "website"
-    t.string   "time_zone",              default: "Eastern Time (US & Canada)"
+    t.string   "time_zone"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

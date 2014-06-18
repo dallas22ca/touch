@@ -21,7 +21,7 @@ class Task < ActiveRecord::Base
   scope :template, -> { where template: true }
   scope :has_message, -> { where("message_id is not ?", nil) }
   
-  accepts_nested_attributes_for :message
+  accepts_nested_attributes_for :message, reject_if: Proc.new { |m| m["body"].blank? }
   
   before_validation :create_task_content, if: :message
   after_create :do_deliver_message, if: -> { !template? && !complete? && message && message_overdue? }

@@ -18,7 +18,7 @@ class Member < ActiveRecord::Base
   
   before_validation :set_key, unless: :key
   before_validation :parameterize_key, if: :key_changed?
-  before_validation :intercept_full_name
+  before_validation :intercept_data
   before_validation :flatten_roles, if: :roles_changed?
   before_validation :set_user_data, if: -> { user && user_id_changed? }
 
@@ -37,6 +37,7 @@ class Member < ActiveRecord::Base
   scope :last_name_asc, -> { order("members.data->'last_name' asc") }
   scope :last_name_desc, -> { order("members.data->'last_name' desc") }
   scope :accepted, -> { where "folderships.accepted = ?", true }
+  scope :subscribed, -> { where subscribed: true }
   
   def add_to_sequences
     organization.sequences.manual.where(id: sequence_ids).each do |sequence|
@@ -62,13 +63,12 @@ class Member < ActiveRecord::Base
     end
   end
   
-  def intercept_full_name
-    self.data = self.data.with_indifferent_access
+  def intercept_data
     self.data ||= {}
+    self.data = self.data.with_indifferent_access
+    d = self.data
     
     if self.data.has_key?("full_name") || self.data.has_key?("name")
-      d = {}
-      
       if self.data.has_key?("name") && !self.data.has_key?("full_name")
         d["full_name"] = self.data["name"]
       else
@@ -95,9 +95,9 @@ class Member < ActiveRecord::Base
           d["last_name"] = full_name.gsub("#{d["first_name"]}", "").strip
         end
       end
-    
-      self.data = self.data.merge(d)
     end
+    
+    self.data = self.data.merge(d)
   end
   
   def flatten_roles
@@ -232,6 +232,10 @@ class Member < ActiveRecord::Base
     subscribed? && !data["email"].blank?
   end
   
+  def smsable?
+    subscribed? && !data["mobile"].blank?
+  end
+  
   def toggle_subscribe
     update subscribed: !subscribed?
   end
@@ -242,5 +246,11 @@ class Member < ActiveRecord::Base
       break date - 1 if availability.include?(date.wday - 1)
       date = date + 1.day
     end
+  end
+  
+  def self.prepare_phone(phone)
+    phone = "#{phone}".gsub(/[^0-9]/, "").to_s
+    phone = "1#{phone}" if phone[0] != "1"
+    "+#{phone}"
   end
 end

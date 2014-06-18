@@ -11,12 +11,18 @@ class Message < ActiveRecord::Base
   scope :not_a_template, -> { where template: false }
   scope :template, -> { where template: true }
   
+  before_validation :set_via_default
   before_validation :set_organization, unless: :organization_id
   before_validation :remove_blank_segment_ids, if: :segment_ids
-  validates_presence_of :subject, :body, :creator_id
+  validates_presence_of :body, :creator_id, :via
+  validates_presence_of :subject, unless: -> { via == "sms" }
   validate :validate_recipients, if: -> { !template? && member_ids.empty? && segment_ids.empty? }
   
   after_create :prepare_for_delivery, if: -> { !template? }
+  
+  def set_via_default
+    self.via ||= "email"
+  end
   
   def set_organization
     self.organization = creator.organization
@@ -32,28 +38,41 @@ class Message < ActiveRecord::Base
   
   def prepare_for_delivery
     ids = []
-    member_ids.map { |id| ids.push id }
+    
+    organization.members.find(member_ids).each do |member|
+      if (via == "email" && member.emailable?) || (via == "sms" && member.smsable?)
+        MessageWorker.perform_async id, "deliver", member_id: member.id, via: via
+      end
+    end
     
     if segment_ids.any?
       if segment_ids.include? 0
-        organization.members.map { |m| ids.push m.id }
+        organization.members.each do |member|
+          if (via == "email" && member.emailable?) || (via == "sms" && member.smsable?)
+            ids.push member.id
+          end
+        end
       else
         segments.each do |segment|
           segment.members.each do |member|
-            ids.push member.id
+            if (via == "email" && member.emailable?) || (via == "sms" && member.smsable?)
+              ids.push member.id
+            end
           end
         end
       end
     end
     
     ids.uniq.each do |member_id|
-      MessageWorker.perform_async id, "deliver", member_id: member_id
+      MessageWorker.perform_async id, "deliver", member_id: member_id, via: via
     end
   end
   
   def deliver_to(member_ids = [], task_id = false)
-    member_ids.each do |m|
-      MessageWorker.perform_async id, "deliver", member_id: m, task_id: task_id
+    organization.members.find(member_ids).each do |member|
+      if (via == "email" && member.emailable?) || (via == "sms" && member.smsable?)
+        MessageWorker.perform_async id, "deliver", member_id: member.id, task_id: task_id, via: via
+      end
     end
   end
   
@@ -70,15 +89,15 @@ class Message < ActiveRecord::Base
   end
   
   def opens
-    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "opened")
+    events.opened
   end
   
   def clicks
-    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "clicked")
+    events.clicked
   end
   
   def deliveries
-    organization.events.where("data @> 'message.id=>#{id}' and verb = ?", "was sent")
+    events.delivered
   end
   
   def self.content_for(content, member)
@@ -113,5 +132,48 @@ class Message < ActiveRecord::Base
         task.do_deliver_message
       end
     end
+  end
+  
+  def self.create_delivery_for(message_id, member_id, task_id)
+    message = Message.find(message_id)
+    member = message.organization.members.find(member_id)
+    task = message.creator.tasks.find(task_id) unless "#{task_id}".blank?
+    verb = "was sent"
+    
+    event = message.organization.events.new(
+      description: "{{ member.name }} #{verb} {{ message.subject }}",
+      verb: verb,
+      json_data: {
+        message: message.attributes,
+        member: {
+          key: member.key
+        }
+      }
+    )
+    
+    if task
+      task.update complete: true
+      event.json_data[:task] = task.attributes
+    end
+
+    event.save
+  end
+  
+  def self.send_as_sms(message_id, member_id, task_id)
+    message = Message.find(message_id)
+    member = message.organization.members.find(member_id)
+    client = Twilio::REST::Client.new CONFIG["twilio_account_sid"], CONFIG["twilio_auth_token"]
+    
+    if !Rails.env.production? || client.account.messages.create(
+      from: Message.phone_numbers[message.organization_id % Message.phone_numbers.size],
+      to: Member.prepare_phone(member.data["mobile"]),
+      body: Message.content_for(message.body, member)
+    )
+      Message.create_delivery_for message_id, member_id, task_id
+    end
+  end
+  
+  def self.phone_numbers
+    ["+16474966225"]
   end
 end

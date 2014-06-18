@@ -29,6 +29,7 @@ gem 'skylight'
 gem 'capybara'
 gem 'capybara-webkit'
 gem 'selenium-webdriver'
+gem 'twilio-ruby'
 
 group :development do
   gem 'capistrano', '~> 2.15', require: false

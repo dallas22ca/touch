@@ -13,6 +13,10 @@ class Event < ActiveRecord::Base
   before_validation :parse_json
   before_save :save_flattened_data
   
+  scope :delivered, -> { where verb: "was sent" }
+  scope :clicked, -> { where verb: "clicked" }
+  scope :opened, -> { where verb: "opened" }
+  
   def parse_json
     if json_data[:member] && json_data[:member][:key]
       member = organization.members.where(key: json_data[:member][:key]).first
@@ -72,5 +76,9 @@ class Event < ActiveRecord::Base
     
     story = Mustache.render description.gsub(".", "_"), d
     CGI::unescapeHTML story
+  end
+  
+  def self.for_mobile(mobile)
+    where("'#{mobile.gsub("+1", "")}' ~ regexp_replace(data -> 'member.mobile', '[^0-9]', '', 'g')")
   end
 end

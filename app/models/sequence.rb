@@ -32,7 +32,7 @@ class Sequence < ActiveRecord::Base
       creator.tasks.where(step_id: step_ids).where("contact_id not in (?)", contact_ids).incomplete.destroy_all if contact_ids.any?
     end
     
-    contacts = organization.members.find(contact_ids)
+    contacts = organization.members.where(id: contact_ids)
 
     case strategy
     when "recurring"
