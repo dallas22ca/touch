@@ -1,0 +1,13 @@
+<ul id="profile_<%= @this_member.id %>" class="descriptive">
+	<li>
+		Name:
+		<strong><%= @this_member.name %></strong>
+	</li>
+	
+	<% @this_member.data.reject{ |k| %w[full_name name first_name last_name].include? k }.each do |k, v| %>
+		<li>
+			<%= k.split("_").map { |w| w.capitalize }.join(" ") %>: 
+			<strong><%= v %></strong>
+		</li>
+	<% end %>
+</ul>

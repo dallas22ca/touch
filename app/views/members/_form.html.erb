@@ -28,15 +28,49 @@
 	<% end %>
 	
 	<%= form_for @this_member, url: @this_member.new_record? ? members_path(@org) : member_path(@org, @this_member), remote: true do |f| %>
-		<% %w[first_name last_name email].each do |field| %>
-			<div class="field">
-				<%= label_tag "member[data][#{field}]", field.split("_").map{ |w| w.capitalize }.join(" "), class: "label" %>
-				<%= text_field_tag "member[data][#{field}]", @this_member.data[field] %>
-			</div>
-		<% end %>
+		<% top_fields = %w[first_name last_name email] %>
+		<% special_fields = top_fields + %w[full_name name] %>
+	
+		<div class="field">
+			<table class="table new_member_fields">
+				<thead>
+					<tr>
+						<th>Name (eg. mobile)</th>
+						<th>Value (eg. 19059997777)</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="templates">
+						<td><%= text_field_tag "key_field", "", name: nil, id: nil, class: "key_field" %></td>
+						<td><%= text_field_tag "", "", class: "value_field" %></td>
+						<td><%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, "#", class: "remove_member_field" %></td>
+					</tr>
+					
+					<% top_fields.each do |key| %>
+						<tr>
+							<td><%= text_field_tag "a_field", key.split("_").map{ |w| w.capitalize }.join(" ") %></td>
+							<td><%= text_field_tag "member[data][#{key}]", @this_member.data[key], class: "value_field" %></td>
+							<td><%= link_to "&nbsp;".html_safe, "#" %></td>
+						</tr>
+					<% end %>
+					
+					<% @this_member.data.each do |key, value| %>
+						<% if !special_fields.include? key %>
+							<tr>
+								<td><%= text_field_tag "key_field", key.split("_").map{ |w| w.capitalize }.join(" "), name: nil, id: nil, class: "key_field" %></td>
+								<td><%= text_field_tag "", value, class: "value_field" %></td>
+								<td><%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, "#", class: "remove_member_field" %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			</table>
 		
-
-	  <div class="actions">
+			<%= link_to "Add Field", "#", class: "small grey_bg button add_member_field" %>
+		</div>
+		
+		<div class="actions">
 	    <%= submit_tag "Save Member", class: "big blue_bg button" %>
 			
 			<%= link_to "Close", "#", class: "close_lightbox" %>

@@ -1,2 +1,3 @@
 Lightbox.close()
 $("form").trigger("touch:enable")
+$("#profile_<%= @this_member.id %>").replaceWith("<%= j render "profile" %>")

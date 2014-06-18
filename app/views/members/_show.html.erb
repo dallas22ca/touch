@@ -8,19 +8,7 @@
 	
 	<h3>Profile <%= link_to "(Edit)", edit_member_path(@this_member.organization, @this_member), remote: true if @member.permits? @this_member, :write %></h3>
 	
-	<ul class="descriptive">
-		<li>
-			Name:
-			<strong><%= @this_member.name %></strong>
-		</li>
-		
-		<% @this_member.data.reject{ |k| %w[full_name name first_name last_name].include? k }.each do |k, v| %>
-			<li>
-				<%= k.split("_").map { |w| w.capitalize }.join(" ") %>: 
-				<strong><%= v %></strong>
-			</li>
-		<% end %>
-	</ul>
+	<%= render "profile" %>
 	
 	<h3>History</h3>
 	<ul class="descriptive">
