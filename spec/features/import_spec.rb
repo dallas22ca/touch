@@ -55,7 +55,7 @@ describe "Importer", js: true do
     sign_in @user
     visit members_path(@org)
     click_link "Add Contact"
-    fill_in "First Name", with: "Awesome"
+    fill_in "member[data][first_name]", with: "Awesome"
     click_button "Save Member"
     sleep 0.5
     assert @org.members.count == 2

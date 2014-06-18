@@ -8,6 +8,9 @@ class Message < ActiveRecord::Base
   belongs_to :organization
   has_many :tasks
   
+  has_attached_file :attachment, s3_permissions: :private
+  validates_attachment_content_type :attachment, content_type: /(image|application|doc|xls|csv|txt|text|html|plain)/
+  
   scope :not_a_template, -> { where template: false }
   scope :template, -> { where template: true }
   
@@ -22,7 +25,7 @@ class Message < ActiveRecord::Base
   
   def set_via_default
     self.via ||= "email"
-    self.subject = self.body.truncate(25) if via == "sms"
+    self.subject = self.body.truncate(25) if via == "sms" && subject.blank?
   end
   
   def set_organization
@@ -119,13 +122,21 @@ class Message < ActiveRecord::Base
     Mustache.render content.to_s.gsub(/\n/, "<br>"), d
   end
   
-  def linked_body_for(member, output = "content")
-    content = Message.content_for(body, member)
+  def linked_body_for(member, output = "email")
+    content = Message.content_for body, member
+    content += " #{attachment.url}" if attachment.exists?
     links = URI::extract(content, ["http", "ftp", "https", "mailto"])
 
     links.each_with_index do |href, index|
-      url = click_url(organization, id * CONFIG["secret_number"], member.id * CONFIG["secret_number"], index, href: CGI::escape(href))
-      content = content.sub(href, "<a href=\"#{url}\">#{href}</a>")
+      click_url = click_url(organization, id * CONFIG["secret_number"], member.id * CONFIG["secret_number"], index, href: CGI::escape(href))
+      url = Bitly.create(href: click_url).url
+      
+      case output
+      when "email"
+        content = content.sub(href, "<a href=\"#{url}\">#{href}</a>")
+      when "sms"
+        content = content.sub(href, url)
+      end
     end
     
     output == "count" ? links.count : content
@@ -179,7 +190,7 @@ class Message < ActiveRecord::Base
     if !Rails.env.production? || client.account.messages.create(
       from: Message.phone_numbers[message.organization_id % Message.phone_numbers.size],
       to: Member.prepare_phone(member.data["mobile"]),
-      body: Message.content_for(message.body, member)
+      body: message.linked_body_for(member, "sms")
     )
       Message.create_delivery_for message_id, member_id, task_id
     end

@@ -88,7 +88,7 @@ describe "Message", js: true do
     @message = @org.messages.create! member_ids: [@clicker.id], subject: "Why?", body: "You should go to #{site}", creator: @member
     assert @org.reload.events.count == 1
     assert @message.linked_body_for(@member).include? "<a href"
-    assert @message.linked_body_for(@member).include? "/0?href="
+    assert @message.linked_body_for(@member).include? "tbnow.co/"
     assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
@@ -126,6 +126,20 @@ describe "Message", js: true do
     assert @org.messages.last.via == "sms"
     assert ActionMailer::Base.deliveries.empty?
     assert_equal 0, @org.reload.messages.last.deliveries.count
+  end
+  
+  it "can attach a file for an email" do
+    message = @org.messages.create! member_ids: [@member.id], subject: "Subject for {{ contact.name }}", body: "Content of sms to {{ contact.name }}.", creator: @member, attachment: File.new("#{Rails.root}/spec/assets/importer/good.csv")
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal 1, mail.attachments.size
+    assert_equal "good.csv", mail.attachments.first.filename
+  end
+  
+  it "can attach a file for an sms" do
+    @member.update data: @member.data.merge(mobile: "+19029997606")
+    message = @org.messages.create! via: "sms", member_ids: [@member.id], body: "Content of sms to {{ contact.name }}.", creator: @member, attachment: File.new("#{Rails.root}/spec/assets/importer/good.csv")
+    assert message.linked_body_for(@member, "sms").include? "tbnow.co/"
+    assert Bitly.all.any?
   end
   
   it "parses phone numbers" do

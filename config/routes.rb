@@ -2,6 +2,10 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   
+  constraints host: "tbnow.co" do
+    get "/:token", to: "bitlies#redirect"
+  end
+  
   devise_scope :user do
     devise_for :users,
       controllers: {

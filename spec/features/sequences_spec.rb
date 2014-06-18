@@ -66,8 +66,8 @@ describe "Sequence", js: true do
     
     visit members_path(@org)
     click_link "Add Contact"
-    fill_in "First Name", with: "Billy Joe"
-    fill_in "Last Name", with: "Armstrong"
+    fill_in "member[data][first_name]", with: "Billy Joe"
+    fill_in "member[data][last_name]", with: "Armstrong"
     click_button "Save Member"
     
     sleep 2

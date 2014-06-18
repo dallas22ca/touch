@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616183345) do
+ActiveRecord::Schema.define(version: 20140618183946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "bitlies", force: true do |t|
+    t.string   "token"
+    t.string   "href"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "folder_id"
@@ -161,14 +168,18 @@ ActiveRecord::Schema.define(version: 20140616183345) do
   create_table "messages", force: true do |t|
     t.text     "subject"
     t.text     "body"
-    t.text     "member_ids",      default: "--- []\n"
+    t.text     "member_ids",              default: "--- []\n"
     t.integer  "organization_id"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "segment_ids",     default: "--- []\n"
-    t.boolean  "template",        default: false
-    t.string   "via",             default: "email"
+    t.text     "segment_ids",             default: "--- []\n"
+    t.boolean  "template",                default: false
+    t.string   "via",                     default: "email"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "messages", ["creator_id"], name: "index_messages_on_creator_id", using: :btree
@@ -272,12 +283,12 @@ ActiveRecord::Schema.define(version: 20140616183345) do
   add_index "tasks", ["step_id"], name: "index_tasks_on_step_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",                           null: false
+    t.string   "encrypted_password",     default: "",                           null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -291,7 +302,7 @@ ActiveRecord::Schema.define(version: 20140616183345) do
     t.datetime "avatar_updated_at"
     t.string   "phone"
     t.string   "website"
-    t.string   "time_zone"
+    t.string   "time_zone",              default: "Eastern Time (US & Canada)"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

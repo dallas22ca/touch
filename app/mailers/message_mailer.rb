@@ -7,6 +7,10 @@ class MessageMailer < ActionMailer::Base
       @contact_token = @member.id * CONFIG["secret_number"]
       @message_token = @message.id * CONFIG["secret_number"]
       
+      if @message.attachment.exists?
+        attachments[@message.attachment_file_name] = open(@message.attachment.expiring_url(5)).read
+      end
+      
       if mail(
           from: @message.creator.name_and_email,
           to: @member.name_and_email,
