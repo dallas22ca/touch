@@ -22,6 +22,7 @@ class Message < ActiveRecord::Base
   
   def set_via_default
     self.via ||= "email"
+    self.subject = self.body.truncate(25) if via == "sms"
   end
   
   def set_organization

@@ -37,14 +37,20 @@
 	    <%= f.label :via, "How would you like to send the message?", class: "label" %>
 	    <%= f.select :via, options_for_select([["Email", "email"], ["SMS (Text Message)", "sms"]], @message.via), class: "full_width" %>
 	  </div>
-	  <div class="field">
+	  <div class="field subject_field">
 	    <%= f.label :subject, class: "label" %>
 	    <%= f.text_field :subject, class: "full_width" %>
 	  </div>
 	  <div class="field">
 	    <%= f.label :body, "Message", class: "label" %>
 	    <%= f.text_area :body, class: "full_width" %>
+			
+			<p class="sms_limit">
+				<span class="sms_length">0</span> / 160 characters
+			</p>
 	  </div>
+		
+		<div class="clear"></div>
 
 	  <div class="actions">
 	    <%= f.submit "Save Message", class: "big blue_bg button" %>

@@ -59,7 +59,7 @@
 						<% if !special_fields.include? key %>
 							<tr>
 								<td><%= text_field_tag "key_field", key.split("_").map{ |w| w.capitalize }.join(" "), name: nil, id: nil, class: "key_field" %></td>
-								<td><%= text_field_tag "", value, class: "value_field" %></td>
+								<td><%= text_field_tag "member[data][#{key}]", value, class: "value_field" %></td>
 								<td><%= link_to "<i class=\"fa fa-times-circle\"></i>".html_safe, "#", class: "remove_member_field" %></td>
 							</tr>
 						<% end %>

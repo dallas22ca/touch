@@ -12,6 +12,6 @@
 	
 	<h3>History</h3>
 	<ul class="descriptive">
-		<%= jibe @this_member.events.includes(:organization).order("created_at desc"), scope: [@this_member] %>
+		<%= jibe @this_member.events.includes(:organization).order("created_at desc"), scope: [@this_member], strategy: "prepend" %>
 	</ul>
 </div>

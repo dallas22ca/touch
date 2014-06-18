@@ -28,6 +28,6 @@
 	
 	<h3>History</h3>
 	<ul class="descriptive">
-		<%= jibe @message.events.includes(:member).includes(:organization).order("created_at desc") %>
+		<%= jibe @message.events.includes(:member).includes(:organization).order("created_at desc"), strategy: "prepend" %>
 	</ul>
 </div>
