@@ -10,10 +10,5 @@ $(document).on "change", "#message_via", ->
 
 $(document).on "keyup", "#message_body", ->
 	limit = 160
-	length = $(this).val().length
-	
-	if length > limit
-		length = 160
-		$(this).val $(this).val().substring(0, 159)
-	
+	length = $(this).val().length	
 	$(".sms_length").text length

@@ -92,7 +92,7 @@ describe "Message", js: true do
     assert @message.linked_body_for(@member).include? click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0)
     
     visit click_path(@org, @message.id * CONFIG["secret_number"], @member.id * CONFIG["secret_number"], 0, href: site, format: :gif)
-    assert @org.reload.events.count == 2
+    assert @org.reload.events.count == 3
     assert @message.reload.deliveries.count == 1
     page.should have_content "FIFA"
   end

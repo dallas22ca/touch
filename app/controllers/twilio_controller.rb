@@ -6,7 +6,7 @@ class TwilioController < ApplicationController
     response = ::Twilio::TwiML::Response.new do |r|
       r.Say "Thanks for contacting #{@org.name}. We will contact you as soon as we can.", voice: "alice"
     end
-
+    
     client = Twilio::REST::Client.new CONFIG["twilio_account_sid"], CONFIG["twilio_auth_token"]
     client.account.messages.create(
       from: @from,
@@ -39,6 +39,7 @@ class TwilioController < ApplicationController
       @message = @org.messages.find @event.data["message.id"]
       @creator = @message.creator
       @from = Message.phone_numbers[@org.id % Message.phone_numbers.size]
+      Event.create_reply_for @message.id, @member.id, nil
     else
       render text: "No member found."
     end

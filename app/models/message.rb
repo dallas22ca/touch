@@ -101,6 +101,10 @@ class Message < ActiveRecord::Base
     events.delivered
   end
   
+  def replies
+    events.replied
+  end
+  
   def self.content_for(content, member)
     member_data = member.data.merge({
       name: member.name,
@@ -135,11 +139,10 @@ class Message < ActiveRecord::Base
     end
   end
   
-  def self.create_delivery_for(message_id, member_id, task_id)
+  def self.create_event_for(message_id, member_id, task_id, verb)
     message = Message.find(message_id)
     member = message.organization.members.find(member_id)
     task = message.creator.tasks.find(task_id) unless "#{task_id}".blank?
-    verb = "was sent"
     
     event = message.organization.events.new(
       description: "{{ member.name }} #{verb} {{ message.subject }}",
@@ -158,6 +161,14 @@ class Message < ActiveRecord::Base
     end
 
     event.save
+  end
+  
+  def self.create_delivery_for(message_id, member_id, task_id)
+    Message.create_event_for message_id, member_id, task_id, "was sent"
+  end
+  
+  def self.create_reply_for(message_id, member_id, task_id)
+    Message.create_event_for message_id, member_id, task_id, "replied to"
   end
   
   def self.send_as_sms(message_id, member_id, task_id)

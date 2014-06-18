@@ -71,18 +71,7 @@ class MessagesController < ApplicationController
     begin
       @this_message = @org.messages.find(params[:message_token].to_i / CONFIG["secret_number"].to_i)
       @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
-      verb = "opened"
-
-      @org.events.create!(
-        description: "{{ member.name }} #{verb} {{ message.subject }}",
-        verb: verb,
-        json_data: {
-          message: @this_message.attributes,
-          member: {
-            key: @this_member.key
-          }
-        }
-      )
+      Message.create_event_for @this_message.id, @this_member.id, nil, "opened"
     rescue
     end
     
@@ -93,8 +82,8 @@ class MessagesController < ApplicationController
     begin
       @this_message = @org.messages.find(params[:message_token].to_i / CONFIG["secret_number"].to_i)
       @this_member = @org.members.find(params[:member_token].to_i / CONFIG["secret_number"].to_i)
+      
       verb = "clicked"
-
       @org.events.create!(
         description: "{{ member.name }} #{verb} {{ message.subject }}",
         verb: verb,
@@ -107,6 +96,10 @@ class MessagesController < ApplicationController
           }
         }
       )
+      
+      if @org.events.where(verb: "opened").where("data @> 'message.id=>#{@this_message.id}'").where("data @> 'member.id=>#{@this_member.id}'").empty?
+        Message.create_event_for @this_message.id, @this_member.id, nil, "opened"
+      end
     rescue
     end
     
