@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   scope :delivered, -> { where verb: "was sent" }
   scope :clicked, -> { where verb: "clicked" }
   scope :opened, -> { where verb: "opened" }
-  scope :opened, -> { where verb: "replied to" }
+  scope :replied, -> { where verb: "replied to" }
   
   def parse_json
     if json_data[:member] && json_data[:member][:key]

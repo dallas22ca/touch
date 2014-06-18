@@ -51,6 +51,11 @@
 	  </div>
 		
 		<div class="clear"></div>
+		
+	  <div class="field subject_field">
+	    <%= f.label :attachment, class: "label" %>
+	    <%= f.file_field :attachment, class: "full_width" %>
+	  </div>
 
 	  <div class="actions">
 	    <%= f.submit "Save Message", class: "big blue_bg button" %>
