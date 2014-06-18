@@ -14,5 +14,7 @@ $(document).on "keyup", "#message_body", ->
 	$(".sms_length").text length
 
 $(document).on "submit", "#new_message", ->
-	$("#new_message")[0].reset()
-	Lightbox.close()
+	setTimeout ->
+		$("#new_message")[0].reset()
+		Lightbox.close()
+	, 100

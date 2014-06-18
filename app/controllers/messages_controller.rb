@@ -31,8 +31,8 @@ class MessagesController < ApplicationController
     @message.creator = @member
 
     respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+      if @message.save!
+        format.html { render nothing: true, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
         format.js
       else
