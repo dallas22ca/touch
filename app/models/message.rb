@@ -8,7 +8,11 @@ class Message < ActiveRecord::Base
   belongs_to :organization
   has_many :tasks
   
-  has_attached_file :attachment, s3_permissions: :private
+  has_attached_file :attachment,
+    url: "//s3.amazonaws.com/#{CONFIG["aws_bucket"]}/message/attachments/:hash/:style/:filename",
+    path: "/message/attachments/:hash/:style/:filename",
+    hash_secret: CONFIG["secret_key_base"]
+
   validates_attachment_content_type :attachment, content_type: /(image|application|doc|xls|csv|txt|text|html|plain)/
   
   scope :not_a_template, -> { where template: false }
