@@ -11,7 +11,7 @@ class TwilioController < ApplicationController
     client.account.messages.create(
       from: @from,
       to: Member.prepare_phone(@creator.data["mobile"]),
-      body: "#{@member.name} (#{@member.data["mobile"]}) has just tried to call your messaging number."
+      body: "#{@member_description} has just tried to call your messaging number."
     )
   
     render text: response.text
@@ -22,10 +22,10 @@ class TwilioController < ApplicationController
     response = client.account.messages.create(
       from: @from,
       to: Member.prepare_phone(@creator.data["mobile"]),
-      body: "#{@member.name} (#{@member.data["mobile"]}) said, \"#{params[:Body]}\""
+      body: "#{@member_description} said, \"#{params[:Body]}\""
     )
     
-    render text: "Message received from #{@member.name} (#{@member.data["mobile"]})."
+    render text: "Message received from #{@member_description}."
   end
   
   private
@@ -35,6 +35,7 @@ class TwilioController < ApplicationController
     
     if @event
       @member = @event.member
+      @member_description = @member.name.blank? ? "#{@member.data["mobile"]}" : "#{@member.name} (#{@member.data["mobile"]})"
       @org = @event.organization
       @message = @org.messages.find @event.data["message.id"]
       @creator = @message.creator
