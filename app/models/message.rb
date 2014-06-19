@@ -21,7 +21,7 @@ class Message < ActiveRecord::Base
   validates_presence_of :subject, unless: -> { via == "sms" }
   validate :validate_recipients, if: -> { !template? && member_ids.empty? && segment_ids.empty? }
   
-  after_create :prepare_for_delivery, if: -> { !template? }
+  after_commit :prepare_for_delivery, if: -> { !template? }, on: :create
   
   def set_via_default
     self.via ||= "email"
