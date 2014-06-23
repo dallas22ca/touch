@@ -83,6 +83,7 @@ class EventsController < ApplicationController
     
     @this_member.data = @this_member.data.merge(member_args)
     @this_member.save
+    p @this_member
 
     @event = @org.events.new(
       description: args.delete(:description),
@@ -91,5 +92,6 @@ class EventsController < ApplicationController
     )
 
     @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
+    p @event
   end
 end
