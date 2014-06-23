@@ -6,11 +6,11 @@ class EventsController < ApplicationController
     @events = @org.events.order("created_at desc")
   end
   
-  def save_member
+  def members_save
     member = params[:member]
     member = params[:contact] if !member && params[:contact]
     
-    @org = Organization.where(permalink: params[:permalink], publishable_key: params[:publishable_key]).first
+    @org = Organization.where(publishable_key: params[:publishable_key]).first
     
     if @org
       @this_member = @org.members.where(key: member[:key]).first if member.has_key?(:key)
@@ -23,7 +23,11 @@ class EventsController < ApplicationController
     end
 
     if @this_member && @this_member.save
-      render json: { success: true, member: @this_member }
+      if params[:redirect]
+        redirect_to params[:redirect]
+      else
+        render json: { success: true, member: @this_member }
+      end
     else
       render json: { success: false }
     end

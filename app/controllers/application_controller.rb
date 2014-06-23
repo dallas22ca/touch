@@ -1,10 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_website
+  before_filter :set_cors
   before_filter :authenticate_user!, unless: :does_not_need_authorization
   before_filter :set_time_zone, if: :user_signed_in?
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :set_organization, if: :devise_controller?
+  
+  def set_cors
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+    headers['Access-Control-Request-Method'] = '*'
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  end
   
   def configure_devise_params
     set_organization
@@ -26,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
   
   def does_not_need_authorization
-    %w[accept unsubscribe open click example save_member track sms voice bitly].include?(action_name)
+    %w[accept unsubscribe open click example save_member track sms voice bitly members_save].include?(action_name)
   end
   
   def set_organization

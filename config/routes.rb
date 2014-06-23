@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
     get "/track/img/:args" => "events#track", as: :track_img
     get "/track/redirect/:args" => "events#track", as: :track_redirect
+    post "/events/members/save" => "events#members_save", as: :members_save
     
     authenticated :user, lambda { |u| u.admin? } do
       resources :organizations, only: [:index, :edit, :update]
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
     end
     
     scope "/:permalink" do
-      post "/members/save" => "events#save_member", as: :add_member
       get "/examples/:example" => "organizations#example", as: :example
       get "/unsubscribe/:member_token" => "members#unsubscribe", as: :unsubscribe
       get "/open/:message_token/:member_token" => "messages#open", as: :open, defaults: { format: :gif }
