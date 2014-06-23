@@ -8,8 +8,6 @@ Remetric.log = (data) ->
 	console.log data if Remetric.debug
 
 Remetric.detectPushes = ->
-	@_RM ||= []
-
 	_RM.push = (args) ->
 		a = Array.prototype.push.call this, args
 		Remetric.log "Remetric has received a(n) #{args[0]} event."
@@ -17,6 +15,8 @@ Remetric.detectPushes = ->
 		a
 
 Remetric.parseEvents = ->
+	@_RM ||= []
+	
 	for event in _RM
 		event = _RM.shift()
 	
