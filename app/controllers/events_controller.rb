@@ -33,36 +33,66 @@ class EventsController < ApplicationController
     end
   end
   
-  def track
+  def events_save
     begin
-      args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
-      redirect = args.delete :redirect
-      member_args = args[:member]
-      member_args = args[:contact] if member_args.blank?
-      member_args = member_args.with_indifferent_access
-      key = "#{member_args.delete(:key)}".parameterize
-      @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
-      
-      unless key.blank?
-        @this_member = @org.members.where(key: key).first_or_initialize
-        @this_member.update data: @this_member.data.merge(member_args)
-      
-        @event = @org.events.new(
-          description: args.delete(:description),
-          verb: args.delete(:verb),
-          json_data: args.merge({ member: { key: @this_member.key } })
-        )
-
-        @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
-        @event.save
-      end
+      create_event_from_args params
     rescue
     end
     
-    if args && !redirect.blank?
+    if @event && @event.save
+      if params[:redirect]
+        redirect_to params[:redirect]
+      else
+        render json: { success: true, member: @this_member, event: @event }
+      end
+    else
+      render json: { success: false }
+    end
+  end
+  
+  def track
+    begin
+      args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
+      create_event_from_args args
+      @event.save
+    rescue
+    end
+    
+    if args && !@redirect.blank?
       redirect_to redirect
     else
       send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
     end
+  end
+  
+  private
+  
+  def create_event_from_args(args)
+    @redirect = args.delete :redirect
+    member_args = args[:member]
+    member_args = args[:contact] if member_args.blank?
+    member_args = member_args.with_indifferent_access
+    key = "#{member_args.delete(:key)}".parameterize
+    @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
+    
+    if key.blank?
+      @this_member = @org.member.new
+    else
+      @this_member = @org.members.where(key: key).first_or_initialize
+    end
+    
+    @this_member.data = @this_member.data.merge(member_args)
+    @this_member.save
+
+    @event = @org.events.new(
+      description: args.delete(:description),
+      verb: args.delete(:verb),
+      json_data: args.merge({ member: { key: @this_member.key } })
+    )
+
+    @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
+    
+    p @event
+    p @this_member
   end
 end

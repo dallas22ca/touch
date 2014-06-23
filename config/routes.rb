@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     get "/users/auth/facebook/setup", to: "omniauth_callbacks#setup"
     get "/track/img/:args" => "events#track", as: :track_img
     get "/track/redirect/:args" => "events#track", as: :track_redirect
-    post "/events/members/save" => "events#members_save", as: :members_save
+    post "/track/members/save" => "events#members_save", as: :members_save
+    post "/track/events/save" => "events#events_save", as: :events_save
     
     authenticated :user, lambda { |u| u.admin? } do
       resources :organizations, only: [:index, :edit, :update]
