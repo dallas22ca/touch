@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
   
   def does_not_need_authorization
-    %w[accept unsubscribe open click example save_member track sms voice bitly members_save].include?(action_name)
+    %w[accept unsubscribe open click example track sms voice bitly members_save events_save].include?(action_name)
   end
   
   def set_organization
