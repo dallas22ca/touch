@@ -1,4 +1,5 @@
 @Remetric ||= {}
+@_RM ||= []
 
 Remetric.domain = "https://secure.remetric.com"
 Remetric.publishable_key = false
@@ -15,8 +16,6 @@ Remetric.detectPushes = ->
 		a
 
 Remetric.parseEvents = ->
-	@_RM ||= []
-	
 	for event in _RM
 		event = _RM.shift()
 	
