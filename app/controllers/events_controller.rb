@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
     
     if key.blank?
-      @this_member = @org.member.new
+      @this_member = @org.members.new
     else
       @this_member = @org.members.where(key: key).first_or_initialize
     end
