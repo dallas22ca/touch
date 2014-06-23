@@ -35,6 +35,7 @@ class EventsController < ApplicationController
   
   def events_save
     begin
+      p params
       create_event_from_args params
     rescue
     end
