@@ -74,6 +74,7 @@ class EventsController < ApplicationController
     member_args = member_args.with_indifferent_access
     key = "#{member_args.delete(:key)}".parameterize
     @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
+    p @org
     
     if key.blank?
       @this_member = @org.member.new
@@ -81,17 +82,19 @@ class EventsController < ApplicationController
       @this_member = @org.members.where(key: key).first_or_initialize
     end
     
+    p @this_member
+    
     @this_member.data = @this_member.data.merge(member_args)
     @this_member.save
-    p @this_member
 
     @event = @org.events.new(
       description: args.delete(:description),
       verb: args.delete(:verb),
       json_data: args.merge({ member: { key: @this_member.key } })
     )
+    
+    p @event
 
     @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
-    p @event
   end
 end
