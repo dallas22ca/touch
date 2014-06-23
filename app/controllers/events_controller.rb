@@ -29,25 +29,32 @@ class EventsController < ApplicationController
         render json: { success: true, member: @this_member }
       end
     else
-      render json: { success: false }
+      if params[:redirect]
+        redirect_to params[:redirect]
+      else
+        render json: { success: false }
+      end
     end
   end
   
   def events_save
     begin
-      p params
       create_event_from_args params
     rescue
     end
     
     if @event && @event.save
-      if @redirect
+      if !@redirect.blank?
         redirect_to @redirect
       else
         render json: { success: true, member: @this_member, event: @event }
       end
     else
-      render json: { success: false }
+      if !@redirect.blank?
+        redirect_to @redirect
+      else
+        render json: { success: false }
+      end
     end
   end
   
@@ -59,7 +66,7 @@ class EventsController < ApplicationController
     rescue
     end
     
-    if args && !@redirect.blank?
+    if !@redirect.blank?
       redirect_to @redirect
     else
       send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
@@ -75,15 +82,12 @@ class EventsController < ApplicationController
     member_args = member_args.with_indifferent_access
     key = "#{member_args.delete(:key)}".parameterize
     @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
-    p @org
     
     if key.blank?
       @this_member = @org.member.new
     else
       @this_member = @org.members.where(key: key).first_or_initialize
     end
-    
-    p @this_member
     
     @this_member.data = @this_member.data.merge(member_args)
     @this_member.save
@@ -93,8 +97,6 @@ class EventsController < ApplicationController
       verb: args.delete(:verb),
       json_data: args.merge({ member: { key: @this_member.key } })
     )
-    
-    p @event
 
     @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
   end
