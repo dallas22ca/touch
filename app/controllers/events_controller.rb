@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  protect_from_forgery except: [:save_member, :track]
-  before_filter :set_organization, except: [:save_member, :track]
+  protect_from_forgery except: [:members_save, :events_save, :track]
+  before_filter :set_organization, except: [:members_save, :events_save, :track]
   
   def index
     @events = @org.events.order("created_at desc")
@@ -40,8 +40,8 @@ class EventsController < ApplicationController
     end
     
     if @event && @event.save
-      if params[:redirect]
-        redirect_to params[:redirect]
+      if @redirect
+        redirect_to @redirect
       else
         render json: { success: true, member: @this_member, event: @event }
       end
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
     end
     
     if args && !@redirect.blank?
-      redirect_to redirect
+      redirect_to @redirect
     else
       send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
     end
@@ -91,8 +91,5 @@ class EventsController < ApplicationController
     )
 
     @event.created_at = Time.zone.at(args.delete(:event_created_at).to_i) if args.has_key? :event_created_at
-    
-    p @event
-    p @this_member
   end
 end
