@@ -38,7 +38,7 @@
 					<% @sequence.steps.build if @sequence.steps.empty? %>
 					
 					<%= f.fields_for :steps do |s| %>
-						<%= s.select :action, options_for_select([["Do something", "task"], ["Send an email", "email"]]) %>
+						<%= s.select :action, options_for_select([["Do something", "task"], ["Send an email", "email"]], s.object.try(:action)) %>
 						<%= s.select :offset, options_for_select([
 							["Immediately", 0],
 							["1 Day Before", 1.day * -1],
@@ -61,7 +61,7 @@
 							["2 Months After", 2.months],
 							["3 Months After", 3.months],
 							["6 Months After", 6.months]
-						]) %>
+						], s.object.try(:offset)) %>
 						
 							<% s.object.build_task unless s.object.task %>
 							
