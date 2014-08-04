@@ -1,8 +1,8 @@
 <%= @message.linked_body_for(@member).html_safe %><br><br><br>
 <br>
-Sent by <%= @message.organization.name %><br>
+Sent by <%= @message.organization.name %>.<br>
 <a href="<%= click_url(@message.organization, @message_token, @contact_token, @message.linked_body_for(@member, "count"), 
 		href: CGI::escape(unsubscribe_url(@message.organization, @contact_token))
-) %>">Unsubscribe from our emails</a><br>
+) %>">Unsubscribe from our emails.</a><br>
 <%= @message.organization.full_address %><br>
-<%= image_tag open_url(@message.organization, @message_token, @contact_token, format: :gif) %>
+<%= image_tag open_url(@message.organization, @message_token, @contact_token, format: :gif) if @message.to.blank? %>

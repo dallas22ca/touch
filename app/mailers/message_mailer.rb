@@ -19,7 +19,7 @@ class MessageMailer < ActionMailer::Base
           subject: Message.content_for(@message.subject, @member)
         )
         
-        Message.create_delivery_for message_id, member_id, task_id
+        Message.create_delivery_for message_id, member_id, task_id if @message.to.blank?
       end
     end
   end

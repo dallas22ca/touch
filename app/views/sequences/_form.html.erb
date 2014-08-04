@@ -69,8 +69,10 @@
 								<% t.object.build_message unless t.object.message %>
 								<%= t.text_field :content, placeholder: "Task Content" %>
 								<%= t.hidden_field :template, value: true %>
+								<%= t.hidden_field :id %>
 								
 								<%= t.fields_for :message do |m| %>
+									<%= m.hidden_field :id %>
 									<%= m.text_field :to, placeholder: "To" %>
 									<%= m.text_area :subject, placeholder: "Subject" %>
 									<%= m.text_area :body, placeholder: "Body" %>
