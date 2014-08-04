@@ -158,9 +158,15 @@ class Message < ActiveRecord::Base
     message = Message.find(message_id)
     member = message.organization.members.find(member_id)
     task = message.creator.tasks.find(task_id) unless "#{task_id}".blank?
+    description = "{{ member.name }} #{verb} {{ message.subject }}"
+    
+    unless message.to.blank?
+      description = "{{ message.subject }} was sent to #{message.to}"
+      verb = "was sent to"
+    end
     
     event = message.organization.events.new(
-      description: "{{ member.name }} #{verb} {{ message.subject }}",
+      description: description,
       verb: verb,
       json_data: {
         message: message.attributes,

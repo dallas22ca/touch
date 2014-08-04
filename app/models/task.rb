@@ -39,6 +39,7 @@ class Task < ActiveRecord::Base
   
   def create_task_content
     self.content = "Send {{ message.subject }} to {{ contact.name }} (automatic)."
+    self.content = "Send {{ message.subject }} to #{message.to} (automatic)." if message.to.blank?
   end
   
   def do_skip_jibe
