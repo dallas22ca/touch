@@ -78,14 +78,14 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   
-  default_url_options[:host] = "app.realtxn.com"
+  default_url_options[:host] = "app.touchbasenow.com"
   default_url_options[:protocol] = "https"
   
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      sender_address: %{"Notifier" <no-reply@oneattendance.com>},
+      sender_address: %{"TouchBaseNow.com Notifier" <no-reply@touchbasenow.com>},
       exception_recipients: %w{dallas@excitecreative.ca},
-      email_prefix: "[OneAttendance.com ERROR]"
+      email_prefix: "[TouchBaseNow.com ERROR]"
     }
 
   # Do not dump schema after migrations.

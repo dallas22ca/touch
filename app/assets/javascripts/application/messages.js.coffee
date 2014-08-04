@@ -14,7 +14,11 @@ $(document).on "keyup", "#message_body", ->
 	$(".sms_length").text length
 
 $(document).on "submit", "#new_message", ->
-	setTimeout ->
-		$("#new_message")[0].reset()
-		Lightbox.close()
-	, 100
+	if confirm "Are you sure you want to send this message?"
+		setTimeout ->
+			$("#new_message")[0].reset()
+			Lightbox.close()
+		, 100
+	else
+		$(this).closest("form").trigger "touch:enable"
+		false

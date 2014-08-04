@@ -81,10 +81,16 @@ class EventsController < ApplicationController
     member_args = args[:contact] if member_args.blank?
     member_args = member_args.with_indifferent_access
     key = "#{member_args.delete(:key)}".parameterize
+    email = member_args.delete(:email)
     @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
     
     if key.blank?
-      @this_member = @org.members.new
+      if email.blank?
+        @this_member = @org.members.new
+      else
+        @this_member = @org.members.where("data @> 'email=>#{email}'").first
+        @this_member = @org.members.new(data: { email: email }) unless @this_member
+      end
     else
       @this_member = @org.members.where(key: key).first_or_initialize
     end

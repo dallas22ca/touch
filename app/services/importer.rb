@@ -23,7 +23,7 @@ class Importer
         progress = (i * 100) / row_count
         data = Hash[[headers, spreadsheet.row(i).map{ |c| c.to_s.strip }].transpose]
         
-        member = @org.members.where("data @> 'email=>#{data["email"]}'").first
+        member = @org.members.where("data @> 'email=>#{data["email"]}'").first_or_initialize unless data["email"].blank?
         member = @org.members.new unless member
         member.bulk_action = true
         member.data ||= {}

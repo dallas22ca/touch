@@ -5,7 +5,7 @@ if Rails.env.production?
     address: "smtp.mandrillapp.com",
     user_name: CONFIG["mandrill_username"],
     password: CONFIG["mandrill_password"],
-    domain: "realtxn.com",
+    domain: "touchbasenow.com",
     authentication: :login,
     enable_starttls_auto: true
   }

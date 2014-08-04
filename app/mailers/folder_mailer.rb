@@ -1,5 +1,5 @@
 class FolderMailer < ActionMailer::Base
-  default from: "RealTXN.com <no-reply@realtxn.com>"
+  default from: "TouchBaseNow.com <no-reply@touchbasenow.com>"
   
   def invitation(foldership_id)
     @foldership = Foldership.find(foldership_id)
