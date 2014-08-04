@@ -71,6 +71,7 @@
 								<%= t.hidden_field :template, value: true %>
 								
 								<%= t.fields_for :message do |m| %>
+									<%= m.text_field :to, placeholder: "To" %>
 									<%= m.text_area :subject, placeholder: "Subject" %>
 									<%= m.text_area :body, placeholder: "Body" %>
 									<%= m.hidden_field :template, value: true %>

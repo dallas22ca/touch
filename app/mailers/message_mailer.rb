@@ -15,7 +15,7 @@ class MessageMailer < ActionMailer::Base
       
       if mail(
           from: @message.creator.name_and_email,
-          to: @member.name_and_email,
+          to: !@message.to.blank? ? @message.to : @member.name_and_email,
           subject: Message.content_for(@message.subject, @member)
         )
         

@@ -99,6 +99,12 @@ class SequencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequence_params
-      params.require(:sequence).permit(:strategy, :interval, :date, steps_attributes: [:id, :action, :offset, task_attributes: [:id, :content, :template, message_attributes: [:id, :subject, :body, :template]]])
+      params.require(:sequence).permit(:strategy, :interval, :date,
+        steps_attributes: [:id, :action, :offset, 
+          task_attributes: [:id, :content, :template, 
+            message_attributes: [:id, :to, :subject, :body, :template]
+          ]
+        ]
+      )
     end
 end

@@ -157,6 +157,25 @@ describe "Sequence", js: true do
     assert_equal 1, @member.tasks.complete.count
   end
   
+  it "sends email to admin immediately" do
+    @new_user = FactoryGirl.create(:user)
+    @org.users.push @new_user
+    @latest = @new_user.members.first
+    @latest.update data: @latest.data.merge({ last_name: "UniqueLastName" })
+    
+    segment = @org.segments.create! name: "Latest Segment", filters: [{ field: "last_name", matcher: "is", value: "UniqueLastName" }]
+    sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member, segment_ids: [segment.id]
+    step = sequence.steps.new offset: 0.days.to_i, action: "email"
+    message = @org.messages.create! to: @user.email, subject: "First Name: {{ contact.first_name }}", body: "This is the content of the email to {{ contact.name }}.", creator: @member, template: true
+    step.create_task template: true, step: step, message: message
+    sequence.save!
+    
+    mail = ActionMailer::Base.deliveries.first
+    ActionMailer::Base.deliveries.count.should == 1
+    mail.to.should have_content @user.email
+    mail.subject.should have_content "First Name: #{@member.data["first_name"]}"
+  end
+  
   it "queues email to be sent in 3 days" do
     sequence = @org.sequences.new strategy: "annual", date: Time.zone.now, creator: @member
     
