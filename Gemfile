@@ -21,7 +21,7 @@ gem 'roo'
 gem 'whenever', require: false
 
 gem 'sidekiq'
-gem 'capistrano-sidekiq'
+gem 'capistrano-sidekiq', '0.3.4'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'newrelic_rpm'

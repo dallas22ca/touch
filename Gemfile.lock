@@ -53,7 +53,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-maintenance (0.0.4)
       capistrano (>= 2.0.0)
-    capistrano-sidekiq (0.3.5)
+    capistrano-sidekiq (0.3.4)
       capistrano
       sidekiq
     capybara (2.2.1)
@@ -284,7 +284,7 @@ DEPENDENCIES
   aws-sdk
   capistrano (~> 2.15)
   capistrano-maintenance
-  capistrano-sidekiq
+  capistrano-sidekiq (= 0.3.4)
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
