@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'puma'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -21,6 +21,7 @@ gem 'roo'
 gem 'whenever', require: false
 
 gem 'sidekiq'
+gem 'capistrano-sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'newrelic_rpm'

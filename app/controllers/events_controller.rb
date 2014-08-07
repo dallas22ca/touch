@@ -81,7 +81,7 @@ class EventsController < ApplicationController
     member_args = args[:contact] if member_args.blank?
     member_args = member_args.with_indifferent_access
     key = "#{member_args.delete(:key)}".parameterize
-    email = member_args.delete(:email)
+    email = member_args[:email]
     @org = Organization.where(publishable_key: args.delete(:publishable_key)).first
     
     if key.blank?

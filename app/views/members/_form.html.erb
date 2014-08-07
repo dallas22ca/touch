@@ -28,7 +28,7 @@
 	<% end %>
 	
 	<%= form_for @this_member, url: @this_member.new_record? ? members_path(@org) : member_path(@org, @this_member), remote: true do |f| %>
-		<% top_fields = %w[first_name last_name email] %>
+		<% top_fields = %w[first_name last_name email mobile] %>
 		<% special_fields = top_fields + %w[full_name name] %>
 	
 		<div class="field">
