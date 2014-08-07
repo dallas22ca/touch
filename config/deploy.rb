@@ -6,7 +6,7 @@ require "whenever/capistrano"
 require 'puma/capistrano'
 
 set :pty, false
-set :forward_agent, true
+set :ssh_options, { :forward_agent => true }
 
 set :application, "touch"
 set :user, "deployer"
@@ -17,7 +17,7 @@ set :workers, { '*' => 5 }
 set :app_server, :puma
 
 set :scm, "git"
-set :repository, "git@github.com:dallas22ca/#{application}.git"
+set :repository, "git@github.com:dallasread/#{application}.git"
 
 set :maintenance_template_path, File.expand_path("../recipes/templates/maintenance.html.erb", __FILE__)
 set :whenever_command, "bundle exec whenever"
