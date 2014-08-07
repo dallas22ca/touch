@@ -5,8 +5,8 @@ require 'capistrano/sidekiq'
 require "whenever/capistrano"
 require 'puma/capistrano'
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+set :pty, false
+set :forward_agent, true
 
 set :application, "touch"
 set :user, "deployer"
