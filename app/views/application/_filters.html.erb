@@ -16,15 +16,15 @@
 	<div class="clear"></div>
 	
 	<ul id="filters">
-		<% %w[first_name last_name email].each do |field| %>
+		<% @org.fields.each do |field| %>
 			<li class="disabled disablable">
-				<%= check_box_tag "#{field}" %>
-				<%= label_tag "#{field}", field.humanize %>
+				<%= check_box_tag "#{field.permalink}" %>
+				<%= label_tag "#{field.permalink}", field.name %>
 				
 				<div class="indent field">
-					<%= hidden_field_tag "#{field}_field", field, data: { field: true } %>
-					<%= hidden_field_tag "#{field}_matcher", "like", data: { matcher: true } %>
-					<%= text_field_tag "#{field}_value", nil, data: { value: true } %>
+					<%= hidden_field_tag "#{field.permalink}_field", field.permalink, data: { field: true } %>
+					<%= hidden_field_tag "#{field.permalink}_matcher", "like", data: { matcher: true } %>
+					<%= text_field_tag "#{field.permalink}_value", nil, data: { value: true } %>
 				</div>
 			</li>
 		<% end %>
