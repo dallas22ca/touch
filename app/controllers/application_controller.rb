@@ -58,6 +58,7 @@ class ApplicationController < ActionController::Base
   def set_website
     cookies[:domain] = Rails.env.production? ? request.domain : "realtxn.com"
     @website = CONFIG["sites"][cookies[:domain]]
+    redirect_to "https://app.touchbasenow.com" unless @website
   end
   
   def redirect_to_root
