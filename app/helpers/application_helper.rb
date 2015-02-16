@@ -8,6 +8,10 @@ module ApplicationHelper
   end
   
   def parse_default(url)
-    url.gsub "default_org_logo", "/#{@website["domain"]}/imgs/top_logo.png"
+    if @website
+      url.gsub "default_org_logo", "/#{@website["domain"]}/imgs/top_logo.png"
+    else
+      url
+    end
   end
 end
