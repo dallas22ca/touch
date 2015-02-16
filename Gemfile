@@ -25,7 +25,7 @@ gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'newrelic_rpm'
-gem 'skylight'
+# gem 'skylight'
 
 gem 'capybara'
 gem 'capybara-webkit'
